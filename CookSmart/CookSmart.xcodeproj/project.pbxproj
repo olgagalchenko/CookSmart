@@ -19,6 +19,7 @@
 		B7BCA2AC180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
 		B7BCA2B4180524A800CF7588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2B2180524A800CF7588 /* InfoPlist.strings */; };
 		B7BCA2B6180524A800CF7588 /* CookSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2B5180524A800CF7588 /* CookSmartTests.m */; };
+		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		B7BCA2B1180524A800CF7588 /* CookSmartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookSmartTests-Info.plist"; sourceTree = "<group>"; };
 		B7BCA2B3180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7BCA2B5180524A800CF7588 /* CookSmartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookSmartTests.m; sourceTree = "<group>"; };
+		B7BCA2BF1805284A00CF7588 /* Ingredients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		B7BCA297180524A800CF7588 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B7BCA2BF1805284A00CF7588 /* Ingredients.plist */,
 				B7BCA298180524A800CF7588 /* CookSmart-Info.plist */,
 				B7BCA299180524A800CF7588 /* InfoPlist.strings */,
 				B7BCA29C180524A800CF7588 /* main.m */,
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
+				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
