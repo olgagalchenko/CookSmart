@@ -16,8 +16,9 @@
     // Override point for customization after application launch.
     
     CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] init];
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
     
-    self.window.rootViewController = ingrListVC;
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
 }
