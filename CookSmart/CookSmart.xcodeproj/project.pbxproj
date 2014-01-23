@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
 		B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
+		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		B7BCA28D180524A800CF7588 /* CookSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BCA290180524A800CF7588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7BCA292180524A800CF7588 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -111,6 +114,8 @@
 			children = (
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
+				9368096E1891059700655B89 /* CSIngredientListVC.h */,
+				9368096F1891059700655B89 /* CSIngredientListVC.m */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);
@@ -246,6 +251,7 @@
 			files = (
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
+				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +452,7 @@
 				B7BCA2BB180524A800CF7588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B7BCA2BC180524A800CF7588 /* Build configuration list for PBXNativeTarget "CookSmartTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +461,7 @@
 				B7BCA2BE180524A800CF7588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

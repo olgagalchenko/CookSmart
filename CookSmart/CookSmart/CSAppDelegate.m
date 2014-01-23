@@ -7,14 +7,17 @@
 //
 
 #import "CSAppDelegate.h"
-
+#import "CSIngredientListVC.h"
 @implementation CSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    
+    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] init];
+    
+    self.window.rootViewController = ingrListVC;
     [self.window makeKeyAndVisible];
     return YES;
 }
