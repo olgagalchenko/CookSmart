@@ -14,15 +14,16 @@
 
 @implementation CSIngredientListVC
 
-static NSString *CellIdentifier = @"Cell";
+static NSString* CellIdentifier = @"Cell";
+static NSString* baseDomain = @"http://www.asswaffle.com/";
 
 - (id)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
-        NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"];
-        _ingrData = [NSArray arrayWithContentsOfFile:plistPath];
+        NSString* plistPath = [baseDomain stringByAppendingPathComponent:@"ingredients.plist"];
+        _ingrData = [NSArray arrayWithContentsOfURL:[NSURL URLWithString:plistPath]];
     }
     return self;
 }
