@@ -16,6 +16,8 @@
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ingredientNameBarButtonItem;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *prevButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 
 @end
 
@@ -45,6 +47,16 @@ static CSConversionVC *sharedConversionVC = nil;
 {
     self.navigationItem.title = self.ingredientGroup.name;
     self.ingredientNameBarButtonItem.title = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] name];
+    
+    if (_ingredientIndex == 0)
+        _prevButton.enabled = NO;
+    else
+        _prevButton.enabled = YES;
+    
+    if (_ingredientIndex >= [_ingredientGroup countOfIngredients]-1)
+        _nextButton.enabled = NO;
+    else
+        _nextButton.enabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +76,18 @@ static CSConversionVC *sharedConversionVC = nil;
 {
     self.ingredientGroup = ingredientGroup;
     self.ingredientIndex = index;
+    [self refreshUI];
+}
+
+- (IBAction)onPrevIngrTap:(id)sender
+{
+    _ingredientIndex--;
+    [self refreshUI];
+}
+
+- (IBAction)onNextIngrTap:(id)sender
+{
+    _ingredientIndex++;
     [self refreshUI];
 }
 
