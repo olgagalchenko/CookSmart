@@ -43,7 +43,7 @@ static NSString* CellIdentifier = @"Cell";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
-    UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Down"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
+    UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Close"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
     self.navigationItem.rightBarButtonItem = closeItem;
 }
 
