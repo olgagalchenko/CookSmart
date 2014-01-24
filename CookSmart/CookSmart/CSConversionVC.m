@@ -8,8 +8,14 @@
 
 #import "CSConversionVC.h"
 #import "CSIngredientListVC.h"
-#import "CSAppDelegate.h"
+#import "CSIngredientGroup.h"
+#import "CSIngredient.h"
+
 @interface CSConversionVC ()
+
+@property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
+@property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ingredientNameBarButtonItem;
 
 @end
 
@@ -17,13 +23,13 @@
 
 static CSConversionVC *sharedConversionVC = nil;
 
-- (id)initWithIndexPath:(NSIndexPath *)indexPath
+- (id)initWithIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)ingredientIndex
 {
     self = [super initWithNibName:@"CSConversionVC" bundle:nil];
     if (self)
     {
-        delegate = (CSAppDelegate*)[[UIApplication sharedApplication] delegate];
-        indexPathToIngr = indexPath;
+        self.ingredientGroup = ingredientGroup;
+        self.ingredientIndex = ingredientIndex;
         sharedConversionVC = self;
     }
     return self;
@@ -32,12 +38,13 @@ static CSConversionVC *sharedConversionVC = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self refreshUI];
 }
 
-- (void)viewWillLayoutSubviews
+- (void)refreshUI
 {
-    _ingrNameItem.title = [[delegate ingredientsForSection:indexPathToIngr.section][indexPathToIngr.row] objectForKey:@"Name"];
+    self.navigationItem.title = self.ingredientGroup.name;
+    self.ingredientNameBarButtonItem.title = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] name];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,21 +52,19 @@ static CSConversionVC *sharedConversionVC = nil;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)onIngrTap:(id)sender
 {
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] init];
+    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-+ (CSConversionVC*)conversionVC
+- (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
 {
-    assert(sharedConversionVC != nil);
-    return sharedConversionVC;
+    self.ingredientGroup = ingredientGroup;
+    self.ingredientIndex = index;
+    [self refreshUI];
 }
 
-- (void)changeIngredientTo:(NSIndexPath*)indexPath
-{
-    indexPathToIngr = indexPath;
-}
 @end

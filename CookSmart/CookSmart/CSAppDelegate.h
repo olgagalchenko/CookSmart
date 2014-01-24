@@ -11,9 +11,5 @@
 @interface CSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSArray* ingrData;
-
-- (NSString*)ingredientTypeForSection:(NSInteger)section;
-- (NSArray*)ingredientsForSection:(NSInteger)section;
 
 @end

@@ -7,9 +7,13 @@
 //
 
 #import "CSIngredientListVC.h"
-#import "CSAppDelegate.h"
-#import "CSConversionVC.h"
+#import "CSIngredients.h"
+#import "CSIngredientGroup.h"
+#import "CSIngredient.h"
+
 @interface CSIngredientListVC ()
+
+@property (nonatomic, readwrite, weak) id<CSIngredientListVCDelegate>delegate;
 
 @end
 
@@ -18,12 +22,12 @@
 static NSString* CellIdentifier = @"Cell";
 
 
-- (id)init
+- (id)initWithDelegate:(id<CSIngredientListVCDelegate>)delegate
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
-        delegate = (CSAppDelegate*)[[UIApplication sharedApplication] delegate];
+        self.delegate = delegate;
     }
     return self;
 }
@@ -54,19 +58,18 @@ static NSString* CellIdentifier = @"Cell";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[delegate ingrData] count];
+    return [[CSIngredients sharedInstance] countOfIngredientGroups];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray* ingrdOfType = [delegate ingredientsForSection:section];
-    return [ingrdOfType count];
+    return [[[CSIngredients sharedInstance] ingredientGroupAtIndex:section] countOfIngredients];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [delegate ingredientTypeForSection:section];
+    return [[[CSIngredients sharedInstance] ingredientGroupAtIndex:section] name];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,15 +78,16 @@ static NSString* CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    NSArray* ingrOfType = [delegate ingredientsForSection:indexPath.section];
     
-    cell.textLabel.text =[ingrOfType[indexPath.row] objectForKey:@"Name"];
+    cell.textLabel.text = [[[[CSIngredients sharedInstance] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row] name];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[CSConversionVC conversionVC] changeIngredientTo:indexPath];
+    [self.delegate ingredientListVC:self
+            selectedIngredientGroup:[[CSIngredients sharedInstance] ingredientGroupAtIndex:indexPath.section]
+                    ingredientIndex:indexPath.row];
     [self closeIngrList:nil];
 }
 

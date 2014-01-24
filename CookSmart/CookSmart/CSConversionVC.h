@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CSConversionVC.h"
+#import "CSIngredientListVC.h"
 
-@class CSAppDelegate;
-@interface CSConversionVC : UIViewController
-{
-    CSAppDelegate*  delegate;
-    NSIndexPath*    indexPathToIngr;
-}
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *ingrNameItem;
+@class CSIngredientGroup;
 
-- (id)initWithIndexPath:(NSIndexPath *)indexPath;
-+ (CSConversionVC*)conversionVC;
-- (void)changeIngredientTo:(NSIndexPath*)indexPath;
+@interface CSConversionVC : UIViewController <CSIngredientListVCDelegate>
+
+- (id)initWithIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)ingredientIndex;
+
 @end

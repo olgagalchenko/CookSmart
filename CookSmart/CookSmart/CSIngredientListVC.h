@@ -7,9 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CSAppDelegate;
+
+@class CSIngredientGroup;
+@protocol CSIngredientListVCDelegate;
+
 @interface CSIngredientListVC : UITableViewController
-{
-    CSAppDelegate* delegate;
-}
+
+- (id)initWithDelegate:(id<CSIngredientListVCDelegate>)delegate;
+
+@end
+
+@protocol CSIngredientListVCDelegate <NSObject>
+
+- (void)ingredientListVC:(CSIngredientListVC *)listVC
+ selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup
+         ingredientIndex:(NSUInteger)index;
+
 @end
