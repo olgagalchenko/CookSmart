@@ -48,6 +48,8 @@ static CSConversionVC *sharedConversionVC = nil;
     self.navigationItem.title = self.ingredientGroup.name;
     self.ingredientNameBarButtonItem.title = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] name];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"List"] style:UIBarButtonItemStylePlain target:self action:@selector(onIngrTap:)];
+    
     if (_ingredientIndex == 0)
         _prevButton.enabled = NO;
     else
