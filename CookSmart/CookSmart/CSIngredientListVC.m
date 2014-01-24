@@ -7,7 +7,8 @@
 //
 
 #import "CSIngredientListVC.h"
-
+#import "CSAppDelegate.h"
+#import "CSConversionVC.h"
 @interface CSIngredientListVC ()
 
 @end
@@ -15,15 +16,14 @@
 @implementation CSIngredientListVC
 
 static NSString* CellIdentifier = @"Cell";
-static NSString* baseDomain = @"http://www.asswaffle.com/";
+
 
 - (id)init
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
-        NSString* plistPath = [baseDomain stringByAppendingPathComponent:@"ingredients.plist"];
-        _ingrData = [NSArray arrayWithContentsOfURL:[NSURL URLWithString:plistPath]];
+        delegate = (CSAppDelegate*)[[UIApplication sharedApplication] delegate];
     }
     return self;
 }
@@ -38,6 +38,9 @@ static NSString* baseDomain = @"http://www.asswaffle.com/";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Down"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
+    self.navigationItem.rightBarButtonItem = closeItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,41 +49,24 @@ static NSString* baseDomain = @"http://www.asswaffle.com/";
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString*)ingredientTypeForSection:(NSInteger)section
-{
-    NSDictionary* ingredientType = _ingrData[section];
-    
-    NSArray* ingredientTypeKeys = [ingredientType allKeys];
-    assert(ingredientTypeKeys.count == 1);
-    return [ingredientTypeKeys firstObject];
-}
-
-- (NSArray*)ingredientsForSection:(NSInteger)section
-{
-    NSDictionary* dictOfIngrOfType = _ingrData[section];
-    NSString* ingredientType = [self ingredientTypeForSection:section];
-    NSArray* ingrOfType = [dictOfIngrOfType objectForKey:ingredientType];
-    return ingrOfType;
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [_ingrData count];
+    return [[delegate ingrData] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray* ingrdOfType = [self ingredientsForSection:section];
+    NSArray* ingrdOfType = [delegate ingredientsForSection:section];
     return [ingrdOfType count];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self ingredientTypeForSection:section];
+    return [delegate ingredientTypeForSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,61 +75,22 @@ static NSString* baseDomain = @"http://www.asswaffle.com/";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    NSArray* ingrOfType = [self ingredientsForSection:indexPath.section];
+    NSArray* ingrOfType = [delegate ingredientsForSection:indexPath.section];
     
     cell.textLabel.text =[ingrOfType[indexPath.row] objectForKey:@"Name"];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [[CSConversionVC conversionVC] changeIngredientTo:indexPath];
+    [self closeIngrList:nil];
 }
 
- */
+#pragma mark - dismiss self
+- (void)closeIngrList:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

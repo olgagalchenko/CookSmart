@@ -8,19 +8,42 @@
 
 #import "CSAppDelegate.h"
 #import "CSIngredientListVC.h"
+#import "CSConversionVC.h"
 @implementation CSAppDelegate
+
+static NSString* baseDomain = @"http://www.asswaffle.com/";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSString* plistPath = [baseDomain stringByAppendingPathComponent:@"ingredients.plist"];
+    _ingrData = [NSArray arrayWithContentsOfURL:[NSURL URLWithString:plistPath]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] init];
+    CSConversionVC* ingrListVC = [[CSConversionVC alloc] initWithIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
     
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (NSString*)ingredientTypeForSection:(NSInteger)section
+{
+    NSDictionary* ingredientType = _ingrData[section];
+    
+    NSArray* ingredientTypeKeys = [ingredientType allKeys];
+    assert(ingredientTypeKeys.count == 1);
+    return [ingredientTypeKeys firstObject];
+}
+
+- (NSArray*)ingredientsForSection:(NSInteger)section
+{
+    NSDictionary* dictOfIngrOfType = _ingrData[section];
+    NSString* ingredientType = [self ingredientTypeForSection:section];
+    NSArray* ingrOfType = [dictOfIngrOfType objectForKey:ingredientType];
+    return ingrOfType;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

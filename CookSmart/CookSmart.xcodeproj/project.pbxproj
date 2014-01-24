@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
+		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
+		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
+		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		B7BCA28D180524A800CF7588 /* CookSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +121,9 @@
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
 				9368096E1891059700655B89 /* CSIngredientListVC.h */,
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
+				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
+				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
+				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);
@@ -228,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
@@ -249,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,

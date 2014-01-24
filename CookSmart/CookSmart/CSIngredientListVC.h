@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CSAppDelegate;
 @interface CSIngredientListVC : UITableViewController
-@property (nonatomic, strong) NSArray* ingrData;
+{
+    CSAppDelegate* delegate;
+}
 @end
