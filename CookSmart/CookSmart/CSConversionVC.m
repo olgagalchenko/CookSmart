@@ -10,6 +10,7 @@
 #import "CSIngredientListVC.h"
 #import "CSIngredientGroup.h"
 #import "CSIngredient.h"
+#import "CSScaleView.h"
 
 @interface CSConversionVC ()
 
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ingredientNameBarButtonItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *prevButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
+@property (weak, nonatomic) IBOutlet CSScaleView *volumeScaleScrollView;
+@property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
 
 @end
 
@@ -59,6 +62,27 @@ static CSConversionVC *sharedConversionVC = nil;
         _nextButton.enabled = NO;
     else
         _nextButton.enabled = YES;
+
+    CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
+    self.ingredientNameBarButtonItem.title = [ingredient name];
+    float volumeInitialCenterValue = 2.0;
+    float volumeScale = 1.0;
+    [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
+                                                                   scale:volumeScale
+                                                        scaleDisplayMode:CSScaleViewScaleDisplayModeRight];
+    
+    float idealWeightScale = ingredient.density*volumeScale;
+    NSUInteger humanReadableWeightScale = 1;
+    if (idealWeightScale >=  10)
+    {
+        NSUInteger orderOfMagnitude = (NSUInteger) floor(log10(idealWeightScale));
+        humanReadableWeightScale = idealWeightScale - (((NSUInteger)idealWeightScale)%(NSUInteger)pow(10, orderOfMagnitude));
+    }
+    
+    float initialCenterValue = volumeInitialCenterValue*ingredient.density;
+    [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
+                                                                   scale:humanReadableWeightScale
+                                                        scaleDisplayMode:CSScaleViewScaleDisplayModeLeft];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,6 +115,33 @@ static CSConversionVC *sharedConversionVC = nil;
 {
     _ingredientIndex++;
     [self refreshUI];
+}
+
+#pragma mark UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self synchronizeVolumeAndWeight:scrollView cancelDeceleration:NO];
+}
+
+- (void)scaleViewTapped:(CSScaleView *)scaleView
+{
+    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
+    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
+}
+
+- (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
+{
+    if (sourceOfTruth == self.volumeScaleScrollView)
+    {
+        float volumeValue = [self.volumeScaleScrollView getCenterValue];
+        [self.weightScaleScrollView setCenterValue:volumeValue*[[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density] cancelDeceleration:cancelDeceleration];
+    }
+    else if (sourceOfTruth == self.weightScaleScrollView)
+    {
+        float weightValue = [self.weightScaleScrollView getCenterValue];
+        [self.volumeScaleScrollView setCenterValue:weightValue/[[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density] cancelDeceleration:cancelDeceleration];
+    }
 }
 
 @end

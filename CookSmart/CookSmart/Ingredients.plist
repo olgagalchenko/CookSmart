@@ -9,19 +9,19 @@
 				<key>Name</key>
 				<string>Brown Sugar</string>
 				<key>Density</key>
-				<real>0.837</real>
+				<integer>220</integer>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Confectioners&apos; Sugar</string>
 				<key>Density</key>
-				<real>0.478</real>
+				<real>189.51</real>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Granulated Sugar</string>
 				<key>Density</key>
-				<real>0.837</real>
+				<real>200.86</real>
 			</dict>
 		</array>
 	</dict>
