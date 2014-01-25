@@ -13,6 +13,7 @@
 @protocol CSScaleViewDelegate <UIScrollViewDelegate>
 
 - (void)scaleViewTapped:(CSScaleView *)scaleView;
+- (BOOL)isSnapping;
 
 @end
 

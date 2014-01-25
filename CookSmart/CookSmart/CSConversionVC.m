@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (nonatomic, readwrite, assign) BOOL isSnapping;
 
 @end
 
@@ -148,8 +149,11 @@ static CSConversionVC *sharedConversionVC = nil;
     float humanReadableFloat = 0;
     humanReadableValue([scaleView getCenterValue], &humanReadableFloat);
     [UIView animateWithDuration:.2 animations:^{
+        self.isSnapping = YES;
         [scaleView setCenterValue:humanReadableFloat cancelDeceleration:YES];
         [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES];
+    } completion:^(BOOL finished) {
+        self.isSnapping = NO;
     }];
 }
 

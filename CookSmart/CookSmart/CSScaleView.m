@@ -71,6 +71,13 @@
 {
     [super layoutSubviews];
     
+    if ([self.delegate respondsToSelector:@selector(isSnapping)] && [self.delegate performSelector:@selector(isSnapping)])
+    {
+        // We snap these views to values in an animated way. We don't want to be messing with the contentOffset
+        // and tile moves inside an animation block. For that reason, we will forego this work during the snapping animation.
+        return;
+    }
+    
     CGFloat currentOffset = self.contentOffset.y;
     CGFloat contentHeight = self.contentSize.height;
 #define OFFSET_EDGE_PROXIMITY_THRESHOLD     (.25*self.bounds.size.height)
