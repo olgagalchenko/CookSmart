@@ -9,7 +9,7 @@
 #import "CSScaleView.h"
 #import "CSScaleTile.h"
 
-#define SCALE_TILE_HEIGHT       100.0
+#define SCALE_TILE_HEIGHT       200.0
 
 @interface CSScaleView()
 
