@@ -105,12 +105,14 @@
         CGFloat maxY = CGRectGetMaxY(tileFrame);
         CGFloat minY = CGRectGetMinY(tileFrame);
         
-        if (minY > maximumVisibleY)
+        if (minY > maximumVisibleY &&
+            tile.frame.origin.y - (self.tileContainer.subviews.count - 1)*SCALE_TILE_HEIGHT > minimumVisibleY)
         {
             tile.frame = CGRectMake(0, tile.frame.origin.y - (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value -= self.tileContainer.subviews.count*self.unitsPerTile;
         }
-        else if (maxY < minimumVisibleY)
+        else if (maxY < minimumVisibleY &&
+                 tile.frame.origin.y + (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT < maximumVisibleY)
         {
             tile.frame = CGRectMake(0, tile.frame.origin.y + (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value += self.tileContainer.subviews.count*self.unitsPerTile;
@@ -120,7 +122,6 @@
 
 - (void)configureScaleViewWithInitialCenterValue:(float)centerValue
                                            scale:(NSUInteger)unitsPerTile
-                                scaleDisplayMode:(CSScaleViewScaleDisplayMode)scaleDisplayMode
 {
     if (!self.tileContainer)
     {
@@ -139,7 +140,7 @@
     CGFloat lowestTileY = 0;
     for (int i = 0; i < numTiles; i++)
     {
-        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT) scaleDisplayMode:scaleDisplayMode];
+        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT)];
         [self.tileContainer addSubview:tile];
         lowestTileY += SCALE_TILE_HEIGHT;
     }

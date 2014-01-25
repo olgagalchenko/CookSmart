@@ -19,9 +19,7 @@
     
     CSConversionVC* conversionVC = [[CSConversionVC alloc] initWithIngredientGroup:[[CSIngredients sharedInstance] ingredientGroupAtIndex:0]
                                                                    ingredientIndex:0];
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:conversionVC];
-    
-    self.window.rootViewController = navController;
+    self.window.rootViewController = conversionVC;
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -8,30 +8,33 @@
 
 #import "CSScaleTile.h"
 
-#define EIGHTH_LINE_LENGTH      7
-#define QUARTER_LINE_LENGTH     13
+#define EIGHTH_LINE_LENGTH      15
+#define QUARTER_LINE_LENGTH     30
+#define MINOR_LINE_THICKNESS    1.0
+#define WHOLE_LINE_LENGTH       80
+#define WHOLE_LINE_THICKNESS    4.0
+#define TEXT_BOX_PADDING        10
+#define TEXT_BOX_HEIGHT         20
 
 @interface CSScaleTile()
 
 @property (nonatomic, readwrite, strong) UILabel *valueLabel;
-@property (nonatomic, readwrite, assign) CSScaleViewScaleDisplayMode scaleDisplayMode;
 
 @end
 
 @implementation CSScaleTile
 
-- (id)initWithFrame:(CGRect)frame scaleDisplayMode:(CSScaleViewScaleDisplayMode)scaleDisplayMode
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.clearsContextBeforeDrawing = YES;
-        self.scaleDisplayMode = scaleDisplayMode;
         self.valueLabel = [[UILabel alloc] init];
+        self.valueLabel.opaque = YES;
         self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        [self.valueLabel setBackgroundColor:[UIColor clearColor]];
-        [self.valueLabel setTextColor:[UIColor blackColor]];
-        self.valueLabel.bounds = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [self.valueLabel setBackgroundColor:BACKGROUND_COLOR];
+        [self.valueLabel setTextColor:[UIColor grayColor]];
+        self.valueLabel.bounds = CGRectMake(0, 0, frame.size.width, TEXT_BOX_HEIGHT);
         self.valueLabel.center = CGPointMake(frame.size.width/2, 0);
         [self addSubview:self.valueLabel];
     }
@@ -50,6 +53,12 @@
     {
         text = @"";
     }
+    NSDictionary *attributes = @{NSFontAttributeName: self.valueLabel.font};
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(self.bounds.size.width, TEXT_BOX_HEIGHT)
+                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                  attributes:attributes
+                                     context:nil];
+    self.valueLabel.bounds = CGRectMake(0, 0, rect.size.width + TEXT_BOX_PADDING, TEXT_BOX_HEIGHT);
     [self.valueLabel setText:text];
 }
 
@@ -58,41 +67,30 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     CGPoint line[2];
-    CGContextSetLineWidth(ctx, 1.0);
+    [[UIColor grayColor] setStroke];
+    CGContextSetLineWidth(ctx, MINOR_LINE_THICKNESS);
     
-    float eighthStartX, eighthEndX, quarterStartX, quarterEndX;
-    switch (self.scaleDisplayMode)
+    for (float y = (self.bounds.size.height/8); y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        case CSScaleViewScaleDisplayModeLeft:
-            eighthStartX = 0;
-            eighthEndX = EIGHTH_LINE_LENGTH;
-            quarterStartX = 0;
-            quarterEndX = QUARTER_LINE_LENGTH;
-            break;
-        case CSScaleViewScaleDisplayModeRight:
-            eighthStartX = self.bounds.size.width - EIGHTH_LINE_LENGTH;
-            eighthEndX = self.bounds.size.width;
-            quarterStartX = self.bounds.size.width - QUARTER_LINE_LENGTH;
-            quarterEndX = self.bounds.size.width;
-            break;
-        default:
-            NSAssert(NO, @"Unknown scale display mode: %d", self.scaleDisplayMode);
-            break;
-    }
-    for (float y = self.bounds.size.height/8; y < self.bounds.size.height; y += self.bounds.size.height/4)
-    {
-        line[0] = CGPointMake(eighthStartX, y);
-        line[1] = CGPointMake(eighthEndX, y);
+        line[0] = CGPointMake((self.bounds.size.width - EIGHTH_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width + EIGHTH_LINE_LENGTH)/2, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
     
-    for (float y = 0.5; y < self.bounds.size.height; y += self.bounds.size.height/4)
+    for (float y = 0.5 + self.bounds.size.height/4; y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        line[0] = CGPointMake(quarterStartX, y);
-        line[1] = CGPointMake(quarterEndX, y);
+        line[0] = CGPointMake((self.bounds.size.width - QUARTER_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width + QUARTER_LINE_LENGTH)/2, y);
         CGContextAddLines(ctx, line, 2);
     }
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    [[UIColor blackColor] setStroke];
+    CGContextSetLineWidth(ctx, WHOLE_LINE_THICKNESS);
+    line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, 0.0);
+    line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, 0.0);
+    CGContextAddLines(ctx, line, 2);
     CGContextDrawPath(ctx, kCGPathStroke);
 }
 

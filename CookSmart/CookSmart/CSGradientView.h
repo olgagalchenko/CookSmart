@@ -1,5 +1,5 @@
 //
-//  CSScaleTile.h
+//  CSGradientView.h
 //  CookSmart
 //
 //  Created by Vova Galchenko on 1/24/14.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSScaleTile : UIView
-
-- (id)initWithFrame:(CGRect)frame;
-
-@property (nonatomic, readwrite, assign) float value;
+@interface CSGradientView : UIView
 
 @end

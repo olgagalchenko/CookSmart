@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScaleDisplayMode.h"
 
 @class CSScaleView;
 
@@ -20,8 +19,7 @@
 @interface CSScaleView : UIScrollView <UIGestureRecognizerDelegate>
 
 - (void)configureScaleViewWithInitialCenterValue:(float)centerValue
-                                           scale:(NSUInteger)unitsPerTile
-                                scaleDisplayMode:(CSScaleViewScaleDisplayMode)scaleDisplayMode;
+                                           scale:(NSUInteger)unitsPerTile;
 - (float)getCenterValue;
 - (void)setCenterValue:(float)newCenterValue cancelDeceleration:(BOOL)cancelDeceleration;
 

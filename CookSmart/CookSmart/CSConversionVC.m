@@ -16,11 +16,14 @@
 
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *ingredientNameBarButtonItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *prevButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *ingredientGroupNameButton;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *prevButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet CSScaleView *volumeScaleScrollView;
 @property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 
 @end
 
@@ -48,28 +51,24 @@ static CSConversionVC *sharedConversionVC = nil;
 
 - (void)refreshUI
 {
-    self.navigationItem.title = self.ingredientGroup.name;
-    self.ingredientNameBarButtonItem.title = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] name];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"List"] style:UIBarButtonItemStylePlain target:self action:@selector(onIngrTap:)];
-    
-    if (_ingredientIndex == 0)
-        _prevButton.enabled = NO;
+    if (self.ingredientIndex == 0)
+        self.prevButton.enabled = NO;
     else
-        _prevButton.enabled = YES;
+        self.prevButton.enabled = YES;
     
-    if (_ingredientIndex >= [_ingredientGroup countOfIngredients]-1)
-        _nextButton.enabled = NO;
+    if (self.ingredientIndex >= [self.ingredientGroup countOfIngredients]-1)
+        self.nextButton.enabled = NO;
     else
-        _nextButton.enabled = YES;
+        self.nextButton.enabled = YES;
 
     CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
-    self.ingredientNameBarButtonItem.title = [ingredient name];
+    [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
+                                    forState:UIControlStateNormal];
+    self.ingredientNameLabel.text = [ingredient name];
     float volumeInitialCenterValue = 2.0;
     float volumeScale = 1.0;
     [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
-                                                                   scale:volumeScale
-                                                        scaleDisplayMode:CSScaleViewScaleDisplayModeRight];
+                                                                   scale:volumeScale];
     
     float idealWeightScale = ingredient.density*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
@@ -81,21 +80,15 @@ static CSConversionVC *sharedConversionVC = nil;
     
     float initialCenterValue = volumeInitialCenterValue*ingredient.density;
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
-                                                                   scale:humanReadableWeightScale
-                                                        scaleDisplayMode:CSScaleViewScaleDisplayModeLeft];
+                                                                   scale:humanReadableWeightScale];
+    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
+    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)onIngrTap:(id)sender
-{
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
@@ -105,16 +98,23 @@ static CSConversionVC *sharedConversionVC = nil;
     [self refreshUI];
 }
 
-- (IBAction)onPrevIngrTap:(id)sender
+- (IBAction)handlePreviousIngredientTap:(id)sender
 {
-    _ingredientIndex--;
+    self.ingredientIndex--;
     [self refreshUI];
 }
 
-- (IBAction)onNextIngrTap:(id)sender
+- (IBAction)handleNextIngredientTap:(id)sender
 {
-    _ingredientIndex++;
+    self.ingredientIndex++;
     [self refreshUI];
+}
+
+- (IBAction)handleIngredientGroupTap:(id)sender
+{
+    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark UIScrollViewDelegate
@@ -130,6 +130,29 @@ static CSConversionVC *sharedConversionVC = nil;
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+    {
+        [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
+    }
+}
+
+- (void)snapToHumanReadableValueOfScaleView:(CSScaleView *)scaleView
+{
+    float humanReadableFloat = 0;
+    humanReadableValue([scaleView getCenterValue], &humanReadableFloat);
+    [UIView animateWithDuration:.2 animations:^{
+        [scaleView setCenterValue:humanReadableFloat cancelDeceleration:YES];
+        [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES];
+    }];
+}
+
 - (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
 {
     if (sourceOfTruth == self.volumeScaleScrollView)
@@ -142,6 +165,80 @@ static CSConversionVC *sharedConversionVC = nil;
         float weightValue = [self.weightScaleScrollView getCenterValue];
         [self.volumeScaleScrollView setCenterValue:weightValue/[[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density] cancelDeceleration:cancelDeceleration];
     }
+    self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
+    self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
+}
+
+static NSDictionary *specialFractions;
+
+static inline NSString *humanReadableValue(float rawValue, float *humanReadableValue)
+{
+    NSString *resultString = nil;
+    if (rawValue >= 50)
+    {
+        float winningValue = round(rawValue);
+        resultString = [NSString stringWithFormat:@"%1.0f", winningValue];
+        if (humanReadableValue)
+        {
+            *humanReadableValue = winningValue;
+        }
+    }
+    else
+    {
+        if (!specialFractions)
+        {
+            specialFractions = @{
+                                 @0.125 : @"\u215B",
+                                 @0.250 : @"\u00BC",
+                                 @0.333 : @"\u2153",
+                                 @0.375 : @"\u215C",
+                                 @0.500 : @"\u00BD",
+                                 @0.625 : @"\u215D",
+                                 @0.666 : @"\u2154",
+                                 @0.750 : @"\u00BE",
+                                 @0.875 : @"\u215E",
+                                 @1.0 : @"",
+                                 [NSNull null] : @""
+                                };
+        }
+        id winningKey = [NSNull null];
+        int wholeNumber = (int)floor(rawValue);
+        float actualFraction = rawValue - wholeNumber;
+        float winningDifference = actualFraction;
+        for (id number in specialFractions.allKeys)
+        {
+            if ([number respondsToSelector:@selector(floatValue)] &&
+                winningDifference > fabs([number floatValue] - actualFraction))
+            {
+                winningDifference = fabs([number floatValue] - actualFraction);
+                winningKey = number;
+            }
+        }
+        float fractionValue = 0;
+        if ([winningKey respondsToSelector:@selector(isEqualToNumber:)] &&
+            [winningKey isEqualToNumber:@1.0])
+        {
+            wholeNumber++;
+            fractionValue = 0;
+        }
+        else if (winningKey == [NSNull null])
+        {
+            fractionValue = 0;
+        }
+        else
+        {
+            fractionValue = [winningKey floatValue];
+        }
+        if (humanReadableValue)
+        {
+            *humanReadableValue = wholeNumber + fractionValue;
+        }
+        NSString *fractionString = [specialFractions objectForKey:winningKey];
+        resultString = [NSString stringWithFormat:@"%@%@", (wholeNumber || winningKey == [NSNull null])?
+                        [NSString stringWithFormat:@"%d", wholeNumber] : @"",
+                        fractionString];
+    }
+    return resultString;
 }
 
 @end
