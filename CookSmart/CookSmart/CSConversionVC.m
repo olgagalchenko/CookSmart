@@ -43,9 +43,9 @@ static CSConversionVC *sharedConversionVC = nil;
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewDidLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewDidLayoutSubviews];
     [self refreshUI];
 }
 
@@ -65,7 +65,7 @@ static CSConversionVC *sharedConversionVC = nil;
     [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
                                     forState:UIControlStateNormal];
     self.ingredientNameLabel.text = [ingredient name];
-    float volumeInitialCenterValue = 2.0;
+    float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? 2.0 : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
     [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
                                                                    scale:volumeScale];

@@ -91,23 +91,32 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="thj-kt-Qng">
-                    <rect key="frame" x="0.0" y="339" width="320" height="2"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thj-kt-Qng">
+                    <rect key="frame" x="0.0" y="338" width="320" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.26011036900000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="2Yp-23-mDl"/>
+                    </constraints>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Fs-m9-eVF">
-                    <rect key="frame" x="40" y="329" width="80" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Fs-m9-eVF">
+                    <rect key="frame" x="40" y="328" width="80" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="NMy-nA-BDr"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-tK-t86">
-                    <rect key="frame" x="200" y="329" width="80" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-tK-t86">
+                    <rect key="frame" x="200" y="328" width="80" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="eVN-0g-KGB"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -115,11 +124,20 @@
             </subviews>
             <color key="backgroundColor" red="0.96862751245498657" green="0.96862751245498657" blue="0.96862751245498657" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
+                <constraint firstItem="thj-kt-Qng" firstAttribute="centerY" secondItem="5Fs-m9-eVF" secondAttribute="centerY" id="3D4-HN-iIZ"/>
                 <constraint firstItem="psD-Ty-vzN" firstAttribute="top" secondItem="1HY-Ay-Qxn" secondAttribute="bottom" constant="16" id="89n-9S-OYk"/>
+                <constraint firstItem="thj-kt-Qng" firstAttribute="centerY" secondItem="psD-Ty-vzN" secondAttribute="centerY" id="Gem-pb-CC0"/>
+                <constraint firstAttribute="trailing" secondItem="thj-kt-Qng" secondAttribute="trailing" id="GkQ-Py-0Qh"/>
+                <constraint firstItem="aol-tK-t86" firstAttribute="centerY" secondItem="7C8-SM-9YU" secondAttribute="centerY" id="IPy-yH-4fn"/>
+                <constraint firstItem="5Fs-m9-eVF" firstAttribute="centerY" secondItem="psD-Ty-vzN" secondAttribute="centerY" id="KIe-DD-Z6j"/>
                 <constraint firstItem="psD-Ty-vzN" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Vie-QG-OJ4"/>
                 <constraint firstAttribute="bottom" secondItem="psD-Ty-vzN" secondAttribute="bottom" id="WwZ-zS-Ure"/>
+                <constraint firstItem="aol-tK-t86" firstAttribute="centerX" secondItem="7C8-SM-9YU" secondAttribute="centerX" id="YZV-e9-U8G"/>
+                <constraint firstItem="thj-kt-Qng" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="a0z-EL-4lR"/>
                 <constraint firstAttribute="trailing" secondItem="7C8-SM-9YU" secondAttribute="trailing" id="lyE-EF-ubY"/>
                 <constraint firstItem="1HY-Ay-Qxn" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="31" id="mW4-j8-vTH"/>
+                <constraint firstItem="5Fs-m9-eVF" firstAttribute="centerX" secondItem="psD-Ty-vzN" secondAttribute="centerX" id="rc4-7T-Gb8"/>
+                <constraint firstItem="thj-kt-Qng" firstAttribute="centerY" secondItem="aol-tK-t86" secondAttribute="centerY" id="tHr-os-Ts0"/>
                 <constraint firstItem="7C8-SM-9YU" firstAttribute="leading" secondItem="psD-Ty-vzN" secondAttribute="trailing" id="tnQ-86-3g7"/>
                 <constraint firstItem="psD-Ty-vzN" firstAttribute="top" secondItem="7C8-SM-9YU" secondAttribute="top" id="w9V-VB-suF"/>
                 <constraint firstAttribute="bottom" secondItem="7C8-SM-9YU" secondAttribute="bottom" id="xgv-Xg-EAM"/>
