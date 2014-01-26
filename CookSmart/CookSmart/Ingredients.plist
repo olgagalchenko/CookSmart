@@ -9,19 +9,25 @@
 				<key>Name</key>
 				<string>Brown Sugar</string>
 				<key>Density</key>
-				<integer>220</integer>
+				<integer>198</integer>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Confectioners&apos; Sugar</string>
 				<key>Density</key>
-				<real>189.51</real>
+				<real>113</real>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Granulated Sugar</string>
 				<key>Density</key>
-				<real>200.86</real>
+				<integer>198</integer>
+			</dict>
+            <dict>
+				<key>Name</key>
+				<string>Turbinado (Raw) Sugar</string>
+				<key>Density</key>
+				<integer>190</integer>
 			</dict>
 		</array>
 	</dict>
@@ -32,19 +38,19 @@
 				<key>Name</key>
 				<string>Cake Flour</string>
 				<key>Density</key>
-				<real>0.478</real>
+				<real>116.25</real>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Whole Wheat Flour</string>
 				<key>Density</key>
-				<real>0.659</real>
+				<integer>156</integer>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>All-Purpose Flour</string>
 				<key>Density</key>
-				<real>0.6</real>
+				<integer>125</integer>
 			</dict>
 		</array>
 	</dict>
@@ -61,7 +67,7 @@
 				<key>Name</key>
 				<string>Peanut Oil</string>
 				<key>Density</key>
-				<real>0.91</real>
+				<real>222</real>
 			</dict>
 			<dict>
 				<key>Name</key>
@@ -73,21 +79,44 @@
 				<key>Name</key>
 				<string>Canola Oil</string>
 				<key>Density</key>
-				<real>0.92</real>
+				<real>219.5</real>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Olive Oil</string>
 				<key>Density</key>
-				<real>0.91</real>
+				<real>219.5</real>
+			</dict>
+            <dict>
+				<key>Name</key>
+				<string>Coconut Oil</string>
+				<key>Density</key>
+				<real>216</real>
 			</dict>
 			<dict>
 				<key>Name</key>
 				<string>Butter</string>
 				<key>Density</key>
-				<real>0.959</real>
+				<real>227</real>
 			</dict>
 		</array>
+	</dict>
+    <dict>
+		<key>Others</key>
+		<array>
+			<dict>
+				<key>Name</key>
+				<string>Cocoa Powder</string>
+				<key>Density</key>
+				<real>85</real>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Honey</string>
+				<key>Density</key>
+				<integer>340</integer>
+			</dict>
+        </array>
 	</dict>
 </array>
 </plist>
