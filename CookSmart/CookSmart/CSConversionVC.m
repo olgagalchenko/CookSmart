@@ -13,6 +13,10 @@
 #import "CSScaleView.h"
 
 @interface CSConversionVC ()
+{
+    NSInteger volumeUnitIndex;
+    NSInteger weightUnitIndex;
+}
 
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
@@ -26,7 +30,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
 
+@property (weak, nonatomic) IBOutlet UIButton *volumeUnit;
+@property (weak, nonatomic) IBOutlet UIButton *weightUnit;
+
 @end
+
+enum units
+{
+    volume = 0,
+    weight = 1
+};
+
+#define kVolumeUnits @[@"Cups", @"Tablespoons", @"Teaspoons"]
+#define kWeightUnits @[@"Grams", @"Kilograms", @"Ounces"]
+
 
 @implementation CSConversionVC
 
@@ -40,6 +57,9 @@ static CSConversionVC *sharedConversionVC = nil;
         self.ingredientGroup = ingredientGroup;
         self.ingredientIndex = ingredientIndex;
         sharedConversionVC = self;
+        
+        volumeUnitIndex = 0;
+        weightUnitIndex = 0;
     }
     return self;
 }
@@ -61,6 +81,9 @@ static CSConversionVC *sharedConversionVC = nil;
         self.nextButton.enabled = NO;
     else
         self.nextButton.enabled = YES;
+    
+    self.volumeUnit.tag = volume;
+    self.weightUnit.tag = weight;
 
     CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
     [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
@@ -84,6 +107,9 @@ static CSConversionVC *sharedConversionVC = nil;
                                                                    scale:humanReadableWeightScale];
     [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
+    
+    [_volumeUnit setTitle:kVolumeUnits[volumeUnitIndex] forState:UIControlStateNormal];
+    [_weightUnit setTitle:kWeightUnits[weightUnitIndex] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -243,6 +269,37 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
                         fractionString];
     }
     return resultString;
+}
+
+#pragma mark - unit change
+
+- (IBAction)handleUnitTouch:(id)sender
+{
+    UIActionSheet* unitSheet;
+    if (((UILabel*)sender).tag == volume)
+    {
+        NSAssert([kVolumeUnits count] == 3, @"Number of volume units should be 3 (unless we change it)");
+        unitSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:kVolumeUnits[0], kVolumeUnits[1], kVolumeUnits[2], nil];
+        unitSheet.tag = volume;
+    }
+    else
+    {
+        NSAssert([kWeightUnits count] == 3, @"Number of weight units should be 3 (unless we change it)");
+        unitSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:kWeightUnits[0], kWeightUnits[1], kWeightUnits[2], nil];
+        unitSheet.tag = weight;
+    }
+    [unitSheet showInView:self.view];
+}
+
+#pragma mark - action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == volume)
+        volumeUnitIndex = buttonIndex;
+    else if (actionSheet.tag == weight)
+        weightUnitIndex = buttonIndex;
+    
+    [self refreshUI];
 }
 
 @end
