@@ -94,16 +94,35 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
 #define DEFAULT_VOLUME  2.0
     float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
-    [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
-                                                                   scale:volumeScale];
     
     float idealWeightScale = density(ingredient, self.currentVolumeUnit, self.currentWeightUnit)*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
-    if (idealWeightScale >=  10)
+    if (idealWeightScale >=  5 && idealWeightScale < 10)
+    {
+        humanReadableWeightScale = 5;
+    }
+    else if (idealWeightScale >= 10)
     {
         NSUInteger orderOfMagnitude = (NSUInteger) floor(log10(idealWeightScale));
         humanReadableWeightScale = idealWeightScale - (((NSUInteger)idealWeightScale)%(NSUInteger)pow(10, orderOfMagnitude));
     }
+    else
+    {
+        float idealVolumeScale = humanReadableWeightScale/density(ingredient, self.currentVolumeUnit, self.currentWeightUnit);
+        volumeScale = 1;
+        if (idealVolumeScale >= 5 && idealVolumeScale < 10)
+        {
+            volumeScale = 5;
+        }
+        else if (idealVolumeScale >= 10)
+        {
+            NSUInteger orderOfMagnitude = (NSUInteger) floor(log10(idealVolumeScale));
+            volumeScale = idealVolumeScale - (((NSUInteger)idealVolumeScale)%(NSUInteger)pow(10, orderOfMagnitude));
+        }
+    }
+    
+    [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
+                                                                   scale:volumeScale];
     
     float initialCenterValue = volumeInitialCenterValue*density(ingredient, self.currentVolumeUnit, self.currentWeightUnit);
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
