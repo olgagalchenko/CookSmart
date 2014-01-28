@@ -16,6 +16,9 @@
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
+		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
+		93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09936189776A00014DB3E /* CSWeightUnit.m */; };
+		93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D099391897774C0014DB3E /* CSVolumeUnit.m */; };
 		B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
 		B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
@@ -59,6 +62,12 @@
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
+		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
+		93D09933189766080014DB3E /* CSUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnit.m; sourceTree = "<group>"; };
+		93D09935189776A00014DB3E /* CSWeightUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSWeightUnit.h; sourceTree = "<group>"; };
+		93D09936189776A00014DB3E /* CSWeightUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSWeightUnit.m; sourceTree = "<group>"; };
+		93D099381897774C0014DB3E /* CSVolumeUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVolumeUnit.h; sourceTree = "<group>"; };
+		93D099391897774C0014DB3E /* CSVolumeUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVolumeUnit.m; sourceTree = "<group>"; };
 		B7BCA28D180524A800CF7588 /* CookSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BCA290180524A800CF7588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7BCA292180524A800CF7588 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,8 +143,22 @@
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
+				93D0993B18977D320014DB3E /* Units */,
 			);
 			name = "Conversion Screen";
+			sourceTree = "<group>";
+		};
+		93D0993B18977D320014DB3E /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				93D09932189766080014DB3E /* CSUnit.h */,
+				93D09933189766080014DB3E /* CSUnit.m */,
+				93D09935189776A00014DB3E /* CSWeightUnit.h */,
+				93D09936189776A00014DB3E /* CSWeightUnit.m */,
+				93D099381897774C0014DB3E /* CSVolumeUnit.h */,
+				93D099391897774C0014DB3E /* CSVolumeUnit.m */,
+			);
+			name = Units;
 			sourceTree = "<group>";
 		};
 		B7BCA284180524A800CF7588 = {
@@ -312,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
@@ -320,8 +344,10 @@
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
+				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
+				93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

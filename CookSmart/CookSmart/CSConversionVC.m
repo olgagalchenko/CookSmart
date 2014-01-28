@@ -11,12 +11,11 @@
 #import "CSIngredientGroup.h"
 #import "CSIngredient.h"
 #import "CSScaleView.h"
+#import "CSUnit.h"
+#import "CSVolumeUnit.h"
+#import "CSWeightUnit.h"
 
 @interface CSConversionVC ()
-{
-    NSInteger volumeUnitIndex;
-    NSInteger weightUnitIndex;
-}
 
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
@@ -33,6 +32,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *volumeUnit;
 @property (weak, nonatomic) IBOutlet UIButton *weightUnit;
 
+@property (strong, nonatomic) CSUnit* currentWeightUnit;
+@property (strong, nonatomic) CSUnit* currentVolumeUnit;
+
 @end
 
 enum units
@@ -40,10 +42,6 @@ enum units
     volume = 0,
     weight = 1
 };
-
-#define kVolumeUnits @[@"Cups", @"Tablespoons", @"Teaspoons"]
-#define kWeightUnits @[@"Grams", @"Kilograms", @"Ounces"]
-
 
 @implementation CSConversionVC
 
@@ -58,8 +56,8 @@ static CSConversionVC *sharedConversionVC = nil;
         self.ingredientIndex = ingredientIndex;
         sharedConversionVC = self;
         
-        volumeUnitIndex = 0;
-        weightUnitIndex = 0;
+        _currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:0];
+        _currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:0];
     }
     return self;
 }
@@ -108,8 +106,10 @@ static CSConversionVC *sharedConversionVC = nil;
     [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
     
-    [_volumeUnit setTitle:kVolumeUnits[volumeUnitIndex] forState:UIControlStateNormal];
-    [_weightUnit setTitle:kWeightUnits[weightUnitIndex] forState:UIControlStateNormal];
+    
+    
+    [_volumeUnit setTitle:_currentVolumeUnit.name forState:UIControlStateNormal];
+    [_weightUnit setTitle:_currentWeightUnit.name forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -278,14 +278,12 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     UIActionSheet* unitSheet;
     if (((UILabel*)sender).tag == volume)
     {
-        NSAssert([kVolumeUnits count] == 3, @"Number of volume units should be 3 (unless we change it)");
-        unitSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:kVolumeUnits[0], kVolumeUnits[1], kVolumeUnits[2], nil];
+        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Volume Unit" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:[CSVolumeUnit nameWithIndex:0], [CSVolumeUnit nameWithIndex:1], [CSVolumeUnit nameWithIndex:2], nil];
         unitSheet.tag = volume;
     }
     else
     {
-        NSAssert([kWeightUnits count] == 3, @"Number of weight units should be 3 (unless we change it)");
-        unitSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:kWeightUnits[0], kWeightUnits[1], kWeightUnits[2], nil];
+        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Weight Unit" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:[CSWeightUnit nameWithIndex:0], [CSWeightUnit nameWithIndex:1], [CSWeightUnit nameWithIndex:2], nil];
         unitSheet.tag = weight;
     }
     [unitSheet showInView:self.view];
@@ -295,9 +293,9 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == volume)
-        volumeUnitIndex = buttonIndex;
+        _currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:buttonIndex];
     else if (actionSheet.tag == weight)
-        weightUnitIndex = buttonIndex;
+        _currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:buttonIndex];
     
     [self refreshUI];
 }
