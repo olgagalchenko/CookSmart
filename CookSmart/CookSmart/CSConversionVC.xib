@@ -13,10 +13,10 @@
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="volumeLabel" destination="5Fs-m9-eVF" id="WkD-Gd-N9N"/>
                 <outlet property="volumeScaleScrollView" destination="psD-Ty-vzN" id="Dmf-5v-KYN"/>
-                <outlet property="volumeUnit" destination="edW-tt-TbL" id="AVs-2B-YW9"/>
+                <outlet property="volumeUnitButton" destination="edW-tt-TbL" id="gVr-by-qbG"/>
                 <outlet property="weightLabel" destination="aol-tK-t86" id="n7l-vB-Fzf"/>
                 <outlet property="weightScaleScrollView" destination="7C8-SM-9YU" id="yh9-1B-h7W"/>
-                <outlet property="weightUnit" destination="Twd-Yk-xbf" id="7gO-rc-FNZ"/>
+                <outlet property="weightUnitButton" destination="Twd-Yk-xbf" id="ZxP-nl-T3u"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

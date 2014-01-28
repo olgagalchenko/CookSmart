@@ -9,8 +9,8 @@
 #import "CSWeightUnit.h"
 
 static const float kGramsInGram = 1;
-static const float kGramsInKg = 1000;
-static const float kGramsInOunce = 28.3495;
+static const float kKgsInGram = 0.001;
+static const float kOuncesInGram = 0.035274;
 
 static NSString* kGrams = @"Grams";
 static NSString* kKilograms = @"Kilograms";
@@ -25,9 +25,9 @@ static NSString* kOunces = @"Ounces";
         if ([self.name isEqualToString:kGrams])
             self.conversionFactor = kGramsInGram;
         else if ([self.name isEqualToString:kKilograms])
-            self.conversionFactor = kGramsInKg;
+            self.conversionFactor = kKgsInGram;
         else if ([self.name isEqualToString:kOunces])
-            self.conversionFactor = kGramsInOunce;
+            self.conversionFactor = kOuncesInGram;
         else
             NSAssert(NO, @"Bad unit.");
     }

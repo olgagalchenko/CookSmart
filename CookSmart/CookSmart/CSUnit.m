@@ -20,4 +20,16 @@
     return self;
 }
 
+- (id)initWithIndex:(NSInteger)index
+{
+    NSAssert(NO, @"Must implement - (id)initWithIndex:(NSInteger)index inside your CSUnit subclass.");
+    return nil;
+}
+
++ (NSString*)nameWithIndex:(NSInteger)index
+{
+    NSAssert(NO, @"Must implement + (NSString*)nameWithIndex:(NSInteger)index inside your CSUnit subclass.");
+    return nil;
+}
+
 @end

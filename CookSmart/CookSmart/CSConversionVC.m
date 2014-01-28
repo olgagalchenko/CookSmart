@@ -27,13 +27,13 @@
 @property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet UIButton *volumeUnitButton;
+@property (weak, nonatomic) IBOutlet UIButton *weightUnitButton;
+
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
 
-@property (weak, nonatomic) IBOutlet UIButton *volumeUnit;
-@property (weak, nonatomic) IBOutlet UIButton *weightUnit;
-
-@property (strong, nonatomic) CSUnit* currentWeightUnit;
-@property (strong, nonatomic) CSUnit* currentVolumeUnit;
+@property (strong, nonatomic) CSWeightUnit* currentWeightUnit;
+@property (strong, nonatomic) CSVolumeUnit* currentVolumeUnit;
 
 @end
 
@@ -56,8 +56,8 @@ static CSConversionVC *sharedConversionVC = nil;
         self.ingredientIndex = ingredientIndex;
         sharedConversionVC = self;
         
-        _currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:0];
-        _currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:0];
+        self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:0];
+        self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:0];
     }
     return self;
 }
@@ -66,6 +66,13 @@ static CSConversionVC *sharedConversionVC = nil;
 {
     [super viewDidLayoutSubviews];
     [self refreshUI];
+    self.volumeUnitButton.tag = volume;
+    self.weightUnitButton.tag = weight;
+}
+
+static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, CSWeightUnit *weightUnit)
+{
+    return ingredient.density*(weightUnit.conversionFactor/volumeUnit.conversionFactor);
 }
 
 - (void)refreshUI
@@ -79,9 +86,6 @@ static CSConversionVC *sharedConversionVC = nil;
         self.nextButton.enabled = NO;
     else
         self.nextButton.enabled = YES;
-    
-    self.volumeUnit.tag = volume;
-    self.weightUnit.tag = weight;
 
     CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
     [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
@@ -93,7 +97,7 @@ static CSConversionVC *sharedConversionVC = nil;
     [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
                                                                    scale:volumeScale];
     
-    float idealWeightScale = ingredient.density*volumeScale;
+    float idealWeightScale = density(ingredient, self.currentVolumeUnit, self.currentWeightUnit)*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
     if (idealWeightScale >=  10)
     {
@@ -101,16 +105,14 @@ static CSConversionVC *sharedConversionVC = nil;
         humanReadableWeightScale = idealWeightScale - (((NSUInteger)idealWeightScale)%(NSUInteger)pow(10, orderOfMagnitude));
     }
     
-    float initialCenterValue = volumeInitialCenterValue*ingredient.density;
+    float initialCenterValue = volumeInitialCenterValue*density(ingredient, self.currentVolumeUnit, self.currentWeightUnit);
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
                                                                    scale:humanReadableWeightScale];
     [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
     
-    
-    
-    [_volumeUnit setTitle:_currentVolumeUnit.name forState:UIControlStateNormal];
-    [_weightUnit setTitle:_currentWeightUnit.name forState:UIControlStateNormal];
+    [self.volumeUnitButton setTitle:self.currentVolumeUnit.name forState:UIControlStateNormal];
+    [self.weightUnitButton setTitle:self.currentWeightUnit.name forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -186,16 +188,18 @@ static CSConversionVC *sharedConversionVC = nil;
 
 - (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
 {
-    float convertedDensity = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density]*(_currentVolumeUnit.conversionFactor/_currentWeightUnit.conversionFactor);
+    density([self.ingredientGroup ingredientAtIndex:self.ingredientIndex], self.currentVolumeUnit, self.currentWeightUnit);
     if (sourceOfTruth == self.volumeScaleScrollView)
     {
         float volumeValue = [self.volumeScaleScrollView getCenterValue];
-        [self.weightScaleScrollView setCenterValue:volumeValue*convertedDensity cancelDeceleration:cancelDeceleration];
+        [self.weightScaleScrollView setCenterValue:volumeValue*density([self.ingredientGroup ingredientAtIndex:self.ingredientIndex], self.currentVolumeUnit, self.currentWeightUnit)
+                                cancelDeceleration:cancelDeceleration];
     }
     else if (sourceOfTruth == self.weightScaleScrollView)
     {
         float weightValue = [self.weightScaleScrollView getCenterValue];
-        [self.volumeScaleScrollView setCenterValue:weightValue/convertedDensity cancelDeceleration:cancelDeceleration];
+        [self.volumeScaleScrollView setCenterValue:weightValue/density([self.ingredientGroup ingredientAtIndex:self.ingredientIndex], self.currentVolumeUnit, self.currentWeightUnit)
+                                cancelDeceleration:cancelDeceleration];
     }
     self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
     self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
@@ -296,9 +300,9 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == volume)
-        _currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:buttonIndex];
+        self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:buttonIndex];
     else if (actionSheet.tag == weight)
-        _currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:buttonIndex];
+        self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:buttonIndex];
     
     [self refreshUI];
 }

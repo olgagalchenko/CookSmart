@@ -114,6 +114,7 @@
 		80592C0218924AEA0082D4E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				93D0993B18977D320014DB3E /* Units */,
 				80592C0318924B010082D4E1 /* CSIngredients.h */,
 				80592C0418924B010082D4E1 /* CSIngredients.m */,
 				80592C0618924B0F0082D4E1 /* CSIngredient.h */,
@@ -143,7 +144,6 @@
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
-				93D0993B18977D320014DB3E /* Units */,
 			);
 			name = "Conversion Screen";
 			sourceTree = "<group>";
