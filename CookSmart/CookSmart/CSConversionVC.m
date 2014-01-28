@@ -185,15 +185,16 @@ static CSConversionVC *sharedConversionVC = nil;
 
 - (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
 {
+    float convertedDensity = [[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density]*(_currentVolumeUnit.conversionFactor/_currentWeightUnit.conversionFactor);
     if (sourceOfTruth == self.volumeScaleScrollView)
     {
         float volumeValue = [self.volumeScaleScrollView getCenterValue];
-        [self.weightScaleScrollView setCenterValue:volumeValue*[[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density] cancelDeceleration:cancelDeceleration];
+        [self.weightScaleScrollView setCenterValue:volumeValue*convertedDensity cancelDeceleration:cancelDeceleration];
     }
     else if (sourceOfTruth == self.weightScaleScrollView)
     {
         float weightValue = [self.weightScaleScrollView getCenterValue];
-        [self.volumeScaleScrollView setCenterValue:weightValue/[[self.ingredientGroup ingredientAtIndex:self.ingredientIndex] density] cancelDeceleration:cancelDeceleration];
+        [self.volumeScaleScrollView setCenterValue:weightValue/convertedDensity cancelDeceleration:cancelDeceleration];
     }
     self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
     self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);

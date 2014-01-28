@@ -9,8 +9,8 @@
 #import "CSVolumeUnit.h"
 
 static const float kCupsInCup = 1;
-static const float kTbspInCup = 100;
-static const float kTspInCup = 28.3495;
+static const float kTbspInCup = 16;
+static const float kTspInCup = 48;
 
 static NSString* kCups = @"Cups";
 static NSString* kTablespoons = @"Tablespoons";

@@ -9,7 +9,7 @@
 #import "CSWeightUnit.h"
 
 static const float kGramsInGram = 1;
-static const float kGramsInKg = 100;
+static const float kGramsInKg = 1000;
 static const float kGramsInOunce = 28.3495;
 
 static NSString* kGrams = @"Grams";
