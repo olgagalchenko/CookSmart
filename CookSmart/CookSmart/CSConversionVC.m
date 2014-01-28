@@ -87,7 +87,8 @@ static CSConversionVC *sharedConversionVC = nil;
     [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
                                     forState:UIControlStateNormal];
     self.ingredientNameLabel.text = [ingredient name];
-    float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? 2.0 : [self.volumeScaleScrollView getCenterValue];
+#define DEFAULT_VOLUME  2.0
+    float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
     [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
                                                                    scale:volumeScale];
@@ -205,7 +206,8 @@ static NSDictionary *specialFractions;
 static inline NSString *humanReadableValue(float rawValue, float *humanReadableValue)
 {
     NSString *resultString = nil;
-    if (rawValue >= 50)
+#define THRESHOLD_FOR_SHOWING_FRACTIONS     50
+    if (rawValue >= THRESHOLD_FOR_SHOWING_FRACTIONS)
     {
         float winningValue = round(rawValue);
         resultString = [NSString stringWithFormat:@"%1.0f", winningValue];

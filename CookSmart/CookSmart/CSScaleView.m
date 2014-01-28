@@ -16,6 +16,8 @@
 @property (nonatomic, readwrite, assign) CGFloat accumulatedOffset;
 @property (nonatomic, readwrite, strong) UIView *tileContainer;
 @property (nonatomic, readwrite, assign) NSUInteger unitsPerTile;
+@property (nonatomic, readwrite, assign) CGFloat previousContentOffset;
+@property (nonatomic, readwrite, strong) NSDate *prevTime;
 
 @end
 
@@ -58,7 +60,7 @@
     self.bouncesZoom = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    self.contentSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height*2);
+    self.contentSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height*10);
     self.accumulatedOffset = 0;
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
     tapRecognizer.numberOfTapsRequired = 1;
@@ -79,18 +81,15 @@
     }
     
     CGFloat currentOffset = self.contentOffset.y;
-    CGFloat contentHeight = self.contentSize.height;
-#define OFFSET_EDGE_PROXIMITY_THRESHOLD     (.25*self.bounds.size.height)
-    CGFloat maxOffset = (contentHeight - self.bounds.size.height) - OFFSET_EDGE_PROXIMITY_THRESHOLD;
-    CGFloat minOffset = OFFSET_EDGE_PROXIMITY_THRESHOLD;
+    CGFloat targetContentOffset = getTargetContentOffset(self);
+#define OFFSET_THRESHOLD     (self.bounds.size.height)
+    CGFloat maxOffset = targetContentOffset + OFFSET_THRESHOLD;
+    CGFloat minOffset = targetContentOffset - OFFSET_THRESHOLD;
     CGFloat newOffset = currentOffset;
-    if (currentOffset > maxOffset)
+    if (currentOffset > maxOffset ||
+        (currentOffset < minOffset && self.accumulatedOffset > 0))
     {
-        newOffset = minOffset;
-    }
-    else if (currentOffset < minOffset && self.accumulatedOffset > 0)
-    {
-        newOffset = MIN(maxOffset, currentOffset + self.accumulatedOffset);
+        newOffset = MIN(targetContentOffset, currentOffset + self.accumulatedOffset);
     }
     
     if (currentOffset != newOffset)
@@ -98,6 +97,7 @@
         CGFloat dyCounteract = currentOffset - newOffset;
         
         setScrollViewOffset(self, CGPointMake(self.contentOffset.x, newOffset), NO);
+        self.previousContentOffset = newOffset;
         self.tileContainer.center = CGPointMake(self.tileContainer.center.x, self.tileContainer.center.y - dyCounteract);
         self.accumulatedOffset += dyCounteract;
     }
@@ -113,16 +113,22 @@
         CGFloat minY = CGRectGetMinY(tileFrame);
         
         if (minY > maximumVisibleY &&
-            tile.frame.origin.y - (self.tileContainer.subviews.count - 1)*SCALE_TILE_HEIGHT > minimumVisibleY)
+            tileFrame.origin.y - (self.tileContainer.subviews.count - 2)*SCALE_TILE_HEIGHT > minimumVisibleY)
         {
-            tile.frame = CGRectMake(0, tile.frame.origin.y - (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT, self.bounds.size.width, SCALE_TILE_HEIGHT);
-            tile.value -= self.tileContainer.subviews.count*self.unitsPerTile;
+            CGFloat decreaseFactor = (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT;
+            CGFloat offBy = minY - maximumVisibleY;
+            CGFloat timesDecreaseFactor = ceil(offBy/decreaseFactor);
+            tile.frame = CGRectMake(0, tileFrame.origin.y - timesDecreaseFactor*decreaseFactor, self.bounds.size.width, SCALE_TILE_HEIGHT);
+            tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
         }
         else if (maxY < minimumVisibleY &&
-                 tile.frame.origin.y + (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT < maximumVisibleY)
+                 tileFrame.origin.y + (self.tileContainer.subviews.count - 1)*SCALE_TILE_HEIGHT < maximumVisibleY)
         {
-            tile.frame = CGRectMake(0, tile.frame.origin.y + (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT, self.bounds.size.width, SCALE_TILE_HEIGHT);
-            tile.value += self.tileContainer.subviews.count*self.unitsPerTile;
+            CGFloat increaseFactor = (self.tileContainer.subviews.count)*SCALE_TILE_HEIGHT;
+            CGFloat offBy = minimumVisibleY - maxY;
+            CGFloat timesIncreaseFactor = ceil(offBy/increaseFactor);
+            tile.frame = CGRectMake(0, tileFrame.origin.y + timesIncreaseFactor*increaseFactor, self.bounds.size.width, SCALE_TILE_HEIGHT);
+            tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
         }
     }
 }
@@ -130,39 +136,38 @@
 - (void)configureScaleViewWithInitialCenterValue:(float)centerValue
                                            scale:(NSUInteger)unitsPerTile
 {
+    self.unitsPerTile = unitsPerTile;
+    setScrollViewOffset(self, CGPointMake(0, 0), NO);
     if (!self.tileContainer)
     {
-        self.tileContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.contentSize.width, self.contentSize.height)];
+        self.tileContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     }
     else
     {
-        self.tileContainer.frame = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
+        self.tileContainer.frame = CGRectMake(0, 0, 0, 0);
     }
     for (CSScaleView *subview in self.tileContainer.subviews)
     {
         [subview removeFromSuperview];
     }
-    setScrollViewOffset(self, CGPointMake(0, 0), NO);
-    int numTiles = ((int)self.bounds.size.height)/SCALE_TILE_HEIGHT + 2;
-    CGFloat lowestTileY = 0;
-    for (int i = 0; i < numTiles; i++)
-    {
-        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT)];
-        [self.tileContainer addSubview:tile];
-        lowestTileY += SCALE_TILE_HEIGHT;
-    }
     [self addSubview:self.tileContainer];
-    
-    NSUInteger midTileIndex = (self.tileContainer.subviews.count - 1)/2;
-    NSUInteger roundedCenterValue = (NSUInteger) round(centerValue);
-    roundedCenterValue = roundedCenterValue - roundedCenterValue%unitsPerTile;
-    self.unitsPerTile = unitsPerTile;
-    for (int i = 0; i < self.tileContainer.subviews.count; i++)
+    int i = 0;
+    CGPoint centerPoint = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    float actualCenterValue = 0;
+    for (CGFloat lowestTileY = 0; lowestTileY < self.contentSize.height/2; lowestTileY += SCALE_TILE_HEIGHT, i++)
     {
-        [(CSScaleTile *)self.tileContainer.subviews[i] setValue:roundedCenterValue + (i - midTileIndex)*unitsPerTile];
+        CGRect tileRect = CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT);
+        float tileValue = i*unitsPerTile;
+        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:tileRect];
+        [tile setValue:tileValue];
+        [self.tileContainer addSubview:tile];
+        if (CGRectContainsPoint(tileRect, centerPoint))
+        {
+            actualCenterValue = tileValue + unitsPerPoint(self)*(centerPoint.y - tileRect.origin.y);
+        }
     }
-    self.accumulatedOffset = ((roundedCenterValue - midTileIndex*unitsPerTile)/unitsPerTile)*SCALE_TILE_HEIGHT + self.bounds.size.height/2;
-    
+
+    self.accumulatedOffset = actualCenterValue*ptsPerUnit(self);
     [self setCenterValue:centerValue cancelDeceleration:YES];
 }
 
@@ -191,6 +196,12 @@ static inline CGFloat unitsPerPoint(CSScaleView *scaleView)
 static inline CGFloat ptsPerUnit(CSScaleView *scaleView)
 {
     return (SCALE_TILE_HEIGHT/scaleView.unitsPerTile);
+}
+
+static inline CGFloat getTargetContentOffset(CSScaleView *scaleView)
+{
+    CGFloat centerX = scaleView.contentSize.height/2;
+    return centerX - scaleView.bounds.size.height/2;
 }
 
 static inline void setScrollViewOffset(CSScaleView *scaleView, CGPoint newContentOffset, BOOL cancelDeceleration)
