@@ -315,12 +315,12 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     UIActionSheet* unitSheet;
     if (((UILabel*)sender).tag == volume)
     {
-        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Volume Unit" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:[CSVolumeUnit nameWithIndex:0], [CSVolumeUnit nameWithIndex:1], [CSVolumeUnit nameWithIndex:2], nil];
+        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Volume Unit" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[CSVolumeUnit nameWithIndex:0], [CSVolumeUnit nameWithIndex:1], [CSVolumeUnit nameWithIndex:2], nil];
         unitSheet.tag = volume;
     }
     else
     {
-        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Weight Unit" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:[CSWeightUnit nameWithIndex:0], [CSWeightUnit nameWithIndex:1], [CSWeightUnit nameWithIndex:2], nil];
+        unitSheet = [[UIActionSheet alloc] initWithTitle:@"Weight Unit" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[CSWeightUnit nameWithIndex:0], [CSWeightUnit nameWithIndex:1], [CSWeightUnit nameWithIndex:2], nil];
         unitSheet.tag = weight;
     }
     [unitSheet showInView:self.view];
@@ -329,6 +329,9 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 #pragma mark - action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex == 3)
+        return;
+    
     if (actionSheet.tag == volume)
         self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:buttonIndex];
     else if (actionSheet.tag == weight)
