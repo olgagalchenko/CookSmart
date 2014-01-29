@@ -91,7 +91,7 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
     [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
                                     forState:UIControlStateNormal];
     self.ingredientNameLabel.text = [ingredient name];
-#define DEFAULT_VOLUME  2.0
+#define DEFAULT_VOLUME  1.0
     float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
     
@@ -122,11 +122,13 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
     }
     
     [self.volumeScaleScrollView configureScaleViewWithInitialCenterValue:volumeInitialCenterValue
-                                                                   scale:volumeScale];
+                                                                   scale:volumeScale
+                                                                  mirror:NO];
     
     float initialCenterValue = volumeInitialCenterValue*density(ingredient, self.currentVolumeUnit, self.currentWeightUnit);
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
-                                                                   scale:humanReadableWeightScale];
+                                                                   scale:humanReadableWeightScale
+                                                                  mirror:YES];
     [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
     

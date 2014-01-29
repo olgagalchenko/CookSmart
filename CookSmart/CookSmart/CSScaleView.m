@@ -135,6 +135,7 @@
 
 - (void)configureScaleViewWithInitialCenterValue:(float)centerValue
                                            scale:(NSUInteger)unitsPerTile
+                                          mirror:(BOOL)mirror
 {
     self.unitsPerTile = unitsPerTile;
     setScrollViewOffset(self, CGPointMake(0, 0), NO);
@@ -158,7 +159,7 @@
     {
         CGRect tileRect = CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT);
         float tileValue = i*unitsPerTile;
-        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:tileRect];
+        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:tileRect mirror:mirror];
         [tile setValue:tileValue];
         [self.tileContainer addSubview:tile];
         if (CGRectContainsPoint(tileRect, centerPoint))

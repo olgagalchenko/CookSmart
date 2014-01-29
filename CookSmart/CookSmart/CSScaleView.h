@@ -20,7 +20,8 @@
 @interface CSScaleView : UIScrollView <UIGestureRecognizerDelegate>
 
 - (void)configureScaleViewWithInitialCenterValue:(float)centerValue
-                                           scale:(NSUInteger)unitsPerTile;
+                                           scale:(NSUInteger)unitsPerTile
+                                          mirror:(BOOL)mirror;
 - (float)getCenterValue;
 - (void)setCenterValue:(float)newCenterValue cancelDeceleration:(BOOL)cancelDeceleration;
 

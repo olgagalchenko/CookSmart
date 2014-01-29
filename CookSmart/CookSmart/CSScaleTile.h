@@ -10,7 +10,7 @@
 
 @interface CSScaleTile : UIView
 
-- (id)initWithFrame:(CGRect)frame;
+- (id)initWithFrame:(CGRect)frame mirror:(BOOL)mirror;
 
 @property (nonatomic, readwrite, assign) float value;
 

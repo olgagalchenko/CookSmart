@@ -10,6 +10,8 @@
 
 #define EIGHTH_LINE_LENGTH      15
 #define QUARTER_LINE_LENGTH     30
+#define THIRD_LINE_LENGTH       QUARTER_LINE_LENGTH
+#define SIXTH_LINE_LENGTH       EIGHTH_LINE_LENGTH
 #define MINOR_LINE_THICKNESS    1.0
 #define WHOLE_LINE_LENGTH       80
 #define WHOLE_LINE_THICKNESS    4.0
@@ -19,15 +21,18 @@
 @interface CSScaleTile()
 
 @property (nonatomic, readwrite, strong) UILabel *valueLabel;
+@property (nonatomic, assign) BOOL mirror;
 
 @end
 
 @implementation CSScaleTile
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame mirror:(BOOL)mirror
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
+        self.mirror = mirror;
         self.backgroundColor = [UIColor clearColor];
         self.valueLabel = [[UILabel alloc] init];
         self.valueLabel.opaque = YES;
@@ -65,6 +70,12 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    if (self.mirror)
+    {
+        CGContextTranslateCTM(ctx, self.bounds.size.width/2, 0);
+        CGContextScaleCTM(ctx, -1, 1);
+        CGContextTranslateCTM(ctx, -self.bounds.size.width/2, 0);
+    }
     
     CGPoint line[2];
     [[UIColor grayColor] setStroke];
@@ -72,16 +83,33 @@
     
     for (float y = (self.bounds.size.height/8); y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        line[0] = CGPointMake((self.bounds.size.width - EIGHTH_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width + EIGHTH_LINE_LENGTH)/2, y);
+        line[0] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2 - EIGHTH_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
     
     for (float y = 0.5 + self.bounds.size.height/4; y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        line[0] = CGPointMake((self.bounds.size.width - QUARTER_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width + QUARTER_LINE_LENGTH)/2, y);
+        line[0] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2 - QUARTER_LINE_LENGTH, y);
+        CGContextAddLines(ctx, line, 2);
+    }
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    [[UIColor colorWithWhite:0.8 alpha:1.0] setStroke];
+    for (float y = (self.bounds.size.height/3); y < self.bounds.size.height; y += self.bounds.size.height/3)
+    {
+        line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2 + THIRD_LINE_LENGTH, y);
+        CGContextAddLines(ctx, line, 2);
+    }
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    for (float y = (self.bounds.size.height/6); y < self.bounds.size.height; y += self.bounds.size.height/3)
+    {
+        line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, y);
+        line[1] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2 + SIXTH_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
