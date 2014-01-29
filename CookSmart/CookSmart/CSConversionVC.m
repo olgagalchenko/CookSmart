@@ -194,6 +194,15 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
     }
 }
 
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    [UIView animateWithDuration:.2 animations:^{
+        [self.weightScaleScrollView setCenterValue:0 cancelDeceleration:YES];
+        [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
+    }];
+    return NO;
+}
+
 - (void)snapToHumanReadableValueOfScaleView:(CSScaleView *)scaleView
 {
     float humanReadableFloat = 0;
@@ -327,5 +336,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     
     [self refreshUI];
 }
+
+#pragma mark - scroll
 
 @end
