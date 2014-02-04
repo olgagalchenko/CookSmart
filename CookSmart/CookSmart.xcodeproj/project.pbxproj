@@ -13,6 +13,10 @@
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C111892CA110082D4E1 /* CSScaleTile.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
+		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
+		9351F3F818A1A32900AD45D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F218A1A32900AD45D0 /* README.md */; };
+		9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F318A1A32900AD45D0 /* release_notes.md */; };
+		9351F3FB18A1A48B00AD45D0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3FA18A1A48B00AD45D0 /* libz.dylib */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
@@ -57,6 +61,13 @@
 		80592C111892CA110082D4E1 /* CSScaleTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleTile.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
+		9351F3F118A1A32900AD45D0 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		9351F3F218A1A32900AD45D0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9351F3F318A1A32900AD45D0 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		9351F3F418A1A32900AD45D0 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		9351F3F518A1A32900AD45D0 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		9351F3F618A1A32900AD45D0 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		9351F3FA18A1A48B00AD45D0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
@@ -92,9 +103,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9351F3FB18A1A48B00AD45D0 /* libz.dylib in Frameworks */,
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
+				9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +161,19 @@
 			name = "Conversion Screen";
 			sourceTree = "<group>";
 		};
+		9351F3F018A1A32900AD45D0 /* TestFlightSDK2 */ = {
+			isa = PBXGroup;
+			children = (
+				9351F3F118A1A32900AD45D0 /* libTestFlight.a */,
+				9351F3F218A1A32900AD45D0 /* README.md */,
+				9351F3F318A1A32900AD45D0 /* release_notes.md */,
+				9351F3F418A1A32900AD45D0 /* TestFlight+AsyncLogging.h */,
+				9351F3F518A1A32900AD45D0 /* TestFlight+ManualSessions.h */,
+				9351F3F618A1A32900AD45D0 /* TestFlight.h */,
+			);
+			path = TestFlightSDK2;
+			sourceTree = "<group>";
+		};
 		93D0993B18977D320014DB3E /* Units */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +190,7 @@
 		B7BCA284180524A800CF7588 = {
 			isa = PBXGroup;
 			children = (
+				9351F3F018A1A32900AD45D0 /* TestFlightSDK2 */,
 				B7BCA296180524A800CF7588 /* CookSmart */,
 				B7BCA2AF180524A800CF7588 /* CookSmartTests */,
 				B7BCA28F180524A800CF7588 /* Frameworks */,
@@ -183,6 +210,7 @@
 		B7BCA28F180524A800CF7588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9351F3FA18A1A48B00AD45D0 /* libz.dylib */,
 				B7BCA290180524A800CF7588 /* Foundation.framework */,
 				B7BCA292180524A800CF7588 /* CoreGraphics.framework */,
 				B7BCA294180524A800CF7588 /* UIKit.framework */,
@@ -286,7 +314,7 @@
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
-						DevelopmentTeam = 5B7P72SMLP;
+						DevelopmentTeam = 6NPJ4ZUZ5S;
 					};
 					B7BCA2A7180524A800CF7588 = {
 						TestTargetID = B7BCA28C180524A800CF7588;
@@ -316,8 +344,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */,
 				9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
+				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 			);
@@ -474,6 +504,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/olgagalchenko/Dropbox/iPhone\\ Development/CookSmart/CookSmart/TestFlightSDK2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -490,6 +524,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/olgagalchenko/Dropbox/iPhone\\ Development/CookSmart/CookSmart/TestFlightSDK2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
