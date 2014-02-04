@@ -53,11 +53,6 @@
 - (void)initialize
 {
     self.bounces = NO;
-    self.scrollsToTop = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.scrollsToTop = YES;
-    });
     self.pagingEnabled = NO;
     self.alwaysBounceHorizontal = NO;
     self.alwaysBounceVertical = NO;
