@@ -16,17 +16,21 @@
 #import "CSWeightUnit.h"
 
 @interface CSConversionVC ()
+{
+    CGFloat _previousIngredientPickerDistanceToSnap;
+}
 
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
+@property (weak, nonatomic) IBOutlet UIScrollView *ingredientPickerScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *ingredientGroupNameButton;
-@property (weak, nonatomic) IBOutlet UILabel *ingredientNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *prevButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet CSScaleView *volumeScaleScrollView;
 @property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet UIView *midlineView;
 @property (weak, nonatomic) IBOutlet UIButton *volumeUnitButton;
 @property (weak, nonatomic) IBOutlet UIButton *weightUnitButton;
 
@@ -65,9 +69,18 @@ static CSConversionVC *sharedConversionVC = nil;
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self refreshUI];
+    [self refreshIngredientGroupUI];
+    [self refreshScalesUI];
     self.volumeUnitButton.tag = volume;
     self.weightUnitButton.tag = weight;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.ingredientPickerScrollView.scrollsToTop = NO;
+    self.volumeScaleScrollView.scrollsToTop = NO;
+    self.weightScaleScrollView.scrollsToTop = YES;
 }
 
 static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, CSWeightUnit *weightUnit)
@@ -75,22 +88,43 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
     return ingredient.density*(weightUnit.conversionFactor/volumeUnit.conversionFactor);
 }
 
-- (void)refreshUI
+static inline UILabel *createIngredientLabel()
 {
-    if (self.ingredientIndex == 0)
-        self.prevButton.enabled = NO;
-    else
-        self.prevButton.enabled = YES;
-    
-    if (self.ingredientIndex >= [self.ingredientGroup countOfIngredients]-1)
-        self.nextButton.enabled = NO;
-    else
-        self.nextButton.enabled = YES;
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = BACKGROUND_COLOR;
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17.0];
+    label.textColor = [UIColor darkTextColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
 
+- (NSString *)nameForIngredientAtXOrigin:(CGFloat)xOrigin
+{
+    return [[self.ingredientGroup ingredientAtIndex:(int) (xOrigin/self.ingredientPickerScrollView.bounds.size.width)] name];
+}
+
+- (void)refreshIngredientGroupUI
+{
+    [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name] forState:UIControlStateNormal];
+    self.ingredientPickerScrollView.contentSize = CGSizeMake(self.ingredientPickerScrollView.bounds.size.width*[self.ingredientGroup countOfIngredients], self.ingredientPickerScrollView.bounds.size.height);
+    for (UIView *subview in self.ingredientPickerScrollView.subviews)
+    {
+        [subview removeFromSuperview];
+    }
+    for (CGFloat x = 0; x <= 2*self.ingredientPickerScrollView.bounds.size.width; x += self.ingredientPickerScrollView.bounds.size.width)
+    {
+        UILabel *label = createIngredientLabel();
+        label.frame = CGRectMake(x, 0, self.ingredientPickerScrollView.bounds.size.width, self.ingredientPickerScrollView.bounds.size.height);
+        label.text = [self nameForIngredientAtXOrigin:x];
+        [self.ingredientPickerScrollView addSubview:label];
+    }
+    self.ingredientPickerScrollView.contentOffset = CGPointMake(self.ingredientPickerScrollView.bounds.size.width*self.ingredientIndex, 0);
+}
+
+- (void)refreshScalesUI
+{
+    [self refreshButtons];
     CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
-    [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name]
-                                    forState:UIControlStateNormal];
-    self.ingredientNameLabel.text = [ingredient name];
 #define DEFAULT_VOLUME  1.0
     float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
@@ -136,6 +170,12 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
     [self.weightUnitButton setTitle:self.currentWeightUnit.name forState:UIControlStateNormal];
 }
 
+- (void)refreshButtons
+{
+    [self.nextButton setEnabled:self.ingredientIndex < ([self.ingredientGroup countOfIngredients] - 1)];
+    [self.prevButton setEnabled:self.ingredientIndex > 0];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -146,19 +186,23 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
 {
     self.ingredientGroup = ingredientGroup;
     self.ingredientIndex = index;
-    [self refreshUI];
+    [self refreshIngredientGroupUI];
+    [self refreshScalesUI];
 }
 
 - (IBAction)handlePreviousIngredientTap:(id)sender
 {
-    self.ingredientIndex--;
-    [self refreshUI];
+    if (self.ingredientPickerScrollView.contentOffset.x >= self.ingredientPickerScrollView.bounds.size.width &&
+        remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width) == 0.0)
+        [self.ingredientPickerScrollView setContentOffset:CGPointMake(self.ingredientPickerScrollView.contentOffset.x - self.ingredientPickerScrollView.bounds.size.width, 0)
+                                             animated:YES];
 }
 
 - (IBAction)handleNextIngredientTap:(id)sender
 {
-    self.ingredientIndex++;
-    [self refreshUI];
+    if (self.ingredientPickerScrollView.contentOffset.x < self.ingredientPickerScrollView.contentSize.width - self.ingredientPickerScrollView.bounds.size.width && remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width) == 0.0)
+        [self.ingredientPickerScrollView setContentOffset:CGPointMake(self.ingredientPickerScrollView.contentOffset.x + self.ingredientPickerScrollView.bounds.size.width, 0)
+                                             animated:YES];
 }
 
 - (IBAction)handleIngredientGroupTap:(id)sender
@@ -172,23 +216,65 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self synchronizeVolumeAndWeight:scrollView cancelDeceleration:NO];
+    if (scrollViewIsAScaleView(scrollView))
+    {
+        [self synchronizeVolumeAndWeight:scrollView cancelDeceleration:NO];
+    }
+    else if (scrollView == self.ingredientPickerScrollView)
+    {
+        CGFloat minVisibleX = self.ingredientPickerScrollView.contentOffset.x;
+        CGFloat maxVisibleX = minVisibleX + self.ingredientPickerScrollView.bounds.size.width;
+        NSUInteger numLabels = self.ingredientPickerScrollView.subviews.count;
+        CGFloat contentSize = self.ingredientPickerScrollView.contentSize.width;
+        for (UILabel *label in self.ingredientPickerScrollView.subviews)
+        {
+            if (label.frame.origin.x + label.bounds.size.width < minVisibleX &&
+                label.frame.origin.x + (numLabels + 1)*label.bounds.size.width <= contentSize &&
+                label.frame.origin.x + numLabels*label.bounds.size.width <= maxVisibleX)
+            {
+                label.frame = CGRectMake(label.frame.origin.x + numLabels*label.bounds.size.width, 0, label.frame.size.width, label.frame.size.height);
+                label.text = [self nameForIngredientAtXOrigin:label.frame.origin.x];
+            }
+            if (label.frame.origin.x > maxVisibleX &&
+                label.frame.origin.x - numLabels*label.bounds.size.width >= 0 &&
+                label.frame.origin.x + (1 - numLabels)*label.bounds.size.width >= minVisibleX)
+            {
+                label.frame = CGRectMake(label.frame.origin.x - numLabels*label.bounds.size.width, 0, label.frame.size.width, label.frame.size.height);
+                label.text = [self nameForIngredientAtXOrigin:label.frame.origin.x];
+            }
+        }
+        
+        CGFloat distanceToSnap = remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width);
+        CGFloat distanceToMiddle = (self.ingredientPickerScrollView.bounds.size.width/2) - fabs(distanceToSnap);
+        CGFloat scaleViewAlpha = distanceToMiddle/(self.ingredientPickerScrollView.bounds.size.width/2);
+        self.volumeScaleScrollView.alpha = scaleViewAlpha;
+        self.weightScaleScrollView.alpha = scaleViewAlpha;
+        self.volumeLabel.alpha = scaleViewAlpha;
+        self.weightLabel.alpha = scaleViewAlpha;
+        self.midlineView.alpha = scaleViewAlpha;
+
+        if (distanceToMiddle < self.ingredientPickerScrollView.bounds.size.width/4 && (_previousIngredientPickerDistanceToSnap >= 0 ^ distanceToSnap >= 0))
+        {
+            // Let's reflect the change of ingredient on the scale
+            if (_previousIngredientPickerDistanceToSnap > 0)
+            {
+                self.ingredientIndex++;
+            }
+            else
+            {
+                self.ingredientIndex--;
+            }
+            [self refreshScalesUI];
+        }
+        
+        _previousIngredientPickerDistanceToSnap = distanceToSnap;
+    }
 }
 
-- (void)scaleViewTapped:(CSScaleView *)scaleView
-{
-    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
-    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
-}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (!decelerate)
+    if (!decelerate && scrollViewIsAScaleView(scrollView))
     {
         [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
     }
@@ -196,11 +282,30 @@ static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, 
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
+    // This is only called for one of the scale views, because other scrollviews have scrollsToTop = NO;
     [UIView animateWithDuration:.2 animations:^{
         [self.weightScaleScrollView setCenterValue:0 cancelDeceleration:YES];
         [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
     }];
     return NO;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollViewIsAScaleView(scrollView))
+        [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
+}
+
+static inline BOOL scrollViewIsAScaleView(UIScrollView *scrollView)
+{
+    return [scrollView isKindOfClass:[CSScaleView class]];
+}
+
+
+- (void)scaleViewTapped:(CSScaleView *)scaleView
+{
+    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
+    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
 }
 
 - (void)snapToHumanReadableValueOfScaleView:(CSScaleView *)scaleView
@@ -337,7 +442,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     else if (actionSheet.tag == weight)
         self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:buttonIndex];
     
-    [self refreshUI];
+    [self refreshScalesUI];
 }
 
 #pragma mark - scroll
