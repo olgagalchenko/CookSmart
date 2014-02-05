@@ -100,7 +100,13 @@ static inline UILabel *createIngredientLabel()
 
 - (NSString *)nameForIngredientAtXOrigin:(CGFloat)xOrigin
 {
-    return [[self.ingredientGroup ingredientAtIndex:(int) (xOrigin/self.ingredientPickerScrollView.bounds.size.width)] name];
+    NSUInteger indexOfIngredient = (NSUInteger) (xOrigin/self.ingredientPickerScrollView.bounds.size.width);
+    NSString *nameOfIngredient = nil;
+    if (indexOfIngredient < [self.ingredientGroup countOfIngredients])
+    {
+        nameOfIngredient = [[self.ingredientGroup ingredientAtIndex:indexOfIngredient] name];
+    }
+    return nameOfIngredient;
 }
 
 - (void)refreshIngredientGroupUI
