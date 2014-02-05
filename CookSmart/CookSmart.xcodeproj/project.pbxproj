@@ -314,7 +314,7 @@
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
-						DevelopmentTeam = 6NPJ4ZUZ5S;
+						DevelopmentTeam = 5B7P72SMLP;
 					};
 					B7BCA2A7180524A800CF7588 = {
 						TestTargetID = B7BCA28C180524A800CF7588;
@@ -506,7 +506,7 @@
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/olgagalchenko/Dropbox/iPhone\\ Development/CookSmart/CookSmart/TestFlightSDK2",
+					"$(PROJECT_DIR)/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E739F6D3-ED86-4EAC-840A-B58F0689BD4E";
@@ -526,7 +526,7 @@
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/olgagalchenko/Dropbox/iPhone\\ Development/CookSmart/CookSmart/TestFlightSDK2",
+					"$(PROJECT_DIR)/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E739F6D3-ED86-4EAC-840A-B58F0689BD4E";
