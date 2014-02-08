@@ -66,13 +66,12 @@ static CSConversionVC *sharedConversionVC = nil;
     return self;
 }
 
+#pragma mark - View Lifecycle Management
+
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self refreshIngredientGroupUI];
-    [self refreshScalesUI];
-    self.volumeUnitButton.tag = volume;
-    self.weightUnitButton.tag = weight;
+    [self selectIngredientGroup:self.ingredientGroup ingredientIndex:self.ingredientIndex];
 }
 
 - (void)viewDidLoad
@@ -81,7 +80,17 @@ static CSConversionVC *sharedConversionVC = nil;
     self.ingredientPickerScrollView.scrollsToTop = NO;
     self.volumeScaleScrollView.scrollsToTop = NO;
     self.weightScaleScrollView.scrollsToTop = YES;
+    self.volumeUnitButton.tag = volume;
+    self.weightUnitButton.tag = weight;
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    logViewChange(@"conversion", [self analyticsAttributes]);
+}
+
+#pragma mark -
 
 static inline float density(CSIngredient *ingredient, CSVolumeUnit *volumeUnit, CSWeightUnit *weightUnit)
 {
@@ -182,13 +191,18 @@ static inline UILabel *createIngredientLabel()
     [self.prevButton setEnabled:self.ingredientIndex > 0];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    CSIngredient *ingredient = [ingredientGroup ingredientAtIndex:index];
+    logUserAction(@"ingredient_select", @{
+                                          @"ingredient_group_name" : ingredientGroup.name,
+                                          @"ingredient_name" : ingredient.name,
+                                          @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
+                                          });
+    [self selectIngredientGroup:ingredientGroup ingredientIndex:index];
 }
 
-- (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
+- (void)selectIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
 {
     self.ingredientGroup = ingredientGroup;
     self.ingredientIndex = index;
@@ -270,6 +284,7 @@ static inline UILabel *createIngredientLabel()
             {
                 self.ingredientIndex--;
             }
+            logUserAction(@"ingredient_switch", [self analyticsAttributes]);
             [self refreshScalesUI];
         }
         
@@ -292,6 +307,8 @@ static inline UILabel *createIngredientLabel()
     [UIView animateWithDuration:.2 animations:^{
         [self.weightScaleScrollView setCenterValue:0 cancelDeceleration:YES];
         [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
+    } completion:^(BOOL finished) {
+        logUserAction(@"scroll_to_top", [self analyticsAttributes]);
     }];
     return NO;
 }
@@ -324,6 +341,16 @@ static inline BOOL scrollViewIsAScaleView(UIScrollView *scrollView)
         [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES];
     } completion:^(BOOL finished) {
         self.isSnapping = NO;
+        NSString *valueSnapEventName = @"value_snap_unknown";
+        if (scaleView == self.weightScaleScrollView)
+        {
+            valueSnapEventName = @"value_snap_weight";
+        }
+        else if (scaleView == self.volumeScaleScrollView)
+        {
+            valueSnapEventName = @"value_snap_volume";
+        }
+        logUserAction(valueSnapEventName, [self analyticsAttributes]);
     }];
 }
 
@@ -444,13 +471,32 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
         return;
     
     if (actionSheet.tag == volume)
+    {
         self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:buttonIndex];
+        logUserAction(@"volume_unit_change", [self analyticsAttributes]);
+    }
     else if (actionSheet.tag == weight)
+    {
         self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:buttonIndex];
-    
+        logUserAction(@"weight_unit_change", [self analyticsAttributes]);
+    }
     [self refreshScalesUI];
 }
 
-#pragma mark - scroll
+#pragma mark -
+
+- (NSDictionary *)analyticsAttributes
+{
+    CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
+    return @{
+             @"ingredient_group_name" : self.ingredientGroup.name,
+             @"ingredient_name" : ingredient.name,
+             @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
+             @"volume_unit" : self.currentVolumeUnit.name,
+             @"weight_unit" : self.currentWeightUnit.name,
+             @"volume_value" : @([self.volumeScaleScrollView getCenterValue]),
+             @"weight_value" : @([self.weightScaleScrollView getCenterValue]),
+             };
+}
 
 @end

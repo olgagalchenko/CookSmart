@@ -15,6 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    logAppLifecycleEvent(@"launch", nil);
     [TestFlight takeOff:@"33e4b92b-0234-47cb-b533-e676909b43da"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -29,12 +30,14 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    logAppLifecycleEvent(@"resign_active", nil);
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    logAppLifecycleEvent(@"enter_background", nil);
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -46,11 +49,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    logAppLifecycleEvent(@"become_active", nil);
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    logAppLifecycleEvent(@"terminate", nil);
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
