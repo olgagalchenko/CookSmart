@@ -144,7 +144,14 @@ static AnalyticsSender *sharedInstance = nil;
             else
             {
                 NSLog(@"Failed sending analytics: %@", [httpResponse allHeaderFields]);
-                [[Analytics sharedInstance] logEventWithName:@"analytics_send_fail" type:AnalyticsEventTypeIssue attributes:[httpResponse allHeaderFields]];
+                if (connectionError)
+                {
+                    [[Analytics sharedInstance] logEventWithName:@"analytics_send_fail" type:AnalyticsEventTypeIssue attributes:errorInfo(connectionError)];
+                }
+                else
+                {
+                    [[Analytics sharedInstance] logEventWithName:@"analytics_send_fail" type:AnalyticsEventTypeIssue attributes:[httpResponse allHeaderFields]];
+                }
             }
             me.isSending = NO;
         }];
