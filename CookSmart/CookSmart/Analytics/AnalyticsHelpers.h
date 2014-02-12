@@ -37,4 +37,14 @@ static inline NSURL *analyticsPostURL()
     return [NSURL URLWithString:@"http://asswaffle.com/api/analytics.py"];
 }
 
+static inline NSDictionary *errorInfo(NSError *error)
+{
+    return @{
+             @"error_code" : [NSNumber numberWithInteger:error.code],
+             @"error_domain" : error.domain,
+             @"error_description" : error.localizedDescription,
+             @"error_info" : [error.userInfo description],
+             };
+}
+
 #endif
