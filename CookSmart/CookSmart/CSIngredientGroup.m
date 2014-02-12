@@ -50,4 +50,46 @@
     return self.ingredients.count;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len
+{
+    NSUInteger count = 0;
+    unsigned long countOfItemsAlreadyEnumerated = state->state;
+    
+    if(countOfItemsAlreadyEnumerated == 0)
+	{
+		// We are not tracking mutations, so we'll set state->mutationsPtr to point
+        // into one of our extra values, since these values are not otherwise used
+        // by the protocol.
+		// If your class was mutable, you may choose to use an internal variable that
+        // is updated when the class is mutated.
+		// state->mutationsPtr MUST NOT be NULL and SHOULD NOT be set to self.
+		state->mutationsPtr = &state->extra[0];
+	}
+    
+    if(countOfItemsAlreadyEnumerated < [self.ingredients count])
+    {
+        state->itemsPtr = buffer;
+        while((countOfItemsAlreadyEnumerated < [self.ingredients count]) && (count < len))
+		{
+			// Add the item for the next index to stackbuf.
+            //
+            // If you choose not to use ARC, you do not need to retain+autorelease the
+            // objects placed into stackbuf.  It is the caller's responsibility to ensure we
+            // are not deallocated during enumeration.
+			buffer[count] = self.ingredients[countOfItemsAlreadyEnumerated];
+			countOfItemsAlreadyEnumerated++;
+            
+            // We must return how many items are in state->itemsPtr.
+			count++;
+		}
+    }
+    else
+        count = 0;
+    
+    // Update state->state with the new value of countOfItemsAlreadyEnumerated so that it is
+    // preserved for the next invocation.
+    state->state = countOfItemsAlreadyEnumerated;
+    return count;
+}
+
 @end

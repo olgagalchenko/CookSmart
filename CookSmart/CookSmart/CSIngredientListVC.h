@@ -11,7 +11,7 @@
 @class CSIngredientGroup;
 @protocol CSIngredientListVCDelegate;
 
-@interface CSIngredientListVC : UITableViewController
+@interface CSIngredientListVC : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
 
 - (id)initWithDelegate:(id<CSIngredientListVCDelegate>)delegate;
 

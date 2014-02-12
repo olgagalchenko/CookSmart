@@ -10,7 +10,9 @@
 
 @class CSIngredientGroup;
 
-@interface CSIngredients : NSObject
+@interface CSIngredients : NSObject <NSFastEnumeration>
+
+- (id)initWithArray:(NSArray*)array;
 
 + (CSIngredients *)sharedInstance;
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;

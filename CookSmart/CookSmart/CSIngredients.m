@@ -32,16 +32,6 @@ static inline NSString *pathToIngredientsOnDisk()
 {
     if(!initialized)
     {
-        sharedInstance = [[self alloc] init];
-        initialized = YES;
-    }
-}
-
-- (id)init
-{
-    NSAssert(!initialized, @"Never create an instance of CSIngredients directly. Use the singleton.");
-    if (self = [super init])
-    {
         BOOL ingredientsIsDir = YES;
         if ([[NSFileManager defaultManager] fileExistsAtPath:pathToIngredientsOnDisk() isDirectory:&ingredientsIsDir])
         {
@@ -58,8 +48,19 @@ static inline NSString *pathToIngredientsOnDisk()
             NSAssert(copyError == nil, @"Error occurred while copying the ingredients file to the sandbox.");
         }
         NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
-        NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
-        for (NSDictionary *ingredientGroupDict in rawIngredientGroupsArray)
+        
+        sharedInstance = [[self alloc] initWithArray:rawIngredientGroupsArray];
+        initialized = YES;
+    }
+}
+
+- (id)initWithArray:(NSArray*)array
+{
+    if (self = [super init])
+    {
+        
+        NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary *ingredientGroupDict in array)
         {
             [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
         }
@@ -83,6 +84,48 @@ static inline NSString *pathToIngredientsOnDisk()
 - (NSUInteger)countOfIngredientGroups
 {
     return self.ingredientGroups.count;
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len
+{
+    NSUInteger count = 0;
+    unsigned long countOfItemsAlreadyEnumerated = state->state;
+    
+    if(countOfItemsAlreadyEnumerated == 0)
+	{
+		// We are not tracking mutations, so we'll set state->mutationsPtr to point
+        // into one of our extra values, since these values are not otherwise used
+        // by the protocol.
+		// If your class was mutable, you may choose to use an internal variable that
+        // is updated when the class is mutated.
+		// state->mutationsPtr MUST NOT be NULL and SHOULD NOT be set to self.
+		state->mutationsPtr = &state->extra[0];
+	}
+    
+    if(countOfItemsAlreadyEnumerated < [self.ingredientGroups count])
+    {
+        state->itemsPtr = buffer;
+        while((countOfItemsAlreadyEnumerated < [self.ingredientGroups count]) && (count < len))
+		{
+			// Add the item for the next index to stackbuf.
+            //
+            // If you choose not to use ARC, you do not need to retain+autorelease the
+            // objects placed into stackbuf.  It is the caller's responsibility to ensure we
+            // are not deallocated during enumeration.
+			buffer[count] = self.ingredientGroups[countOfItemsAlreadyEnumerated];
+			countOfItemsAlreadyEnumerated++;
+            
+            // We must return how many items are in state->itemsPtr.
+			count++;
+		}
+    }
+    else
+        count = 0;
+    
+    // Update state->state with the new value of countOfItemsAlreadyEnumerated so that it is
+    // preserved for the next invocation.
+    state->state = countOfItemsAlreadyEnumerated;
+    return count;
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @class CSIngredient;
 
-@interface CSIngredientGroup : NSObject
+@interface CSIngredientGroup : NSObject <NSFastEnumeration>
 
 + (CSIngredientGroup *)ingredientGroupWithDictionary:(NSDictionary *)groupDictionary;
 - (CSIngredient *)ingredientAtIndex:(NSUInteger)ingredientIndex;
