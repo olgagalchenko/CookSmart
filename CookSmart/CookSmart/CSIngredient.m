@@ -35,8 +35,4 @@
     return [[self alloc] initWithDictionary:rawIngredientDictionary];
 }
 
-- (NSDictionary*)dictionary
-{
-    return [[NSDictionary alloc] initWithObjectsAndKeys:self.name, INGREDIENT_KEY_NAME, [NSNumber numberWithFloat:self.density], INGREDIENT_KEY_DENSITY, nil];
-}
 @end

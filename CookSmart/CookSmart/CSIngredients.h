@@ -12,7 +12,7 @@
 
 @interface CSIngredients : NSObject <NSFastEnumeration>
 
-- (id)initWithArray:(NSArray*)array;
+- (id)initWithIngredientGroups:(NSArray *)ingredientGroups;
 
 + (CSIngredients *)sharedInstance;
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;

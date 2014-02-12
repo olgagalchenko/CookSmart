@@ -36,6 +36,7 @@
 		B7BCA2B4180524A800CF7588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2B2180524A800CF7588 /* InfoPlist.strings */; };
 		B7BCA2B6180524A800CF7588 /* CookSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2B5180524A800CF7588 /* CookSmartTests.m */; };
 		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
+		DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */; };
 		DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E7E18A43F9F00F801D3 /* Analytics.m */; };
 		DCCC5E8618A46C7A00F801D3 /* AnalyticsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E8518A46C7A00F801D3 /* AnalyticsWriter.m */; };
 		DCCC5E8918A4827800F801D3 /* AnalyticsSender.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E8818A4827800F801D3 /* AnalyticsSender.m */; };
@@ -99,6 +100,9 @@
 		B7BCA2B3180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7BCA2B5180524A800CF7588 /* CookSmartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookSmartTests.m; sourceTree = "<group>"; };
 		B7BCA2BF1805284A00CF7588 /* Ingredients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
+		DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFilteredIngredientGroup.h; sourceTree = "<group>"; };
+		DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFilteredIngredientGroup.m; sourceTree = "<group>"; };
+		DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIngredientGroupInternals.h; sourceTree = "<group>"; };
 		DCCC5E7D18A43F9F00F801D3 /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Analytics/Analytics.h; sourceTree = "<group>"; };
 		DCCC5E7E18A43F9F00F801D3 /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Analytics.m; path = Analytics/Analytics.m; sourceTree = "<group>"; };
 		DCCC5E8318A462F200F801D3 /* CommonAnalyticsInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CommonAnalyticsInfo.h; path = Analytics/CommonAnalyticsInfo.h; sourceTree = "<group>"; };
@@ -145,6 +149,9 @@
 				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
 				80592C091892541D0082D4E1 /* CSIngredientGroup.h */,
 				80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */,
+				DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */,
+				DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */,
+				DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -407,6 +414,7 @@
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				DCCC5E8618A46C7A00F801D3 /* AnalyticsWriter.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
+				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,

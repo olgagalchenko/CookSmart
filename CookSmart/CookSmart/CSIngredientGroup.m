@@ -8,13 +8,7 @@
 
 #import "CSIngredientGroup.h"
 #import "CSIngredient.h"
-
-@interface CSIngredientGroup()
-
-@property (nonatomic, readwrite, strong) NSString *name;
-@property (nonatomic, readwrite, strong) NSArray *ingredients;
-
-@end
+#import "CSIngredientGroupInternals.h"
 
 @implementation CSIngredientGroup
 
@@ -43,6 +37,11 @@
 - (CSIngredient *)ingredientAtIndex:(NSUInteger)ingredientIndex
 {
     return [self.ingredients objectAtIndex:ingredientIndex];
+}
+
+- (NSUInteger)indexOfIngredient:(CSIngredient *)ingredient
+{
+    return [self.ingredients indexOfObject:ingredient];
 }
 
 - (NSUInteger)countOfIngredients

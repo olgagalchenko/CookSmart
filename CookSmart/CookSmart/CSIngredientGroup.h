@@ -14,6 +14,7 @@
 
 + (CSIngredientGroup *)ingredientGroupWithDictionary:(NSDictionary *)groupDictionary;
 - (CSIngredient *)ingredientAtIndex:(NSUInteger)ingredientIndex;
+- (NSUInteger)indexOfIngredient:(CSIngredient *)ingredient;
 - (NSUInteger)countOfIngredients;
 
 @property (nonatomic, readonly) NSString *name;

@@ -48,23 +48,21 @@ static inline NSString *pathToIngredientsOnDisk()
             NSAssert(copyError == nil, @"Error occurred while copying the ingredients file to the sandbox.");
         }
         NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
-        
-        sharedInstance = [[self alloc] initWithArray:rawIngredientGroupsArray];
+        NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
+        for (NSDictionary *ingredientGroupDict in rawIngredientGroupsArray)
+        {
+            [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
+        }
+        sharedInstance = [[self alloc] initWithIngredientGroups:[NSArray arrayWithArray:tmpIngredientGroupsArray]];
         initialized = YES;
     }
 }
 
-- (id)initWithArray:(NSArray*)array
+- (id)initWithIngredientGroups:(NSArray *)ingredientGroups
 {
     if (self = [super init])
     {
-        
-        NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSDictionary *ingredientGroupDict in array)
-        {
-            [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
-        }
-        self.ingredientGroups = [NSArray arrayWithArray:tmpIngredientGroupsArray];
+        self.ingredientGroups = ingredientGroups;
     }
     return self;
 }

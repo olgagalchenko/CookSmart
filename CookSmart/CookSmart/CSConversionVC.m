@@ -126,14 +126,15 @@ static inline UILabel *createIngredientLabel()
     {
         [subview removeFromSuperview];
     }
-    for (CGFloat x = 0; x <= 2*self.ingredientPickerScrollView.bounds.size.width; x += self.ingredientPickerScrollView.bounds.size.width)
+    CGFloat initialXOffset = self.ingredientPickerScrollView.bounds.size.width*self.ingredientIndex;
+    for (CGFloat x = initialXOffset; x <= initialXOffset + 2*self.ingredientPickerScrollView.bounds.size.width; x += self.ingredientPickerScrollView.bounds.size.width)
     {
         UILabel *label = createIngredientLabel();
         label.frame = CGRectMake(x, 0, self.ingredientPickerScrollView.bounds.size.width, self.ingredientPickerScrollView.bounds.size.height);
         label.text = [self nameForIngredientAtXOrigin:x];
         [self.ingredientPickerScrollView addSubview:label];
     }
-    self.ingredientPickerScrollView.contentOffset = CGPointMake(self.ingredientPickerScrollView.bounds.size.width*self.ingredientIndex, 0);
+    self.ingredientPickerScrollView.contentOffset = CGPointMake(initialXOffset, 0);
 }
 
 - (void)refreshScalesUI
