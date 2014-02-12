@@ -30,6 +30,7 @@ static NSString* CellIdentifier = @"Cell";
     if (self)
     {
         self.delegate = delegate;
+        self.title = @"Ingredients";
     }
     return self;
 }
@@ -40,7 +41,8 @@ static NSString* CellIdentifier = @"Cell";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Close"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
-    self.navigationItem.rightBarButtonItem = closeItem;
+    self.navigationItem.leftBarButtonItem = closeItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editIngredient:)];
     
     NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSInteger heightOfCell = [self tableView:self.tableView heightForRowAtIndexPath:firstCellPath];
@@ -96,7 +98,7 @@ static NSString* CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    
+    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     cell.textLabel.text = [[[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row] name];
     return cell;
 }
@@ -114,6 +116,37 @@ static NSString* CellIdentifier = @"Cell";
                     ingredientIndex:[selectedIngredientGroup indexOfIngredient:selectedIngredient]];
     
     [self closeIngrList:nil];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section];
+    CSIngredient *selectedIngredient = [selectedIngredientGroup ingredientAtIndex:indexPath.row];
+    [self editIngredient:selectedIngredient];
+}
+
+- (void)editIngredient:(id)sender
+{
+    UIViewController *editVC = nil;
+    if (sender == self.navigationItem.rightBarButtonItem)
+    {
+        NSLog(@"IMPLEMENT CODE TO ADD INGREDIENT");
+        /* Create new ingredient and edit it
+        editVC = [[CSIngredientEditVC alloc] initWithIngredient:nil];
+         */
+    }
+    else if ([sender isKindOfClass:[CSIngredient class]])
+    {
+        NSLog(@"IMPLEMENT CODE TO EDIT INGREDIENT: %@", [(CSIngredient *)sender name]);
+        /* Edit the given ingredient
+        editVC = [[CSIngredientEditVC alloc] initWithIngredient:(CSIngredient *)sender];
+         */
+    }
+    else
+    {
+        NSAssert(NO, @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");
+    }
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 #pragma mark - search bar delegate
