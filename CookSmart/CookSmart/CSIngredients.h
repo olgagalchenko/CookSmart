@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define INGREDIENT_DELETE_NOTIFICATION_NAME     @"ingredient_delete_notification"
+
 @class CSIngredientGroup;
 
 @interface CSIngredients : NSObject <NSFastEnumeration>
@@ -17,5 +19,7 @@
 + (CSIngredients *)sharedInstance;
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;
 - (NSUInteger)countOfIngredientGroups;
+
+- (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex;
 
 @end

@@ -21,7 +21,7 @@
 {
     if (self = [super init])
     {
-        self.ingredients = ingredients;
+        self.ingredients = [NSMutableArray arrayWithArray:ingredients];
         self.name = groupName;
         self.originalIngredientGroup = originalIngredientGroup;
     }
@@ -31,6 +31,12 @@
 + (CSFilteredIngredientGroup *)filteredIngredientGroupWithIngredients:(NSArray *)ingredients name:(NSString *)groupName originalIngredientGroup:(CSIngredientGroup *)originalIngredientGroup
 {
     return [[self alloc] initWithIngredients:ingredients name:groupName originalIngredientGroup:originalIngredientGroup];
+}
+
+- (void)deleteIngredient:(CSIngredient *)ingredient
+{
+    [super deleteIngredient:ingredient];
+    [self.originalIngredientGroup deleteIngredient:ingredient];
 }
 
 @end

@@ -17,6 +17,9 @@
 - (NSUInteger)indexOfIngredient:(CSIngredient *)ingredient;
 - (NSUInteger)countOfIngredients;
 
+- (void)deleteIngredient:(CSIngredient *)ingredient;
+- (NSDictionary *)dictionary;
+
 @property (nonatomic, readonly) NSString *name;
 
 @end

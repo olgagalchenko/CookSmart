@@ -8,10 +8,11 @@
 
 #import "CSIngredients.h"
 #import "CSIngredientGroup.h"
+#import "CSFilteredIngredientGroup.h"
 
 @interface CSIngredients()
 
-@property (nonatomic, readwrite, strong) NSArray *ingredientGroups;
+@property (nonatomic, readwrite, strong) NSMutableArray *ingredientGroups;
 
 @end
 
@@ -62,7 +63,7 @@ static inline NSString *pathToIngredientsOnDisk()
 {
     if (self = [super init])
     {
-        self.ingredientGroups = ingredientGroups;
+        self.ingredientGroups = [NSMutableArray arrayWithArray:ingredientGroups];
     }
     return self;
 }
@@ -124,6 +125,40 @@ static inline NSString *pathToIngredientsOnDisk()
     // preserved for the next invocation.
     state->state = countOfItemsAlreadyEnumerated;
     return count;
+}
+
+- (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex
+{
+    CSIngredientGroup *ingrGroup = [self ingredientGroupAtIndex:groupIndex];
+    CSIngredient *ingredient = [ingrGroup ingredientAtIndex:ingredientIndex];
+    [ingrGroup deleteIngredient:ingredient];
+    if ([ingrGroup countOfIngredients] <= 0)
+    {
+        [self.ingredientGroups removeObject:ingrGroup];
+    }
+    if ([ingrGroup respondsToSelector:@selector(originalIngredientGroup)] &&
+        (ingrGroup = [ingrGroup performSelector:@selector(originalIngredientGroup) withObject:nil]) &&
+        [ingrGroup countOfIngredients] <= 0)
+    {
+        [sharedInstance.ingredientGroups removeObject:ingrGroup];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_DELETE_NOTIFICATION_NAME object:ingredient];
+    return [sharedInstance persist];
+}
+
+- (BOOL)persist
+{
+    NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];
+    for (CSIngredientGroup *group in self.ingredientGroups)
+    {
+        [groupsToSerialize addObject:[group dictionary]];
+    }
+    BOOL success = [groupsToSerialize writeToFile:pathToIngredientsOnDisk() atomically:YES];
+    if (!success)
+    {
+        NSLog(@"FAILED TO WRITE FILE: %s", strerror(errno));
+    }
+    return success;
 }
 
 @end

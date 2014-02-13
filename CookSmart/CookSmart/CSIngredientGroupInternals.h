@@ -12,7 +12,7 @@
 @interface CSIngredientGroup()
 
 @property (nonatomic, readwrite, strong) NSString *name;
-@property (nonatomic, readwrite, strong) NSArray *ingredients;
+@property (nonatomic, readwrite, strong) NSMutableArray *ingredients;
 
 @end
 

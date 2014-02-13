@@ -7,6 +7,7 @@
 //
 
 #import "CSConversionVC.h"
+#import "CSIngredients.h"
 #import "CSIngredientListVC.h"
 #import "CSIngredientGroup.h"
 #import "CSIngredient.h"
@@ -62,8 +63,17 @@ static CSConversionVC *sharedConversionVC = nil;
         
         self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:0];
         self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:0];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(ingredientDeleted:)
+                                                     name:INGREDIENT_DELETE_NOTIFICATION_NAME
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View Lifecycle Management
@@ -484,7 +494,26 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [self refreshScalesUI];
 }
 
-#pragma mark -
+#pragma mark - Notifications
+
+- (void)ingredientDeleted:(NSNotification *)notification
+{
+    // When an ingredient is deleted, our index into the ingredient group might change.
+    // In the future we might want to put a better solution for this, but for now, we'll
+    // just select the very first ingredient of the very first ingredient group and be done
+    // with it.
+    
+    if ([[CSIngredients sharedInstance] countOfIngredientGroups] > 0)
+    {
+        [self selectIngredientGroup:[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] ingredientIndex:0];
+    }
+    else
+    {
+        [self selectIngredientGroup:nil ingredientIndex:0];
+    }
+}
+
+#pragma mark - Misc Helpers
 
 - (NSDictionary *)analyticsAttributes
 {

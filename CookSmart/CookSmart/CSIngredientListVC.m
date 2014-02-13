@@ -125,6 +125,49 @@ static NSString* CellIdentifier = @"Cell";
     [self editIngredient:selectedIngredient];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Don't let people delete the final ingredient for now.
+    // It's not clear what we want the UX to be when there aren't any ingredients.
+    // For now, this is such an edge case that we'll just not support it.
+    NSUInteger numGroups = [[CSIngredients sharedInstance] countOfIngredientGroups];
+    return  (numGroups > 1) ||
+            (numGroups == 1 && [[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] countOfIngredients] > 1);
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        CSIngredients *ingredients = [self ingredientsToSupplyDataForTableView:tableView];
+        CSIngredient *ingredientToDelete = [[ingredients ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
+        NSUInteger numIngredientGroups = [ingredients countOfIngredientGroups];
+        BOOL deleteSuccess = [ingredients deleteIngredientAtGroupIndex:indexPath.section ingredientIndex:indexPath.row];
+        if (deleteSuccess)
+        {
+            logUserAction(@"ingredient_delete", [ingredientToDelete dictionary]);
+            if (numIngredientGroups > [ingredients countOfIngredientGroups])
+            {
+                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            else
+            {
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+        else
+        {
+            logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionary]);
+            [tableView reloadData];
+        }
+        if (tableView != self.tableView)
+        {
+            // Still need to update the base tableView regardless of which tableView we made the delete from.
+            [self.tableView reloadData];
+        }
+    }
+}
+
 - (void)editIngredient:(id)sender
 {
     UIViewController *editVC = nil;

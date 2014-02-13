@@ -75,6 +75,11 @@ static inline NSDate *getSpecialDateOrCurrent(NSString *specialDateUserDefaultsK
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma - Public Interface Implementation
 
 - (void)logEventWithName:(NSString *)eventName

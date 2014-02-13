@@ -24,7 +24,7 @@
         {
             [tmpIngredients addObject:[CSIngredient ingredientWithDictionary:ingredientDictionary]];
         }
-        self.ingredients = [NSMutableArray arrayWithArray:tmpIngredients];
+        self.ingredients = tmpIngredients;
     }
     return self;
 }
@@ -89,6 +89,23 @@
     // preserved for the next invocation.
     state->state = countOfItemsAlreadyEnumerated;
     return count;
+}
+
+- (void)deleteIngredient:(CSIngredient *)ingredient
+{
+    [self.ingredients removeObject:ingredient];
+}
+
+- (NSDictionary *)dictionary
+{
+    NSMutableArray *ingredients = [NSMutableArray arrayWithCapacity:self.ingredients.count];
+    for (CSIngredient *ingredient in self.ingredients)
+    {
+        [ingredients addObject:[ingredient dictionary]];
+    }
+    return @{
+             self.name : ingredients
+             };
 }
 
 @end
