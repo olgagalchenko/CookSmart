@@ -18,6 +18,7 @@
 
 #define ANALYTICS_EVENT_NAME_KEY                                    @"event_name"
 #define ANALYTICS_EVENT_TYPE_KEY                                    @"event_type"
+#define ANALYTICS_SESSION_ID_KEY                                    @"session_id"
 
 
 
@@ -92,6 +93,7 @@ static inline NSDate *getSpecialDateOrCurrent(NSString *specialDateUserDefaultsK
     NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
     [eventDictionary setObject:eventName forKey:ANALYTICS_EVENT_NAME_KEY];
     [eventDictionary setObject:eventTypeStringForEventType(eventType) forKey:ANALYTICS_EVENT_TYPE_KEY];
+    [eventDictionary setObject:self.sessionId forKey:ANALYTICS_SESSION_ID_KEY];
     [self write:eventDictionary];
 }
 
@@ -112,21 +114,20 @@ static inline NSDate *getSpecialDateOrCurrent(NSString *specialDateUserDefaultsK
         {
             // This session has ended
             NSTimeInterval sessionDuration = [self.dateOfLastEventInSession timeIntervalSinceDate:self.dateOfFirstEventInSession];
-            if (sessionDuration)
-            {
-                // Write the end of the session
-                NSDictionary *sessionInfo = @{
-                                              ANALYTICS_EVENT_NAME_KEY : @"session_end",
-                                              ANALYTICS_EVENT_TYPE_KEY : eventTypeStringForEventType(AnalyticsEventTypeAppLifecycle),
-                                              @"duration" : [NSNumber numberWithDouble:sessionDuration],
-                                              };
-                [self write:sessionInfo];
-            }
+            // Write the end of the session
+            NSDictionary *sessionInfo = @{
+                                          ANALYTICS_EVENT_NAME_KEY : @"session_end",
+                                          ANALYTICS_EVENT_TYPE_KEY : eventTypeStringForEventType(AnalyticsEventTypeAppLifecycle),
+                                          @"duration" : [NSNumber numberWithDouble:sessionDuration],
+                                          ANALYTICS_SESSION_ID_KEY : self.sessionId,
+                                          };
+            [self write:sessionInfo];
             self.dateOfFirstEventInSession = newLastEventInSession;
             self.dateOfLastEventInSession = newLastEventInSession;
             self.sessionId = [NSNumber numberWithUnsignedLongLong:[self.sessionId unsignedLongLongValue] + 1];
             [self persistSessionInformation];
         }
+        self.dateOfLastEventInSession = newLastEventInSession;
     }
 }
 
