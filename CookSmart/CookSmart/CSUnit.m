@@ -22,13 +22,13 @@
 
 - (id)initWithIndex:(NSInteger)index
 {
-    NSAssert(NO, @"Must implement - (id)initWithIndex:(NSInteger)index inside your CSUnit subclass.");
+    CSAssertFail(@"unit_abstract_init", @"Must implement - (id)initWithIndex:(NSInteger)index inside your CSUnit subclass.");
     return nil;
 }
 
 + (NSString*)nameWithIndex:(NSInteger)index
 {
-    NSAssert(NO, @"Must implement + (NSString*)nameWithIndex:(NSInteger)index inside your CSUnit subclass.");
+    CSAssertFail(@"unit_abstract_name_with_index", @"Must implement + (NSString*)nameWithIndex:(NSInteger)index inside your CSUnit subclass.");
     return nil;
 }
 

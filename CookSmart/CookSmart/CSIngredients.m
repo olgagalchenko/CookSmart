@@ -36,7 +36,7 @@ static inline NSString *pathToIngredientsOnDisk()
         BOOL ingredientsIsDir = YES;
         if ([[NSFileManager defaultManager] fileExistsAtPath:pathToIngredientsOnDisk() isDirectory:&ingredientsIsDir])
         {
-            NSAssert(!ingredientsIsDir, @"The ingredients file's place is taken by a directory.");
+            CSAssert(!ingredientsIsDir, @"ingredients_file_is_directory", @"The ingredients file's place is taken by a directory.");
         }
         else
         {
@@ -46,7 +46,7 @@ static inline NSString *pathToIngredientsOnDisk()
             [[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"]
                                                     toPath:pathToIngredientsOnDisk()
                                                      error:&copyError];
-            NSAssert(copyError == nil, @"Error occurred while copying the ingredients file to the sandbox.");
+            CSAssert(copyError == nil, @"ingredients_file_copy", @"Error occurred while copying the ingredients file to the sandbox.");
         }
         NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
         NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
@@ -70,7 +70,7 @@ static inline NSString *pathToIngredientsOnDisk()
 
 + (CSIngredients *)sharedInstance
 {
-    NSAssert(sharedInstance != nil, @"Something went wrong with the singleton.");
+    CSAssert(sharedInstance != nil, @"ingredients_singleton_guard", @"Something went wrong with the singleton.");
     return sharedInstance;
 }
 

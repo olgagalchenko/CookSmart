@@ -29,7 +29,7 @@ static NSString* kTeaspoons = @"Teaspoons";
         else if ([self.name isEqualToString:kTeaspoons])
             self.conversionFactor = kTspInCup;
         else
-            NSAssert(NO, @"Bad unit.");
+            CSAssertFail(@"unknown_volume_unit", @"Bad unit.");
     }
     return self;
 }
@@ -37,14 +37,14 @@ static NSString* kTeaspoons = @"Teaspoons";
 - (id)initWithIndex:(NSInteger)index
 {
     NSString* unitName = [CSVolumeUnit nameWithIndex:index];
-    NSAssert(unitName, @"Bad unit.");
+    CSAssert(unitName != nil, @"unknown_volume_unit_init", @"Bad unit.");
     self = [self initWithName:unitName];
     return self;
 }
 
 + (NSString*)nameWithIndex:(NSInteger)index
 {
-    NSString* unitName;
+    NSString* unitName = nil;
     switch (index) {
         case 0:
             unitName = kCups;

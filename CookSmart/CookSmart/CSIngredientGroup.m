@@ -17,7 +17,7 @@
     if (self = [super init])
     {
         NSArray *dictionaryKeys = [groupDictionary allKeys];
-        NSAssert(dictionaryKeys.count == 1, @"A group dictionary should contain exactly one key: the name of the group.");
+        CSAssert(dictionaryKeys.count == 1, @"ingredient_group_dictionary_consistency", @"A group dictionary should contain exactly one key: the name of the group.");
         self.name = dictionaryKeys[0];
         NSMutableArray *tmpIngredients = [NSMutableArray array];
         for (NSDictionary *ingredientDictionary in [groupDictionary objectForKey:self.name])

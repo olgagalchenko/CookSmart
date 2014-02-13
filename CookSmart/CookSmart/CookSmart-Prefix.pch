@@ -18,3 +18,34 @@
 #define BACKGROUND_COLOR    [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
 
 #import "Analytics.h"
+
+// There's no need to ever invoke this directly. Just use CSAssert and CSAssertFail.
+static inline void CSAssert_v(BOOL assertion, NSString *assertName, NSString *descriptionFormat, va_list args)
+{
+    NSString *description = nil;
+    if (!assertion)
+    {
+        description = [[NSString alloc] initWithFormat:descriptionFormat arguments:args];
+        logIssue(@"assert_fail", @{
+                                   @"assert_name" : assertName,
+                                   @"assert_msg" : description,
+                                   });
+    }
+    NSCAssert(assertion, description);
+}
+
+static inline void CSAssert(BOOL assertion, NSString *assertName, NSString *descriptionFormat, ...)
+{
+    va_list args;
+    va_start(args, descriptionFormat);
+    CSAssert_v(assertion, assertName, descriptionFormat, args);
+    va_end(args);
+}
+
+static inline void CSAssertFail(NSString *assertName, NSString *descriptionFormat, ...)
+{
+    va_list args;
+    va_start(args, descriptionFormat);
+    CSAssert_v(NO, assertName, descriptionFormat, args);
+    va_end(args);
+}

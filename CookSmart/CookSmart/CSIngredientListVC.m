@@ -187,7 +187,7 @@ static NSString* CellIdentifier = @"Cell";
     }
     else
     {
-        NSAssert(NO, @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");
+        CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");
     }
     [self.navigationController pushViewController:editVC animated:YES];
 }
@@ -238,7 +238,7 @@ static NSString* CellIdentifier = @"Cell";
     }
     else
     {
-        NSAssert(NO, @"CSIngredientsListVC is not ready to supply data for %@", tableViewToSupplyDataFor);
+        CSAssertFail(@"ingredients_list_vc_data_source", @"CSIngredientsListVC is not ready to supply data for %@", tableViewToSupplyDataFor);
     }
     return ingredients;
 }

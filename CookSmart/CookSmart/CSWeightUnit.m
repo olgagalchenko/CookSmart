@@ -29,22 +29,22 @@ static NSString* kOunces = @"Ounces";
         else if ([self.name isEqualToString:kOunces])
             self.conversionFactor = kOuncesInGram;
         else
-            NSAssert(NO, @"Bad unit.");
+            CSAssertFail(@"weight_unit_init", @"Bad unit.");
     }
     return self;
 }
 
-- (id) initWithIndex:(NSInteger)index
+- (id)initWithIndex:(NSInteger)index
 {
     NSString* unitName = [CSWeightUnit nameWithIndex:index];
-    NSAssert(unitName, @"Bad unit.");
+    CSAssert(unitName != nil, @"weight_unit_init_with_index", @"Bad unit.");
     self = [self initWithName:unitName];
     return self;
 }
 
 + (NSString*)nameWithIndex:(NSInteger)index
 {
-    NSString* unitName;
+    NSString* unitName = nil;
     switch (index) {
         case 0:
             unitName = kGrams;

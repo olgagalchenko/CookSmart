@@ -54,6 +54,7 @@ static inline void logDebug(NSString *eventName, NSDictionary *eventAttributes)
 
 static inline void logIssue(NSString *eventName, NSDictionary *eventAttributes)
 {
+    NSLog(@"%@: %@", eventName, eventAttributes);
     logEvent(eventName, AnalyticsEventTypeIssue, eventAttributes);
 }
 
