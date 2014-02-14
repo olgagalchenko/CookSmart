@@ -13,6 +13,7 @@
 @interface CSIngredients()
 
 @property (nonatomic, readwrite, strong) NSMutableArray *ingredientGroups;
+@property (nonatomic, readwrite, assign) unsigned long version;
 
 @end
 
@@ -98,7 +99,7 @@ static inline NSString *pathToIngredientsOnDisk()
 		// If your class was mutable, you may choose to use an internal variable that
         // is updated when the class is mutated.
 		// state->mutationsPtr MUST NOT be NULL and SHOULD NOT be set to self.
-		state->mutationsPtr = &state->extra[0];
+		state->mutationsPtr = &_version;
 	}
     
     if(countOfItemsAlreadyEnumerated < [self.ingredientGroups count])
@@ -129,6 +130,8 @@ static inline NSString *pathToIngredientsOnDisk()
 
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex
 {
+    _version++; //mutation protection for fast enumeration
+    
     CSIngredientGroup *ingrGroup = [self ingredientGroupAtIndex:groupIndex];
     CSIngredient *ingredient = [ingrGroup ingredientAtIndex:ingredientIndex];
     [ingrGroup deleteIngredient:ingredient];

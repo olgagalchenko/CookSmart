@@ -10,6 +10,12 @@
 #import "CSIngredient.h"
 #import "CSIngredientGroupInternals.h"
 
+@interface CSIngredientGroup ()
+
+@property (nonatomic, readwrite, assign) unsigned long version;
+
+@end
+
 @implementation CSIngredientGroup
 
 - (id)initWithDictionary:(NSDictionary *)groupDictionary
@@ -62,7 +68,7 @@
 		// If your class was mutable, you may choose to use an internal variable that
         // is updated when the class is mutated.
 		// state->mutationsPtr MUST NOT be NULL and SHOULD NOT be set to self.
-		state->mutationsPtr = &state->extra[0];
+		state->mutationsPtr = &_version;
 	}
     
     if(countOfItemsAlreadyEnumerated < [self.ingredients count])
@@ -93,6 +99,7 @@
 
 - (void)deleteIngredient:(CSIngredient *)ingredient
 {
+    _version++;
     [self.ingredients removeObject:ingredient];
 }
 
