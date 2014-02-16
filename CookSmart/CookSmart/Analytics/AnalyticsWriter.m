@@ -10,12 +10,6 @@
 #import "CommonAnalyticsInfo.h"
 #import "AnalyticsHelpers.h"
 
-@interface AnalyticsWriter()
-
-@property (nonatomic, readwrite, strong) NSOutputStream *currentLogFileStream;
-
-@end
-
 @implementation AnalyticsWriter
 
 static AnalyticsWriter *sharedInstance = nil;
@@ -99,14 +93,13 @@ static AnalyticsWriter *sharedInstance = nil;
         }
         return;
     }
-    NSUInteger numBytesWritten = [self.currentLogFileStream write:eventData.bytes maxLength:eventData.length];
+    NSUInteger numBytesWritten = [currentLogFileStream write:eventData.bytes maxLength:eventData.length];
     if (numBytesWritten != eventData.length)
     {
         // The write failed and possibly corrupted the log file.
         [[NSFileManager defaultManager] removeItemAtPath:currentLogFilePath()
                                                    error:nil];
-        [self.currentLogFileStream close];
-        self.currentLogFileStream = nil;
+        [currentLogFileStream close];
         NSAssert(NO, @"Failed to write log event to current log file. Log file was possibly corrupted and deleted.");
     }
 }
@@ -115,73 +108,67 @@ static AnalyticsWriter *sharedInstance = nil;
 
 - (NSOutputStream *)initializedCurrentLogFileStream:(BOOL *)logFileWasCreated
 {
-    if (logFileWasCreated != nil)
-    {
-        *logFileWasCreated = NO;
-    }
-    
     @synchronized(self)
     {
-        if (!self.currentLogFileStream)
+        BOOL isDir = YES;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:currentLogFilePath()
+                                                  isDirectory:&isDir])
         {
-            BOOL isDir = YES;
-            if (![[NSFileManager defaultManager] fileExistsAtPath:currentLogFilePath()
-                                                      isDirectory:&isDir])
+            NSError *error = nil;
+            NSData *eventGroupData = [NSJSONSerialization dataWithJSONObject:commonAttributes()
+                                                                     options:0
+                                                                       error:&error];
+            if (error)
             {
-                NSError *error = nil;
-                NSData *eventGroupData = [NSJSONSerialization dataWithJSONObject:commonAttributes()
-                                                                         options:0
-                                                                           error:&error];
-                if (error)
-                {
-                    NSAssert(error == nil, @"Unable to serialize event group attributes.");
-                    return nil;
-                }
-                NSMutableString *fileInitialContents = [[NSMutableString alloc] initWithBytes:eventGroupData.bytes
-                                                                                       length:eventGroupData.length
-                                                                                     encoding:NSUTF8StringEncoding];
-                [fileInitialContents deleteCharactersInRange:NSMakeRange(fileInitialContents.length - 1, 1)];
-                [fileInitialContents appendString:@",\"events\":["];
-                NSData *dataToStartWith = [fileInitialContents dataUsingEncoding:NSUTF8StringEncoding];
-                if (![[NSFileManager defaultManager] createFileAtPath:currentLogFilePath()
-                                                             contents:dataToStartWith
-                                                           attributes:@{NSFileProtectionKey : NSFileProtectionCompleteUnlessOpen}])
-                {
-                    NSAssert(NO, @"Unable to initialize log file at path: %@", currentLogFilePath());
-                    return nil;
-                }
-                else if (logFileWasCreated != nil)
-                {
-                    *logFileWasCreated = YES;
-                }
+                NSAssert(error == nil, @"Unable to serialize event group attributes.");
+                return nil;
             }
-            else if (isDir)
+            NSMutableString *fileInitialContents = [[NSMutableString alloc] initWithBytes:eventGroupData.bytes
+                                                                                   length:eventGroupData.length
+                                                                                 encoding:NSUTF8StringEncoding];
+            [fileInitialContents deleteCharactersInRange:NSMakeRange(fileInitialContents.length - 1, 1)];
+            [fileInitialContents appendString:@",\"events\":["];
+            NSData *dataToStartWith = [fileInitialContents dataUsingEncoding:NSUTF8StringEncoding];
+            if (![[NSFileManager defaultManager] createFileAtPath:currentLogFilePath()
+                                                         contents:dataToStartWith
+                                                       attributes:@{NSFileProtectionKey : NSFileProtectionCompleteUnlessOpen}])
             {
-                NSAssert(NO, @"There is a directory where the current log file should be.");
+                NSAssert(NO, @"Unable to initialize log file at path: %@", currentLogFilePath());
                 return nil;
             }
             else if (logFileWasCreated != nil)
             {
-                *logFileWasCreated = NO;
+                *logFileWasCreated = YES;
             }
         }
-        self.currentLogFileStream = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:currentLogFilePath()]
-                                                                 append:YES];
-        [self.currentLogFileStream open];
+        else if (isDir)
+        {
+            NSAssert(NO, @"There is a directory where the current log file should be.");
+            return nil;
+        }
+        else if (logFileWasCreated != nil)
+        {
+            *logFileWasCreated = NO;
+        }
+        NSOutputStream *currentLogFileStream = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:currentLogFilePath()]
+                                                                            append:YES];
+        [currentLogFileStream open];
+        return currentLogFileStream;
     }
-    return self.currentLogFileStream;
 }
 
 - (void)flushCurrentLogFile
 {
     @synchronized(self)
     {
-        if (self.currentLogFileStream)
+        BOOL newCurrentLogFileCreated = YES;
+        NSOutputStream *currentLogStream = [self initializedCurrentLogFileStream:&newCurrentLogFileCreated];
+        if (!newCurrentLogFileCreated)
         {
+            // There's some data to flush
             NSData *logFileEndCapData = [NSData dataWithBytes:"]}" length:2];
-            NSUInteger numBytesWritten = [self.currentLogFileStream write:logFileEndCapData.bytes maxLength:logFileEndCapData.length];
-            [self.currentLogFileStream close];
-            self.currentLogFileStream = nil;
+            NSUInteger numBytesWritten = [currentLogStream write:logFileEndCapData.bytes maxLength:logFileEndCapData.length];
+            [currentLogStream close];
             if (numBytesWritten == logFileEndCapData.length)
             {
                 NSTimeInterval now = [[NSDate date] timeIntervalSince1970];

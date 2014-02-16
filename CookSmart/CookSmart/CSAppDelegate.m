@@ -16,6 +16,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     logAppLifecycleEvent(@"launch", nil);
+    // Don't install TestFlight crash handlers. The analytics framework will take care of crash logging.
+    [TestFlight setOptions:@{TFOptionReportCrashes : @NO}];
     [TestFlight takeOff:@"33e4b92b-0234-47cb-b533-e676909b43da"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

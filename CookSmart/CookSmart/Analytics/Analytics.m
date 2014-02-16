@@ -13,7 +13,7 @@
 #define ANALYTICS_SESSION_ID_USER_DEFAULTS_KEY                      @"analytics_session_id"
 #define ANALYTICS_DATE_OF_FIRST_EVENT_IN_SESSION_USER_DEFAULTS_KEY  @"analytics_first_date_in_session"
 #define ANALYTICS_DATE_OF_LAST_EVENT_IN_SESSION_USER_DEFAULTS_KEY   @"analytics_last_date_in_session"
-#define ANALYTICS_FIRST_SESSION_ID                                  @1
+#define ANALYTICS_FIRST_SESSION_ID                                  (@1)
 #define ANALYTICS_MAX_IDLE_TIME_IN_SESSION                          (30*60)
 
 #define ANALYTICS_EVENT_NAME_KEY                                    @"event_name"
@@ -42,6 +42,16 @@ static Analytics *sharedInstance = nil;
     dispatch_once(&onceToken, ^
     {
         sharedInstance = [[self alloc] init];
+        
+        NSSetUncaughtExceptionHandler(&exceptionHandler);
+        signal(SIGABRT, handleSignal);
+        signal(SIGILL, handleSignal);
+        signal(SIGSEGV, handleSignal);
+        signal(SIGFPE, handleSignal);
+        signal(SIGBUS, handleSignal);
+        signal(SIGPIPE, handleSignal);
+        
+        [sharedInstance sendAnalytics];
     });
     return sharedInstance;
 }
@@ -156,6 +166,59 @@ static inline NSDate *getSpecialDateOrCurrent(NSString *specialDateUserDefaultsK
     NSMutableDictionary *finalDictionary = [NSMutableDictionary dictionaryWithDictionary:eventDictionary];
     [finalDictionary setObject:[NSNumber numberWithInteger:(NSInteger)[[NSDate date] timeIntervalSince1970]] forKey:@"timestamp"];
     [[AnalyticsWriter sharedInstance] write:finalDictionary];
+}
+
+#pragma mark - Crash Handlers
+
+#include <execinfo.h>
+#include <libkern/OSAtomic.h>
+volatile int32_t signalsCaught = 0;
+const int32_t maxCaughtSignals = 10;
+
+void exceptionHandler(NSException *exception) {
+    NSString *eventName = nil;
+    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    {
+        eventName = @"uncaught_exception";
+    }
+    else
+    {
+        eventName = @"bg_uncaught_exception";
+    }
+    logCrash(eventName, @{
+                          @"exception_reason" : [exception reason],
+                          @"stack" : [exception callStackSymbols],
+                          });
+    [sharedInstance persistSessionInformation];
+}
+
+void handleSignal(int sig){
+    int32_t exceptionCount = OSAtomicIncrement32(&signalsCaught);
+	if (exceptionCount > maxCaughtSignals)
+		return;
+    
+    if(sig == SIGALRM && [[UIApplication sharedApplication] applicationState] == UIApplicationStateInactive)
+    {
+        logCrash(@"sigalrm_in_bg", nil);
+        return;
+    }
+	void *backtraceFrames[128];
+	int frameCount = backtrace(backtraceFrames, 128);
+	char **symbols = backtrace_symbols(backtraceFrames, frameCount);
+	NSMutableArray *stackTrace = [NSMutableArray array];
+	for(int i = 0; i < frameCount; i++)
+    {
+		[stackTrace addObject:[NSString stringWithFormat:@"%s", symbols[i]]];
+	}
+	free(symbols);
+    
+    logCrash(@"signal_caught", @{
+                         @"signal" : [NSNumber numberWithInt:sig],
+                         @"signal_name" : [NSString stringWithFormat:@"%s", strsignal(sig)],
+                         @"stack" : stackTrace,
+                         });
+    [sharedInstance persistSessionInformation];
+    exit(128+sig);
 }
 
 #pragma mark - Misc Helpers
