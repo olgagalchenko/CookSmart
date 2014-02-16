@@ -11,9 +11,11 @@
 #import "CSFilteredIngredientGroup.h"
 
 @interface CSIngredients()
+{
+    unsigned long _version;
+}
 
 @property (nonatomic, readwrite, strong) NSMutableArray *ingredientGroups;
-@property (nonatomic, readwrite, assign) unsigned long version;
 
 @end
 

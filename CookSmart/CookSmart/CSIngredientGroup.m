@@ -11,8 +11,9 @@
 #import "CSIngredientGroupInternals.h"
 
 @interface CSIngredientGroup ()
-
-@property (nonatomic, readwrite, assign) unsigned long version;
+{
+    unsigned long _version;
+}
 
 @end
 
