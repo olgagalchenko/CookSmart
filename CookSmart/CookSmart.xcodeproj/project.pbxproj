@@ -23,6 +23,8 @@
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09936189776A00014DB3E /* CSWeightUnit.m */; };
 		93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D099391897774C0014DB3E /* CSVolumeUnit.m */; };
+		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
+		93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93F6CCA718AED6050045400D /* CSScaleVC.xib */; };
 		B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
 		B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
@@ -83,6 +85,9 @@
 		93D09936189776A00014DB3E /* CSWeightUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSWeightUnit.m; sourceTree = "<group>"; };
 		93D099381897774C0014DB3E /* CSVolumeUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVolumeUnit.h; sourceTree = "<group>"; };
 		93D099391897774C0014DB3E /* CSVolumeUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVolumeUnit.m; sourceTree = "<group>"; };
+		93F6CCA518AED6050045400D /* CSScaleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSScaleVC.h; sourceTree = "<group>"; };
+		93F6CCA618AED6050045400D /* CSScaleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleVC.m; sourceTree = "<group>"; };
+		93F6CCA718AED6050045400D /* CSScaleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSScaleVC.xib; sourceTree = "<group>"; };
 		B7BCA28D180524A800CF7588 /* CookSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BCA290180524A800CF7588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7BCA292180524A800CF7588 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -246,6 +251,9 @@
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
 				9368096E1891059700655B89 /* CSIngredientListVC.h */,
+				93F6CCA518AED6050045400D /* CSScaleVC.h */,
+				93F6CCA618AED6050045400D /* CSScaleVC.m */,
+				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
@@ -384,6 +392,7 @@
 				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
+				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +414,7 @@
 				93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */,
+				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
 				DCCC5E8918A4827800F801D3 /* AnalyticsSender.m in Sources */,

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class CSVolumeUnit;
+@class CSWeightUnit;
+
 @interface CSIngredient : NSObject
 
 + (CSIngredient *)ingredientWithDictionary:(NSDictionary *)rawIngredientDictionary;
@@ -16,4 +19,5 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) float density;
 
+- (float)densityWithVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit;
 @end
