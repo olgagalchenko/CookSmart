@@ -12,8 +12,8 @@
 
 @interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
-@property (strong, nonatomic) CSIngredient* currIngredient;
+@property (strong, nonatomic) CSIngredient* ingredient;
 
-- (NSInteger)weightValue;
-- (NSInteger)volumeValue;
+- (NSDictionary *)analyticsAttributes;
+
 @end

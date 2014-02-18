@@ -167,7 +167,7 @@ static inline UILabel *createIngredientLabel()
 
 - (void)refreshScalesWithCurrentIngredient
 {
-    self.scaleVC.currIngredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
+    self.scaleVC.ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
 }
 
 - (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
@@ -291,14 +291,9 @@ static inline UILabel *createIngredientLabel()
 
 - (NSDictionary *)analyticsAttributes
 {
-    CSIngredient *ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
-    return @{
-             @"ingredient_group_name" : self.ingredientGroup.name,
-             @"ingredient_name" : ingredient.name,
-             @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
-             @"volume_value" : @([_scaleVC volumeValue]),
-             @"weight_value" : @([_scaleVC weightValue]),
-             };
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.scaleVC analyticsAttributes]];
+    [dict setObject:self.ingredientGroup.name forKey:@"ingredient_group_name"];
+    return dict;
 }
 
 @end

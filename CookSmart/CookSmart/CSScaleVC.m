@@ -13,9 +13,9 @@
 #import "CSVolumeUnit.h"
 
 @interface CSScaleVC ()
+
 @property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
-@property (weak, nonatomic) IBOutlet UIView *midlineView;
 @property (weak, nonatomic) IBOutlet UIButton *volumeUnitButton;
 @property (weak, nonatomic) IBOutlet UIButton *weightUnitButton;
 @property (weak, nonatomic) IBOutlet CSScaleView *volumeScaleScrollView;
@@ -25,6 +25,7 @@
 @property (strong, nonatomic) CSVolumeUnit* currentVolumeUnit;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
+
 @end
 
 enum units
@@ -57,21 +58,22 @@ enum units
     self.weightUnitButton.tag = weight;
 }
 
-- (void)setCurrIngredient:(CSIngredient *)currIngredient
+- (void)setIngredient:(CSIngredient *)currIngredient
 {
-    _currIngredient = currIngredient;
-    [self refreshScalesUI];
+    _ingredient = currIngredient;
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [self refreshScalesUI];
+    });
 }
 
 - (void)refreshScalesUI
 {
-    CSIngredient* ingredient = _currIngredient;
-    
 #define DEFAULT_VOLUME  1.0
     float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
     
-    float idealWeightScale = [ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit]*volumeScale;
+    float idealWeightScale = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit]*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
     if (idealWeightScale >=  5 && idealWeightScale < 10)
     {
@@ -84,7 +86,7 @@ enum units
     }
     else
     {
-        float idealVolumeScale = humanReadableWeightScale/[ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+        float idealVolumeScale = humanReadableWeightScale/[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
         volumeScale = 1;
         if (idealVolumeScale >= 5 && idealVolumeScale < 10)
         {
@@ -101,7 +103,7 @@ enum units
                                                                    scale:volumeScale
                                                                   mirror:NO];
     
-    float initialCenterValue = volumeInitialCenterValue*[ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    float initialCenterValue = volumeInitialCenterValue*[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
                                                                    scale:humanReadableWeightScale
                                                                   mirror:YES];
@@ -175,7 +177,7 @@ enum units
 
 - (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
 {
-    float trueDensity = [_currIngredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    float trueDensity = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
     if (sourceOfTruth == self.volumeScaleScrollView)
     {
         float volumeValue = [self.volumeScaleScrollView getCenterValue];
@@ -209,8 +211,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     }
     else
     {
-        if (!specialFractions)
-        {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
             specialFractions = @{
                                  @0.125 : @"\u215B",
                                  @0.250 : @"\u00BC",
@@ -224,7 +226,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
                                  @1.0 : @"",
                                  [NSNull null] : @""
                                  };
-        }
+        });
         id winningKey = [NSNull null];
         int wholeNumber = (int)floor(rawValue);
         float actualFraction = rawValue - wholeNumber;
@@ -302,29 +304,17 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [self refreshScalesUI];
 }
 
-#pragma mark - getters for analytics
-- (NSInteger)weightValue
-{
-    return [self.weightScaleScrollView getCenterValue];
-}
-
-- (NSInteger)volumeValue
-{
-    return [self.volumeScaleScrollView getCenterValue];
-}
-
 #pragma mark - Misc Helpers
 
 - (NSDictionary *)analyticsAttributes
 {
-    CSIngredient *ingredient = _currIngredient;
     return @{
-             @"ingredient_name" : ingredient.name,
-             @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
+             @"ingredient_name" : self.ingredient.name,
+             @"ingredient_density" : [NSNumber numberWithFloat:self.ingredient.density],
              @"volume_unit" : self.currentVolumeUnit.name,
              @"weight_unit" : self.currentWeightUnit.name,
-             @"volume_value" : @([self volumeValue]),
-             @"weight_value" : @([self weightValue]),
+             @"volume_value" : @([self.volumeScaleScrollView getCenterValue]),
+             @"weight_value" : @([self.weightScaleScrollView getCenterValue]),
              };
 }
 
