@@ -24,10 +24,16 @@
 
 - (id)initWithDictionary:(NSDictionary *)rawIngredientDictionary
 {
-    if ((self = [super init]))
+    return [self initWithName:rawIngredientDictionary[INGREDIENT_KEY_NAME]
+                    andDensity:[rawIngredientDictionary[INGREDIENT_KEY_DENSITY] floatValue]];
+}
+
+- (id)initWithName:(NSString*)name andDensity:(float)density
+{
+    if (self = [super init])
     {
-        self.name = rawIngredientDictionary[INGREDIENT_KEY_NAME];
-        self.density = [rawIngredientDictionary[INGREDIENT_KEY_DENSITY] floatValue];
+        self.name = name;
+        self.density = density;
     }
     return self;
 }

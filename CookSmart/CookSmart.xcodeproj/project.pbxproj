@@ -19,6 +19,8 @@
 		9351F3FB18A1A48B00AD45D0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3FA18A1A48B00AD45D0 /* libz.dylib */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
+		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
+		935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09936189776A00014DB3E /* CSWeightUnit.m */; };
@@ -77,6 +79,9 @@
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
+		935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEditIngredientVC.h; sourceTree = "<group>"; };
+		935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEditIngredientVC.m; sourceTree = "<group>"; };
+		935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSEditIngredientVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
@@ -256,6 +261,9 @@
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
 				9368096E1891059700655B89 /* CSIngredientListVC.h */,
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
+				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
+				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
+				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);
@@ -391,6 +399,7 @@
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
+				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
 			);
@@ -415,6 +424,7 @@
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
+				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
 				DCCC5E8918A4827800F801D3 /* AnalyticsSender.m in Sources */,

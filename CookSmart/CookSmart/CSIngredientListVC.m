@@ -10,6 +10,7 @@
 #import "CSIngredients.h"
 #import "CSFilteredIngredientGroup.h"
 #import "CSIngredient.h"
+#import "CSEditIngredientVC.h"
 
 @interface CSIngredientListVC ()
 
@@ -59,6 +60,8 @@ static NSString* CellIdentifier = @"Cell";
     self.searchController.searchResultsDelegate = self;
     
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -172,19 +175,9 @@ static NSString* CellIdentifier = @"Cell";
 {
     UIViewController *editVC = nil;
     if (sender == self.navigationItem.rightBarButtonItem)
-    {
-        NSLog(@"IMPLEMENT CODE TO ADD INGREDIENT");
-        /* Create new ingredient and edit it
-        editVC = [[CSIngredientEditVC alloc] initWithIngredient:nil];
-         */
-    }
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil];
     else if ([sender isKindOfClass:[CSIngredient class]])
-    {
-        NSLog(@"IMPLEMENT CODE TO EDIT INGREDIENT: %@", [(CSIngredient *)sender name]);
-        /* Edit the given ingredient
-        editVC = [[CSIngredientEditVC alloc] initWithIngredient:(CSIngredient *)sender];
-         */
-    }
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:(CSIngredient *)sender];
     else
     {
         CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");

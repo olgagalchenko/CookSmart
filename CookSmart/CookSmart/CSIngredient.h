@@ -14,6 +14,7 @@
 @interface CSIngredient : NSObject
 
 + (CSIngredient *)ingredientWithDictionary:(NSDictionary *)rawIngredientDictionary;
+- (id)initWithName:(NSString*)name andDensity:(float)density;
 - (NSDictionary *)dictionary;
 
 @property (nonatomic, readonly) NSString *name;
