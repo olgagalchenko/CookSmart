@@ -195,6 +195,7 @@ static NSString* CellIdentifier = @"Cell";
 #pragma mark - search bar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    logUserAction(@"ingredient_filter", @{@"search_text" : searchText});
     NSMutableArray* filteredGroupsArray = [NSMutableArray array];
     
     for (CSIngredientGroup* group in [CSIngredients sharedInstance])
@@ -215,6 +216,11 @@ static NSString* CellIdentifier = @"Cell";
     }
     
     self.filteredIngredients = [[CSIngredients alloc] initWithIngredientGroups:filteredGroupsArray];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    logUserAction(@"ingredient_filter_cancel", @{@"search_text" : searchBar.text});
 }
 
 #pragma mark - dismiss self
