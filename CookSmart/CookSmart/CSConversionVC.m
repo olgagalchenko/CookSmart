@@ -29,8 +29,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *prevButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
-@property (nonatomic, readwrite, assign) BOOL isSnapping;
-
 @property (strong, nonatomic) IBOutlet CSScaleVC* scaleVC;
 
 @end
