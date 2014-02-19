@@ -13,7 +13,7 @@
 @interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) CSIngredient* ingredient;
-
+@property (assign, nonatomic) BOOL          syncsScales;
 - (NSDictionary *)analyticsAttributes;
 
 @end
