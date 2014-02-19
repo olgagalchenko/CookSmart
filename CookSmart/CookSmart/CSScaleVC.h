@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class CSScaleVC;
+@protocol CSScaleVCDelegate <NSObject>
+
+- (void)scaleVC:(CSScaleVC *)scaleVC densityDidChange:(float)changedDensity;
+
+@end
+
 @class CSIngredient;
 
 @interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
-@property (strong, nonatomic) CSIngredient* ingredient;
-@property (assign, nonatomic) BOOL          syncsScales;
+@property (strong, nonatomic) CSIngredient*         ingredient;
+@property (assign, nonatomic) BOOL                  syncsScales;
+@property (weak, nonatomic) id<CSScaleVCDelegate>   delegate;
 - (NSDictionary *)analyticsAttributes;
 
 @end

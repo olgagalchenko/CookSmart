@@ -17,8 +17,8 @@
 - (id)initWithName:(NSString*)name andDensity:(float)density;
 - (NSDictionary *)dictionary;
 
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) float density;
+@property (nonatomic, readwrite, strong) NSString *name;
+@property (nonatomic, readwrite, assign) float density;
 
 - (float)densityWithVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit;
 @end

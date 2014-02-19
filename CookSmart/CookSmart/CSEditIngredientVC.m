@@ -31,6 +31,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.scaleVC.delegate = nil;
+}
+
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -42,7 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.ingredientNameField.text = self.ingredient.name;
-    
+    self.scaleVC.delegate = self;
     [self.view addSubview:self.scaleVC.view];
     
     self.scaleVC.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -89,14 +94,34 @@
 
 - (void)done:(id)sender
 {
-    
+    if (!self.ingredient.name.length)
+    {
+        [self.ingredientNameField becomeFirstResponder];
+    }
+    else
+    {
+        [self.ingredientNameField resignFirstResponder];
+        NSLog(@"PERSIST INGREDIENT: %@", self.ingredient.dictionary);
+    }
 }
 
 #pragma mark - text field delegate methods
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    self.ingredient.name = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.ingredientNameField resignFirstResponder];
     return YES;
+}
+
+#pragma mark - CSScaleVCDelegate methods
+- (void)scaleVC:(CSScaleVC *)scaleVC densityDidChange:(float)changedDensity
+{
+    self.ingredient.density = changedDensity;
 }
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSScaleVC.h"
 @class CSIngredient;
 
-@interface CSEditIngredientVC : UIViewController <UITextFieldDelegate>
+@interface CSEditIngredientVC : UIViewController <UITextFieldDelegate, CSScaleVCDelegate>
 
 - (id)initWithIngredient:(CSIngredient*)ingr;
+
 @end

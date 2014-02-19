@@ -36,6 +36,14 @@ static NSString* CellIdentifier = @"Cell";
     return self;
 }
 
+- (void)dealloc
+{
+    self.searchBar.delegate = nil;
+    self.searchController.delegate = nil;
+    self.searchController.searchResultsDataSource = nil;
+    self.searchController.searchResultsDelegate = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

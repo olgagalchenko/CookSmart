@@ -13,13 +13,6 @@
 #define INGREDIENT_KEY_NAME     @"Name"
 #define INGREDIENT_KEY_DENSITY  @"Density"
 
-@interface CSIngredient()
-
-@property (nonatomic, readwrite, strong) NSString *name;
-@property (nonatomic, readwrite, assign) float density;
-
-@end
-
 @implementation CSIngredient
 
 - (id)initWithDictionary:(NSDictionary *)rawIngredientDictionary

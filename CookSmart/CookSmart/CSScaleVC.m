@@ -127,6 +127,8 @@ enum units
     
     self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
     self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
+    
+    [self informDelegateOfScaleChangeIfNecessary];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -179,6 +181,7 @@ enum units
         {
             valueSnapEventName = @"value_snap_volume";
         }
+        [self informDelegateOfScaleChangeIfNecessary];
         logUserAction(valueSnapEventName, [self analyticsAttributes]);
     }];
 }
@@ -325,6 +328,15 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
              @"volume_value" : @([self.volumeScaleScrollView getCenterValue]),
              @"weight_value" : @([self.weightScaleScrollView getCenterValue]),
              };
+}
+
+- (void)informDelegateOfScaleChangeIfNecessary
+{
+    if (!self.syncsScales && self.delegate)
+    {
+        float currentDensity = ([self.weightScaleScrollView getCenterValue]/self.currentWeightUnit.conversionFactor)/([self.volumeScaleScrollView getCenterValue]/self.currentVolumeUnit.conversionFactor);
+        [self.delegate scaleVC:self densityDidChange:currentDensity];
+    }
 }
 
 
