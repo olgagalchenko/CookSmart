@@ -98,6 +98,11 @@
     {
         [self.ingredientNameField becomeFirstResponder];
     }
+    else if (![self.ingredient isIngredientDensityValid])
+    {
+        UIAlertView* densityError = [[UIAlertView alloc] initWithTitle:@"Invalid density" message:@"wow. such dense. much error." delegate:nil cancelButtonTitle:@"OK, I'll fix it." otherButtonTitles: nil];
+        [densityError show];
+    }
     else
     {
         [self.ingredientNameField resignFirstResponder];

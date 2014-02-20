@@ -21,4 +21,5 @@
 @property (nonatomic, readwrite, assign) float density;
 
 - (float)densityWithVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit;
+- (BOOL)isIngredientDensityValid;
 @end

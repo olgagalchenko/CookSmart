@@ -322,7 +322,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 {
     return @{
              @"ingredient_name" : self.ingredient.name,
-             @"ingredient_density" : [NSNumber numberWithFloat:self.ingredient.density],
+             @"ingredient_density" : [self.ingredient isIngredientDensityValid] ? [NSNumber numberWithFloat:self.ingredient.density] : [NSNumber numberWithFloat:FLT_MAX],
              @"volume_unit" : self.currentVolumeUnit.name,
              @"weight_unit" : self.currentWeightUnit.name,
              @"volume_value" : @([self.volumeScaleScrollView getCenterValue]),

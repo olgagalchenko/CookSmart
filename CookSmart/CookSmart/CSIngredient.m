@@ -49,4 +49,12 @@
     return self.density*(weightUnit.conversionFactor/volumeUnit.conversionFactor);
 }
 
+- (BOOL)isIngredientDensityValid
+{
+    BOOL valid = NO;
+    if (!isnan(self.density) && !isinf(self.density))
+        return YES;
+    return valid;
+}
+
 @end
