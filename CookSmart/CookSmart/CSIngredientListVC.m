@@ -32,6 +32,8 @@ static NSString* CellIdentifier = @"Cell";
     {
         self.delegate = delegate;
         self.title = @"Ingredients";
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newIngredientAdded:) name:INGREDIENT_ADD_NOTIFICATION_NAME object:nil];
     }
     return self;
 }
@@ -222,6 +224,12 @@ static NSString* CellIdentifier = @"Cell";
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     logUserAction(@"ingredient_filter_cancel", @{@"search_text" : searchBar.text});
+}
+
+#pragma mark - notification responders
+- (void)newIngredientAdded:(NSNotification*)notificationObj
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - dismiss self

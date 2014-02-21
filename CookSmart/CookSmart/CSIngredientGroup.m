@@ -104,6 +104,12 @@
     [self.ingredients removeObject:ingredient];
 }
 
+- (void)addIngredient:(CSIngredient *)ingredient
+{
+    _version++;
+    [self.ingredients addObject:ingredient];
+}
+
 - (NSDictionary *)dictionary
 {
     NSMutableArray *ingredients = [NSMutableArray arrayWithCapacity:self.ingredients.count];

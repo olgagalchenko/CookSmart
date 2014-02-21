@@ -9,6 +9,7 @@
 #import "CSEditIngredientVC.h"
 #import "CSScaleVC.h"
 #import "CSIngredient.h"
+#import "CSIngredients.h"
 
 @interface CSEditIngredientVC ()
 @property (nonatomic, strong) IBOutlet CSScaleVC* scaleVC;
@@ -106,7 +107,8 @@
     else
     {
         [self.ingredientNameField resignFirstResponder];
-        NSLog(@"PERSIST INGREDIENT: %@", self.ingredient.dictionary);
+        [[CSIngredients sharedInstance] addIngredient:self.ingredient atGroupIndex:3];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

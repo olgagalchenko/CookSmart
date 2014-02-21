@@ -151,6 +151,17 @@ static inline NSString *pathToIngredientsOnDisk()
     return [sharedInstance persist];
 }
 
+- (BOOL)addIngredient:(CSIngredient*)newIngr atGroupIndex:(NSUInteger)groupIndex
+{
+    _version++;
+    
+    CSIngredientGroup* ingrGroup = [self ingredientGroupAtIndex:groupIndex];
+    [ingrGroup addIngredient:newIngr];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_ADD_NOTIFICATION_NAME object:newIngr];
+    return [sharedInstance persist];
+}
+
 - (BOOL)persist
 {
     NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];

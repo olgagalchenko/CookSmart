@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define INGREDIENT_DELETE_NOTIFICATION_NAME     @"ingredient_delete_notification"
-
+#define INGREDIENT_ADD_NOTIFICATION_NAME        @"ingredient_add_notification"
+@class CSIngredient;
 @class CSIngredientGroup;
 
 @interface CSIngredients : NSObject <NSFastEnumeration>
@@ -21,5 +22,5 @@
 - (NSUInteger)countOfIngredientGroups;
 
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex;
-
+- (BOOL)addIngredient:(CSIngredient*)newIngr atGroupIndex:(NSUInteger)groupIndex;
 @end
