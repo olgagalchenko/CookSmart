@@ -56,7 +56,8 @@ static AnalyticsWriter *sharedInstance = nil;
 - (void)write:(NSDictionary *)eventDictionary
 {
     BOOL thisEventIsFirst = NO;
-    NSOutputStream *currentLogFileStream = [self initializedCurrentLogFileStream:&thisEventIsFirst];
+    NSOutputStream *currentLogFileStream = [self initializedCurrentLogFileStreamCreatingNewFileIfNecessary:YES
+                                                                                            newFileCreated:&thisEventIsFirst];
     if (!currentLogFileStream)
     {
         NSAssert(NO, @"Unable to get an output stream to the current log file. Will proceed without logging.");
@@ -106,13 +107,13 @@ static AnalyticsWriter *sharedInstance = nil;
 
 #pragma mark - Misc. Helpers
 
-- (NSOutputStream *)initializedCurrentLogFileStream:(BOOL *)logFileWasCreated
+- (NSOutputStream *)initializedCurrentLogFileStreamCreatingNewFileIfNecessary:(BOOL)createNewFileIfNecessary newFileCreated:(BOOL *)logFileWasCreated
 {
     @synchronized(self)
     {
-        BOOL isDir = YES;
+        BOOL isDir = NO;
         if (![[NSFileManager defaultManager] fileExistsAtPath:currentLogFilePath()
-                                                  isDirectory:&isDir])
+                                                  isDirectory:&isDir] && createNewFileIfNecessary)
         {
             NSError *error = nil;
             NSData *eventGroupData = [NSJSONSerialization dataWithJSONObject:commonAttributes()
@@ -144,15 +145,24 @@ static AnalyticsWriter *sharedInstance = nil;
         else if (isDir)
         {
             NSAssert(NO, @"There is a directory where the current log file should be.");
+            if (logFileWasCreated != nil)
+            {
+                *logFileWasCreated = NO;
+            }
             return nil;
         }
         else if (logFileWasCreated != nil)
         {
             *logFileWasCreated = NO;
         }
-        NSOutputStream *currentLogFileStream = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:currentLogFilePath()]
-                                                                            append:YES];
-        [currentLogFileStream open];
+        NSOutputStream *currentLogFileStream = nil;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:currentLogFilePath()
+                                                 isDirectory:nil])
+        {
+            currentLogFileStream = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:currentLogFilePath()]
+                                         append:YES];
+            [currentLogFileStream open];
+        }
         return currentLogFileStream;
     }
 }
@@ -161,9 +171,8 @@ static AnalyticsWriter *sharedInstance = nil;
 {
     @synchronized(self)
     {
-        BOOL newCurrentLogFileCreated = YES;
-        NSOutputStream *currentLogStream = [self initializedCurrentLogFileStream:&newCurrentLogFileCreated];
-        if (!newCurrentLogFileCreated)
+        NSOutputStream *currentLogStream = [self initializedCurrentLogFileStreamCreatingNewFileIfNecessary:NO newFileCreated:nil];
+        if (currentLogStream)
         {
             // There's some data to flush
             NSData *logFileEndCapData = [NSData dataWithBytes:"]}" length:2];
