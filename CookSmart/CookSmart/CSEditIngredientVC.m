@@ -43,6 +43,12 @@
     self.scaleVC.ingredient = self.ingredient;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    logViewChange(@"edit_ingredient", [self analyticsDictionary]);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -91,6 +97,7 @@
 - (void)cancelEdit:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+    logUserAction(@"ingredient_edit_cancelled", [self analyticsDictionary]);
 }
 
 - (void)done:(id)sender
@@ -109,6 +116,7 @@
         [self.ingredientNameField resignFirstResponder];
         [[CSIngredients sharedInstance] addIngredient:self.ingredient atGroupIndex:3];
         [self.navigationController popViewControllerAnimated:YES];
+        logUserAction(@"ingredient_persisted", [self analyticsDictionary]);
     }
 }
 
@@ -116,6 +124,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     self.ingredient.name = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    logUserAction(@"ingredient_name_change", [self analyticsDictionary]);
     return YES;
 }
 
@@ -129,6 +138,15 @@
 - (void)scaleVC:(CSScaleVC *)scaleVC densityDidChange:(float)changedDensity
 {
     self.ingredient.density = changedDensity;
+}
+
+#pragma mark - Misc. Helpers
+- (NSDictionary *)analyticsDictionary
+{
+    return @{
+             @"ingredient_name": self.ingredient.name,
+             @"ingredient_density" : [self.ingredient isIngredientDensityValid]? @(self.ingredient.density) : @(FLT_MAX),
+             };
 }
 
 @end
