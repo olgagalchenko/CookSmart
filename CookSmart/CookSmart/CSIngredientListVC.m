@@ -70,8 +70,6 @@ static NSString* CellIdentifier = @"Cell";
     self.searchController.searchResultsDelegate = self;
     
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated

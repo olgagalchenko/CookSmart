@@ -71,14 +71,25 @@ static AnalyticsWriter *sharedInstance = nil;
     }
     
     NSError *error = nil;
-    [eventData appendData:[NSJSONSerialization dataWithJSONObject:eventDictionary
-                                                          options:0
-                                                            error:&error]];
+    NSData *eventMeatData = nil;
+    @try
+    {
+        eventMeatData = [NSJSONSerialization dataWithJSONObject:eventDictionary
+                                                        options:0
+                                                          error:&error];
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"Failed to serialize analytics event: %@", exception);
+        return;
+    }
+    
     if (error)
     {
         NSAssert(NO, @"Unable to serialize event dictionary.");
         return;
     }
+    [eventData appendData:eventMeatData];
     unsigned long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:currentLogFilePath()
                                                                                     error:nil] fileSize];
     if (eventData.length + fileSize >= ANALYTICS_ROUGH_LOG_FILE_SIZE_CAP)

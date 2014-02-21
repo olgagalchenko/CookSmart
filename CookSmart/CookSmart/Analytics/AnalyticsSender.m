@@ -156,6 +156,10 @@ static AnalyticsSender *sharedInstance = nil;
             me.isSending = NO;
         }];
     }
+    else
+    {
+        self.isSending = NO;
+    }
 }
 
 #pragma mark - Misc. Helpers
