@@ -1,4 +1,4 @@
-//
+ //
 //  CSIngredients.m
 //  CookSmart
 //
@@ -9,6 +9,8 @@
 #import "CSIngredients.h"
 #import "CSIngredientGroup.h"
 #import "CSFilteredIngredientGroup.h"
+
+#define OTHER_GROUP_INDEX 4
 
 @interface CSIngredients()
 {
@@ -83,6 +85,29 @@ static inline NSString *pathToIngredientsOnDisk()
     return group;
 }
 
+- (CSIngredientGroup *)customIngredientGroup
+{
+    if (OTHER_GROUP_INDEX > [self countOfIngredientGroups]-1)
+    {
+        //need to create it
+        [self.ingredientGroups addObject:[CSIngredientGroup ingredientGroupWithDictionary:@{@"Custom":@[]}]];
+    }
+    return [self ingredientGroupAtIndex:OTHER_GROUP_INDEX];
+}
+
+- (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index
+{
+    CSIngredient* returnIngr = nil;
+    if (groupIndex < [self countOfIngredientGroups])
+    {
+        CSIngredientGroup* group = [self ingredientGroupAtIndex:groupIndex];
+        if (index < [group countOfIngredients])
+            returnIngr = [group ingredientAtIndex:index];
+    }
+    
+    return returnIngr;
+}
+
 - (NSUInteger)countOfIngredientGroups
 {
     return self.ingredientGroups.count;
@@ -151,14 +176,22 @@ static inline NSString *pathToIngredientsOnDisk()
     return [sharedInstance persist];
 }
 
-- (BOOL)addIngredient:(CSIngredient*)newIngr atGroupIndex:(NSUInteger)groupIndex
+- (BOOL)addIngredient:(CSIngredient*)newIngr
 {
     _version++;
     
-    CSIngredientGroup* ingrGroup = [self ingredientGroupAtIndex:groupIndex];
+    CSIngredientGroup* ingrGroup = [self customIngredientGroup];
     [ingrGroup addIngredient:newIngr];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_ADD_NOTIFICATION_NAME object:newIngr];
+    return [sharedInstance persist];
+}
+
+- (BOOL)editIngredient:(CSIngredient*)modifiedIngr
+{
+    _version++;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_ADD_NOTIFICATION_NAME object:modifiedIngr];
     return [sharedInstance persist];
 }
 

@@ -181,15 +181,31 @@ static NSString* CellIdentifier = @"Cell";
 
 - (void)editIngredient:(id)sender
 {
-    UIViewController *editVC = nil;
+    CSIngredient* ingrToEdit;
+    UIViewController *editVC;
     if (sender == self.navigationItem.rightBarButtonItem)
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil];
+    {
+        ingrToEdit = [[CSIngredient alloc] initWithName:@"" andDensity:125];
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
+                                                  withDoneBlock:^(CSIngredient* newIngr){
+                                                      [[CSIngredients sharedInstance] addIngredient:newIngr];
+                                                  }];
+
+    }
     else if ([sender isKindOfClass:[CSIngredient class]])
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:(CSIngredient *)sender];
+    {
+        ingrToEdit = (CSIngredient*)sender;
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
+                                                  withDoneBlock:^(CSIngredient* newIngr){
+                                                      [[CSIngredients sharedInstance] editIngredient:newIngr];
+                                                  }];
+
+    }
     else
     {
         CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");
     }
+        
     [self.navigationController pushViewController:editVC animated:YES];
 }
 

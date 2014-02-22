@@ -10,8 +10,10 @@
 #import "CSScaleVC.h"
 @class CSIngredient;
 
+typedef void(^BlockType)(CSIngredient*);
+
 @interface CSEditIngredientVC : UIViewController <UITextFieldDelegate, CSScaleVCDelegate>
 
-- (id)initWithIngredient:(CSIngredient*)ingr;
+- (id)initWithIngredient:(CSIngredient*)ingr withDoneBlock:(BlockType)done;
 
 @end

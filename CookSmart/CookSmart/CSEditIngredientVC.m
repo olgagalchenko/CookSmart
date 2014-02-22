@@ -15,11 +15,13 @@
 @property (nonatomic, strong) IBOutlet CSScaleVC* scaleVC;
 @property (weak, nonatomic) IBOutlet UITextField *ingredientNameField;
 @property (nonatomic, strong) CSIngredient* ingredient;
+
+@property (nonatomic, copy) BlockType doneBlock;
 @end
 
 @implementation CSEditIngredientVC
 
-- (id)initWithIngredient:(CSIngredient*)ingr
+- (id)initWithIngredient:(CSIngredient*)ingr withDoneBlock:(BlockType)done
 {
     self = [super init];
     if (self)
@@ -28,6 +30,8 @@
             self.ingredient = ingr;
         else
             self.ingredient = [[CSIngredient alloc] initWithName:@"" andDensity:150];
+        
+        self.doneBlock = done;
     }
     return self;
 }
@@ -114,9 +118,9 @@
     else
     {
         [self.ingredientNameField resignFirstResponder];
-        [[CSIngredients sharedInstance] addIngredient:self.ingredient atGroupIndex:3];
         [self.navigationController popViewControllerAnimated:YES];
         logUserAction(@"ingredient_persisted", [self analyticsDictionary]);
+        self.doneBlock(self.ingredient);
     }
 }
 

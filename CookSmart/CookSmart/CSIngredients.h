@@ -19,8 +19,10 @@
 
 + (CSIngredients *)sharedInstance;
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;
+- (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index;
 - (NSUInteger)countOfIngredientGroups;
 
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex;
-- (BOOL)addIngredient:(CSIngredient*)newIngr atGroupIndex:(NSUInteger)groupIndex;
+- (BOOL)addIngredient:(CSIngredient*)newIngr;
+- (BOOL)editIngredient:(CSIngredient*)modifiedIngr;
 @end
