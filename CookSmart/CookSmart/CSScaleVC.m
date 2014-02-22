@@ -128,7 +128,7 @@ enum units
     self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
     self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
     
-    [self informDelegateOfScaleChangeIfNecessary];
+    [self informDelegateOfDensityChangeIfNecessary];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -170,6 +170,8 @@ enum units
         self.isSnapping = YES;
         [scaleView setCenterValue:humanReadableFloat cancelDeceleration:YES];
         [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES];
+        self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
+        self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
     } completion:^(BOOL finished) {
         self.isSnapping = NO;
         NSString *valueSnapEventName = @"value_snap_unknown";
@@ -181,7 +183,7 @@ enum units
         {
             valueSnapEventName = @"value_snap_volume";
         }
-        [self informDelegateOfScaleChangeIfNecessary];
+        [self informDelegateOfDensityChangeIfNecessary];
         logUserAction(valueSnapEventName, [self analyticsAttributes]);
     }];
 }
@@ -330,7 +332,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
              };
 }
 
-- (void)informDelegateOfScaleChangeIfNecessary
+- (void)informDelegateOfDensityChangeIfNecessary
 {
     if (!self.syncsScales && self.delegate)
     {
