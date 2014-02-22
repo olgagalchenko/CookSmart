@@ -193,24 +193,6 @@ static inline NSString *pathToIngredientsOnDisk()
     return [sharedInstance persist];
 }
 
-- (BOOL)editIngredient:(CSIngredient*)modifiedIngr
-{
-    _version++;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_EDIT_NOTIFICATION_NAME object:modifiedIngr];
-    return [sharedInstance persist];
-}
-
-- (BOOL)replaceIngredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)ingrIndex withIngredient:(CSIngredient*)replacement
-{
-    _version++;
-    
-    CSIngredientGroup* ingrGroup = [self ingredientGroupAtIndex:groupIndex];
-    [ingrGroup replaceIngredientAtIndex:ingrIndex withIngredient:replacement];
-    
-    return [sharedInstance persist];
-}
-
 - (BOOL)persist
 {
     NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];

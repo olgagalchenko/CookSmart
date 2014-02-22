@@ -53,6 +53,7 @@
 {
     [super viewDidAppear:animated];
     logViewChange(@"edit_ingredient", [self analyticsDictionary]);
+    [self.ingredientNameField becomeFirstResponder];
 }
 
 - (void)viewDidLoad
@@ -124,8 +125,9 @@
     {
         [self.ingredientNameField resignFirstResponder];
         [self.navigationController popViewControllerAnimated:YES];
+        if (self.doneBlock != nil)
+            self.doneBlock(self.ingredient);
         logUserAction(@"ingredient_persisted", [self analyticsDictionary]);
-        self.doneBlock(self.ingredient);
     }
 }
 

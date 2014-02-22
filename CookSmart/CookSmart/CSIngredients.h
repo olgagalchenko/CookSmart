@@ -10,7 +10,6 @@
 
 #define INGREDIENT_DELETE_NOTIFICATION_NAME     @"ingredient_delete_notification"
 #define INGREDIENT_ADD_NOTIFICATION_NAME        @"ingredient_add_notification"
-#define INGREDIENT_EDIT_NOTIFICATION_NAME       @"ingredient_edit_notification"
 
 @class CSIngredient;
 @class CSIngredientGroup;
@@ -26,6 +25,6 @@
 
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex;
 - (BOOL)addIngredient:(CSIngredient*)newIngr;
-- (BOOL)editIngredient:(CSIngredient*)modifiedIngr;
-- (BOOL)replaceIngredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)ingrIndex withIngredient:(CSIngredient*)replacement;
+- (BOOL)persist;
+
 @end

@@ -32,9 +32,6 @@ static NSString* CellIdentifier = @"Cell";
     {
         self.delegate = delegate;
         self.title = @"Ingredients";
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newIngredientAdded:) name:INGREDIENT_ADD_NOTIFICATION_NAME object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ingredientModified:) name:INGREDIENT_EDIT_NOTIFICATION_NAME object:nil];
     }
     return self;
 }
@@ -132,7 +129,8 @@ static NSString* CellIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    [self editIngredientAtGroupIndex:indexPath.section andIngredientIndex:indexPath.row];
+    CSIngredient *ingredientToEdit = [[CSIngredients sharedInstance] ingredientAtGroupIndex:indexPath.section andIngredientIndex:indexPath.row];
+    [self editIngredient:ingredientToEdit];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -183,36 +181,35 @@ static NSString* CellIdentifier = @"Cell";
     UIViewController *editVC;
     if (sender == self.navigationItem.rightBarButtonItem)
     {
+        UITableView *tableViewToReload = self.tableView;
         editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil
                                                   withDoneBlock:^(CSIngredient* newIngr){
                                                       [[CSIngredients sharedInstance] addIngredient:newIngr];
+                                                      [tableViewToReload reloadData];
                                                   }
                                                  andCancelBlock:nil];
+    }
+    else if ([sender isKindOfClass:[CSIngredient class]])
+    {
+        CSIngredient *ingredientToEdit = (CSIngredient *)sender;
+        UITableView *tableViewToReload = self.tableView;
+        NSString *oldIngrName = [NSString stringWithString:ingredientToEdit.name];
+        float oldIngrDensity = ingredientToEdit.density;
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingredientToEdit
+                                                  withDoneBlock:^(CSIngredient* newIngr){
+                                                      [[CSIngredients sharedInstance] persist];
+                                                      [tableViewToReload reloadData];
+                                                  }
+                                                 andCancelBlock:^(void){
+                                                     ingredientToEdit.name = oldIngrName;
+                                                     ingredientToEdit.density = oldIngrDensity;
+                                                 }];
     }
     else
     {
         CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be rightBarButtonItem.");
     }
         
-    [self.navigationController pushViewController:editVC animated:YES];
-}
-
-- (void)editIngredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)ingrIndex
-{
-    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyDataForTableView:self.tableView] ingredientGroupAtIndex:groupIndex];
-    CSIngredient *ingrToEdit = [selectedIngredientGroup ingredientAtIndex:ingrIndex];
-    
-    __block NSString* oldIngrName = ingrToEdit.name;
-    __block float oldIngrDensity = ingrToEdit.density;
-    CSEditIngredientVC* editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
-                                              withDoneBlock:^(CSIngredient* newIngr){
-                                                  [[CSIngredients sharedInstance] editIngredient:newIngr];
-                                              }
-                                             andCancelBlock:^(void){
-                                                 CSIngredient* oldIngr = [[CSIngredient alloc] initWithName:oldIngrName andDensity:oldIngrDensity];
-                                                 [[CSIngredients sharedInstance] replaceIngredientAtGroupIndex:groupIndex andIngredientIndex:ingrIndex withIngredient:oldIngr];
-                                             }];
-    
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
