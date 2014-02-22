@@ -10,7 +10,7 @@
 #import "CSIngredientGroup.h"
 #import "CSFilteredIngredientGroup.h"
 
-#define OTHER_GROUP_INDEX 4
+#define CUSTOM_GROUP_NAME @"Custom"
 
 @interface CSIngredients()
 {
@@ -85,14 +85,20 @@ static inline NSString *pathToIngredientsOnDisk()
     return group;
 }
 
+- (CSIngredientGroup*)lastIngredientGroup
+{
+    CSIngredientGroup* group = [self.ingredientGroups lastObject];
+    return group;
+}
+
 - (CSIngredientGroup *)customIngredientGroup
 {
-    if (OTHER_GROUP_INDEX > [self countOfIngredientGroups]-1)
+    if (![[self lastIngredientGroup].name isEqualToString:CUSTOM_GROUP_NAME])
     {
         //need to create it
-        [self.ingredientGroups addObject:[CSIngredientGroup ingredientGroupWithDictionary:@{@"Custom":@[]}]];
+        [self.ingredientGroups addObject:[CSIngredientGroup ingredientGroupWithDictionary:@{CUSTOM_GROUP_NAME:@[]}]];
     }
-    return [self ingredientGroupAtIndex:OTHER_GROUP_INDEX];
+    return [self lastIngredientGroup];
 }
 
 - (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index
@@ -191,7 +197,17 @@ static inline NSString *pathToIngredientsOnDisk()
 {
     _version++;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_ADD_NOTIFICATION_NAME object:modifiedIngr];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_EDIT_NOTIFICATION_NAME object:modifiedIngr];
+    return [sharedInstance persist];
+}
+
+- (BOOL)replaceIngredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)ingrIndex withIngredient:(CSIngredient*)replacement
+{
+    _version++;
+    
+    CSIngredientGroup* ingrGroup = [self ingredientGroupAtIndex:groupIndex];
+    [ingrGroup replaceIngredientAtIndex:ingrIndex withIngredient:replacement];
+    
     return [sharedInstance persist];
 }
 

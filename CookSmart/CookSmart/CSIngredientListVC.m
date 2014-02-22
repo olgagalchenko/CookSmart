@@ -34,6 +34,7 @@ static NSString* CellIdentifier = @"Cell";
         self.title = @"Ingredients";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newIngredientAdded:) name:INGREDIENT_ADD_NOTIFICATION_NAME object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ingredientModified:) name:INGREDIENT_EDIT_NOTIFICATION_NAME object:nil];
     }
     return self;
 }
@@ -131,9 +132,7 @@ static NSString* CellIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section];
-    CSIngredient *selectedIngredient = [selectedIngredientGroup ingredientAtIndex:indexPath.row];
-    [self editIngredient:selectedIngredient];
+    [self editIngredientAtGroupIndex:indexPath.section andIngredientIndex:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,31 +180,39 @@ static NSString* CellIdentifier = @"Cell";
 
 - (void)editIngredient:(id)sender
 {
-    CSIngredient* ingrToEdit;
     UIViewController *editVC;
     if (sender == self.navigationItem.rightBarButtonItem)
     {
-        ingrToEdit = [[CSIngredient alloc] initWithName:@"" andDensity:125];
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
+        editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil
                                                   withDoneBlock:^(CSIngredient* newIngr){
                                                       [[CSIngredients sharedInstance] addIngredient:newIngr];
-                                                  }];
-
-    }
-    else if ([sender isKindOfClass:[CSIngredient class]])
-    {
-        ingrToEdit = (CSIngredient*)sender;
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
-                                                  withDoneBlock:^(CSIngredient* newIngr){
-                                                      [[CSIngredients sharedInstance] editIngredient:newIngr];
-                                                  }];
-
+                                                  }
+                                                 andCancelBlock:nil];
     }
     else
     {
-        CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be either the ingredient to edit or the rightBarButtonItem.");
+        CSAssertFail(@"edit_ingredient_sender", @"The sender of the editIngredient: message should be rightBarButtonItem.");
     }
         
+    [self.navigationController pushViewController:editVC animated:YES];
+}
+
+- (void)editIngredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)ingrIndex
+{
+    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyDataForTableView:self.tableView] ingredientGroupAtIndex:groupIndex];
+    CSIngredient *ingrToEdit = [selectedIngredientGroup ingredientAtIndex:ingrIndex];
+    
+    __block NSString* oldIngrName = ingrToEdit.name;
+    __block float oldIngrDensity = ingrToEdit.density;
+    CSEditIngredientVC* editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingrToEdit
+                                              withDoneBlock:^(CSIngredient* newIngr){
+                                                  [[CSIngredients sharedInstance] editIngredient:newIngr];
+                                              }
+                                             andCancelBlock:^(void){
+                                                 CSIngredient* oldIngr = [[CSIngredient alloc] initWithName:oldIngrName andDensity:oldIngrDensity];
+                                                 [[CSIngredients sharedInstance] replaceIngredientAtGroupIndex:groupIndex andIngredientIndex:ingrIndex withIngredient:oldIngr];
+                                             }];
+    
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
@@ -242,6 +249,11 @@ static NSString* CellIdentifier = @"Cell";
 
 #pragma mark - notification responders
 - (void)newIngredientAdded:(NSNotification*)notificationObj
+{
+    [self.tableView reloadData];
+}
+
+- (void)ingredientModified:(NSNotification*)notificationObj
 {
     [self.tableView reloadData];
 }

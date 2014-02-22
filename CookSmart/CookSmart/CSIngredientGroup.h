@@ -19,6 +19,7 @@
 
 - (void)deleteIngredient:(CSIngredient *)ingredient;
 - (void)addIngredient:(CSIngredient*)ingredient;
+- (void)replaceIngredientAtIndex:(NSUInteger)index withIngredient:(CSIngredient*)ingredient;
 - (NSDictionary *)dictionary;
 
 @property (nonatomic, readonly) NSString *name;

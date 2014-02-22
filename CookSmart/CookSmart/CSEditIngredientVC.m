@@ -16,12 +16,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *ingredientNameField;
 @property (nonatomic, strong) CSIngredient* ingredient;
 
-@property (nonatomic, copy) BlockType doneBlock;
+@property (nonatomic, copy) void (^doneBlock) (CSIngredient* newIngr);
+@property (nonatomic, copy) void (^cancelBlock) (void);
 @end
 
 @implementation CSEditIngredientVC
 
-- (id)initWithIngredient:(CSIngredient*)ingr withDoneBlock:(BlockType)done
+- (id)initWithIngredient:(CSIngredient*)ingr withDoneBlock:(void (^)(CSIngredient*))done andCancelBlock:(void (^)(void))cancel
 {
     self = [super init];
     if (self)
@@ -32,6 +33,7 @@
             self.ingredient = [[CSIngredient alloc] initWithName:@"" andDensity:150];
         
         self.doneBlock = done;
+        self.cancelBlock = cancel;
     }
     return self;
 }
@@ -102,6 +104,9 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
     logUserAction(@"ingredient_edit_cancelled", [self analyticsDictionary]);
+    
+    if (self.cancelBlock != nil)
+        self.cancelBlock();
 }
 
 - (void)done:(id)sender
