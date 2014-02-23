@@ -154,7 +154,7 @@ static inline NSDictionary *commonAttributes()
              @"user_locale" : [[NSLocale currentLocale] localeIdentifier],
              @"user_timezone" : userTimeZone(),
              @"user_language" : currentLanguage(),
-             @"app_version" : [NSString stringWithFormat:@"%@.%@",
+             @"app_version" : [NSString stringWithFormat:@"%@:%@",
                                [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
                                [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]],
              @"platform" : @"iOS",
