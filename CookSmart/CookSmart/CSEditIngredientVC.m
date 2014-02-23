@@ -59,12 +59,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
+    self.ingredientNameField.translatesAutoresizingMaskIntoConstraints = NO;
     self.ingredientNameField.text = self.ingredient.name;
-    self.scaleVC.delegate = self;
-    [self.view addSubview:self.scaleVC.view];
     
+    [self addChildViewController:self.scaleVC];
+    self.scaleVC.delegate = self;
     self.scaleVC.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.scaleVC.view];
+    self.scaleVC.syncsScales = NO;
     
     NSLayoutConstraint* bottom = [NSLayoutConstraint constraintWithItem:self.scaleVC.view
                                                               attribute:NSLayoutAttributeBottom
@@ -95,8 +99,6 @@
                                                           multiplier:1.0
                                                             constant:10];
     [self.view addConstraints:@[bottom, left, right, top]];
-    
-    self.scaleVC.syncsScales = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }

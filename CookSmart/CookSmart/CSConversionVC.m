@@ -72,8 +72,8 @@ static CSConversionVC *sharedConversionVC = nil;
     [super viewDidLoad];
     self.ingredientPickerScrollView.scrollsToTop = NO;
     
+    [self addChildViewController:self.scaleVC];
     [self.view addSubview:self.scaleVC.view];
-    
     self.scaleVC.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSLayoutConstraint* bottom = [NSLayoutConstraint constraintWithItem:self.scaleVC.view
@@ -185,7 +185,6 @@ static inline UILabel *createIngredientLabel()
     self.ingredientIndex = index;
     [self refreshIngredientGroupUI];
     [self refreshButtons];
-    
     [self refreshScalesWithCurrentIngredient];
 }
 

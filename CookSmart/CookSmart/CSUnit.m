@@ -32,4 +32,10 @@
     return nil;
 }
 
++ (NSUInteger)numUnits
+{
+    CSAssertFail(@"unit_abstract_num_units", @"Must implement + (NSUInteger)numUnits inside your CSUnit subclass.");
+    return 0;
+}
+
 @end

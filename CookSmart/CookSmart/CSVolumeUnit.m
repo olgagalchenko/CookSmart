@@ -60,4 +60,10 @@ static NSString* kTeaspoons = @"Teaspoons";
     }
     return unitName;
 }
+
++ (NSUInteger)numUnits
+{
+    return 3;
+}
+
 @end

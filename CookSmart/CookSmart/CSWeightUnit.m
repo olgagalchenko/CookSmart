@@ -61,4 +61,10 @@ static NSString* kOunces = @"Ounces";
     
     return unitName;
 }
+
++ (NSUInteger)numUnits
+{
+    return 3;
+}
+
 @end

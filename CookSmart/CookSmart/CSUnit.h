@@ -13,6 +13,7 @@
 - (id)initWithName:(NSString*)name;
 - (id)initWithIndex:(NSInteger)index;
 + (NSString*)nameWithIndex:(NSInteger)index;
++ (NSUInteger)numUnits;
 @property (nonatomic, strong) NSString* name;
 @property (assign) float conversionFactor;
 @end
