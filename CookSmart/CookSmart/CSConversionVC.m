@@ -24,10 +24,7 @@
 
 @property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
-@property (weak, nonatomic) IBOutlet UIScrollView *ingredientPickerScrollView;
-@property (weak, nonatomic) IBOutlet UIButton *ingredientGroupNameButton;
-@property (weak, nonatomic) IBOutlet UIButton *prevButton;
-@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *ingredientNameButton;
 
 @property (strong, nonatomic) IBOutlet CSScaleVC* scaleVC;
 
@@ -70,12 +67,11 @@ static CSConversionVC *sharedConversionVC = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.ingredientPickerScrollView.scrollsToTop = NO;
     
     [self addChildViewController:self.scaleVC];
     [self.view addSubview:self.scaleVC.view];
     self.scaleVC.view.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    self.scaleVC.delegate = self;
     NSLayoutConstraint* bottom = [NSLayoutConstraint constraintWithItem:self.scaleVC.view
                                                               attribute:NSLayoutAttributeBottom
                                                               relatedBy:NSLayoutRelationEqual
@@ -100,7 +96,7 @@ static CSConversionVC *sharedConversionVC = nil;
     NSLayoutConstraint* top = [NSLayoutConstraint constraintWithItem:self.scaleVC.view
                                                            attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
-                                                              toItem:self.ingredientPickerScrollView
+                                                              toItem:self.ingredientNameButton
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:10];
@@ -125,42 +121,9 @@ static inline UILabel *createIngredientLabel()
     return label;
 }
 
-- (NSString *)nameForIngredientAtXOrigin:(CGFloat)xOrigin
+- (void)refreshIngredientNameUI
 {
-    NSUInteger indexOfIngredient = (NSUInteger) (xOrigin/self.ingredientPickerScrollView.bounds.size.width);
-    NSString *nameOfIngredient = nil;
-    if (indexOfIngredient < [self.ingredientGroup countOfIngredients])
-    {
-        nameOfIngredient = [[self.ingredientGroup ingredientAtIndex:indexOfIngredient] name];
-    }
-    return nameOfIngredient;
-}
-
-- (void)refreshIngredientGroupUI
-{
-    [self.ingredientGroupNameButton setTitle:[self.ingredientGroup name] forState:UIControlStateNormal];
-    self.ingredientPickerScrollView.contentSize = CGSizeMake(self.ingredientPickerScrollView.bounds.size.width*[self.ingredientGroup countOfIngredients], self.ingredientPickerScrollView.bounds.size.height);
-    for (UIView *subview in self.ingredientPickerScrollView.subviews)
-    {
-        [subview removeFromSuperview];
-    }
-    CGFloat initialXOffset = self.ingredientPickerScrollView.bounds.size.width*self.ingredientIndex;
-    for (CGFloat x = initialXOffset; x <= initialXOffset + 2*self.ingredientPickerScrollView.bounds.size.width; x += self.ingredientPickerScrollView.bounds.size.width)
-    {
-        UILabel *label = createIngredientLabel();
-        label.frame = CGRectMake(x, 0, self.ingredientPickerScrollView.bounds.size.width, self.ingredientPickerScrollView.bounds.size.height);
-        label.text = [self nameForIngredientAtXOrigin:x];
-        [self.ingredientPickerScrollView addSubview:label];
-    }
-    self.ingredientPickerScrollView.contentOffset = CGPointMake(initialXOffset, 0);
-}
-
-
-
-- (void)refreshButtons
-{
-    [self.nextButton setEnabled:self.ingredientIndex < ([self.ingredientGroup countOfIngredients] - 1)];
-    [self.prevButton setEnabled:self.ingredientIndex > 0];
+    [self.ingredientNameButton setTitle:[self.ingredientGroup ingredientAtIndex:self.ingredientIndex].name forState:UIControlStateNormal];
 }
 
 - (void)refreshScalesWithCurrentIngredient
@@ -183,24 +146,8 @@ static inline UILabel *createIngredientLabel()
 {
     self.ingredientGroup = ingredientGroup;
     self.ingredientIndex = index;
-    [self refreshIngredientGroupUI];
-    [self refreshButtons];
+    [self refreshIngredientNameUI];
     [self refreshScalesWithCurrentIngredient];
-}
-
-- (IBAction)handlePreviousIngredientTap:(id)sender
-{
-    if (self.ingredientPickerScrollView.contentOffset.x >= self.ingredientPickerScrollView.bounds.size.width &&
-        remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width) == 0.0)
-        [self.ingredientPickerScrollView setContentOffset:CGPointMake(self.ingredientPickerScrollView.contentOffset.x - self.ingredientPickerScrollView.bounds.size.width, 0)
-                                             animated:YES];
-}
-
-- (IBAction)handleNextIngredientTap:(id)sender
-{
-    if (self.ingredientPickerScrollView.contentOffset.x < self.ingredientPickerScrollView.contentSize.width - self.ingredientPickerScrollView.bounds.size.width && remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width) == 0.0)
-        [self.ingredientPickerScrollView setContentOffset:CGPointMake(self.ingredientPickerScrollView.contentOffset.x + self.ingredientPickerScrollView.bounds.size.width, 0)
-                                             animated:YES];
 }
 
 - (IBAction)handleIngredientGroupTap:(id)sender
@@ -209,61 +156,6 @@ static inline UILabel *createIngredientLabel()
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
     [self presentViewController:nav animated:YES completion:nil];
 }
-
-#pragma mark - scroll view delegate methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-   if (scrollView == self.ingredientPickerScrollView)
-    {
-        CGFloat minVisibleX = self.ingredientPickerScrollView.contentOffset.x;
-        CGFloat maxVisibleX = minVisibleX + self.ingredientPickerScrollView.bounds.size.width;
-        NSUInteger numLabels = self.ingredientPickerScrollView.subviews.count;
-        CGFloat contentSize = self.ingredientPickerScrollView.contentSize.width;
-        for (UILabel *label in self.ingredientPickerScrollView.subviews)
-        {
-            if (label.frame.origin.x + label.bounds.size.width < minVisibleX &&
-                label.frame.origin.x + (numLabels + 1)*label.bounds.size.width <= contentSize &&
-                label.frame.origin.x + numLabels*label.bounds.size.width <= maxVisibleX)
-            {
-                label.frame = CGRectMake(label.frame.origin.x + numLabels*label.bounds.size.width, 0, label.frame.size.width, label.frame.size.height);
-                label.text = [self nameForIngredientAtXOrigin:label.frame.origin.x];
-            }
-            if (label.frame.origin.x > maxVisibleX &&
-                label.frame.origin.x - numLabels*label.bounds.size.width >= 0 &&
-                label.frame.origin.x + (1 - numLabels)*label.bounds.size.width >= minVisibleX)
-            {
-                label.frame = CGRectMake(label.frame.origin.x - numLabels*label.bounds.size.width, 0, label.frame.size.width, label.frame.size.height);
-                label.text = [self nameForIngredientAtXOrigin:label.frame.origin.x];
-            }
-        }
-        
-        CGFloat distanceToSnap = remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width);
-        CGFloat distanceToMiddle = (self.ingredientPickerScrollView.bounds.size.width/2) - fabs(distanceToSnap);
-        CGFloat scaleViewAlpha = distanceToMiddle/(self.ingredientPickerScrollView.bounds.size.width/2);
-        
-        self.scaleVC.view.alpha = scaleViewAlpha;
-        
-        if (distanceToMiddle < self.ingredientPickerScrollView.bounds.size.width/4 && (_previousIngredientPickerDistanceToSnap >= 0 ^ distanceToSnap >= 0))
-        {
-            // Let's reflect the change of ingredient on the scale
-            if (_previousIngredientPickerDistanceToSnap > 0)
-            {
-                self.ingredientIndex++;
-            }
-            else
-            {
-                self.ingredientIndex--;
-            }
-            logUserAction(@"ingredient_switch", [self analyticsAttributes]);
-            [self refreshScalesWithCurrentIngredient];
-            [self refreshButtons];
-        }
-        
-        _previousIngredientPickerDistanceToSnap = distanceToSnap;
-    }
-}
-
 
 #pragma mark - Notifications
 
@@ -282,6 +174,17 @@ static inline UILabel *createIngredientLabel()
     {
         [self selectIngredientGroup:nil ingredientIndex:0];
     }
+}
+
+#pragma mark - scaleVC delegate methods
+- (void)scaleVC:(CSScaleVC *)scaleVC didBeginChangingUnits:(BOOL)begin
+{
+    self.ingredientNameButton.enabled = NO;
+}
+
+- (void)scaleVC:(CSScaleVC *)scaleVC didFinishChangingUnits:(BOOL)begin
+{
+    self.ingredientNameButton.enabled = YES;
 }
 
 #pragma mark - Misc Helpers

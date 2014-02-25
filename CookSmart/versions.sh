@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 CURRENT_GIT_TAG=$(git describe --abbrev=0 --tags)
 COMMITS_SINCE_TAG=$(git rev-list $CURRENT_GIT_TAG..HEAD --count)
 CURRENT_HASH=$(git rev-parse --short HEAD)

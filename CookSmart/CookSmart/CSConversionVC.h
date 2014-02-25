@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "CSIngredientListVC.h"
 #import "CSScaleView.h"
+#import "CSScaleVC.h"
 
 @class CSIngredientGroup;
 
-@interface CSConversionVC : UIViewController <CSIngredientListVCDelegate, UIScrollViewDelegate>
+@interface CSConversionVC : UIViewController <CSIngredientListVCDelegate, CSScaleVCDelegate>
 
 - (id)initWithIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)ingredientIndex;
 

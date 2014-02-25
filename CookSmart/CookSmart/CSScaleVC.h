@@ -10,9 +10,10 @@
 
 @class CSScaleVC;
 @protocol CSScaleVCDelegate <NSObject>
-
+@optional
 - (void)scaleVC:(CSScaleVC *)scaleVC densityDidChange:(float)changedDensity;
-
+- (void)scaleVC:(CSScaleVC *)scaleVC didBeginChangingUnits:(BOOL)begin;
+- (void)scaleVC:(CSScaleVC *)scaleVC didFinishChangingUnits:(BOOL)finish;
 @end
 
 @class CSIngredient;

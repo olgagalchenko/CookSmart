@@ -428,7 +428,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PROJECT_DIR}/versions.sh";
+			shellScript = "\"${PROJECT_DIR}\"/versions.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 

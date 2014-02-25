@@ -113,6 +113,7 @@ typedef enum
     UIButton *unitChoiceDoneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     unitChoiceDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
     [unitChoiceDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    unitChoiceDoneButton.titleLabel.font = [UIFont systemFontOfSize:20];
     [unitLabelsContainer addSubview:unitChoiceDoneButton];
     [unitChoiceDoneButton addTarget:self action:@selector(commitUnitChoices:) forControlEvents:UIControlEventTouchUpInside];
     self.unitChoiceDoneButton = unitChoiceDoneButton;
@@ -346,12 +347,16 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 
 - (IBAction)handleUnitTouch:(id)sender
 {
+    [self.delegate scaleVC:self didBeginChangingUnits:YES];
+    
     logUserAction(@"begin_unit_change", [self analyticsAttributes]);
     [self animateToArrangement:CSScaleVCArrangementUnitChoice];
 }
 
 - (void)commitUnitChoices:(id)sender
 {
+    [self.delegate scaleVC:self didFinishChangingUnits:YES];
+    
     logUserAction(@"commit_unit_change", [self analyticsAttributes]);
     [self animateToArrangement:CSScaleVCArrangementScales];
 }
