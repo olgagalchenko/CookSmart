@@ -17,7 +17,7 @@
 #import "CSWeightUnit.h"
 #import "CSScaleVC.h"
 
-#define CHOOSE_UNITS_TEXT @"Select Units"
+#define CHOOSE_UNITS_TEXT @"Choose Units"
 
 @interface CSConversionVC ()
 {
