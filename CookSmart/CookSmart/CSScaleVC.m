@@ -26,12 +26,12 @@
 @property (weak, nonatomic) IBOutlet CSScaleView *weightScaleScrollView;
 @property (weak, nonatomic) IBOutlet UIView *scalesContainer;
 
+@property (weak, nonatomic) UIPickerView *unitsPickerView;
+
 @property (strong, nonatomic) CSWeightUnit* currentWeightUnit;
 @property (strong, nonatomic) CSVolumeUnit* currentVolumeUnit;
 
 @property (weak, nonatomic) UIView *unitLabelsContainer;
-@property (strong, nonatomic) NSArray *weightUnitLabels;
-@property (strong, nonatomic) NSArray *volumeUnitLabels;
 @property (weak, nonatomic) UIButton *unitChoiceDoneButton;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
@@ -100,8 +100,13 @@ typedef enum
                                                             multiplier:1.0
                                                               constant:0];
     
-    self.weightUnitLabels = addUnitLabels([CSWeightUnit class], unitLabelsContainer, self, @selector(handleWeightUnitChange:));
-    self.volumeUnitLabels = addUnitLabels([CSVolumeUnit class], unitLabelsContainer, self, @selector(handleVolumeUnitChange:));
+    UIPickerView *unitsPickerView = [[UIPickerView alloc] init];
+    unitsPickerView.translatesAutoresizingMaskIntoConstraints = NO;
+    unitsPickerView.delegate = self;
+    unitsPickerView.dataSource = self;
+    [unitLabelsContainer addSubview:unitsPickerView];
+    self.unitsPickerView = unitsPickerView;
+    
     
     UIButton *unitChoiceDoneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     unitChoiceDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -379,17 +384,12 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     {
         CSAssertFail(@"invalid_scale_vc_arrangement", @"Invalid scale VC arrangement: %d", arrangement);
     }
-    [self refreshUnitBackgroundColors];
 }
 
 - (void)handleWeightUnitChange:(UITapGestureRecognizer *)tapRecognizer
 {
     UILabel *weightUnitLabel = (UILabel *)tapRecognizer.view;
     self.currentWeightUnit = [[CSWeightUnit alloc] initWithName:weightUnitLabel.text];
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^
-     {
-         [self refreshUnitBackgroundColors];
-     }];
     [self refreshScalesUI];
     logUserAction(@"weight_unit_change", [self analyticsAttributes]);
 }
@@ -398,35 +398,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 {
     UILabel *volumeUnitLabel = (UILabel *)tapRecognizer.view;
     self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithName:volumeUnitLabel.text];
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^
-    {
-        [self refreshUnitBackgroundColors];
-    }];
     [self refreshScalesUI];
     logUserAction(@"volume_unit_change", [self analyticsAttributes]);
-}
-
-- (void)refreshUnitBackgroundColors
-{
-    refreshUnitLabels(self.weightUnitLabels, self.currentWeightUnit.name);
-    refreshUnitLabels(self.volumeUnitLabels, self.currentVolumeUnit.name);
-}
-
-static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitName)
-{
-    for (UILabel *unitLabel in unitLabels)
-    {
-        if ([unitLabel.text isEqualToString:currentUnitName])
-        {
-            unitLabel.layer.backgroundColor = [[UIColor blackColor] CGColor];
-            unitLabel.textColor = [UIColor whiteColor];
-        }
-        else
-        {
-            unitLabel.layer.backgroundColor = [[UIColor clearColor] CGColor];
-            unitLabel.textColor = [UIColor blackColor];
-        }
-    }
 }
 
 - (void)setConstraintsForArrangement:(CSScaleVCArrangement)arrangement
@@ -499,8 +472,39 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
     
     CGFloat constantVerticalOffset =    self.volumeUnitButton.bounds.size.height/2 // For the volume unit buttons at the top
                                         - UNIT_LABEL_HEIGHT/2 - UNIT_VERTICAL_PADDING/2; // For the done button at the bottom
-    setConstraintsForUnitLabelColumn(self.volumeUnitLabels, arrangement, 0.5, constantVerticalOffset);
-    setConstraintsForUnitLabelColumn(self.weightUnitLabels, arrangement, 1.5, constantVerticalOffset);
+    NSLayoutConstraint *pickerViewLeft = [NSLayoutConstraint constraintWithItem:self.unitsPickerView
+                                                            attribute:NSLayoutAttributeLeft
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self.unitLabelsContainer
+                                                            attribute:NSLayoutAttributeLeft
+                                                           multiplier:1.0
+                                                             constant:0.0];
+    NSLayoutConstraint *pickerViewYOriginFix = [NSLayoutConstraint constraintWithItem:self.unitsPickerView
+                                                                            attribute:NSLayoutAttributeTop
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.unitLabelsContainer
+                                                                            attribute:NSLayoutAttributeTop
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
+    if (arrangement == CSScaleVCArrangementUnitChoice)
+    {
+        pickerViewYOriginFix = [NSLayoutConstraint constraintWithItem:self.unitsPickerView
+                                                            attribute:NSLayoutAttributeCenterY
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self.unitLabelsContainer
+                                                            attribute:NSLayoutAttributeCenterY
+                                                           multiplier:1.0
+                                                             constant:constantVerticalOffset];
+    }
+    NSLayoutConstraint *pickerViewWidth = [NSLayoutConstraint constraintWithItem:self.unitsPickerView
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.unitLabelsContainer
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                     multiplier:1.0
+                                                                       constant:0.0];
+    // The pickerViewHeight is fixed
+    [self.unitLabelsContainer addConstraints:@[pickerViewLeft, pickerViewWidth, pickerViewYOriginFix]];
 
     NSLayoutConstraint *yOriginFix = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
                                                                   attribute:NSLayoutAttributeTop
@@ -541,79 +545,41 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
                                                                        multiplier:0
                                                                          constant:UNIT_LABEL_HEIGHT];
     [self.unitLabelsContainer addConstraints:@[yOriginFix, doneButtonHeight, doneButtonXCenter, doneButtonWidth]];
-    
 }
 
-static inline NSArray *addUnitLabels(Class class, UIView *superview, id delegate, SEL delegateSelector)
-{
-    NSMutableArray *labels = [NSMutableArray arrayWithCapacity:[class numUnits]];
-    for (NSUInteger i = 0; i < [class numUnits]; i++)
-    {
-        UILabel *unitLabel = [[UILabel alloc] init];
+#pragma mark - UIPickerViewDataSource and Delegate
 
-        unitLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        unitLabel.text = [class nameWithIndex:i];
-        unitLabel.textAlignment = NSTextAlignmentCenter;
-        unitLabel.font = [UIFont systemFontOfSize:15.0];
-        unitLabel.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:delegate action:delegateSelector];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        [unitLabel addGestureRecognizer:tapGestureRecognizer];
-        [labels addObject:unitLabel];
-        [superview addSubview:unitLabel];
-    }
-    return [NSArray arrayWithArray:labels];
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2; // one for volume, one for weight
 }
 
-static inline void setConstraintsForUnitLabelColumn(NSArray *unitLabels, CSScaleVCArrangement arrangement, CGFloat xCenterMultiplier, CGFloat constantVerticalOffset)
+static inline Class unitClassForPickerViewComponent(NSInteger component)
 {
-    __weak UILabel *prevLabel = nil;
-    CGFloat centerConstantIncrement = UNIT_LABEL_SPREAD/(unitLabels.count - 1);
-    CGFloat constant = -centerConstantIncrement*(unitLabels.count/2) + constantVerticalOffset;
-    for (int i = 0; i < unitLabels.count; i++, constant += centerConstantIncrement)
+    Class unitClass = nil;
+    switch (component)
     {
-        UILabel *label = unitLabels[i];
-        NSLayoutConstraint *unitTop = [NSLayoutConstraint constraintWithItem:label
-                                                                   attribute:NSLayoutAttributeTop
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:label.superview
-                                                                   attribute:NSLayoutAttributeTop
-                                                                  multiplier:1.0
-                                                                    constant:0];
-        if (arrangement == CSScaleVCArrangementUnitChoice)
-        {
-            unitTop = [NSLayoutConstraint constraintWithItem:label
-                                                   attribute:NSLayoutAttributeCenterY
-                                                   relatedBy:NSLayoutRelationEqual
-                                                      toItem:label.superview
-                                                   attribute:NSLayoutAttributeCenterY
-                                                  multiplier:1.0
-                                                    constant:constant];
-        }
-        NSLayoutConstraint *unitXCenter = [NSLayoutConstraint constraintWithItem:label
-                                                                       attribute:NSLayoutAttributeCenterX
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:label.superview
-                                                                       attribute:NSLayoutAttributeCenterX
-                                                                      multiplier:xCenterMultiplier
-                                                                        constant:0];
-        NSLayoutConstraint *unitWidth = [NSLayoutConstraint constraintWithItem:label
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:label.superview
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                    multiplier:0.33
-                                                                      constant:0];
-        NSLayoutConstraint *unitHeight = [NSLayoutConstraint constraintWithItem:label
-                                                                      attribute:NSLayoutAttributeHeight
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:0
-                                                                       constant:UNIT_LABEL_HEIGHT];
-        [label.superview addConstraints:@[unitTop, unitXCenter, unitWidth, unitHeight]];
-        prevLabel = label;
+        case 0:
+            unitClass = [CSVolumeUnit class];
+            break;
+        case 1:
+            unitClass = [CSWeightUnit class];
+            break;
+        default:
+            CSAssertFail(@"pickerview_wrong_component", @"The units pickerview should only have two components, but we are being asked about component %d", component);
+            break;
     }
+    return unitClass;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [unitClassForPickerViewComponent(component) numUnits];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [unitClassForPickerViewComponent(component) nameWithIndex:row];
 }
 
 #pragma mark - Misc Helpers
