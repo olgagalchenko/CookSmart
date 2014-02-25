@@ -17,6 +17,8 @@
 #import "CSWeightUnit.h"
 #import "CSScaleVC.h"
 
+#define CHOOSE_UNITS_TEXT @"Select Units"
+
 @interface CSConversionVC ()
 {
     CGFloat _previousIngredientPickerDistanceToSnap;
@@ -177,14 +179,18 @@ static inline UILabel *createIngredientLabel()
 }
 
 #pragma mark - scaleVC delegate methods
-- (void)scaleVC:(CSScaleVC *)scaleVC didBeginChangingUnits:(BOOL)begin
+- (void)scaleVCDidBeginChangingUnits:(CSScaleVC*)scaleVC
 {
     self.ingredientNameButton.enabled = NO;
+    
+    [self.ingredientNameButton setTitle:CHOOSE_UNITS_TEXT forState:UIControlStateNormal];
 }
 
-- (void)scaleVC:(CSScaleVC *)scaleVC didFinishChangingUnits:(BOOL)begin
+- (void)scaleVCDidFinishChangingUnits:(CSScaleVC *)scaleVC
 {
     self.ingredientNameButton.enabled = YES;
+    
+    [self refreshIngredientNameUI];
 }
 
 #pragma mark - Misc Helpers

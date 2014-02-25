@@ -12,7 +12,7 @@
 #import "CSWeightUnit.h"
 #import "CSVolumeUnit.h"
 
-#define UNIT_LABEL_HEIGHT           20
+#define UNIT_LABEL_HEIGHT           44
 #define UNIT_LABEL_VERTICAL_MARGIN  10
 
 @interface CSScaleVC ()
@@ -347,7 +347,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 
 - (IBAction)handleUnitTouch:(id)sender
 {
-    [self.delegate scaleVC:self didBeginChangingUnits:YES];
+    if ([self.delegate respondsToSelector:@selector(scaleVCDidBeginChangingUnits:)])
+        [self.delegate scaleVCDidBeginChangingUnits:self];
     
     logUserAction(@"begin_unit_change", [self analyticsAttributes]);
     [self animateToArrangement:CSScaleVCArrangementUnitChoice];
@@ -355,7 +356,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 
 - (void)commitUnitChoices:(id)sender
 {
-    [self.delegate scaleVC:self didFinishChangingUnits:YES];
+    if ([self.delegate respondsToSelector:@selector(scaleVCDidFinishChangingUnits:)])
+        [self.delegate scaleVCDidFinishChangingUnits:self];
     
     logUserAction(@"commit_unit_change", [self analyticsAttributes]);
     [self animateToArrangement:CSScaleVCArrangementScales];
@@ -638,7 +640,8 @@ static inline CGFloat setConstraintsForUnitLabelColumn(NSArray *unitLabels, CSSc
     if (!self.syncsScales && self.delegate)
     {
         float currentDensity = ([self.weightScaleScrollView getCenterValue]/self.currentWeightUnit.conversionFactor)/([self.volumeScaleScrollView getCenterValue]/self.currentVolumeUnit.conversionFactor);
-        [self.delegate scaleVC:self densityDidChange:currentDensity];
+        if ([self.delegate respondsToSelector:@selector(scaleVC:densityDidChange:)])
+            [self.delegate scaleVC:self densityDidChange:currentDensity];
     }
 }
 
