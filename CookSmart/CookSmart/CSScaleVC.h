@@ -18,7 +18,7 @@
 
 @class CSIngredient;
 
-@interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) CSIngredient*         ingredient;
 @property (assign, nonatomic) BOOL                  syncsScales;
