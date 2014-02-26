@@ -251,6 +251,9 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
+				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
+				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
+				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
@@ -261,9 +264,6 @@
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
 				9368096E1891059700655B89 /* CSIngredientListVC.h */,
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
-				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
-				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
-				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);

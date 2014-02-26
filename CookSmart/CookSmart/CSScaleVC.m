@@ -167,22 +167,24 @@ typedef enum
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
                                                                    scale:humanReadableWeightScale
                                                                   mirror:YES];
-    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
-    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
-    
-    self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
-    self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
+    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES force:YES];
+    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES force:YES];
 }
 
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self synchronizeVolumeAndWeight:scrollView cancelDeceleration:NO];
+    if (scrollView == self.weightScaleScrollView)
+    {
+        self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
+    }
+    else if (scrollView == self.volumeScaleScrollView)
+    {
+        self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
+    }
     
-    self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
-    self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
-    
+    [self synchronizeVolumeAndWeight:scrollView cancelDeceleration:NO force:NO];
     [self informDelegateOfDensityChangeIfNecessary];
 }
 
@@ -198,8 +200,8 @@ typedef enum
 {
     // This is only called for one of the scale views, because other scrollviews have scrollsToTop = NO;
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
-        [self.weightScaleScrollView setCenterValue:0 cancelDeceleration:YES];
-        [self.volumeScaleScrollView setCenterValue:0 cancelDeceleration:YES];
+        [self setCenterValue:0 forScaleView:self.weightScaleScrollView cancelDeceleration:YES];
+        [self setCenterValue:0 forScaleView:self.volumeScaleScrollView cancelDeceleration:YES];
     } completion:^(BOOL finished) {
         logUserAction(@"scroll_to_top", [self analyticsAttributes]);
     }];
@@ -213,8 +215,8 @@ typedef enum
 
 - (void)scaleViewTapped:(CSScaleView *)scaleView
 {
-    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES];
-    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES];
+    [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES force:NO];
+    [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES force:NO];
 }
 
 - (void)snapToHumanReadableValueOfScaleView:(CSScaleView *)scaleView
@@ -223,10 +225,8 @@ typedef enum
     humanReadableValue([scaleView getCenterValue], &humanReadableFloat);
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
         self.isSnapping = YES;
-        [scaleView setCenterValue:humanReadableFloat cancelDeceleration:YES];
-        [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES];
-        self.volumeLabel.text = humanReadableValue([self.volumeScaleScrollView getCenterValue], nil);
-        self.weightLabel.text = humanReadableValue([self.weightScaleScrollView getCenterValue], nil);
+        [self setCenterValue:humanReadableFloat forScaleView:scaleView cancelDeceleration:YES];
+        [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES force:NO];
     } completion:^(BOOL finished) {
         self.isSnapping = NO;
         NSString *valueSnapEventName = @"value_snap_unknown";
@@ -243,23 +243,38 @@ typedef enum
     }];
 }
 
-- (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration
+- (void)synchronizeVolumeAndWeight:(UIScrollView *)sourceOfTruth cancelDeceleration:(BOOL)cancelDeceleration force:(BOOL)force
 {
-    if (self.syncsScales)
+    if (self.syncsScales || force)
     {
         float trueDensity = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
         if (sourceOfTruth == self.volumeScaleScrollView)
         {
             float volumeValue = [self.volumeScaleScrollView getCenterValue];
-            [self.weightScaleScrollView setCenterValue:volumeValue*trueDensity
-                                    cancelDeceleration:cancelDeceleration];
+            [self setCenterValue:volumeValue*trueDensity
+                    forScaleView:self.weightScaleScrollView
+              cancelDeceleration:cancelDeceleration];
         }
         else if (sourceOfTruth == self.weightScaleScrollView)
         {
             float weightValue = [self.weightScaleScrollView getCenterValue];
-            [self.volumeScaleScrollView setCenterValue:weightValue/trueDensity
-                                    cancelDeceleration:cancelDeceleration];
+            [self setCenterValue:weightValue/trueDensity
+                    forScaleView:self.volumeScaleScrollView
+              cancelDeceleration:cancelDeceleration];
         }
+    }
+}
+
+- (void)setCenterValue:(float)newCenterValue forScaleView:(CSScaleView *)scaleView cancelDeceleration:(BOOL)cancelDeceleration
+{
+    [scaleView setCenterValue:newCenterValue cancelDeceleration:cancelDeceleration];
+    if (scaleView == self.volumeScaleScrollView)
+    {
+        self.volumeLabel.text = humanReadableValue(newCenterValue, nil);
+    }
+    else if (scaleView == self.weightScaleScrollView)
+    {
+        self.weightLabel.text = humanReadableValue(newCenterValue, nil);
     }
 }
 
