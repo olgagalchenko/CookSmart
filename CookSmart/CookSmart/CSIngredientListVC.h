@@ -20,7 +20,7 @@
 @protocol CSIngredientListVCDelegate <NSObject>
 
 - (void)ingredientListVC:(CSIngredientListVC *)listVC
- selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup
+ selectedIngredientGroup:(NSUInteger)ingredientGroupIndex
          ingredientIndex:(NSUInteger)index;
 
 @end

@@ -106,7 +106,7 @@ typedef enum
     UIButton *unitChoiceDoneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     unitChoiceDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
     [unitChoiceDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    unitChoiceDoneButton.titleLabel.font = [UIFont systemFontOfSize:20];
+    unitChoiceDoneButton.titleLabel.font = [UIFont systemFontOfSize:MAJOR_BUTTON_FONT_SIZE];
     [unitLabelsContainer addSubview:unitChoiceDoneButton];
     [unitChoiceDoneButton addTarget:self action:@selector(commitUnitChoices:) forControlEvents:UIControlEventTouchUpInside];
     self.unitChoiceDoneButton = unitChoiceDoneButton;
@@ -653,6 +653,11 @@ static inline void setConstraintsForUnitLabelColumn(NSArray *unitLabels, CSScale
         if ([self.delegate respondsToSelector:@selector(scaleVC:densityDidChange:)])
             [self.delegate scaleVC:self densityDidChange:currentDensity];
     }
+}
+
+- (void)setScalesAlpha:(CGFloat)newScaleViewAlpha
+{
+    self.scalesContainer.alpha = newScaleViewAlpha;
 }
 
 @end

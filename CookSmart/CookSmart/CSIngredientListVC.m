@@ -121,7 +121,7 @@ static NSString* CellIdentifier = @"Cell";
         selectedIngredientGroup = [selectedIngredientGroup performSelector:@selector(originalIngredientGroup) withObject:nil];
     }
     [self.delegate ingredientListVC:self
-            selectedIngredientGroup:selectedIngredientGroup
+            selectedIngredientGroup:[[CSIngredients sharedInstance] indexOfIngredientGroup:selectedIngredientGroup]
                     ingredientIndex:[selectedIngredientGroup indexOfIngredient:selectedIngredient]];
     
     [self closeIngrList:nil];

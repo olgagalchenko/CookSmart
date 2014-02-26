@@ -24,9 +24,8 @@
     CGFloat _previousIngredientPickerDistanceToSnap;
 }
 
-@property (nonatomic, readwrite, strong) CSIngredientGroup *ingredientGroup;
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
-@property (weak, nonatomic) IBOutlet UIButton *ingredientNameButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *ingredientPickerScrollView;
 
 @property (strong, nonatomic) IBOutlet CSScaleVC* scaleVC;
 
@@ -34,16 +33,12 @@
 
 @implementation CSConversionVC
 
-static CSConversionVC *sharedConversionVC = nil;
-
-- (id)initWithIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)ingredientIndex
+- (id)initWithIngredientGroupIndex:(NSUInteger)ingredientGroupIndex ingredientIndex:(NSUInteger)ingredientIndex
 {
     self = [super initWithNibName:@"CSConversionVC" bundle:nil];
     if (self)
     {
-        self.ingredientGroup = ingredientGroup;
-        self.ingredientIndex = ingredientIndex;
-        sharedConversionVC = self;
+        self.ingredientIndex = [[CSIngredients sharedInstance] flattenedIngredientIndexForGroupIndex:ingredientGroupIndex ingredientIndex:ingredientIndex];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(ingredientDeleted:)
@@ -63,7 +58,7 @@ static CSConversionVC *sharedConversionVC = nil;
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self selectIngredientGroup:self.ingredientGroup ingredientIndex:self.ingredientIndex];
+    [self selectIngredientAtIndex:self.ingredientIndex];
 }
 
 - (void)viewDidLoad
@@ -98,7 +93,7 @@ static CSConversionVC *sharedConversionVC = nil;
     NSLayoutConstraint* top = [NSLayoutConstraint constraintWithItem:self.scaleVC.view
                                                            attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
-                                                              toItem:self.ingredientNameButton
+                                                              toItem:self.ingredientPickerScrollView
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:10];
@@ -108,55 +103,122 @@ static CSConversionVC *sharedConversionVC = nil;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    logViewChange(@"conversion", [self analyticsAttributes]);
+    logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
 }
 
-#pragma mark -
+#pragma mark - Ingredient Picker
 
-static inline UILabel *createIngredientLabel()
+- (NSString *)nameForIngredientAtXOrigin:(CGFloat)xOrigin
 {
-    UILabel *label = [[UILabel alloc] init];
-    label.backgroundColor = BACKGROUND_COLOR;
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:17.0];
-    label.textColor = [UIColor darkTextColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    return label;
+    NSUInteger indexOfIngredient = (NSUInteger) (xOrigin/self.ingredientPickerScrollView.bounds.size.width);
+    NSString *nameOfIngredient = nil;
+    if (indexOfIngredient < [[CSIngredients sharedInstance] flattenedCountOfIngredients])
+    {
+        nameOfIngredient = [[[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:indexOfIngredient] name];
+    }
+    return nameOfIngredient;
 }
 
 - (void)refreshIngredientNameUI
 {
-    [self.ingredientNameButton setTitle:[self.ingredientGroup ingredientAtIndex:self.ingredientIndex].name forState:UIControlStateNormal];
+    self.ingredientPickerScrollView.contentSize = CGSizeMake(self.ingredientPickerScrollView.bounds.size.width*[[CSIngredients sharedInstance] flattenedCountOfIngredients],
+                                                             self.ingredientPickerScrollView.bounds.size.height);
+    for (UIView *subview in self.ingredientPickerScrollView.subviews)
+    {
+        [subview removeFromSuperview];
+    }
+    CGFloat initialXOffset = self.ingredientPickerScrollView.bounds.size.width*self.ingredientIndex;
+    for (CGFloat xOrigin = initialXOffset; xOrigin <= initialXOffset + 2*self.ingredientPickerScrollView.bounds.size.width; xOrigin += self.ingredientPickerScrollView.bounds.size.width)
+    {
+        UIButton *ingredientButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        ingredientButton.frame = CGRectMake(xOrigin, 0, self.ingredientPickerScrollView.bounds.size.width, self.ingredientPickerScrollView.bounds.size.height);
+        [ingredientButton setTitle:[self nameForIngredientAtXOrigin:xOrigin] forState:UIControlStateNormal];
+        ingredientButton.titleLabel.font = [UIFont systemFontOfSize:MAJOR_BUTTON_FONT_SIZE];
+        [ingredientButton addTarget:self action:@selector(handleIngredientTap:) forControlEvents:UIControlEventTouchUpInside];
+        [self.ingredientPickerScrollView addSubview:ingredientButton];
+    }
+    self.ingredientPickerScrollView.contentOffset = CGPointMake(initialXOffset, 0);
 }
 
-- (void)refreshScalesWithCurrentIngredient
+- (void)handleIngredientTap:(id)sender
 {
-    self.scaleVC.ingredient = [self.ingredientGroup ingredientAtIndex:self.ingredientIndex];
+    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    CSAssert(scrollView == self.ingredientPickerScrollView, @"conversion_vc_wrong_scrollview_delegate",
+             @"CSConversionVC doesn't expect to be delegate of a scrollview other than its ingredientPickerScrollView");
+    CGFloat minVisibleX = self.ingredientPickerScrollView.contentOffset.x;
+    CGFloat maxVisibleX = minVisibleX + self.ingredientPickerScrollView.bounds.size.width;
+    NSUInteger numSubviews = self.ingredientPickerScrollView.subviews.count;
+    CGFloat contentSize = self.ingredientPickerScrollView.contentSize.width;
+    for (UIButton *button in self.ingredientPickerScrollView.subviews)
+    {
+        if (button.frame.origin.x + button.bounds.size.width < minVisibleX &&
+            button.frame.origin.x + (numSubviews + 1)*button.bounds.size.width <= contentSize &&
+            button.frame.origin.x + numSubviews*button.bounds.size.width)
+        {
+            button.frame = CGRectMake(button.frame.origin.x + numSubviews*button.bounds.size.width, 0, button.frame.size.width, button.frame.size.height);
+            [button setTitle:[self nameForIngredientAtXOrigin:button.frame.origin.x] forState:UIControlStateNormal];
+        }
+        if (button.frame.origin.x > maxVisibleX &&
+            button.frame.origin.x - numSubviews*button.bounds.size.width >= 0 &&
+            button.frame.origin.x + (1 - numSubviews)*button.bounds.size.width >= minVisibleX)
+        {
+            button.frame = CGRectMake(button.frame.origin.x - numSubviews*button.bounds.size.width, 0, button.frame.size.width, button.frame.size.height);
+            [button setTitle:[self nameForIngredientAtXOrigin:button.frame.origin.x] forState:UIControlStateNormal];
+        }
+    }
+    
+    CGFloat distanceToSnap = remainder(self.ingredientPickerScrollView.contentOffset.x, self.ingredientPickerScrollView.bounds.size.width);
+    CGFloat distanceToMiddle = (self.ingredientPickerScrollView.bounds.size.width/2) - fabs(distanceToSnap);
+    CGFloat scaleViewAlpha = distanceToMiddle/(self.ingredientPickerScrollView.bounds.size.width/2);
+    [self.scaleVC setScalesAlpha:scaleViewAlpha];
+    
+    if (distanceToMiddle < self.ingredientPickerScrollView.bounds.size.width/4 && (_previousIngredientPickerDistanceToSnap >= 0 ^ distanceToSnap >= 0))
+    {
+        // Reflect the chagne of ingredient on the scale
+        if (_previousIngredientPickerDistanceToSnap > 0)
+        {
+            self.ingredientIndex++;
+        }
+        else
+        {
+            self.ingredientIndex--;
+        }
+        [self refreshScalesWithCurrentIngredient];
+        logUserAction(@"ingredient_switch", [self.scaleVC analyticsAttributes]);
+    }
+    _previousIngredientPickerDistanceToSnap = distanceToSnap;
+}
+
+#pragma mark - CSIngredientListVCDelegate
+
+- (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(NSUInteger)ingredientGroupIndex ingredientIndex:(NSUInteger)index
+{
+    CSIngredientGroup *ingredientGroup = [[CSIngredients sharedInstance] ingredientGroupAtIndex:ingredientGroupIndex];
     CSIngredient *ingredient = [ingredientGroup ingredientAtIndex:index];
     logUserAction(@"ingredient_select", @{
                                           @"ingredient_group_name" : ingredientGroup.name,
                                           @"ingredient_name" : ingredient.name,
                                           @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
                                           });
-    [self selectIngredientGroup:ingredientGroup ingredientIndex:index];
+    [self selectIngredientAtIndex:[[CSIngredients sharedInstance] flattenedIngredientIndexForGroupIndex:ingredientGroupIndex ingredientIndex:index]];
 }
 
-- (void)selectIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)index
+- (void)selectIngredientAtIndex:(NSUInteger)ingredientIndex
 {
-    self.ingredientGroup = ingredientGroup;
-    self.ingredientIndex = index;
+    self.ingredientIndex = ingredientIndex;
     [self refreshIngredientNameUI];
     [self refreshScalesWithCurrentIngredient];
 }
 
-- (IBAction)handleIngredientGroupTap:(id)sender
+- (void)refreshScalesWithCurrentIngredient
 {
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
-    [self presentViewController:nav animated:YES completion:nil];
+    self.scaleVC.ingredient = [[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:self.ingredientIndex];
 }
 
 #pragma mark - Notifications
@@ -167,39 +229,29 @@ static inline UILabel *createIngredientLabel()
     // In the future we might want to put a better solution for this, but for now, we'll
     // just select the very first ingredient of the very first ingredient group and be done
     // with it.
-    
-    if ([[CSIngredients sharedInstance] countOfIngredientGroups] > 0)
-    {
-        [self selectIngredientGroup:[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] ingredientIndex:0];
-    }
-    else
-    {
-        [self selectIngredientGroup:nil ingredientIndex:0];
-    }
+    [self selectIngredientAtIndex:0];
 }
 
 #pragma mark - scaleVC delegate methods
+
 - (void)scaleVCDidBeginChangingUnits:(CSScaleVC*)scaleVC
 {
-    self.ingredientNameButton.enabled = NO;
-    
-    [self.ingredientNameButton setTitle:CHOOSE_UNITS_TEXT forState:UIControlStateNormal];
+    for (UIButton *ingredientButton in self.ingredientPickerScrollView.subviews)
+    {
+        ingredientButton.enabled = NO;
+        [ingredientButton setTitle:CHOOSE_UNITS_TEXT forState:UIControlStateNormal];
+    }
+    [self.ingredientPickerScrollView setScrollEnabled:NO];
 }
 
 - (void)scaleVCDidFinishChangingUnits:(CSScaleVC *)scaleVC
 {
-    self.ingredientNameButton.enabled = YES;
-    
-    [self refreshIngredientNameUI];
-}
-
-#pragma mark - Misc Helpers
-
-- (NSDictionary *)analyticsAttributes
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self.scaleVC analyticsAttributes]];
-    [dict setObject:self.ingredientGroup.name forKey:@"ingredient_group_name"];
-    return dict;
+    for (UIButton *ingredientButton in self.ingredientPickerScrollView.subviews)
+    {
+        ingredientButton.enabled = YES;
+        [ingredientButton setTitle:[self nameForIngredientAtXOrigin:ingredientButton.frame.origin.x] forState:UIControlStateNormal];
+    }
+    [self.ingredientPickerScrollView setScrollEnabled:YES];
 }
 
 @end

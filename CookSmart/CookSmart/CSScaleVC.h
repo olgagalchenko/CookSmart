@@ -24,5 +24,6 @@
 @property (assign, nonatomic) BOOL                  syncsScales;
 @property (weak, nonatomic) id<CSScaleVCDelegate>   delegate;
 - (NSDictionary *)analyticsAttributes;
+- (void)setScalesAlpha:(CGFloat)newScaleViewAlpha;
 
 @end

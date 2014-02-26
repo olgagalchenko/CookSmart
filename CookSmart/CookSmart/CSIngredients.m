@@ -114,6 +114,51 @@ static inline NSString *pathToIngredientsOnDisk()
     return returnIngr;
 }
 
+- (NSUInteger)indexOfIngredientGroup:(CSIngredientGroup *)group
+{
+    NSUInteger index = NSNotFound;
+    for (int i = 0; i < self.countOfIngredientGroups; i++)
+    {
+        if ([self ingredientGroupAtIndex:i] == group)
+        {
+            index = i;
+        }
+    }
+    return index;
+}
+
+- (CSIngredient *)ingredientAtFlattenedIngredientIndex:(NSUInteger)flattenedIngredientIndex
+{
+    NSUInteger ingredientIndex = flattenedIngredientIndex;
+    NSUInteger groupIndex = 0;
+    while (ingredientIndex > ([[self ingredientGroupAtIndex:groupIndex] countOfIngredients] - 1))
+    {
+        ingredientIndex -= [[self ingredientGroupAtIndex:groupIndex] countOfIngredients];
+        groupIndex++;
+    }
+    return [[self ingredientGroupAtIndex:groupIndex] ingredientAtIndex:ingredientIndex];
+}
+
+- (NSUInteger)flattenedIngredientIndexForGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)index
+{
+    NSUInteger flattenedIngredientIndex = index;
+    for (NSUInteger i = 0; i < groupIndex; i++)
+    {
+        flattenedIngredientIndex += [[self ingredientGroupAtIndex:i] countOfIngredients];
+    }
+    return flattenedIngredientIndex;
+}
+
+- (NSUInteger)flattenedCountOfIngredients
+{
+    NSUInteger numIngredients = 0;
+    for (CSIngredientGroup *group in self)
+    {
+        numIngredients += [group countOfIngredients];
+    }
+    return numIngredients;
+}
+
 - (NSUInteger)countOfIngredientGroups
 {
     return self.ingredientGroups.count;

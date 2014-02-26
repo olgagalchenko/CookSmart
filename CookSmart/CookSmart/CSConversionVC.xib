@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CSConversionVC">
             <connections>
-                <outlet property="ingredientNameButton" destination="ijt-y6-wqB" id="Hh0-Js-TPv"/>
+                <outlet property="ingredientPickerScrollView" destination="bZ9-Cp-qon" id="A16-mC-AIv"/>
                 <outlet property="scaleVC" destination="xux-nP-h93" id="SPd-aJ-ngs"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -16,27 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijt-y6-wqB">
-                    <rect key="frame" x="20" y="25" width="280" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="100" id="t3O-MQ-rVv"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <state key="normal" title="Ingredient">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZ9-Cp-qon" userLabel="Ingredient Scroll View">
+                    <rect key="frame" x="0.0" y="25" width="320" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <connections>
-                        <action selector="handleIngredientGroupTap:" destination="-1" eventType="touchUpInside" id="Lnk-6U-ctK"/>
+                        <outlet property="delegate" destination="-1" id="s3g-Ce-334"/>
                     </connections>
-                </button>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96862751245498657" green="0.96862751245498657" blue="0.96862751245498657" alpha="1" colorSpace="deviceRGB"/>
-            <constraints>
-                <constraint firstItem="ijt-y6-wqB" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="0bk-aR-Lbe"/>
-                <constraint firstAttribute="trailing" secondItem="ijt-y6-wqB" secondAttribute="trailing" constant="20" symbolic="YES" id="OgR-jE-7NK"/>
-                <constraint firstItem="ijt-y6-wqB" firstAttribute="top" secondItem="1" secondAttribute="top" constant="25" id="V1H-XH-lxE"/>
-            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

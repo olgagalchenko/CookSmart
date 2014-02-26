@@ -13,8 +13,8 @@
 
 @class CSIngredientGroup;
 
-@interface CSConversionVC : UIViewController <CSIngredientListVCDelegate, CSScaleVCDelegate>
+@interface CSConversionVC : UIViewController <CSIngredientListVCDelegate, CSScaleVCDelegate, UIScrollViewDelegate>
 
-- (id)initWithIngredientGroup:(CSIngredientGroup *)ingredientGroup ingredientIndex:(NSUInteger)ingredientIndex;
+- (id)initWithIngredientGroupIndex:(NSUInteger)ingredientGroupIndex ingredientIndex:(NSUInteger)ingredientIndex;
 
 @end

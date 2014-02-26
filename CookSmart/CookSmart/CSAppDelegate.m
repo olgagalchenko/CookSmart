@@ -23,8 +23,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    CSConversionVC* conversionVC = [[CSConversionVC alloc] initWithIngredientGroup:[[CSIngredients sharedInstance] ingredientGroupAtIndex:0]
-                                                                   ingredientIndex:0];
+    CSConversionVC* conversionVC = [[CSConversionVC alloc] initWithIngredientGroupIndex:0
+                                                                        ingredientIndex:0];
     self.window.rootViewController = conversionVC;
     [self.window makeKeyAndVisible];
     return YES;
