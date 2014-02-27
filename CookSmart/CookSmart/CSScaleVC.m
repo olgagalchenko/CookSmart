@@ -68,6 +68,7 @@ typedef enum
     self.volumeScaleScrollView.scrollsToTop = NO;
     self.weightScaleScrollView.scrollsToTop = YES;
     self.scalesContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
     
     UIView *unitLabelsContainer = [[UIView alloc] init];
     unitLabelsContainer.translatesAutoresizingMaskIntoConstraints = NO;
