@@ -98,6 +98,7 @@
                                                           multiplier:1.0
                                                             constant:10];
     [self.view addConstraints:@[bottom, left, right, top]];
+    self.ingredientPickerScrollView.scrollsToTop = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
