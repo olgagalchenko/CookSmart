@@ -14,6 +14,8 @@
 		80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C111892CA110082D4E1 /* CSScaleTile.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
+		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
+		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
 		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
 		9351F3F818A1A32900AD45D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F218A1A32900AD45D0 /* README.md */; };
 		9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F318A1A32900AD45D0 /* release_notes.md */; };
@@ -72,6 +74,9 @@
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
+		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
+		9343EDC118BD380000892D0B /* CSUnitPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPicker.m; sourceTree = "<group>"; };
+		9343EDC218BD380000892D0B /* CSUnitPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUnitPicker.xib; sourceTree = "<group>"; };
 		9351F3F118A1A32900AD45D0 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		9351F3F218A1A32900AD45D0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		9351F3F318A1A32900AD45D0 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -160,6 +165,9 @@
 				93F6CCA518AED6050045400D /* CSScaleVC.h */,
 				93F6CCA618AED6050045400D /* CSScaleVC.m */,
 				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
+				9343EDC018BD380000892D0B /* CSUnitPicker.h */,
+				9343EDC118BD380000892D0B /* CSUnitPicker.m */,
+				9343EDC218BD380000892D0B /* CSUnitPicker.xib */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
@@ -406,6 +414,7 @@
 				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
+				9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
 			);
@@ -455,6 +464,7 @@
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
+				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
 				DCCC5E8618A46C7A00F801D3 /* AnalyticsWriter.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
@@ -582,6 +592,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
@@ -590,6 +602,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -599,6 +612,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
@@ -607,6 +622,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

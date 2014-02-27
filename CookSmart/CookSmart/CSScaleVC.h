@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSUnitPicker.h"
 
 @class CSScaleVC;
 @protocol CSScaleVCDelegate <NSObject>
@@ -17,13 +18,11 @@
 @end
 
 @class CSIngredient;
-
-@interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+@interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, CSUnitPickerDelegate>
 
 @property (strong, nonatomic) CSIngredient*         ingredient;
 @property (assign, nonatomic) BOOL                  syncsScales;
 @property (weak, nonatomic) id<CSScaleVCDelegate>   delegate;
 - (NSDictionary *)analyticsAttributes;
 - (void)setScalesAlpha:(CGFloat)newScaleViewAlpha;
-
 @end

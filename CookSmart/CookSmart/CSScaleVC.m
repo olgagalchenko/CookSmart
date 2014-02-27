@@ -12,10 +12,17 @@
 #import "CSWeightUnit.h"
 #import "CSVolumeUnit.h"
 #import "CSGlassView.h"
+#import "CSUnitPicker.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
 #define UNIT_LABEL_SPREAD           (150.0) // Unit labels will be spread over that many points
+
+typedef enum
+{
+    CSScaleVCArrangementScales,
+    CSScaleVCArrangementUnitChoice,
+} CSScaleVCArrangement;
 
 @interface CSScaleVC ()
 
@@ -32,20 +39,12 @@
 @property (strong, nonatomic) CSWeightUnit* currentWeightUnit;
 @property (strong, nonatomic) CSVolumeUnit* currentVolumeUnit;
 
-@property (weak, nonatomic) UIView *unitLabelsContainer;
-@property (strong, nonatomic) NSArray *weightUnitLabels;
-@property (strong, nonatomic) NSArray *volumeUnitLabels;
-@property (weak, nonatomic) UIButton *unitChoiceDoneButton;
+@property (weak, nonatomic) CSUnitPicker *unitPicker;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
 
 @end
 
-typedef enum
-{
-    CSScaleVCArrangementScales,
-    CSScaleVCArrangementUnitChoice,
-} CSScaleVCArrangement;
 
 @implementation CSScaleVC
 
@@ -76,30 +75,31 @@ typedef enum
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
     
-    UIView *unitLabelsContainer = [[UIView alloc] init];
-    unitLabelsContainer.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitLabelsContainer
+    CSUnitPicker *unitPicker = [[CSUnitPicker alloc] init];
+    unitPicker.delegate = self;
+    unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitPicker
                                                            attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
                                                               toItem:self.scalesContainer
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:unitLabelsContainer
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:unitPicker
                                                             attribute:NSLayoutAttributeLeft
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:self.contentView
                                                             attribute:NSLayoutAttributeLeft
                                                            multiplier:1.0
                                                              constant:0];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:unitLabelsContainer
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:unitPicker
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual
                                                                  toItem:self.contentView
                                                               attribute:NSLayoutAttributeHeight
                                                              multiplier:1.0
                                                                constant:0];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:unitLabelsContainer
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:unitPicker
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.contentView
@@ -107,20 +107,9 @@ typedef enum
                                                             multiplier:1.0
                                                               constant:0];
     
-    self.weightUnitLabels = addUnitLabels([CSWeightUnit class], unitLabelsContainer, self, @selector(handleWeightUnitChange:));
-    self.volumeUnitLabels = addUnitLabels([CSVolumeUnit class], unitLabelsContainer, self, @selector(handleVolumeUnitChange:));
-    
-    UIButton *unitChoiceDoneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    unitChoiceDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [unitChoiceDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    unitChoiceDoneButton.titleLabel.font = [UIFont systemFontOfSize:MAJOR_BUTTON_FONT_SIZE];
-    [unitLabelsContainer addSubview:unitChoiceDoneButton];
-    [unitChoiceDoneButton addTarget:self action:@selector(commitUnitChoices:) forControlEvents:UIControlEventTouchUpInside];
-    self.unitChoiceDoneButton = unitChoiceDoneButton;
-    
-    [self.contentView addSubview:unitLabelsContainer];
-    [self.contentView addConstraints:@[top, left, height, width]];
-    self.unitLabelsContainer = unitLabelsContainer;
+    [self.contentView insertSubview:unitPicker atIndex:0];
+    [self.view addConstraints:@[top, left, height, width]];
+    self.unitPicker = unitPicker;
     
     [self animateToArrangement:CSScaleVCArrangementScales];
 }
@@ -369,7 +358,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [self animateToArrangement:CSScaleVCArrangementUnitChoice];
 }
 
-- (void)commitUnitChoices:(id)sender
+- (void)commitUnitChoices
 {
     if ([self.delegate respondsToSelector:@selector(scaleVCDidFinishChangingUnits:)])
         [self.delegate scaleVCDidFinishChangingUnits:self];
@@ -401,37 +390,6 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     {
         CSAssertFail(@"invalid_scale_vc_arrangement", @"Invalid scale VC arrangement: %d", arrangement);
     }
-    [self refreshUnitBackgroundColors];
-}
-
-- (void)handleWeightUnitChange:(UITapGestureRecognizer *)tapRecognizer
-{
-    UILabel *weightUnitLabel = (UILabel *)tapRecognizer.view;
-    self.currentWeightUnit = [[CSWeightUnit alloc] initWithName:weightUnitLabel.text];
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^
-     {
-         [self refreshUnitBackgroundColors];
-     }];
-    [self refreshScalesUI];
-    logUserAction(@"weight_unit_change", [self analyticsAttributes]);
-}
-
-- (void)handleVolumeUnitChange:(UITapGestureRecognizer *)tapRecognizer
-{
-    UILabel *volumeUnitLabel = (UILabel *)tapRecognizer.view;
-    self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithName:volumeUnitLabel.text];
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^
-    {
-        [self refreshUnitBackgroundColors];
-    }];
-    [self refreshScalesUI];
-    logUserAction(@"volume_unit_change", [self analyticsAttributes]);
-}
-
-- (void)refreshUnitBackgroundColors
-{
-    refreshUnitLabels(self.weightUnitLabels, self.currentWeightUnit.name);
-    refreshUnitLabels(self.volumeUnitLabels, self.currentVolumeUnit.name);
 }
 
 static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitName)
@@ -462,7 +420,6 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
             [self.contentView removeConstraint:constraint];
         }
     }
-    [self.unitLabelsContainer removeConstraints:self.unitLabelsContainer.constraints];
     
     NSLayoutConstraint *scalesTop, *scalesLeft = nil;
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.scalesContainer
@@ -519,123 +476,12 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
     }
     [self.contentView addConstraints:@[scalesTop, height, scalesLeft, width]];
     
-    CGFloat constantVerticalOffset =    self.volumeUnitButton.bounds.size.height/2 // For the volume unit buttons at the top
-                                        - UNIT_LABEL_HEIGHT/2 - UNIT_VERTICAL_PADDING/2; // For the done button at the bottom
-    setConstraintsForUnitLabelColumn(self.volumeUnitLabels, arrangement, 0.5, constantVerticalOffset);
-    setConstraintsForUnitLabelColumn(self.weightUnitLabels, arrangement, 1.5, constantVerticalOffset);
-
-    NSLayoutConstraint *yOriginFix = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
-                                                                  attribute:NSLayoutAttributeTop
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.unitLabelsContainer
-                                                                  attribute:NSLayoutAttributeTop
-                                                                 multiplier:1.0
-                                                                   constant:0];
-    if (arrangement == CSScaleVCArrangementUnitChoice)
-    {
-        yOriginFix = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.unitLabelsContainer
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:-UNIT_VERTICAL_PADDING];
-    }
-    NSLayoutConstraint *doneButtonXCenter = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
-                                                                         attribute:NSLayoutAttributeCenterX
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:self.unitLabelsContainer
-                                                                         attribute:NSLayoutAttributeCenterX
-                                                                        multiplier:1.0
-                                                                          constant:0];
-    NSLayoutConstraint *doneButtonWidth = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.unitLabelsContainer
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                      multiplier:1.0
-                                                                        constant:0];
-    NSLayoutConstraint *doneButtonHeight = [NSLayoutConstraint constraintWithItem:self.unitChoiceDoneButton
-                                                                        attribute:NSLayoutAttributeHeight
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:nil
-                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                       multiplier:0
-                                                                         constant:UNIT_LABEL_HEIGHT];
-    [self.unitLabelsContainer addConstraints:@[yOriginFix, doneButtonHeight, doneButtonXCenter, doneButtonWidth]];
-    
 }
 
-static inline NSArray *addUnitLabels(Class class, UIView *superview, id delegate, SEL delegateSelector)
+#pragma mark - CSUnitPicker delegate method
+- (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit
 {
-    NSMutableArray *labels = [NSMutableArray arrayWithCapacity:[class numUnits]];
-    for (NSUInteger i = 0; i < [class numUnits]; i++)
-    {
-        UILabel *unitLabel = [[UILabel alloc] init];
-
-        unitLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        unitLabel.text = [class nameWithIndex:i];
-        unitLabel.textAlignment = NSTextAlignmentCenter;
-        unitLabel.font = [UIFont systemFontOfSize:15.0];
-        unitLabel.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:delegate action:delegateSelector];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        [unitLabel addGestureRecognizer:tapGestureRecognizer];
-        [labels addObject:unitLabel];
-        [superview addSubview:unitLabel];
-    }
-    return [NSArray arrayWithArray:labels];
-}
-
-static inline void setConstraintsForUnitLabelColumn(NSArray *unitLabels, CSScaleVCArrangement arrangement, CGFloat xCenterMultiplier, CGFloat constantVerticalOffset)
-{
-    __weak UILabel *prevLabel = nil;
-    CGFloat centerConstantIncrement = UNIT_LABEL_SPREAD/(unitLabels.count - 1);
-    CGFloat constant = -centerConstantIncrement*(unitLabels.count/2) + constantVerticalOffset;
-    for (int i = 0; i < unitLabels.count; i++, constant += centerConstantIncrement)
-    {
-        UILabel *label = unitLabels[i];
-        NSLayoutConstraint *unitTop = [NSLayoutConstraint constraintWithItem:label
-                                                                   attribute:NSLayoutAttributeTop
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:label.superview
-                                                                   attribute:NSLayoutAttributeTop
-                                                                  multiplier:1.0
-                                                                    constant:0];
-        if (arrangement == CSScaleVCArrangementUnitChoice)
-        {
-            unitTop = [NSLayoutConstraint constraintWithItem:label
-                                                   attribute:NSLayoutAttributeCenterY
-                                                   relatedBy:NSLayoutRelationEqual
-                                                      toItem:label.superview
-                                                   attribute:NSLayoutAttributeCenterY
-                                                  multiplier:1.0
-                                                    constant:constant];
-        }
-        NSLayoutConstraint *unitXCenter = [NSLayoutConstraint constraintWithItem:label
-                                                                       attribute:NSLayoutAttributeCenterX
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:label.superview
-                                                                       attribute:NSLayoutAttributeCenterX
-                                                                      multiplier:xCenterMultiplier
-                                                                        constant:0];
-        NSLayoutConstraint *unitWidth = [NSLayoutConstraint constraintWithItem:label
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:label.superview
-                                                                     attribute:NSLayoutAttributeWidth
-                                                                    multiplier:0.33
-                                                                      constant:0];
-        NSLayoutConstraint *unitHeight = [NSLayoutConstraint constraintWithItem:label
-                                                                      attribute:NSLayoutAttributeHeight
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:0
-                                                                       constant:UNIT_LABEL_HEIGHT];
-        [label.superview addConstraints:@[unitTop, unitXCenter, unitWidth, unitHeight]];
-        prevLabel = label;
-    }
+    [self commitUnitChoices];
 }
 
 #pragma mark - Misc Helpers

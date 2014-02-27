@@ -18,16 +18,6 @@
 
 @implementation CSGradientView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.opaque = NO;
-        self.clearsContextBeforeDrawing = YES;
-    }
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
