@@ -22,6 +22,12 @@
     return self;
 }
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    // Pass through all events
+    return NO;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
