@@ -13,6 +13,7 @@
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C111892CA110082D4E1 /* CSScaleTile.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
+		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
 		9351F3F818A1A32900AD45D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F218A1A32900AD45D0 /* README.md */; };
 		9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F318A1A32900AD45D0 /* release_notes.md */; };
@@ -69,6 +70,8 @@
 		80592C111892CA110082D4E1 /* CSScaleTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleTile.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
+		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
+		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
 		9351F3F118A1A32900AD45D0 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		9351F3F218A1A32900AD45D0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		9351F3F318A1A32900AD45D0 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 		8000355C18B3CBF50032BF91 /* Scales */ = {
 			isa = PBXGroup;
 			children = (
+				80A614DC18BF3D4100A205BB /* CSGlassView.h */,
+				80A614DD18BF3D4100A205BB /* CSGlassView.m */,
 				93F6CCA518AED6050045400D /* CSScaleVC.h */,
 				93F6CCA618AED6050045400D /* CSScaleVC.m */,
 				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
@@ -440,6 +445,7 @@
 				93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */,
+				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,

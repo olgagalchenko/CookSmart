@@ -13,10 +13,10 @@
 #define THIRD_LINE_LENGTH       QUARTER_LINE_LENGTH
 #define SIXTH_LINE_LENGTH       EIGHTH_LINE_LENGTH
 #define MINOR_LINE_THICKNESS    1.0
-#define WHOLE_LINE_LENGTH       80
-#define WHOLE_LINE_THICKNESS    4.0
+#define WHOLE_LINE_LENGTH       40
+#define WHOLE_LINE_THICKNESS    2.0
 #define TEXT_BOX_PADDING        10
-#define TEXT_BOX_HEIGHT         20
+#define TEXT_BOX_HEIGHT         12
 
 @interface CSScaleTile()
 
@@ -35,12 +35,13 @@
         self.mirror = mirror;
         self.backgroundColor = [UIColor clearColor];
         self.valueLabel = [[UILabel alloc] init];
-        self.valueLabel.opaque = YES;
+        self.valueLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Medium" size:TEXT_BOX_HEIGHT];
+        self.valueLabel.opaque = NO;
         self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        [self.valueLabel setBackgroundColor:BACKGROUND_COLOR];
+        [self.valueLabel setBackgroundColor:[UIColor clearColor]];
         [self.valueLabel setTextColor:[UIColor grayColor]];
         self.valueLabel.bounds = CGRectMake(0, 0, frame.size.width, TEXT_BOX_HEIGHT);
-        self.valueLabel.center = CGPointMake(frame.size.width/2, 0);
+        self.valueLabel.center = CGPointMake((mirror)? WHOLE_LINE_LENGTH/2 : self.bounds.size.width - WHOLE_LINE_LENGTH/2, -TEXT_BOX_HEIGHT/2);
         [self addSubview:self.valueLabel];
     }
     return self;
@@ -83,16 +84,16 @@
     
     for (float y = (self.bounds.size.height/8); y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        line[0] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2 - EIGHTH_LINE_LENGTH, y);
+        line[0] = CGPointMake(self.bounds.size.width, y);
+        line[1] = CGPointMake(self.bounds.size.width - EIGHTH_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
     
     for (float y = 0.5 + self.bounds.size.height/4; y < self.bounds.size.height; y += self.bounds.size.height/4)
     {
-        line[0] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2 - QUARTER_LINE_LENGTH, y);
+        line[0] = CGPointMake(self.bounds.size.width, y);
+        line[1] = CGPointMake(self.bounds.size.width - QUARTER_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
@@ -100,26 +101,49 @@
     [[UIColor colorWithWhite:0.8 alpha:1.0] setStroke];
     for (float y = (self.bounds.size.height/3); y < self.bounds.size.height; y += self.bounds.size.height/3)
     {
-        line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2 + THIRD_LINE_LENGTH, y);
+        line[0] = CGPointMake(0, y);
+        line[1] = CGPointMake(THIRD_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
     
     for (float y = (self.bounds.size.height/6); y < self.bounds.size.height; y += self.bounds.size.height/3)
     {
-        line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, y);
-        line[1] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2 + SIXTH_LINE_LENGTH, y);
+        line[0] = CGPointMake(0, y);
+        line[1] = CGPointMake(SIXTH_LINE_LENGTH, y);
         CGContextAddLines(ctx, line, 2);
     }
     CGContextDrawPath(ctx, kCGPathStroke);
     
-    [[UIColor blackColor] setStroke];
-    CGContextSetLineWidth(ctx, WHOLE_LINE_THICKNESS);
-    line[0] = CGPointMake((self.bounds.size.width - WHOLE_LINE_LENGTH)/2, 0.0);
-    line[1] = CGPointMake((self.bounds.size.width + WHOLE_LINE_LENGTH)/2, 0.0);
+    line[0] = CGPointMake(self.bounds.size.width, 0);
+    line[1] = CGPointMake(self.bounds.size.width, self.bounds.size.height);
     CGContextAddLines(ctx, line, 2);
     CGContextDrawPath(ctx, kCGPathStroke);
+    
+    
+    for (unsigned int i = 0; i < 2; i++)
+    {
+        if (i)
+        {
+            CGContextTranslateCTM(ctx, 0, self.bounds.size.height/2);
+            CGContextScaleCTM(ctx, 1, -1);
+            CGContextTranslateCTM(ctx, 0, -self.bounds.size.height/2);
+        }
+        
+        [[UIColor grayColor] setStroke];
+        CGFloat lineThickness = WHOLE_LINE_THICKNESS/2.0;
+        CGContextSetLineWidth(ctx, lineThickness);
+        line[0] = CGPointMake(self.bounds.size.width, lineThickness/2.0);
+        line[1] = CGPointMake(self.bounds.size.width - WHOLE_LINE_LENGTH, lineThickness/2.0);
+        CGContextAddLines(ctx, line, 2);
+        CGContextDrawPath(ctx, kCGPathStroke);
+        
+        [[UIColor colorWithWhite:0.8 alpha:1.0] setStroke];
+        line[0] = CGPointMake(0, lineThickness/2.0);
+        line[1] = CGPointMake(WHOLE_LINE_LENGTH, lineThickness/2.0);
+        CGContextAddLines(ctx, line, 2);
+        CGContextDrawPath(ctx, kCGPathStroke);
+    }
 }
 
 @end
