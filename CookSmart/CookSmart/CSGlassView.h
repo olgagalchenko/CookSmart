@@ -10,4 +10,6 @@
 
 @interface CSGlassView : UIView
 
+@property (nonatomic, weak) IBOutlet UIView *viewToMagnify;
+
 @end

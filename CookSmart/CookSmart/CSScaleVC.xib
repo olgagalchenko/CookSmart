@@ -168,6 +168,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="tUJ-R7-DTh"/>
                     </constraints>
+                    <connections>
+                        <outlet property="viewToMagnify" destination="1" id="pi9-Cf-3cn"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
