@@ -13,6 +13,7 @@
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C111892CA110082D4E1 /* CSScaleTile.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
+		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
 		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
@@ -73,6 +74,8 @@
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
+		8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPickerCenterLineView.h; sourceTree = "<group>"; };
+		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
 		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
+				8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */,
+				8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */,
 			);
 			name = Scales;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
+				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
 				93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */,
 			);

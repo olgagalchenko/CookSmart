@@ -9,15 +9,18 @@
 #import "CSUnitPicker.h"
 #import "CSWeightUnit.h"
 #import "CSVolumeUnit.h"
+#import "CSUnitPickerCenterLineView.h"
 
-#define UNIT_LABEL_HEIGHT 60
+#define UNIT_LABEL_HEIGHT       60
+#define CENTER_LINE_THICKNESS   2
 
 @interface CSUnitPicker ()
 @property (weak, nonatomic) IBOutlet UIScrollView *volumeScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *weightScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-@property (strong, nonatomic)        CSVolumeUnit* volumeUnit;
-@property (strong, nonatomic)        CSWeightUnit* weightUnit;
+@property (strong, nonatomic) CSVolumeUnit* volumeUnit;
+@property (strong, nonatomic) CSWeightUnit* weightUnit;
+@property (weak, nonatomic) CSUnitPickerCenterLineView *centerLine;
 @end
 
 @implementation CSUnitPicker
@@ -30,6 +33,10 @@
     {
         addUnitLabels(self.volumeScrollView, [CSVolumeUnit class]);
         addUnitLabels(self.weightScrollView, [CSWeightUnit class]);
+        CSUnitPickerCenterLineView *centerLine = [[CSUnitPickerCenterLineView alloc] init];
+        centerLine.translatesAutoresizingMaskIntoConstraints = NO;
+        [self insertSubview:centerLine atIndex:0];
+        self.centerLine = centerLine;
         
         self.volumeUnit = volUnit;
         self.weightUnit = weightUnit;
@@ -45,6 +52,8 @@
     
     layoutUnitLabels(self.volumeScrollView, self.volumeUnit.name, self.arrangement);
     layoutUnitLabels(self.weightScrollView, self.weightUnit.name, self.arrangement);
+    self.centerLine.frame = CGRectMake(0, (self.arrangement == CSScaleVCArrangementScales)? (UNIT_LABEL_HEIGHT - CENTER_LINE_THICKNESS)/2 : (self.bounds.size.height - CENTER_LINE_THICKNESS)/2,
+                                       self.bounds.size.width, CENTER_LINE_THICKNESS);
 }
 
 - (void)setArrangement:(CSScaleVCArrangement)arrangement
@@ -57,8 +66,8 @@
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-    self.volumeUnit = [self centerVolumeUnit];
-    self.weightUnit = [self centerWeightUnit];
+    self.volumeUnit = (CSVolumeUnit *)[self centerUnitForScrollView:self.volumeScrollView];
+    self.weightUnit = (CSWeightUnit *)[self centerUnitForScrollView:self.weightScrollView];
     [self.delegate unitPicker:self pickedVolumeUnit:self.volumeUnit andWeightUnit:self.weightUnit];
 }
 
@@ -69,6 +78,7 @@ static inline void addUnitLabels(UIScrollView* view, Class unitClass)
         UILabel* unitLabel = [[UILabel alloc] init];
         unitLabel.text = [unitClass nameWithIndex:i];
         unitLabel.textAlignment = NSTextAlignmentCenter;
+        unitLabel.backgroundColor = [UIColor clearColor];
         [view addSubview:unitLabel];
     }
 }
@@ -76,14 +86,14 @@ static inline void addUnitLabels(UIScrollView* view, Class unitClass)
 static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitName, CSScaleVCArrangement arrangement)
 {
     NSUInteger selectedUnitIndex = NSNotFound;
-    CGFloat yOrigin = view.frame.size.height/2 - UNIT_LABEL_HEIGHT/2;
+    CGFloat yOrigin = view.bounds.size.height/2 - UNIT_LABEL_HEIGHT/2;
     for (int i = 0; i < view.subviews.count; i++)
     {
         UIView *subview = view.subviews[i];
         if (arrangement == CSScaleVCArrangementScales)
-            subview.frame = CGRectMake(0, 0, view.frame.size.width, UNIT_LABEL_HEIGHT);
+            subview.frame = CGRectMake(0, 0, view.bounds.size.width, UNIT_LABEL_HEIGHT);
         else if (arrangement == CSScaleVCArrangementUnitChoice)
-            subview.frame = CGRectMake(0, yOrigin, view.frame.size.width, UNIT_LABEL_HEIGHT);
+            subview.frame = CGRectMake(0, yOrigin, view.bounds.size.width, UNIT_LABEL_HEIGHT);
         else
             CSAssertFail(@"unit_picker_invalid_arrangement", @"Only the Scales and UnitChoice arrangements are supported by CSUnitPicker. You've provided %d", arrangement);
         yOrigin += UNIT_LABEL_HEIGHT;
@@ -94,6 +104,11 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
     [view setContentOffset:CGPointMake(0, (arrangement == CSScaleVCArrangementScales)? 0 : selectedUnitIndex*UNIT_LABEL_HEIGHT) animated:YES];
 }
 
+- (Class)unitClassForScrollView:(UIScrollView *)scrollView
+{
+    return self.weightScrollView == scrollView? [CSWeightUnit class] : [CSVolumeUnit class];
+}
+
 - (void)snapScrollView:(UIScrollView*)scrollView toClosestUnit:(CGFloat)position
 {
     CGFloat yOffset;
@@ -102,19 +117,19 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
         yOffset = position - offsetFromSnap + UNIT_LABEL_HEIGHT;
     else
         yOffset = position - offsetFromSnap;
-    
+    yOffset = MIN(MAX(0, yOffset), UNIT_LABEL_HEIGHT*([[self unitClassForScrollView:scrollView] numUnits]-1));
     [scrollView setContentOffset:CGPointMake(0, yOffset) animated:YES];
     NSString *unitKind = @"unknown";
     NSString *unitName = unitKind;
     if (scrollView == self.volumeScrollView)
     {
         unitKind = @"volume";
-        unitName = [[self centerVolumeUnit] name];
+        unitName = [[self unitForScrollView:self.volumeScrollView offset:yOffset] name];
     }
     else if (scrollView == self.weightScrollView)
     {
         unitKind = @"weight";
-        unitName = [[self centerWeightUnit] name];
+        unitName = [[self unitForScrollView:self.volumeScrollView offset:yOffset] name];
     }
     else
     {
@@ -123,17 +138,15 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
     logUserAction(@"snap_to_unit", @{@"unit_kind" : unitKind, @"unit_name" : unitName});
 }
 
-- (CSWeightUnit*)centerWeightUnit
+- (CSUnit *)centerUnitForScrollView:(UIScrollView *)scrollView
 {
-    NSInteger index = self.weightScrollView.contentOffset.y/UNIT_LABEL_HEIGHT;
-    return [[CSWeightUnit alloc] initWithIndex:index];
+    return [self unitForScrollView:scrollView offset:scrollView.contentOffset.y];
 }
 
-- (CSVolumeUnit*)centerVolumeUnit
+- (CSUnit *)unitForScrollView:(UIScrollView *)scrollView offset:(CGFloat)offset
 {
-    NSInteger index = self.volumeScrollView.contentOffset.y/UNIT_LABEL_HEIGHT;
-    return [[CSVolumeUnit alloc] initWithIndex:index];
-
+    NSInteger index = offset/UNIT_LABEL_HEIGHT;
+    return [[[self unitClassForScrollView:scrollView] alloc] initWithIndex:index];
 }
 
 #pragma mark - scroll view delegate methods

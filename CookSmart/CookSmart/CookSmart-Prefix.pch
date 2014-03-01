@@ -16,6 +16,7 @@
 #endif
 
 #define BACKGROUND_COLOR            [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]
+#define RED_LINE_COLOR              [UIColor colorWithRed:187.0/255.0 green:1.0/255.0 blue:3.0/255.0 alpha:1.0]
 #define DEFAULT_ANIMATION_DURATION  (.2)
 #define MAJOR_BUTTON_FONT_SIZE      20
 

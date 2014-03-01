@@ -62,6 +62,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.contentView.backgroundColor = BACKGROUND_COLOR;
     self.volumeLabel.backgroundColor = BACKGROUND_COLOR;
     self.weightLabel.backgroundColor = BACKGROUND_COLOR;
     self.volumeScaleScrollView.scrollsToTop = NO;
