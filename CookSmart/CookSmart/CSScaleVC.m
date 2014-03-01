@@ -12,16 +12,12 @@
 #import "CSWeightUnit.h"
 #import "CSVolumeUnit.h"
 #import "CSGlassView.h"
+#import "CSUnitPicker.h"
+#import "CSScaleVCInternals.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
 #define UNIT_LABEL_SPREAD           (150.0) // Unit labels will be spread over that many points
-
-typedef enum
-{
-    CSScaleVCArrangementScales,
-    CSScaleVCArrangementUnitChoice,
-} CSScaleVCArrangement;
 
 @interface CSScaleVC ()
 
@@ -374,6 +370,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION*2 animations:^
     {
         [self setConstraintsForArrangement:arrangement];
+        self.unitPicker.arrangement = arrangement;
         [self.contentView layoutIfNeeded];
     }];
     self.weightUnitButton.enabled = self.volumeUnitButton.enabled = (arrangement == CSScaleVCArrangementScales);
@@ -476,7 +473,6 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
             break;
     }
     [self.contentView addConstraints:@[scalesTop, height, scalesLeft, width]];
-    
 }
 
 #pragma mark - CSUnitPicker delegate method

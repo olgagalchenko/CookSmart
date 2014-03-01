@@ -80,7 +80,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.96078437569999997" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="0LU-VM-DOD" secondAttribute="bottom" id="0Yy-yc-IXC"/>
                                 <constraint firstAttribute="centerY" secondItem="kiW-LL-mGE" secondAttribute="centerY" id="1u7-6Y-aU0"/>

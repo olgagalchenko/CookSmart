@@ -72,6 +72,7 @@
 		80592C111892CA110082D4E1 /* CSScaleTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleTile.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
+		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
 		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
+				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
 			);
 			name = Scales;
 			sourceTree = "<group>";

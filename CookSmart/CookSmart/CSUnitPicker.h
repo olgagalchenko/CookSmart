@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSScaleVCInternals.h"
 
 @class CSUnitPicker;
 @class CSVolumeUnit;
@@ -16,7 +17,10 @@
 @end
 
 @interface CSUnitPicker : UIControl <UIScrollViewDelegate>
-@property (weak, nonatomic) id <CSUnitPickerDelegate> delegate;
 
 - (id)initWithVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit;
+
+@property (weak, nonatomic) id <CSUnitPickerDelegate> delegate;
+@property (nonatomic, assign) CSScaleVCArrangement arrangement;
+
 @end
