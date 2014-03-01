@@ -378,7 +378,7 @@
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
-						DevelopmentTeam = 6NPJ4ZUZ5S;
+						DevelopmentTeam = 5B7P72SMLP;
 					};
 					B7BCA2A7180524A800CF7588 = {
 						TestTargetID = B7BCA28C180524A800CF7588;

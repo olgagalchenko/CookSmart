@@ -12,7 +12,6 @@
 #import "CSWeightUnit.h"
 #import "CSVolumeUnit.h"
 #import "CSGlassView.h"
-#import "CSUnitPicker.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
