@@ -75,7 +75,7 @@ typedef enum
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
     
-    CSUnitPicker *unitPicker = [[CSUnitPicker alloc] init];
+    CSUnitPicker *unitPicker = [[CSUnitPicker alloc] initWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
     unitPicker.delegate = self;
     unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitPicker
@@ -364,6 +364,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
         [self.delegate scaleVCDidFinishChangingUnits:self];
     
     logUserAction(@"commit_unit_change", [self analyticsAttributes]);
+    
+    [self refreshScalesUI];
     [self animateToArrangement:CSScaleVCArrangementScales];
 }
 
@@ -481,6 +483,8 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
 #pragma mark - CSUnitPicker delegate method
 - (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit
 {
+    self.currentWeightUnit = weightUnit;
+    self.currentVolumeUnit = volumeUnit;
     [self commitUnitChoices];
 }
 
