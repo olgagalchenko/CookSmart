@@ -4,9 +4,9 @@
 <array>
     <dict>
         <key>Name</key>
-        <string>Cups</string>
+        <string>Teaspoons</string>
         <key>Conversion Factor</key>
-        <real>1</real>
+        <real>48</real>
     </dict>
     <dict>
         <key>Name</key>
@@ -16,9 +16,27 @@
     </dict>
     <dict>
         <key>Name</key>
-        <string>Teaspoons</string>
+        <string>Cups</string>
         <key>Conversion Factor</key>
-        <real>48</real>
+        <real>1</real>
+    </dict>
+    <dict>
+        <key>Name</key>
+        <string>Fluid Oz</string>
+        <key>Conversion Factor</key>
+        <real>8</real>
+    </dict>
+    <dict>
+        <key>Name</key>
+        <string>Milliliters</string>
+        <key>Conversion Factor</key>
+        <real>236.588</real>
+    </dict>
+    <dict>
+        <key>Name</key>
+        <string>Liters</string>
+        <key>Conversion Factor</key>
+        <real>.236588</real>
     </dict>
     <dict>
         <key>Name</key>

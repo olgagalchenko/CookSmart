@@ -50,8 +50,8 @@
     {
         self.syncsScales = YES;
         
-        self.currentWeightUnit = [[CSUnitCollection weightUnits] unitAtIndex:0];
-        self.currentVolumeUnit = [[CSUnitCollection volumeUnits] unitAtIndex:0];
+        self.currentWeightUnit = [[CSUnitCollection weightUnits] unitAtIndex:2];
+        self.currentVolumeUnit = [[CSUnitCollection volumeUnits] unitAtIndex:2];
     }
     return self;
 }
