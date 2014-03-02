@@ -127,23 +127,7 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
         yOffset = currentYPosition - offsetFromSnap;
     yOffset = MIN(MAX(0, yOffset), UNIT_LABEL_HEIGHT*([[self unitCollectionForScrollView:scrollView] countOfUnits]-1));
     [scrollView setContentOffset:CGPointMake(0, yOffset) animated:YES];
-    NSString *unitKind = @"unknown";
-    NSString *unitName = unitKind;
-    if (scrollView == self.volumeScrollView)
-    {
-        unitKind = @"volume";
-        unitName = [[self unitForScrollView:self.volumeScrollView offset:yOffset] name];
-    }
-    else if (scrollView == self.weightScrollView)
-    {
-        unitKind = @"weight";
-        unitName = [[self unitForScrollView:self.volumeScrollView offset:yOffset] name];
-    }
-    else
-    {
-        CSAssertFail(@"unknown_unit_scrollview", @"CSUnitPicker should only be taking care of the weight and volume unit scroll views.");
-    }
-    logUserAction(@"snap_to_unit", @{@"unit_kind" : unitKind, @"unit_name" : unitName});
+    logUserAction(@"snap_to_unit", [self analyticsDictionaryForScrollView:scrollView contentYOffset:yOffset]);
 }
 
 - (CSUnit *)centerUnitForScrollView:(UIScrollView *)scrollView
@@ -175,6 +159,38 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
     UIScrollView *scrollView = (UIScrollView *)touchedUnitView.superview;
     NSUInteger indexOfTouchedUnit = [scrollView.subviews indexOfObject:touchedUnitView];
     [scrollView setContentOffset:CGPointMake(0, indexOfTouchedUnit*UNIT_LABEL_HEIGHT) animated:YES];
+    logUserAction(@"unit_tap", [self analyticsDictionaryForScrollView:scrollView contentYOffset:indexOfTouchedUnit*UNIT_LABEL_HEIGHT]);
+}
+
+#pragma mark - Misc. Helpers
+
+- (NSDictionary *)analyticsDictionaryForScrollView:(UIScrollView *)scrollView contentYOffset:(CGFloat)contentYOffset
+{
+    NSString *unitKind = @"unknown";
+    NSString *unitName = unitKind;
+    CSUnit *unit;
+    float unitConversionFactor = 0;
+    if (scrollView == self.volumeScrollView)
+    {
+        unitKind = @"volume";
+        unit = [self unitForScrollView:self.volumeScrollView offset:contentYOffset];
+    }
+    else if (scrollView == self.weightScrollView)
+    {
+        unitKind = @"weight";
+        unit = [self unitForScrollView:self.weightScrollView offset:contentYOffset];
+    }
+    else
+    {
+        CSAssertFail(@"unknown_unit_scrollview", @"CSUnitPicker should only be taking care of the weight and volume unit scroll views.");
+    }
+    unitConversionFactor = unit.conversionFactor;
+    unitName = unit.name;
+    return @{
+             @"unit_kind" : unitKind,
+             @"unit_name" : unitName,
+             @"unit_conversion_factor" : @(unitConversionFactor)
+             };
 }
 
 @end
