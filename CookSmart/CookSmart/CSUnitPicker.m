@@ -31,6 +31,8 @@
     CSUnitPicker *unitPicker = [topViews firstObject];
     if (unitPicker)
     {
+        unitPicker.volumeScrollView.scrollsToTop = NO;
+        unitPicker.weightScrollView.scrollsToTop = NO;
         addUnitLabels(unitPicker.volumeScrollView, [CSUnitCollection volumeUnits], unitPicker, @selector(unitTapped:));
         addUnitLabels(unitPicker.weightScrollView, [CSUnitCollection weightUnits], unitPicker, @selector(unitTapped:));
         CSUnitPickerCenterLineView *centerLine = [[CSUnitPickerCenterLineView alloc] init];

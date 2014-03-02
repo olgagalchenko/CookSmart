@@ -11,6 +11,13 @@
 #define SHADOW_SIZE         5
 #define MAGNIFYING_FACTOR   1.1
 
+@interface CSGlassView()
+
+@property (nonatomic, weak) UIView *magnifiedView;
+
+
+@end
+
 @implementation CSGlassView
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -22,56 +29,37 @@
         self.layer.shadowOffset = CGSizeMake(0, SHADOW_SIZE);
         self.layer.shadowOpacity = 0.075;
         
-        CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(setNeedsDisplay)];
+        UIView *glassening = [[UIView alloc] init];
+        glassening.opaque = NO;
+        glassening.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0.025];
+        glassening.frame = self.bounds;
+        [self addSubview:glassening];
+        
+        CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(refreshMagnifiedView)];
         [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
+}
+
+- (void)refreshMagnifiedView
+{
+    [self.magnifiedView removeFromSuperview];
+    CGPoint imageUnderGlassOrigin = [self.viewToMagnify convertPoint:CGPointMake(0, 0) fromView:self];
+    CGFloat widthIncrease = (MAGNIFYING_FACTOR - 1)*self.bounds.size.width;
+    CGFloat heightIncrease = (MAGNIFYING_FACTOR - 1)*self.bounds.size.height;
+    UIView *magnifiedView = [self.viewToMagnify resizableSnapshotViewFromRect:CGRectMake(imageUnderGlassOrigin.x + widthIncrease/2, imageUnderGlassOrigin.y + heightIncrease/2, self.bounds.size.width - widthIncrease, self.bounds.size.height - heightIncrease)
+                                                           afterScreenUpdates:NO
+                                                                withCapInsets:UIEdgeInsetsZero];
+    
+    magnifiedView.frame = self.bounds;
+    [self insertSubview:magnifiedView atIndex:0];
+    self.magnifiedView = magnifiedView;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
     // Pass through all events
     return NO;
-}
-
-- (UIImage *)imageUnderGlass
-{
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, [[UIScreen mainScreen] scale]);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGPoint imageUnderGlassOrigin = [self.viewToMagnify convertPoint:CGPointMake(0, 0) fromView:self];
-    CGContextTranslateCTM(ctx, -imageUnderGlassOrigin.x, -imageUnderGlassOrigin.y);
-    [self.viewToMagnify.layer.presentationLayer renderInContext:ctx];
-    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return resultingImage;
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    CGImageRef imageUnderGlass = [[self imageUnderGlass] CGImage];
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(ctx);
-    CGContextTranslateCTM(ctx, 0, self.bounds.size.height/2);
-    CGContextScaleCTM(ctx, 1.0, -1.0);
-    CGContextTranslateCTM(ctx, 0, -self.bounds.size.height/2);
-    
-    CGContextTranslateCTM(ctx, self.bounds.size.width/2, self.bounds.size.height/2);
-    CGContextScaleCTM(ctx, MAGNIFYING_FACTOR, MAGNIFYING_FACTOR);
-    CGContextTranslateCTM(ctx, -self.bounds.size.width/2, -self.bounds.size.height/2);
-    
-    CGContextDrawImage(ctx, self.bounds, imageUnderGlass);
-    
-    CGContextRestoreGState(ctx);
-    [[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0.025] setFill];
-    CGContextFillRect(ctx, self.bounds);
-    CGContextSetLineWidth(ctx, 0.5);
-    [[[UIColor blackColor] colorWithAlphaComponent:0.1] setStroke];
-    CGPoint line[2];
-    line[0] = CGPointMake(0, self.bounds.size.height);
-    line[1] = CGPointMake(self.bounds.size.width, self.bounds.size.height);
-    CGContextAddLines(ctx, line, 2);
-    CGContextDrawPath(ctx, kCGPathStroke);
 }
 
 @end
