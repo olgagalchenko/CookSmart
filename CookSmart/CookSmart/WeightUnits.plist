@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Grams</string>
+		<key>Conversion Factor</key>
+		<real>1</real>
+	</dict>
+    <dict>
+		<key>Name</key>
+		<string>Kilograms</string>
+		<key>Conversion Factor</key>
+		<real>0.001</real>
+	</dict>
+    <dict>
+		<key>Name</key>
+		<string>Pounds</string>
+		<key>Conversion Factor</key>
+		<real>0.0022</real>
+	</dict>
+    <dict>
+		<key>Name</key>
+		<string>Ounces</string>
+		<key>Conversion Factor</key>
+		<real>0.035274</real>
+	</dict>
+</array>
+</plist>

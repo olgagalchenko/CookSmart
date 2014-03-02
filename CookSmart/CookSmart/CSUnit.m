@@ -8,34 +8,21 @@
 
 #import "CSUnit.h"
 
-@implementation CSUnit
+@interface CSUnit ()
+@property (nonatomic, readwrite, strong) NSString* name;
+@property (nonatomic, readwrite, assign) float conversionFactor;
+@end
 
-- (id)initWithName:(NSString*)name
+@implementation CSUnit
+- (id)initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
     if (self)
     {
-        _name = name;
+        self.name = dict[@"Name"];
+        self.conversionFactor = [dict[@"Conversion Factor"] floatValue];
     }
     return self;
-}
-
-- (id)initWithIndex:(NSInteger)index
-{
-    CSAssertFail(@"unit_abstract_init", @"Must implement - (id)initWithIndex:(NSInteger)index inside your CSUnit subclass.");
-    return nil;
-}
-
-+ (NSString*)nameWithIndex:(NSInteger)index
-{
-    CSAssertFail(@"unit_abstract_name_with_index", @"Must implement + (NSString*)nameWithIndex:(NSInteger)index inside your CSUnit subclass.");
-    return nil;
-}
-
-+ (NSUInteger)numUnits
-{
-    CSAssertFail(@"unit_abstract_num_units", @"Must implement + (NSUInteger)numUnits inside your CSUnit subclass.");
-    return 0;
 }
 
 @end

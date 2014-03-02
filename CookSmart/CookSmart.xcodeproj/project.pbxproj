@@ -15,6 +15,9 @@
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
 		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
+		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
+		931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96918C2B9C90018AA8B /* VolumeUnits.plist */; };
+		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
 		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
 		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
 		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
@@ -27,8 +30,6 @@
 		935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
-		93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09936189776A00014DB3E /* CSWeightUnit.m */; };
-		93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D099391897774C0014DB3E /* CSVolumeUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
 		93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93F6CCA718AED6050045400D /* CSScaleVC.xib */; };
 		B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
@@ -78,6 +79,10 @@
 		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
+		931AF96718C2B8AF0018AA8B /* WeightUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeightUnits.plist; sourceTree = "<group>"; };
+		931AF96918C2B9C90018AA8B /* VolumeUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VolumeUnits.plist; sourceTree = "<group>"; };
+		931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitCollection.h; sourceTree = "<group>"; };
+		931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitCollection.m; sourceTree = "<group>"; };
 		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
 		9343EDC118BD380000892D0B /* CSUnitPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPicker.m; sourceTree = "<group>"; };
 		9343EDC218BD380000892D0B /* CSUnitPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUnitPicker.xib; sourceTree = "<group>"; };
@@ -98,10 +103,6 @@
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
 		93D09933189766080014DB3E /* CSUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnit.m; sourceTree = "<group>"; };
-		93D09935189776A00014DB3E /* CSWeightUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSWeightUnit.h; sourceTree = "<group>"; };
-		93D09936189776A00014DB3E /* CSWeightUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSWeightUnit.m; sourceTree = "<group>"; };
-		93D099381897774C0014DB3E /* CSVolumeUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVolumeUnit.h; sourceTree = "<group>"; };
-		93D099391897774C0014DB3E /* CSVolumeUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVolumeUnit.m; sourceTree = "<group>"; };
 		93F6CCA518AED6050045400D /* CSScaleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSScaleVC.h; sourceTree = "<group>"; };
 		93F6CCA618AED6050045400D /* CSScaleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleVC.m; sourceTree = "<group>"; };
 		93F6CCA718AED6050045400D /* CSScaleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSScaleVC.xib; sourceTree = "<group>"; };
@@ -228,10 +229,8 @@
 			children = (
 				93D09932189766080014DB3E /* CSUnit.h */,
 				93D09933189766080014DB3E /* CSUnit.m */,
-				93D09935189776A00014DB3E /* CSWeightUnit.h */,
-				93D09936189776A00014DB3E /* CSWeightUnit.m */,
-				93D099381897774C0014DB3E /* CSVolumeUnit.h */,
-				93D099391897774C0014DB3E /* CSVolumeUnit.m */,
+				931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */,
+				931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */,
 			);
 			name = Units;
 			sourceTree = "<group>";
@@ -298,6 +297,8 @@
 				B7BCA299180524A800CF7588 /* InfoPlist.strings */,
 				B7BCA29C180524A800CF7588 /* main.m */,
 				B7BCA29E180524A800CF7588 /* CookSmart-Prefix.pch */,
+				931AF96718C2B8AF0018AA8B /* WeightUnits.plist */,
+				931AF96918C2B9C90018AA8B /* VolumeUnits.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -415,8 +416,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */,
 				9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */,
 				9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */,
+				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
@@ -458,11 +461,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93D0993A1897774C0014DB3E /* CSVolumeUnit.m in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
+				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
@@ -479,7 +482,6 @@
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
-				93D09937189776A00014DB3E /* CSWeightUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,10 +10,7 @@
 
 @interface CSUnit : NSObject
 
-- (id)initWithName:(NSString*)name;
-- (id)initWithIndex:(NSInteger)index;
-+ (NSString*)nameWithIndex:(NSInteger)index;
-+ (NSUInteger)numUnits;
-@property (nonatomic, strong) NSString* name;
-@property (assign) float conversionFactor;
+- (id)initWithDictionary:(NSDictionary*)dict;
+@property (nonatomic, readonly) NSString* name;
+@property (nonatomic, readonly) float conversionFactor;
 @end

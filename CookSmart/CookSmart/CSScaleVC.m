@@ -9,11 +9,11 @@
 #import "CSScaleVC.h"
 #import "CSScaleView.h"
 #import "CSIngredient.h"
-#import "CSWeightUnit.h"
-#import "CSVolumeUnit.h"
 #import "CSGlassView.h"
 #import "CSUnitPicker.h"
 #import "CSScaleVCInternals.h"
+#import "CSUnitCollection.h"
+#import "CSUnit.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
@@ -31,8 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet CSGlassView *glassView;
 
-@property (strong, nonatomic) CSWeightUnit* currentWeightUnit;
-@property (strong, nonatomic) CSVolumeUnit* currentVolumeUnit;
+@property (strong, nonatomic) CSUnit* currentWeightUnit;
+@property (strong, nonatomic) CSUnit* currentVolumeUnit;
 
 @property (weak, nonatomic) CSUnitPicker *unitPicker;
 
@@ -50,8 +50,8 @@
     {
         self.syncsScales = YES;
         
-        self.currentWeightUnit = [[CSWeightUnit alloc] initWithIndex:0];
-        self.currentVolumeUnit = [[CSVolumeUnit alloc] initWithIndex:0];
+        self.currentWeightUnit = [[CSUnitCollection weightUnits] unitAtIndex:0];
+        self.currentVolumeUnit = [[CSUnitCollection volumeUnits] unitAtIndex:0];
     }
     return self;
 }
@@ -477,7 +477,7 @@ static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitN
 }
 
 #pragma mark - CSUnitPicker delegate method
-- (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit
+- (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
 {
     self.currentWeightUnit = weightUnit;
     self.currentVolumeUnit = volumeUnit;

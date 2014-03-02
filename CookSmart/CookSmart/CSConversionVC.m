@@ -13,8 +13,7 @@
 #import "CSIngredient.h"
 #import "CSScaleView.h"
 #import "CSUnit.h"
-#import "CSVolumeUnit.h"
-#import "CSWeightUnit.h"
+#import "CSUnitCollection.h"
 #import "CSScaleVC.h"
 
 #define CHOOSE_UNITS_TEXT @"Choose Units"

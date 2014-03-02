@@ -10,15 +10,14 @@
 #import "CSScaleVCInternals.h"
 
 @class CSUnitPicker;
-@class CSVolumeUnit;
-@class CSWeightUnit;
+@class CSUnit;
 @protocol CSUnitPickerDelegate <NSObject>
-- (void)unitPicker:(CSUnitPicker*)unitPicker pickedVolumeUnit:(CSVolumeUnit*)volumeUnit andWeightUnit:(CSWeightUnit*)weightUnit;
+- (void)unitPicker:(CSUnitPicker*)unitPicker pickedVolumeUnit:(CSUnit*)volumeUnit andWeightUnit:(CSUnit*)weightUnit;
 @end
 
 @interface CSUnitPicker : UIControl <UIScrollViewDelegate>
 
-+ (CSUnitPicker *)unitPickerWithCurrentVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit;
++ (CSUnitPicker *)unitPickerWithCurrentVolumeUnit:(CSUnit*)volUnit andWeightUnit:(CSUnit*)weightUnit;
 
 @property (weak, nonatomic) id <CSUnitPickerDelegate> delegate;
 @property (nonatomic, assign) CSScaleVCArrangement arrangement;

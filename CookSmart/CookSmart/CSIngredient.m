@@ -7,8 +7,7 @@
 //
 
 #import "CSIngredient.h"
-#import "CSWeightUnit.h"
-#import "CSVolumeUnit.h"
+#import "CSUnit.h"
 
 #define INGREDIENT_KEY_NAME     @"Name"
 #define INGREDIENT_KEY_DENSITY  @"Density"
@@ -44,7 +43,7 @@
              };
 }
 
-- (float)densityWithVolumeUnit:(CSVolumeUnit *)volumeUnit andWeightUnit:(CSWeightUnit *)weightUnit
+- (float)densityWithVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
 {
     return self.density*(weightUnit.conversionFactor/volumeUnit.conversionFactor);
 }
