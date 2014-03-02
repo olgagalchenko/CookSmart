@@ -25,23 +25,23 @@
 
 @implementation CSUnitPicker
 
-- (id)initWithVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit
++ (CSUnitPicker *)unitPickerWithCurrentVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit
 {
-    NSArray* topViews = [[NSBundle mainBundle] loadNibNamed:@"CSUnitPicker" owner:self options:nil];
-    self = [topViews firstObject];
+    NSArray* topViews = [[NSBundle mainBundle] loadNibNamed:@"CSUnitPicker" owner:nil options:nil];
+    CSUnitPicker *unitPicker = [topViews firstObject];
     if (self)
     {
-        addUnitLabels(self.volumeScrollView, [CSVolumeUnit class]);
-        addUnitLabels(self.weightScrollView, [CSWeightUnit class]);
+        addUnitLabels(unitPicker.volumeScrollView, [CSVolumeUnit class]);
+        addUnitLabels(unitPicker.weightScrollView, [CSWeightUnit class]);
         CSUnitPickerCenterLineView *centerLine = [[CSUnitPickerCenterLineView alloc] init];
         centerLine.translatesAutoresizingMaskIntoConstraints = NO;
-        [self insertSubview:centerLine atIndex:0];
-        self.centerLine = centerLine;
+        [unitPicker insertSubview:centerLine atIndex:0];
+        unitPicker.centerLine = centerLine;
         
-        self.volumeUnit = volUnit;
-        self.weightUnit = weightUnit;
+        unitPicker.volumeUnit = volUnit;
+        unitPicker.weightUnit = weightUnit;
     }
-    return self;
+    return unitPicker;
 }
 
 - (void)layoutSubviews

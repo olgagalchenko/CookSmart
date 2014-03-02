@@ -49,6 +49,7 @@
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef) colors, locations);
     CGColorSpaceRelease(colorSpace);
     CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, self.gradientStart), CGPointMake(0, self.bounds.size.height), 0);
+    CGGradientRelease(gradient);
 }
 
 @end

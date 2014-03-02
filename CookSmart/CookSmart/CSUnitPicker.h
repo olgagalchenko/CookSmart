@@ -18,7 +18,7 @@
 
 @interface CSUnitPicker : UIControl <UIScrollViewDelegate>
 
-- (id)initWithVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit;
++ (CSUnitPicker *)unitPickerWithCurrentVolumeUnit:(CSVolumeUnit*)volUnit andWeightUnit:(CSWeightUnit*)weightUnit;
 
 @property (weak, nonatomic) id <CSUnitPickerDelegate> delegate;
 @property (nonatomic, assign) CSScaleVCArrangement arrangement;

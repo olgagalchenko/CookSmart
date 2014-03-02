@@ -213,7 +213,6 @@ static AnalyticsSender *sharedInstance = nil;
             return -1;
         }
         // The buffer is filled. We'll zip what's in the buffer and write it to the output stream.
-        status = Z_OK;
         zippedStream.next_in = uncompressedDataBuffer;
         zippedStream.avail_in = numBytesRead;
         // If we're compressing the last chunk use Z_FINISH, otherwise don't flush.

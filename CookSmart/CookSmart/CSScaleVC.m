@@ -71,7 +71,7 @@
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
     
-    CSUnitPicker *unitPicker = [[CSUnitPicker alloc] initWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    CSUnitPicker *unitPicker = [CSUnitPicker unitPickerWithCurrentVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
     unitPicker.delegate = self;
     unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitPicker
