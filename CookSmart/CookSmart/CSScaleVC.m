@@ -127,11 +127,7 @@
     
     float idealWeightScale = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit]*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
-    if (idealWeightScale >=  5 && idealWeightScale < 10)
-    {
-        humanReadableWeightScale = 5;
-    }
-    else if (idealWeightScale >= 10)
+    if (idealWeightScale >= 10)
     {
         NSUInteger orderOfMagnitude = (NSUInteger) floor(log10(idealWeightScale));
         humanReadableWeightScale = idealWeightScale - (((NSUInteger)idealWeightScale)%(NSUInteger)pow(10, orderOfMagnitude));
@@ -140,11 +136,7 @@
     {
         float idealVolumeScale = humanReadableWeightScale/[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
         volumeScale = 1;
-        if (idealVolumeScale >= 5 && idealVolumeScale < 10)
-        {
-            volumeScale = 5;
-        }
-        else if (idealVolumeScale >= 10)
+        if (idealVolumeScale >= 10)
         {
             NSUInteger orderOfMagnitude = (NSUInteger) floor(log10(idealVolumeScale));
             volumeScale = idealVolumeScale - (((NSUInteger)idealVolumeScale)%(NSUInteger)pow(10, orderOfMagnitude));

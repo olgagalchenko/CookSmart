@@ -11,7 +11,7 @@
 #import "CSUnitPickerCenterLineView.h"
 #import "CSUnitCollection.h"
 
-#define UNIT_LABEL_HEIGHT       60
+#define UNIT_LABEL_HEIGHT       40
 #define CENTER_LINE_THICKNESS   2
 
 @interface CSUnitPicker ()
@@ -29,10 +29,10 @@
 {
     NSArray* topViews = [[NSBundle mainBundle] loadNibNamed:@"CSUnitPicker" owner:nil options:nil];
     CSUnitPicker *unitPicker = [topViews firstObject];
-    if (self)
+    if (unitPicker)
     {
-        addUnitLabels(unitPicker.volumeScrollView, [CSUnitCollection volumeUnits]);
-        addUnitLabels(unitPicker.weightScrollView, [CSUnitCollection weightUnits]);
+        addUnitLabels(unitPicker.volumeScrollView, [CSUnitCollection volumeUnits], unitPicker, @selector(unitTapped:));
+        addUnitLabels(unitPicker.weightScrollView, [CSUnitCollection weightUnits], unitPicker, @selector(unitTapped:));
         CSUnitPickerCenterLineView *centerLine = [[CSUnitPickerCenterLineView alloc] init];
         centerLine.translatesAutoresizingMaskIntoConstraints = NO;
         [unitPicker insertSubview:centerLine atIndex:0];
@@ -71,15 +71,20 @@
     [self.delegate unitPicker:self pickedVolumeUnit:self.volumeUnit andWeightUnit:self.weightUnit];
 }
 
-static inline void addUnitLabels(UIScrollView* view, CSUnitCollection* unitCollection)
+static inline void addUnitLabels(UIScrollView* view, CSUnitCollection* unitCollection, id gestureTarget, SEL gestureSelector)
 {
     for (int i = 0; i < [unitCollection countOfUnits]; i++)
     {
         UILabel* unitLabel = [[UILabel alloc] init];
         unitLabel.text = [unitCollection unitAtIndex:i].name;
+        unitLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:15];
         unitLabel.textAlignment = NSTextAlignmentCenter;
         unitLabel.backgroundColor = [UIColor clearColor];
+        unitLabel.userInteractionEnabled = YES;
         [view addSubview:unitLabel];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:gestureTarget action:gestureSelector];
+        tapRecognizer.numberOfTapsRequired = 1;
+        [unitLabel addGestureRecognizer:tapRecognizer];
     }
 }
 
@@ -109,14 +114,15 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
     return self.weightScrollView == scrollView? [CSUnitCollection weightUnits] : [CSUnitCollection volumeUnits];
 }
 
-- (void)snapScrollView:(UIScrollView*)scrollView toClosestUnit:(CGFloat)position
+- (void)snapScrollViewToClosestUnit:(UIScrollView*)scrollView
 {
     CGFloat yOffset;
-    CGFloat offsetFromSnap = remainder(position, UNIT_LABEL_HEIGHT);
+    CGFloat currentYPosition = scrollView.contentOffset.y;
+    CGFloat offsetFromSnap = remainder(currentYPosition, UNIT_LABEL_HEIGHT);
     if (offsetFromSnap > UNIT_LABEL_HEIGHT/2)
-        yOffset = position - offsetFromSnap + UNIT_LABEL_HEIGHT;
+        yOffset = currentYPosition - offsetFromSnap + UNIT_LABEL_HEIGHT;
     else
-        yOffset = position - offsetFromSnap;
+        yOffset = currentYPosition - offsetFromSnap;
     yOffset = MIN(MAX(0, yOffset), UNIT_LABEL_HEIGHT*([[self unitCollectionForScrollView:scrollView] countOfUnits]-1));
     [scrollView setContentOffset:CGPointMake(0, yOffset) animated:YES];
     NSString *unitKind = @"unknown";
@@ -152,6 +158,21 @@ static inline void layoutUnitLabels(UIScrollView* view, NSString* selectedUnitNa
 #pragma mark - scroll view delegate methods
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self snapScrollView:scrollView toClosestUnit:scrollView.contentOffset.y];
+    if (!decelerate)
+        [self snapScrollViewToClosestUnit:scrollView];
 }
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self snapScrollViewToClosestUnit:scrollView];
+}
+
+- (void)unitTapped:(UITapGestureRecognizer *)tapRecognizer
+{
+    UIView *touchedUnitView = tapRecognizer.view;
+    UIScrollView *scrollView = (UIScrollView *)touchedUnitView.superview;
+    NSUInteger indexOfTouchedUnit = [scrollView.subviews indexOfObject:touchedUnitView];
+    [scrollView setContentOffset:CGPointMake(0, indexOfTouchedUnit*UNIT_LABEL_HEIGHT) animated:YES];
+}
+
 @end
