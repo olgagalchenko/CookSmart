@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, strong) UISearchDisplayController* searchController;
 @property (nonatomic, strong) CSIngredients* filteredIngredients;
+
 @end
 
 @implementation CSIngredientListVC
@@ -52,6 +53,13 @@ static NSString* CellIdentifier = @"Cell";
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Close"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
     self.navigationItem.leftBarButtonItem = closeItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editIngredient:)];
+    [self.navigationItem.leftBarButtonItem setTintColor:RED_LINE_COLOR];
+    [self.navigationItem.rightBarButtonItem setTintColor:RED_LINE_COLOR];
+    UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    titleView.text = self.title;
+    titleView.font = [UIFont fontWithName:@"AvenirNext-Medium" size:20];
+    titleView.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = titleView;
     
     NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSInteger heightOfCell = [self tableView:self.tableView heightForRowAtIndexPath:firstCellPath];
@@ -101,14 +109,30 @@ static NSString* CellIdentifier = @"Cell";
     return [[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:section] name];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *headerLabel = [[UILabel alloc] init];
+    headerLabel.text = [@"   " stringByAppendingString:[[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:section] name]];
+    headerLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:15];
+    headerLabel.backgroundColor = BACKGROUND_COLOR;
+    return headerLabel;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.accessoryType = UITableViewCellAccessoryDetailButton;
-    cell.textLabel.text = [[[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row] name];
+    CSIngredient *ingredient = [[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
+    UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    [detailButton setTintColor:RED_LINE_COLOR];
+    [detailButton addTarget:self action:@selector(detailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    detailButton.tag = [[CSIngredients sharedInstance] flattenedIndexForIngredient:ingredient];
+    
+    cell.accessoryView = detailButton;
+    cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:17];
+    cell.textLabel.text = [ingredient name];
     return cell;
 }
 
@@ -127,10 +151,13 @@ static NSString* CellIdentifier = @"Cell";
     [self closeIngrList:nil];
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (void)detailButtonTapped:(id)sender
 {
-    CSIngredient *ingredientToEdit = [[CSIngredients sharedInstance] ingredientAtGroupIndex:indexPath.section andIngredientIndex:indexPath.row];
-    [self editIngredient:ingredientToEdit];
+    NSUInteger flattenedIngredientIndex = [(UIButton *)sender tag];
+    if (flattenedIngredientIndex != NSNotFound)
+        [self editIngredient:[[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:flattenedIngredientIndex]];
+    else
+        CSAssertFail(@"detail_button_unfound_ingredient", @"Wasn't able to find the flattened ingredient index for this button.");
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

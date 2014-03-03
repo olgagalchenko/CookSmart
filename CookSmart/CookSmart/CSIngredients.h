@@ -22,6 +22,7 @@
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;
 - (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index;
 - (NSUInteger)countOfIngredientGroups;
+- (NSUInteger)flattenedIndexForIngredient:(CSIngredient *)passedInIngredient;
 - (CSIngredient *)ingredientAtFlattenedIngredientIndex:(NSUInteger)flattenedIngredientIndex;
 - (NSUInteger)flattenedIngredientIndexForGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)index;
 - (NSUInteger)flattenedCountOfIngredients;

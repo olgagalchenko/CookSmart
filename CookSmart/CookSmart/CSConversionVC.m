@@ -133,7 +133,9 @@
         UIButton *ingredientButton = [UIButton buttonWithType:UIButtonTypeSystem];
         ingredientButton.frame = CGRectMake(xOrigin, 0, self.ingredientPickerScrollView.bounds.size.width, self.ingredientPickerScrollView.bounds.size.height);
         [ingredientButton setTitle:[self nameForIngredientAtXOrigin:xOrigin] forState:UIControlStateNormal];
-        ingredientButton.titleLabel.font = [UIFont systemFontOfSize:MAJOR_BUTTON_FONT_SIZE];
+        ingredientButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:MAJOR_BUTTON_FONT_SIZE];
+        [ingredientButton setTitleColor:RED_LINE_COLOR forState:UIControlStateNormal];
+        [ingredientButton setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
         [ingredientButton addTarget:self action:@selector(handleIngredientTap:) forControlEvents:UIControlEventTouchUpInside];
         [self.ingredientPickerScrollView addSubview:ingredientButton];
     }

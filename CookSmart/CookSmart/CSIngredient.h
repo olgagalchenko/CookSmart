@@ -21,4 +21,6 @@
 
 - (float)densityWithVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit;
 - (BOOL)isIngredientDensityValid;
+- (BOOL)isEqualToIngredient:(CSIngredient *)otherIngredient;
+
 @end

@@ -56,4 +56,9 @@
     return valid;
 }
 
+- (BOOL)isEqualToIngredient:(CSIngredient *)otherIngredient
+{
+    return [self.name isEqualToString:otherIngredient.name] && self.density == otherIngredient.density;
+}
+
 @end

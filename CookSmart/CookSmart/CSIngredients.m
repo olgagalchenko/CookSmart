@@ -9,6 +9,7 @@
 #import "CSIngredients.h"
 #import "CSIngredientGroup.h"
 #import "CSFilteredIngredientGroup.h"
+#import "CSIngredient.h"
 
 #define CUSTOM_GROUP_NAME @"Custom"
 
@@ -125,6 +126,23 @@ static inline NSString *pathToIngredientsOnDisk()
         }
     }
     return index;
+}
+
+- (NSUInteger)flattenedIndexForIngredient:(CSIngredient *)passedInIngredient
+{
+    NSUInteger result = 0;
+    for (CSIngredientGroup *group in self)
+    {
+        for (CSIngredient *ingredient in group)
+        {
+            if ([ingredient isEqualToIngredient:passedInIngredient])
+            {
+                return result;
+            }
+            result++;
+        }
+    }
+    return NSNotFound;
 }
 
 - (CSIngredient *)ingredientAtFlattenedIngredientIndex:(NSUInteger)flattenedIngredientIndex

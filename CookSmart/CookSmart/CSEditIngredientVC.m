@@ -101,6 +101,8 @@
     [self.view addConstraints:@[bottom, left, right, top]];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    [self.navigationItem.leftBarButtonItem setTintColor:RED_LINE_COLOR];
+    [self.navigationItem.rightBarButtonItem setTintColor:RED_LINE_COLOR];
 }
 
 - (void)cancelEdit:(id)sender
