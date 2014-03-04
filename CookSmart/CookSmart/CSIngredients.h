@@ -32,4 +32,6 @@
 - (BOOL)addIngredient:(CSIngredient*)newIngr;
 - (BOOL)persist;
 
+- (void)deleteAllSavedIngredients;
+
 @end

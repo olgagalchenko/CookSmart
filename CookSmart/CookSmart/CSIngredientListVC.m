@@ -16,6 +16,7 @@
 
 @property (nonatomic, readwrite, weak) id<CSIngredientListVCDelegate>delegate;
 @property (nonatomic, strong) UISearchBar* searchBar;
+@property (nonatomic, strong) UIButton* resetToDefaults;
 @property (nonatomic, strong) UISearchDisplayController* searchController;
 @property (nonatomic, strong) CSIngredients* filteredIngredients;
 
@@ -52,9 +53,12 @@ static NSString* CellIdentifier = @"Cell";
     
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Close"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
     self.navigationItem.leftBarButtonItem = closeItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editIngredient:)];
     [self.navigationItem.leftBarButtonItem setTintColor:RED_LINE_COLOR];
-    [self.navigationItem.rightBarButtonItem setTintColor:RED_LINE_COLOR];
+
+    UIBarButtonItem* add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editIngredient:)];
+    add.tintColor = RED_LINE_COLOR;
+    self.navigationItem.rightBarButtonItems = @[add];
+    
     UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     titleView.text = self.title;
     titleView.font = [UIFont fontWithName:@"AvenirNext-Medium" size:20];
@@ -69,6 +73,14 @@ static NSString* CellIdentifier = @"Cell";
     self.tableView.contentOffset = CGPointMake(0,heightOfCell);
     
     self.tableView.tableHeaderView = self.searchBar;
+    
+    UIButton* resetToDefaults = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, heightOfCell)];
+    [resetToDefaults addTarget:self action:@selector(resetButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [resetToDefaults setTitle:@"Reset to Defaults" forState:UIControlStateNormal];
+    [resetToDefaults setTitleColor:BACKGROUND_COLOR forState:UIControlStateNormal];
+    [resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
+    resetToDefaults.backgroundColor = RED_LINE_COLOR;
+    self.tableView.tableFooterView = resetToDefaults;
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     self.searchController.delegate = self;
@@ -269,6 +281,24 @@ static NSString* CellIdentifier = @"Cell";
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     logUserAction(@"ingredient_filter_cancel", @{@"search_text" : searchBar.text});
+}
+
+#pragma mark - reset to defaults
+- (void)resetButtonAction:(id)sender
+{
+    UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to reset to defaults?" message:@"Resetting to defaults will remove all your added and edited ingredients. Are you sure you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+    [resetAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [[CSIngredients sharedInstance] deleteAllSavedIngredients];
+        [self.tableView reloadData];
+        NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:firstCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 #pragma mark - notification responders

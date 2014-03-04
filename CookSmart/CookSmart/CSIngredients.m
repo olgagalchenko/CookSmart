@@ -271,4 +271,15 @@ static inline NSString *pathToIngredientsOnDisk()
     return success;
 }
 
+- (void)deleteAllSavedIngredients
+{
+    initialized = NO;
+    sharedInstance = nil;
+    
+    NSError* err;
+    [[NSFileManager defaultManager] removeItemAtPath:pathToIngredientsOnDisk() error:&err];
+    
+    [CSIngredients initialize];
+}
+
 @end
