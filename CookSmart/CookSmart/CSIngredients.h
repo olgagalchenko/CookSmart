@@ -10,10 +10,21 @@
 
 #define INGREDIENT_DELETE_NOTIFICATION_NAME     @"ingredient_delete_notification"
 
-#define PREF_INGREDIENTS_CHANGED @"Ingredients changed"
-
 @class CSIngredient;
 @class CSIngredientGroup;
+
+static inline NSString *pathToIngredientsOnDisk()
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSCAssert([paths count] > 0, @"Unable to get the path to the documents directory.");
+    NSString *documentsDirectory = paths[0];
+    return [documentsDirectory stringByAppendingPathComponent:@"ingredients.plist"];
+}
+
+static inline NSString *pathToIngredientsInBundle()
+{
+    return [[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"];
+}
 
 @interface CSIngredients : NSObject <NSFastEnumeration>
 

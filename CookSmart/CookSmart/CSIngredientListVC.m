@@ -92,10 +92,10 @@ static NSString* CellIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:PREF_INGREDIENTS_CHANGED])
-        self.tableView.tableFooterView = self.resetToDefaults;
-    else
+    if ([[NSFileManager defaultManager] contentsEqualAtPath:pathToIngredientsOnDisk() andPath:pathToIngredientsInBundle()])
         self.tableView.tableFooterView = nil;
+    else
+        self.tableView.tableFooterView = self.resetToDefaults;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -302,7 +302,6 @@ static NSString* CellIdentifier = @"Cell";
 {
     if (buttonIndex == 1)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:PREF_INGREDIENTS_CHANGED];
         self.tableView.tableFooterView = nil;
         
         [[CSIngredients sharedInstance] deleteAllSavedIngredients];

@@ -26,14 +26,6 @@
 
 static CSIngredients *sharedInstance;
 
-static inline NSString *pathToIngredientsOnDisk()
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSCAssert([paths count] > 0, @"Unable to get the path to the documents directory.");
-    NSString *documentsDirectory = paths[0];
-    return [documentsDirectory stringByAppendingPathComponent:@"ingredients.plist"];
-}
-
 + (void)initialize
 {
     static dispatch_once_t onceToken;
@@ -56,7 +48,7 @@ static inline NSString *pathToIngredientsOnDisk()
 + (void)copyIngredientsFromBundle
 {
     NSError *copyError = nil;
-    [[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"]
+    [[NSFileManager defaultManager] copyItemAtPath:pathToIngredientsInBundle()
                                             toPath:pathToIngredientsOnDisk()
                                              error:&copyError];
     CSAssert(copyError == nil, @"ingredients_file_copy", @"Error occurred while copying the ingredients file to the sandbox.");
@@ -265,8 +257,6 @@ static inline NSString *pathToIngredientsOnDisk()
 
 - (BOOL)persist
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PREF_INGREDIENTS_CHANGED];
-    
     NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];
     for (CSIngredientGroup *group in self.ingredientGroups)
     {
@@ -286,6 +276,9 @@ static inline NSString *pathToIngredientsOnDisk()
     
     NSError* err;
     [[NSFileManager defaultManager] removeItemAtPath:pathToIngredientsOnDisk() error:&err];
+    
+    CSAssert(err == nil, @"csingredients_remove_ingredients_saved_on_disk", @"Resetting ingredients to defaults");
+    
     [CSIngredients copyIngredientsFromBundle];
     sharedInstance = [[CSIngredients alloc] initWithPlistOnDisk];
     
