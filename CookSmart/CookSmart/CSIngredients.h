@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define INGREDIENT_DELETE_NOTIFICATION_NAME     @"ingredient_delete_notification"
-#define INGREDIENT_ADD_NOTIFICATION_NAME        @"ingredient_add_notification"
+
+#define PREF_INGREDIENTS_CHANGED @"Ingredients changed"
 
 @class CSIngredient;
 @class CSIngredientGroup;

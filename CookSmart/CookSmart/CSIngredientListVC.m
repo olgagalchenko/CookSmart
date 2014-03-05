@@ -57,7 +57,7 @@ static NSString* CellIdentifier = @"Cell";
 
     UIBarButtonItem* add = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editIngredient:)];
     add.tintColor = RED_LINE_COLOR;
-    self.navigationItem.rightBarButtonItems = @[add];
+    self.navigationItem.rightBarButtonItem = add;
     
     UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     titleView.text = self.title;
@@ -74,13 +74,12 @@ static NSString* CellIdentifier = @"Cell";
     
     self.tableView.tableHeaderView = self.searchBar;
     
-    UIButton* resetToDefaults = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, heightOfCell)];
-    [resetToDefaults addTarget:self action:@selector(resetButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [resetToDefaults setTitle:@"Reset to Defaults" forState:UIControlStateNormal];
-    [resetToDefaults setTitleColor:BACKGROUND_COLOR forState:UIControlStateNormal];
-    [resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
-    resetToDefaults.backgroundColor = RED_LINE_COLOR;
-    self.tableView.tableFooterView = resetToDefaults;
+    self.resetToDefaults = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, heightOfCell)];
+    [self.resetToDefaults addTarget:self action:@selector(resetButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.resetToDefaults setTitle:@"Reset to Defaults" forState:UIControlStateNormal];
+    [self.resetToDefaults setTitleColor:BACKGROUND_COLOR forState:UIControlStateNormal];
+    [self.resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
+    self.resetToDefaults.backgroundColor = RED_LINE_COLOR;
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     self.searchController.delegate = self;
@@ -88,6 +87,15 @@ static NSString* CellIdentifier = @"Cell";
     self.searchController.searchResultsDelegate = self;
     
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PREF_INGREDIENTS_CHANGED])
+        self.tableView.tableFooterView = self.resetToDefaults;
+    else
+        self.tableView.tableFooterView = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -286,7 +294,7 @@ static NSString* CellIdentifier = @"Cell";
 #pragma mark - reset to defaults
 - (void)resetButtonAction:(id)sender
 {
-    UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to reset to defaults?" message:@"Resetting to defaults will remove all your added and edited ingredients. Are you sure you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+    UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Resetting to defaults will remove all your added and edited ingredients." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
     [resetAlert show];
 }
 
@@ -294,22 +302,14 @@ static NSString* CellIdentifier = @"Cell";
 {
     if (buttonIndex == 1)
     {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:PREF_INGREDIENTS_CHANGED];
+        self.tableView.tableFooterView = nil;
+        
         [[CSIngredients sharedInstance] deleteAllSavedIngredients];
         [self.tableView reloadData];
         NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView scrollToRowAtIndexPath:firstCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
-}
-
-#pragma mark - notification responders
-- (void)newIngredientAdded:(NSNotification*)notificationObj
-{
-    [self.tableView reloadData];
-}
-
-- (void)ingredientModified:(NSNotification*)notificationObj
-{
-    [self.tableView reloadData];
 }
 
 #pragma mark - dismiss self

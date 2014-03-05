@@ -25,7 +25,6 @@
 @implementation CSIngredients
 
 static CSIngredients *sharedInstance;
-static BOOL initialized = NO;
 
 static inline NSString *pathToIngredientsOnDisk()
 {
@@ -37,8 +36,8 @@ static inline NSString *pathToIngredientsOnDisk()
 
 + (void)initialize
 {
-    if(!initialized)
-    {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         BOOL ingredientsIsDir = YES;
         if ([[NSFileManager defaultManager] fileExistsAtPath:pathToIngredientsOnDisk() isDirectory:&ingredientsIsDir])
         {
@@ -48,21 +47,30 @@ static inline NSString *pathToIngredientsOnDisk()
         {
             // This is the first time we're launching the app.
             // Let's move the ingredients file from the app bundle to our sandbox.
-            NSError *copyError = nil;
-            [[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"]
-                                                    toPath:pathToIngredientsOnDisk()
-                                                     error:&copyError];
-            CSAssert(copyError == nil, @"ingredients_file_copy", @"Error occurred while copying the ingredients file to the sandbox.");
+            [CSIngredients copyIngredientsFromBundle];
         }
-        NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
-        NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
-        for (NSDictionary *ingredientGroupDict in rawIngredientGroupsArray)
-        {
-            [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
-        }
-        sharedInstance = [[self alloc] initWithIngredientGroups:[NSArray arrayWithArray:tmpIngredientGroupsArray]];
-        initialized = YES;
+        sharedInstance = [[self alloc] initWithPlistOnDisk];
+    });
+}
+
++ (void)copyIngredientsFromBundle
+{
+    NSError *copyError = nil;
+    [[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"]
+                                            toPath:pathToIngredientsOnDisk()
+                                             error:&copyError];
+    CSAssert(copyError == nil, @"ingredients_file_copy", @"Error occurred while copying the ingredients file to the sandbox.");
+}
+
+- (id)initWithPlistOnDisk
+{
+    NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
+    NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
+    for (NSDictionary *ingredientGroupDict in rawIngredientGroupsArray)
+    {
+        [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
     }
+    return [self initWithIngredientGroups:[NSArray arrayWithArray:tmpIngredientGroupsArray]];
 }
 
 - (id)initWithIngredientGroups:(NSArray *)ingredientGroups
@@ -252,12 +260,13 @@ static inline NSString *pathToIngredientsOnDisk()
     CSIngredientGroup* ingrGroup = [self customIngredientGroup];
     [ingrGroup addIngredient:newIngr];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_ADD_NOTIFICATION_NAME object:newIngr];
     return [sharedInstance persist];
 }
 
 - (BOOL)persist
 {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PREF_INGREDIENTS_CHANGED];
+    
     NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];
     for (CSIngredientGroup *group in self.ingredientGroups)
     {
@@ -273,13 +282,14 @@ static inline NSString *pathToIngredientsOnDisk()
 
 - (void)deleteAllSavedIngredients
 {
-    initialized = NO;
     sharedInstance = nil;
     
     NSError* err;
     [[NSFileManager defaultManager] removeItemAtPath:pathToIngredientsOnDisk() error:&err];
+    [CSIngredients copyIngredientsFromBundle];
+    sharedInstance = [[CSIngredients alloc] initWithPlistOnDisk];
     
-    [CSIngredients initialize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_DELETE_NOTIFICATION_NAME object:nil];
 }
 
 @end
