@@ -15,6 +15,7 @@
 - (void)scaleVCDidBeginChangingUnits:(CSScaleVC*)scaleVC;
 - (void)scaleVCDidFinishChangingUnits:(CSScaleVC*)scaleVC;
 - (void)scaleVC:(CSScaleVC *)scaleVC densityDidChange:(float)changedDensity;
+- (void)scaleVCWillBeginHandlingInteraction:(CSScaleVC*)scaleVC;
 @end
 
 @class CSIngredient;

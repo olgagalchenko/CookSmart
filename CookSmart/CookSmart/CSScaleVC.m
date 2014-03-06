@@ -199,8 +199,17 @@
     [self snapToHumanReadableValueOfScaleView:(CSScaleView *)scrollView];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if ([self.delegate respondsToSelector:@selector(scaleVCWillBeginHandlingInteraction:)])
+        [self.delegate scaleVCWillBeginHandlingInteraction:self];
+}
+
 - (void)scaleViewTapped:(CSScaleView *)scaleView
 {
+    if ([self.delegate respondsToSelector:@selector(scaleVCWillBeginHandlingInteraction:)])
+        [self.delegate scaleVCWillBeginHandlingInteraction:self];
+    
     [self synchronizeVolumeAndWeight:self.volumeScaleScrollView cancelDeceleration:YES force:NO];
     [self synchronizeVolumeAndWeight:self.weightScaleScrollView cancelDeceleration:YES force:NO];
 }
@@ -341,6 +350,8 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 
 - (IBAction)handleUnitTouch:(id)sender
 {
+    if ([self.delegate respondsToSelector:@selector(scaleVCWillBeginHandlingInteraction:)])
+        [self.delegate scaleVCWillBeginHandlingInteraction:self];
     if ([self.delegate respondsToSelector:@selector(scaleVCDidBeginChangingUnits:)])
         [self.delegate scaleVCDidBeginChangingUnits:self];
     

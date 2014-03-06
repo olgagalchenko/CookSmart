@@ -156,6 +156,11 @@
     self.ingredient.density = changedDensity;
 }
 
+- (void)scaleVCWillBeginHandlingInteraction:(CSScaleVC*)scaleVC
+{
+    [self.ingredientNameField resignFirstResponder];
+}
+
 #pragma mark - Misc. Helpers
 - (NSDictionary *)analyticsDictionary
 {
