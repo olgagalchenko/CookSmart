@@ -122,7 +122,7 @@
     }
     else if (![self.ingredient isIngredientDensityValid] || self.ingredient.density == 0)
     {
-        UIAlertView* densityError = [[UIAlertView alloc] initWithTitle:@"Invalid density" message:@"wow. such dense. much error." delegate:nil cancelButtonTitle:@"OK, I'll fix it." otherButtonTitles: nil];
+        UIAlertView* densityError = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Choose a value greater than 0." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [densityError show];
         logUserAction(@"ingredient_persist_fail", [self analyticsDictionary]);
     }
