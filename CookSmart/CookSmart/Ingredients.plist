@@ -2,48 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<dict>
-		<key>Sugars</key>
-		<array>
-			<dict>
-				<key>Name</key>
-				<string>Brown Sugar, light/dark</string>
-				<key>Density</key>
-				<integer>198</integer>
-			</dict>
-			<dict>
-				<key>Name</key>
-				<string>Powdered Sugar</string>
-				<key>Density</key>
-				<real>113</real>
-			</dict>
-			<dict>
-				<key>Name</key>
-				<string>Granulated Sugar</string>
-				<key>Density</key>
-				<integer>198</integer>
-			</dict>
-            <dict>
-				<key>Name</key>
-				<string>Pearl Sugar</string>
-				<key>Density</key>
-				<integer>200</integer>
-			</dict>
-            <dict>
-				<key>Name</key>
-				<string>Muscovado Sugar</string>
-				<key>Density</key>
-				<integer>240</integer>
-			</dict>
-			<dict>
-				<key>Name</key>
-				<string>Turbinado (Raw) Sugar</string>
-				<key>Density</key>
-				<integer>190</integer>
-			</dict>
-		</array>
-	</dict>
-	<dict>
+    <dict>
 		<key>Flours</key>
 		<array>
             <dict>
@@ -121,6 +80,47 @@
 		</array>
 	</dict>
 	<dict>
+		<key>Sugars</key>
+		<array>
+			<dict>
+				<key>Name</key>
+				<string>Brown Sugar, light/dark</string>
+				<key>Density</key>
+				<integer>198</integer>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Powdered Sugar</string>
+				<key>Density</key>
+				<real>113</real>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Granulated Sugar</string>
+				<key>Density</key>
+				<integer>198</integer>
+			</dict>
+            <dict>
+				<key>Name</key>
+				<string>Pearl Sugar</string>
+				<key>Density</key>
+				<integer>200</integer>
+			</dict>
+            <dict>
+				<key>Name</key>
+				<string>Muscovado Sugar</string>
+				<key>Density</key>
+				<integer>240</integer>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Turbinado (Raw) Sugar</string>
+				<key>Density</key>
+				<integer>190</integer>
+			</dict>
+		</array>
+	</dict>
+		<dict>
 		<key>Oil and Shortening</key>
 		<array>
             <dict>
