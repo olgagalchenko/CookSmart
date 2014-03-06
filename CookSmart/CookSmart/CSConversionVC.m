@@ -19,9 +19,6 @@
 #define CHOOSE_UNITS_TEXT @"Choose Units"
 
 @interface CSConversionVC ()
-{
-    CGFloat _previousIngredientPickerDistanceToSnap;
-}
 
 @property (nonatomic, readwrite, assign) NSUInteger ingredientIndex;
 @property (weak, nonatomic) IBOutlet UIScrollView *ingredientPickerScrollView;
@@ -180,21 +177,14 @@
     CGFloat scaleViewAlpha = distanceToMiddle/(self.ingredientPickerScrollView.bounds.size.width/2);
     [self.scaleVC setScalesAlpha:scaleViewAlpha];
     
-    if (distanceToMiddle < self.ingredientPickerScrollView.bounds.size.width/4 && (_previousIngredientPickerDistanceToSnap >= 0 ^ distanceToSnap >= 0))
+    NSUInteger projectedIndex = (int)round(self.ingredientPickerScrollView.contentOffset.x/self.ingredientPickerScrollView.bounds.size.width);
+    projectedIndex = MIN(MAX(0, projectedIndex), self.ingredientPickerScrollView.contentSize.width/self.ingredientPickerScrollView.bounds.size.width - 1);
+    if (projectedIndex != self.ingredientIndex)
     {
-        // Reflect the chagne of ingredient on the scale
-        if (_previousIngredientPickerDistanceToSnap > 0)
-        {
-            self.ingredientIndex++;
-        }
-        else
-        {
-            self.ingredientIndex--;
-        }
+        self.ingredientIndex = projectedIndex;
         [self refreshScalesWithCurrentIngredient];
         logUserAction(@"ingredient_switch", [self.scaleVC analyticsAttributes]);
     }
-    _previousIngredientPickerDistanceToSnap = distanceToSnap;
 }
 
 #pragma mark - CSIngredientListVCDelegate
