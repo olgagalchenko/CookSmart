@@ -13,6 +13,8 @@
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C111892CA110082D4E1 /* CSScaleTile.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
+		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
+		80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.dylib */; };
 		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
@@ -23,7 +25,6 @@
 		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
 		9351F3F818A1A32900AD45D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F218A1A32900AD45D0 /* README.md */; };
 		9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F318A1A32900AD45D0 /* release_notes.md */; };
-		9351F3FB18A1A48B00AD45D0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3FA18A1A48B00AD45D0 /* libz.dylib */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
@@ -46,12 +47,30 @@
 		B7BCA2B6180524A800CF7588 /* CookSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2B5180524A800CF7588 /* CookSmartTests.m */; };
 		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
 		DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */; };
-		DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E7E18A43F9F00F801D3 /* Analytics.m */; };
-		DCCC5E8618A46C7A00F801D3 /* AnalyticsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E8518A46C7A00F801D3 /* AnalyticsWriter.m */; };
-		DCCC5E8918A4827800F801D3 /* AnalyticsSender.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCC5E8818A4827800F801D3 /* AnalyticsSender.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 80629C0D18D4A03100106131;
+			remoteInfo = VGAnalytics;
+		};
+		80629C5C18D4AE8A00106131 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 80629C1D18D4A03100106131;
+			remoteInfo = VGAnalyticsTests;
+		};
+		80629C6118D4B1C700106131 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 80629C0C18D4A03100106131;
+			remoteInfo = VGAnalytics;
+		};
 		B7BCA2AD180524A800CF7588 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
@@ -74,6 +93,8 @@
 		80592C111892CA110082D4E1 /* CSScaleTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleTile.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
+		80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VGAnalytics.xcodeproj; path = "../analytics/iOS Analytics/VGAnalytics.xcodeproj"; sourceTree = "<group>"; };
+		80629C6718D4B3BF00106131 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
 		8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPickerCenterLineView.h; sourceTree = "<group>"; };
 		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
@@ -92,7 +113,6 @@
 		9351F3F418A1A32900AD45D0 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		9351F3F518A1A32900AD45D0 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		9351F3F618A1A32900AD45D0 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		9351F3FA18A1A48B00AD45D0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
@@ -126,14 +146,6 @@
 		DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFilteredIngredientGroup.h; sourceTree = "<group>"; };
 		DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFilteredIngredientGroup.m; sourceTree = "<group>"; };
 		DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIngredientGroupInternals.h; sourceTree = "<group>"; };
-		DCCC5E7D18A43F9F00F801D3 /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Analytics/Analytics.h; sourceTree = "<group>"; };
-		DCCC5E7E18A43F9F00F801D3 /* Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Analytics.m; path = Analytics/Analytics.m; sourceTree = "<group>"; };
-		DCCC5E8318A462F200F801D3 /* CommonAnalyticsInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CommonAnalyticsInfo.h; path = Analytics/CommonAnalyticsInfo.h; sourceTree = "<group>"; };
-		DCCC5E8418A46C7A00F801D3 /* AnalyticsWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticsWriter.h; path = Analytics/AnalyticsWriter.h; sourceTree = "<group>"; };
-		DCCC5E8518A46C7A00F801D3 /* AnalyticsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnalyticsWriter.m; path = Analytics/AnalyticsWriter.m; sourceTree = "<group>"; };
-		DCCC5E8718A4827800F801D3 /* AnalyticsSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticsSender.h; path = Analytics/AnalyticsSender.h; sourceTree = "<group>"; };
-		DCCC5E8818A4827800F801D3 /* AnalyticsSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnalyticsSender.m; path = Analytics/AnalyticsSender.m; sourceTree = "<group>"; };
-		DCCC5E8A18A4ADA400F801D3 /* AnalyticsHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyticsHelpers.h; path = Analytics/AnalyticsHelpers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9351F3FB18A1A48B00AD45D0 /* libz.dylib in Frameworks */,
+				80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */,
+				80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */,
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
@@ -211,6 +224,15 @@
 			name = ScaleView;
 			sourceTree = "<group>";
 		};
+		80629C5618D4AE8A00106131 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80629C5B18D4AE8A00106131 /* libVGAnalytics.a */,
+				80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9351F3F018A1A32900AD45D0 /* TestFlightSDK3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +261,7 @@
 		B7BCA284180524A800CF7588 = {
 			isa = PBXGroup;
 			children = (
+				80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */,
 				9351F3F018A1A32900AD45D0 /* TestFlightSDK3 */,
 				B7BCA296180524A800CF7588 /* CookSmart */,
 				B7BCA2AF180524A800CF7588 /* CookSmartTests */,
@@ -259,7 +282,7 @@
 		B7BCA28F180524A800CF7588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9351F3FA18A1A48B00AD45D0 /* libz.dylib */,
+				80629C6718D4B3BF00106131 /* libz.dylib */,
 				B7BCA290180524A800CF7588 /* Foundation.framework */,
 				B7BCA292180524A800CF7588 /* CoreGraphics.framework */,
 				B7BCA294180524A800CF7588 /* UIKit.framework */,
@@ -278,7 +301,6 @@
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
 				8000355C18B3CBF50032BF91 /* Scales */,
-				DCCC5E7C18A43F8200F801D3 /* Analytics */,
 				80592C0218924AEA0082D4E1 /* Model */,
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
@@ -322,21 +344,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DCCC5E7C18A43F8200F801D3 /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				DCCC5E7D18A43F9F00F801D3 /* Analytics.h */,
-				DCCC5E7E18A43F9F00F801D3 /* Analytics.m */,
-				DCCC5E8318A462F200F801D3 /* CommonAnalyticsInfo.h */,
-				DCCC5E8418A46C7A00F801D3 /* AnalyticsWriter.h */,
-				DCCC5E8518A46C7A00F801D3 /* AnalyticsWriter.m */,
-				DCCC5E8718A4827800F801D3 /* AnalyticsSender.h */,
-				DCCC5E8818A4827800F801D3 /* AnalyticsSender.m */,
-				DCCC5E8A18A4ADA400F801D3 /* AnalyticsHelpers.h */,
-			);
-			name = Analytics;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,6 +359,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				80629C6218D4B1C700106131 /* PBXTargetDependency */,
 			);
 			name = CookSmart;
 			productName = CookSmart;
@@ -383,7 +391,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CS;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
@@ -404,6 +412,12 @@
 			mainGroup = B7BCA284180524A800CF7588;
 			productRefGroup = B7BCA28E180524A800CF7588 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 80629C5618D4AE8A00106131 /* Products */;
+					ProjectRef = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B7BCA28C180524A800CF7588 /* CookSmart */,
@@ -411,6 +425,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		80629C5B18D4AE8A00106131 /* libVGAnalytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libVGAnalytics.a;
+			remoteRef = 80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VGAnalyticsTests.xctest;
+			remoteRef = 80629C5C18D4AE8A00106131 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B7BCA28B180524A800CF7588 /* Resources */ = {
@@ -463,20 +494,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
-				DCCC5E7F18A43F9F00F801D3 /* Analytics.m in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
-				DCCC5E8918A4827800F801D3 /* AnalyticsSender.m in Sources */,
 				80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */,
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
-				DCCC5E8618A46C7A00F801D3 /* AnalyticsWriter.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
@@ -497,6 +525,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		80629C6218D4B1C700106131 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VGAnalytics;
+			targetProxy = 80629C6118D4B1C700106131 /* PBXContainerItemProxy */;
+		};
 		B7BCA2AE180524A800CF7588 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B7BCA28C180524A800CF7588 /* CookSmart */;
@@ -528,7 +561,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -557,6 +589,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
@@ -568,7 +606,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -591,6 +628,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
@@ -611,6 +654,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK2",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -633,6 +680,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK2",
 				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				WRAPPER_EXTENSION = app;
@@ -642,7 +693,6 @@
 		B7BCA2BD180524A800CF7588 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CookSmart.app/CookSmart";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -665,7 +715,6 @@
 		B7BCA2BE180524A800CF7588 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CookSmart.app/CookSmart";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

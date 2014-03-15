@@ -20,7 +20,7 @@
 #define DEFAULT_ANIMATION_DURATION  (.2)
 #define MAJOR_BUTTON_FONT_SIZE      20
 
-#import "Analytics.h"
+#import <VGAnalytics/Analytics.h>
 
 // There's no need to ever invoke this directly. Just use CSAssert and CSAssertFail.
 static inline void CSAssert_v(BOOL assertion, NSString *assertName, NSString *descriptionFormat, va_list args)

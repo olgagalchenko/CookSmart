@@ -396,23 +396,6 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     }
 }
 
-static inline void refreshUnitLabels(NSArray *unitLabels, NSString *currentUnitName)
-{
-    for (UILabel *unitLabel in unitLabels)
-    {
-        if ([unitLabel.text isEqualToString:currentUnitName])
-        {
-            unitLabel.layer.backgroundColor = [[UIColor blackColor] CGColor];
-            unitLabel.textColor = [UIColor whiteColor];
-        }
-        else
-        {
-            unitLabel.layer.backgroundColor = [[UIColor clearColor] CGColor];
-            unitLabel.textColor = [UIColor blackColor];
-        }
-    }
-}
-
 - (void)setConstraintsForArrangement:(CSScaleVCArrangement)arrangement
 {
     NSArray *constraints = [NSArray arrayWithArray:self.contentView.constraints];
