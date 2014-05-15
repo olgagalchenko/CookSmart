@@ -126,7 +126,7 @@
 		93F6CCA518AED6050045400D /* CSScaleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSScaleVC.h; sourceTree = "<group>"; };
 		93F6CCA618AED6050045400D /* CSScaleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleVC.m; sourceTree = "<group>"; };
 		93F6CCA718AED6050045400D /* CSScaleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSScaleVC.xib; sourceTree = "<group>"; };
-		B7BCA28D180524A800CF7588 /* CookSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7BCA28D180524A800CF7588 /* cake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BCA290180524A800CF7588 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7BCA292180524A800CF7588 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B7BCA294180524A800CF7588 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -273,7 +273,7 @@
 		B7BCA28E180524A800CF7588 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7BCA28D180524A800CF7588 /* CookSmart.app */,
+				B7BCA28D180524A800CF7588 /* cake.app */,
 				B7BCA2A8180524A800CF7588 /* CookSmartTests.xctest */,
 			);
 			name = Products;
@@ -347,9 +347,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7BCA28C180524A800CF7588 /* CookSmart */ = {
+		B7BCA28C180524A800CF7588 /* cake */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7BCA2B9180524A800CF7588 /* Build configuration list for PBXNativeTarget "CookSmart" */;
+			buildConfigurationList = B7BCA2B9180524A800CF7588 /* Build configuration list for PBXNativeTarget "cake" */;
 			buildPhases = (
 				B7BCA289180524A800CF7588 /* Sources */,
 				B7BCA28A180524A800CF7588 /* Frameworks */,
@@ -361,9 +361,9 @@
 			dependencies = (
 				80629C6218D4B1C700106131 /* PBXTargetDependency */,
 			);
-			name = CookSmart;
+			name = cake;
 			productName = CookSmart;
-			productReference = B7BCA28D180524A800CF7588 /* CookSmart.app */;
+			productReference = B7BCA28D180524A800CF7588 /* cake.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B7BCA2A7180524A800CF7588 /* CookSmartTests */ = {
@@ -395,7 +395,7 @@
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
-						DevelopmentTeam = 5B7P72SMLP;
+						DevelopmentTeam = DUYQ44RPLQ;
 					};
 					B7BCA2A7180524A800CF7588 = {
 						TestTargetID = B7BCA28C180524A800CF7588;
@@ -420,7 +420,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				B7BCA28C180524A800CF7588 /* CookSmart */,
+				B7BCA28C180524A800CF7588 /* cake */,
 				B7BCA2A7180524A800CF7588 /* CookSmartTests */,
 			);
 		};
@@ -532,7 +532,7 @@
 		};
 		B7BCA2AE180524A800CF7588 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B7BCA28C180524A800CF7588 /* CookSmart */;
+			target = B7BCA28C180524A800CF7588 /* cake */;
 			targetProxy = B7BCA2AD180524A800CF7588 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -646,6 +646,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
@@ -658,6 +660,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -667,6 +670,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
@@ -680,6 +685,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -736,7 +742,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7BCA2B9180524A800CF7588 /* Build configuration list for PBXNativeTarget "CookSmart" */ = {
+		B7BCA2B9180524A800CF7588 /* Build configuration list for PBXNativeTarget "cake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7BCA2BA180524A800CF7588 /* Debug */,
