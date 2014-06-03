@@ -14,7 +14,7 @@
 @interface CSGlassView()
 
 @property (nonatomic, weak) UIView *magnifiedView;
-
+@property (nonatomic, weak) UIView *glassening;
 
 @end
 
@@ -30,15 +30,21 @@
         self.layer.shadowOpacity = 0.075;
         
         UIView *glassening = [[UIView alloc] init];
-        glassening.opaque = NO;
-        glassening.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0.025];
-        glassening.frame = self.bounds;
-        [self addSubview:glassening];
+        [self addSubview:self.glassening];
+        self.glassening = glassening;
+        self.glassening.opaque = NO;
+        self.glassening.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0.025];
         
         CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(refreshMagnifiedView)];
         [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.glassening.frame = self.bounds;
 }
 
 - (void)refreshMagnifiedView
