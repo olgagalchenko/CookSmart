@@ -89,15 +89,6 @@ static NSString* CellIdentifier = @"Cell";
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    if ([[NSFileManager defaultManager] contentsEqualAtPath:pathToIngredientsOnDisk() andPath:pathToIngredientsInBundle()])
-        self.tableView.tableFooterView = nil;
-    else
-        self.tableView.tableFooterView = self.resetToDefaults;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -213,13 +204,9 @@ static NSString* CellIdentifier = @"Cell";
         else
         {
             logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionary]);
-            [tableView reloadData];
         }
-        if (tableView != self.tableView)
-        {
-            // Still need to update the base tableView regardless of which tableView we made the delete from.
-            [self.tableView reloadData];
-        }
+        
+        [self refreshData];
     }
 }
 
@@ -228,24 +215,22 @@ static NSString* CellIdentifier = @"Cell";
     UIViewController *editVC;
     if (sender == self.navigationItem.rightBarButtonItem)
     {
-        UITableView *tableViewToReload = self.tableView;
         editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil
                                                   withDoneBlock:^(CSIngredient* newIngr){
                                                       [[CSIngredients sharedInstance] addIngredient:newIngr];
-                                                      [tableViewToReload reloadData];
+                                                      [self refreshData];
                                                   }
                                                  andCancelBlock:nil];
     }
     else if ([sender isKindOfClass:[CSIngredient class]])
     {
         CSIngredient *ingredientToEdit = (CSIngredient *)sender;
-        UITableView *tableViewToReload = self.tableView;
         NSString *oldIngrName = [NSString stringWithString:ingredientToEdit.name];
         float oldIngrDensity = ingredientToEdit.density;
         editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingredientToEdit
                                                   withDoneBlock:^(CSIngredient* newIngr){
                                                       [[CSIngredients sharedInstance] persist];
-                                                      [tableViewToReload reloadData];
+                                                      [self refreshData];
                                                   }
                                                  andCancelBlock:^(void){
                                                      ingredientToEdit.name = oldIngrName;
@@ -292,6 +277,20 @@ static NSString* CellIdentifier = @"Cell";
 }
 
 #pragma mark - reset to defaults
+- (void)refreshData
+{
+    [self.tableView reloadData];
+    [self showHideResetToDefaults];
+}
+
+- (void)showHideResetToDefaults
+{
+    if ([[NSFileManager defaultManager] contentsEqualAtPath:pathToIngredientsOnDisk() andPath:pathToIngredientsInBundle()])
+        self.tableView.tableFooterView = nil;
+    else
+        self.tableView.tableFooterView = self.resetToDefaults;
+}
+
 - (void)resetButtonAction:(id)sender
 {
     UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Resetting to defaults will remove all your added and edited ingredients." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
@@ -305,7 +304,7 @@ static NSString* CellIdentifier = @"Cell";
         self.tableView.tableFooterView = nil;
         
         [[CSIngredients sharedInstance] deleteAllSavedIngredients];
-        [self.tableView reloadData];
+        [self refreshData];
         NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView scrollToRowAtIndexPath:firstCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
