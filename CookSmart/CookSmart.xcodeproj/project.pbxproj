@@ -22,9 +22,6 @@
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
 		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
 		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
-		9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9351F3F118A1A32900AD45D0 /* libTestFlight.a */; };
-		9351F3F818A1A32900AD45D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F218A1A32900AD45D0 /* README.md */; };
-		9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 9351F3F318A1A32900AD45D0 /* release_notes.md */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
@@ -40,11 +37,6 @@
 		B7BCA29D180524A800CF7588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA29C180524A800CF7588 /* main.m */; };
 		B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */; };
 		B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2A2180524A800CF7588 /* Images.xcassets */; };
-		B7BCA2AA180524A800CF7588 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA2A9180524A800CF7588 /* XCTest.framework */; };
-		B7BCA2AB180524A800CF7588 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA290180524A800CF7588 /* Foundation.framework */; };
-		B7BCA2AC180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
-		B7BCA2B4180524A800CF7588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2B2180524A800CF7588 /* InfoPlist.strings */; };
-		B7BCA2B6180524A800CF7588 /* CookSmartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2B5180524A800CF7588 /* CookSmartTests.m */; };
 		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
 		DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */; };
 /* End PBXBuildFile section */
@@ -70,13 +62,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 80629C0C18D4A03100106131;
 			remoteInfo = VGAnalytics;
-		};
-		B7BCA2AD180524A800CF7588 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B7BCA28C180524A800CF7588;
-			remoteInfo = CookSmart;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -107,12 +92,6 @@
 		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
 		9343EDC118BD380000892D0B /* CSUnitPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPicker.m; sourceTree = "<group>"; };
 		9343EDC218BD380000892D0B /* CSUnitPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUnitPicker.xib; sourceTree = "<group>"; };
-		9351F3F118A1A32900AD45D0 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		9351F3F218A1A32900AD45D0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		9351F3F318A1A32900AD45D0 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		9351F3F418A1A32900AD45D0 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		9351F3F518A1A32900AD45D0 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		9351F3F618A1A32900AD45D0 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
@@ -137,7 +116,6 @@
 		B7BCA29F180524A800CF7588 /* CSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAppDelegate.h; sourceTree = "<group>"; };
 		B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
 		B7BCA2A2180524A800CF7588 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B7BCA2A8180524A800CF7588 /* CookSmartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookSmartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7BCA2A9180524A800CF7588 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		B7BCA2B1180524A800CF7588 /* CookSmartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookSmartTests-Info.plist"; sourceTree = "<group>"; };
 		B7BCA2B3180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -158,17 +136,6 @@
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
-				9351F3F718A1A32900AD45D0 /* libTestFlight.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7BCA2A5180524A800CF7588 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7BCA2AA180524A800CF7588 /* XCTest.framework in Frameworks */,
-				B7BCA2AC180524A800CF7588 /* UIKit.framework in Frameworks */,
-				B7BCA2AB180524A800CF7588 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,20 +200,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9351F3F018A1A32900AD45D0 /* TestFlightSDK3 */ = {
-			isa = PBXGroup;
-			children = (
-				9351F3F118A1A32900AD45D0 /* libTestFlight.a */,
-				9351F3F218A1A32900AD45D0 /* README.md */,
-				9351F3F318A1A32900AD45D0 /* release_notes.md */,
-				9351F3F418A1A32900AD45D0 /* TestFlight+AsyncLogging.h */,
-				9351F3F518A1A32900AD45D0 /* TestFlight+ManualSessions.h */,
-				9351F3F618A1A32900AD45D0 /* TestFlight.h */,
-			);
-			name = TestFlightSDK3;
-			path = TestFlightSDK2;
-			sourceTree = "<group>";
-		};
 		93D0993B18977D320014DB3E /* Units */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */,
-				9351F3F018A1A32900AD45D0 /* TestFlightSDK3 */,
 				B7BCA296180524A800CF7588 /* CookSmart */,
 				B7BCA2AF180524A800CF7588 /* CookSmartTests */,
 				B7BCA28F180524A800CF7588 /* Frameworks */,
@@ -274,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				B7BCA28D180524A800CF7588 /* cake.app */,
-				B7BCA2A8180524A800CF7588 /* CookSmartTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,24 +317,6 @@
 			productReference = B7BCA28D180524A800CF7588 /* cake.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B7BCA2A7180524A800CF7588 /* CookSmartTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B7BCA2BC180524A800CF7588 /* Build configuration list for PBXNativeTarget "CookSmartTests" */;
-			buildPhases = (
-				B7BCA2A4180524A800CF7588 /* Sources */,
-				B7BCA2A5180524A800CF7588 /* Frameworks */,
-				B7BCA2A6180524A800CF7588 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B7BCA2AE180524A800CF7588 /* PBXTargetDependency */,
-			);
-			name = CookSmartTests;
-			productName = CookSmartTests;
-			productReference = B7BCA2A8180524A800CF7588 /* CookSmartTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -396,9 +329,6 @@
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
 						DevelopmentTeam = DUYQ44RPLQ;
-					};
-					B7BCA2A7180524A800CF7588 = {
-						TestTargetID = B7BCA28C180524A800CF7588;
 					};
 				};
 			};
@@ -421,7 +351,6 @@
 			projectRoot = "";
 			targets = (
 				B7BCA28C180524A800CF7588 /* cake */,
-				B7BCA2A7180524A800CF7588 /* CookSmartTests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,24 +378,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */,
-				9351F3F918A1A32900AD45D0 /* release_notes.md in Resources */,
 				9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */,
 				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
-				9351F3F818A1A32900AD45D0 /* README.md in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
 				9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B7BCA2A6180524A800CF7588 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7BCA2B4180524A800CF7588 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,14 +433,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B7BCA2A4180524A800CF7588 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B7BCA2B6180524A800CF7588 /* CookSmartTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -529,11 +440,6 @@
 			isa = PBXTargetDependency;
 			name = VGAnalytics;
 			targetProxy = 80629C6118D4B1C700106131 /* PBXContainerItemProxy */;
-		};
-		B7BCA2AE180524A800CF7588 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B7BCA28C180524A800CF7588 /* cake */;
-			targetProxy = B7BCA2AD180524A800CF7588 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -652,10 +558,7 @@
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/TestFlightSDK2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -679,10 +582,7 @@
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/TestFlightSDK2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -691,46 +591,6 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		B7BCA2BD180524A800CF7588 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CookSmart.app/CookSmart";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CookSmartTests/CookSmartTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		B7BCA2BE180524A800CF7588 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CookSmart.app/CookSmart";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
-				INFOPLIST_FILE = "CookSmartTests/CookSmartTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -751,15 +611,6 @@
 			buildConfigurations = (
 				B7BCA2BA180524A800CF7588 /* Debug */,
 				B7BCA2BB180524A800CF7588 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B7BCA2BC180524A800CF7588 /* Build configuration list for PBXNativeTarget "CookSmartTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B7BCA2BD180524A800CF7588 /* Debug */,
-				B7BCA2BE180524A800CF7588 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
