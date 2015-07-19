@@ -2,47 +2,53 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
-        <key>Name</key>
-        <string>Teaspoons</string>
-        <key>Conversion Factor</key>
-        <real>48</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Tablespoons</string>
-        <key>Conversion Factor</key>
-        <real>16</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Cups</string>
-        <key>Conversion Factor</key>
-        <real>1</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Fluid Oz</string>
-        <key>Conversion Factor</key>
-        <real>8</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Milliliters</string>
-        <key>Conversion Factor</key>
-        <real>236.588</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Liters</string>
-        <key>Conversion Factor</key>
-        <real>.236588</real>
-    </dict>
-    <dict>
-        <key>Name</key>
-        <string>Quarts</string>
-        <key>Conversion Factor</key>
-        <real>0.25</real>
-    </dict>
+	<dict>
+		<key>Name</key>
+		<string>Teaspoons</string>
+		<key>Conversion Factor</key>
+		<real>48</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Tablespoons</string>
+		<key>Conversion Factor</key>
+		<real>16</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Cups</string>
+		<key>Conversion Factor</key>
+		<real>1</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Fluid Oz</string>
+		<key>Conversion Factor</key>
+		<real>8</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Milliliters</string>
+		<key>Conversion Factor</key>
+		<real>236.588</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Deciliters</string>
+		<key>Conversion Factor</key>
+		<real>2.36588</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Liters</string>
+		<key>Conversion Factor</key>
+		<real>0.236588</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Quarts</string>
+		<key>Conversion Factor</key>
+		<real>0.25</real>
+	</dict>
 </array>
 </plist>
