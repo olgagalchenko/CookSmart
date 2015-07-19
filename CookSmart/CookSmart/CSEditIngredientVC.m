@@ -43,12 +43,6 @@
     self.scaleVC.delegate = nil;
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    self.scaleVC.ingredient = self.ingredient;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -103,6 +97,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     [self.navigationItem.leftBarButtonItem setTintColor:RED_LINE_COLOR];
     [self.navigationItem.rightBarButtonItem setTintColor:RED_LINE_COLOR];
+    
+    self.scaleVC.ingredient = self.ingredient;
 }
 
 - (void)cancelEdit:(id)sender

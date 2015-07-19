@@ -51,12 +51,6 @@
 
 #pragma mark - View Lifecycle Management
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [self selectIngredientAtIndex:self.ingredientIndex];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -95,6 +89,8 @@
                                                             constant:10];
     [self.view addConstraints:@[bottom, left, right, top]];
     self.ingredientPickerScrollView.scrollsToTop = NO;
+    
+    [self selectIngredientAtIndex:self.ingredientIndex];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -228,22 +224,31 @@
 
 - (void)scaleVCDidBeginChangingUnits:(CSScaleVC*)scaleVC
 {
-    for (UIButton *ingredientButton in self.ingredientPickerScrollView.subviews)
-    {
-        ingredientButton.enabled = NO;
-        [ingredientButton setTitle:CHOOSE_UNITS_TEXT forState:UIControlStateNormal];
-    }
+    [self iterateOverIngredientButtons:^(UIButton *ingredientButton) {
+            ingredientButton.enabled = NO;
+            [ingredientButton setTitle:CHOOSE_UNITS_TEXT forState:UIControlStateNormal];
+    }];
     [self.ingredientPickerScrollView setScrollEnabled:NO];
 }
 
 - (void)scaleVCDidFinishChangingUnits:(CSScaleVC *)scaleVC
 {
-    for (UIButton *ingredientButton in self.ingredientPickerScrollView.subviews)
-    {
+    [self iterateOverIngredientButtons:^(UIButton *ingredientButton) {
         ingredientButton.enabled = YES;
         [ingredientButton setTitle:[self nameForIngredientAtXOrigin:ingredientButton.frame.origin.x] forState:UIControlStateNormal];
-    }
+    }];
     [self.ingredientPickerScrollView setScrollEnabled:YES];
+}
+
+- (void)iterateOverIngredientButtons:(void (^)(UIButton *))work
+{
+    for (UIButton *ingredientButton in self.ingredientPickerScrollView.subviews)
+    {
+        if ([ingredientButton isKindOfClass:[UIButton class]])
+        {
+            work(ingredientButton);
+        }
+    }
 }
 
 @end
