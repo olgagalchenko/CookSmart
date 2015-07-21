@@ -91,13 +91,12 @@
     self.ingredientPickerScrollView.scrollsToTop = NO;
     self.ingredientPickerScrollView.showsHorizontalScrollIndicator = NO;
     self.ingredientPickerScrollView.showsVerticalScrollIndicator = NO;
-    
-    [self selectIngredientAtIndex:self.ingredientIndex];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self selectIngredientAtIndex:self.ingredientIndex];
     logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
 }
 
