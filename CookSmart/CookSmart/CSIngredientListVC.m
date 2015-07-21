@@ -24,7 +24,7 @@
 @implementation CSIngredientListVC
 
 static NSString* CellIdentifier = @"Cell";
-
+static const NSUInteger ResetToDefaultsHeight = 40;
 
 - (id)initWithDelegate:(id<CSIngredientListVCDelegate>)delegate
 {
@@ -61,21 +61,19 @@ static NSString* CellIdentifier = @"Cell";
     titleView.textAlignment = NSTextAlignmentCenter;
     self.navigationItem.titleView = titleView;
     
-    NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    NSInteger heightOfCell = [self tableView:self.tableView heightForRowAtIndexPath:firstCellPath];
     self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     [self.searchBar sizeToFit];
     self.searchBar.delegate = self;
-    
     self.tableView.tableHeaderView = self.searchBar;
     
-    self.resetToDefaults = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, heightOfCell)];
+    self.resetToDefaults = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, ResetToDefaultsHeight)];
     [self.resetToDefaults addTarget:self action:@selector(resetButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.resetToDefaults setTitle:@"Reset to Defaults" forState:UIControlStateNormal];
     [self.resetToDefaults setTitleColor:BACKGROUND_COLOR forState:UIControlStateNormal];
     [self.resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
     self.resetToDefaults.backgroundColor = RED_LINE_COLOR;
+    [self showHideResetToDefaults];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -88,12 +86,6 @@ static NSString* CellIdentifier = @"Cell";
 {
     [super viewDidAppear:animated];
     logViewChange(@"ingredient_list", nil);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Scroll view delegate
