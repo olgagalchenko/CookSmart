@@ -89,6 +89,8 @@
                                                             constant:10];
     [self.view addConstraints:@[bottom, left, right, top]];
     self.ingredientPickerScrollView.scrollsToTop = NO;
+    self.ingredientPickerScrollView.showsHorizontalScrollIndicator = NO;
+    self.ingredientPickerScrollView.showsVerticalScrollIndicator = NO;
     
     [self selectIngredientAtIndex:self.ingredientIndex];
 }
