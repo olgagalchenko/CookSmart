@@ -17,7 +17,6 @@
 @property (nonatomic, readwrite, weak) id<CSIngredientListVCDelegate>delegate;
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, strong) UIButton* resetToDefaults;
-@property (nonatomic, strong) UISearchDisplayController* searchController;
 @property (nonatomic, strong) CSIngredients* filteredIngredients;
 
 @end
@@ -41,9 +40,6 @@ static NSString* CellIdentifier = @"Cell";
 - (void)dealloc
 {
     self.searchBar.delegate = nil;
-    self.searchController.delegate = nil;
-    self.searchController.searchResultsDataSource = nil;
-    self.searchController.searchResultsDelegate = nil;
 }
 
 - (void)viewDidLoad
@@ -67,10 +63,10 @@ static NSString* CellIdentifier = @"Cell";
     
     NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
     NSInteger heightOfCell = [self tableView:self.tableView heightForRowAtIndexPath:firstCellPath];
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, heightOfCell)];
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    [self.searchBar sizeToFit];
     self.searchBar.delegate = self;
-    
-    self.tableView.contentOffset = CGPointMake(0,heightOfCell);
     
     self.tableView.tableHeaderView = self.searchBar;
     
@@ -80,13 +76,12 @@ static NSString* CellIdentifier = @"Cell";
     [self.resetToDefaults setTitleColor:BACKGROUND_COLOR forState:UIControlStateNormal];
     [self.resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
     self.resetToDefaults.backgroundColor = RED_LINE_COLOR;
-    
-    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
-    self.searchController.delegate = self;
-    self.searchController.searchResultsDataSource = self;
-    self.searchController.searchResultsDelegate = self;
-    
-    [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView setContentOffset:CGPointMake(0, -20)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -101,29 +96,36 @@ static NSString* CellIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Scroll view delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[self ingredientsToSupplyDataForTableView:tableView] countOfIngredientGroups];
+    return [[self ingredientsToSupplyData] countOfIngredientGroups];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:section] countOfIngredients];
+    return [[[self ingredientsToSupplyData] ingredientGroupAtIndex:section] countOfIngredients];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:section] name];
+    return [[[self ingredientsToSupplyData] ingredientGroupAtIndex:section] name];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UILabel *headerLabel = [[UILabel alloc] init];
-    headerLabel.text = [@"   " stringByAppendingString:[[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:section] name]];
+    headerLabel.text = [@"   " stringByAppendingString:[[[self ingredientsToSupplyData] ingredientGroupAtIndex:section] name]];
     headerLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:15];
     headerLabel.backgroundColor = BACKGROUND_COLOR;
     return headerLabel;
@@ -134,7 +136,7 @@ static NSString* CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    CSIngredient *ingredient = [[[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
+    CSIngredient *ingredient = [[[self ingredientsToSupplyData] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
     UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     [detailButton setTintColor:RED_LINE_COLOR];
     [detailButton addTarget:self action:@selector(detailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -148,7 +150,7 @@ static NSString* CellIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyDataForTableView:tableView] ingredientGroupAtIndex:indexPath.section];
+    CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyData] ingredientGroupAtIndex:indexPath.section];
     CSIngredient *selectedIngredient = [selectedIngredientGroup ingredientAtIndex:indexPath.row];
     if ([selectedIngredientGroup respondsToSelector:@selector(originalIngredientGroup)])
     {
@@ -184,7 +186,7 @@ static NSString* CellIdentifier = @"Cell";
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        CSIngredients *ingredients = [self ingredientsToSupplyDataForTableView:tableView];
+        CSIngredients *ingredients = [self ingredientsToSupplyData];
         CSIngredient *ingredientToDelete = [[ingredients ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
         NSUInteger numIngredientGroups = [ingredients countOfIngredientGroups];
         BOOL deleteSuccess = [ingredients deleteIngredientAtGroupIndex:indexPath.section ingredientIndex:indexPath.row];
@@ -248,6 +250,7 @@ static NSString* CellIdentifier = @"Cell";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     logUserAction(@"ingredient_filter", @{@"search_text" : searchText});
+    
     NSMutableArray* filteredGroupsArray = [NSMutableArray array];
     
     for (CSIngredientGroup* group in [CSIngredients sharedInstance])
@@ -268,6 +271,7 @@ static NSString* CellIdentifier = @"Cell";
     }
     
     self.filteredIngredients = [[CSIngredients alloc] initWithIngredientGroups:filteredGroupsArray];
+    [self refreshData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -317,21 +321,18 @@ static NSString* CellIdentifier = @"Cell";
 
 #pragma mark - Misc Helpers
 
-- (CSIngredients *)ingredientsToSupplyDataForTableView:(UITableView *)tableViewToSupplyDataFor
+- (CSIngredients *)ingredientsToSupplyData
 {
     CSIngredients *ingredients = nil;
-    if (tableViewToSupplyDataFor == self.tableView)
+    if ([self.searchBar.text isEqualToString:@""] || !self.searchBar.text)
     {
         ingredients = [CSIngredients sharedInstance];
     }
-    else if (tableViewToSupplyDataFor == self.searchDisplayController.searchResultsTableView)
+    else
     {
         ingredients = self.filteredIngredients;
     }
-    else
-    {
-        CSAssertFail(@"ingredients_list_vc_data_source", @"CSIngredientsListVC is not ready to supply data for %@", tableViewToSupplyDataFor);
-    }
+
     return ingredients;
 }
 
