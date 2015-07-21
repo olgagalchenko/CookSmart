@@ -74,12 +74,14 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     [self.resetToDefaults.titleLabel setFont:[UIFont fontWithName:@"AvenirNext-Medium" size:17]];
     self.resetToDefaults.backgroundColor = RED_LINE_COLOR;
     [self showHideResetToDefaults];
+    
+    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + self.searchBar.frame.size.height)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView setContentOffset:CGPointMake(0, -20)];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
