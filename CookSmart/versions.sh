@@ -17,3 +17,13 @@ fi
 
 defaults write "${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}" "CFBundleShortVersionString" "${DESIRED_SHORT_BUNDLE_VERSION}"
 defaults write "${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}" "CFBundleVersion" "${DESIRED_BUNDLE_VERSION}"
+
+WATCH_KIT_INFOPLIST_PATH="${BUILT_PRODUCTS_DIR}/Cake WatchKit App.app/Info"
+
+defaults write "${WATCH_KIT_INFOPLIST_PATH}" "CFBundleShortVersionString" "${DESIRED_SHORT_BUNDLE_VERSION}"
+defaults write "${WATCH_KIT_INFOPLIST_PATH}" "CFBundleVersion" "${DESIRED_BUNDLE_VERSION}"
+
+WATCH_KIT_EXT_INFOPLIST_PATH="${BUILT_PRODUCTS_DIR}/Cake WatchKit Extension.appex/Info"
+
+defaults write "${WATCH_KIT_EXT_INFOPLIST_PATH}" "CFBundleShortVersionString" "${DESIRED_SHORT_BUNDLE_VERSION}"
+defaults write "${WATCH_KIT_EXT_INFOPLIST_PATH}" "CFBundleVersion" "${DESIRED_BUNDLE_VERSION}"
