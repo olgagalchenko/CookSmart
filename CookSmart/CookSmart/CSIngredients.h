@@ -40,6 +40,7 @@ static inline NSString *pathToIngredientsInBundle()
 - (NSUInteger)flattenedCountOfIngredients;
 - (NSUInteger)indexOfIngredientGroup:(CSIngredientGroup *)group;
 
+- (BOOL)addToRecentlyUsed:(CSIngredient *)ingredient;
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex;
 - (BOOL)addIngredient:(CSIngredient*)newIngr;
 - (BOOL)persist;

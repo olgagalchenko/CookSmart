@@ -78,12 +78,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y + self.searchBar.frame.size.height)];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -146,10 +140,14 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 {
     CSIngredientGroup *selectedIngredientGroup = [[self ingredientsToSupplyData] ingredientGroupAtIndex:indexPath.section];
     CSIngredient *selectedIngredient = [selectedIngredientGroup ingredientAtIndex:indexPath.row];
+    
+    [[CSIngredients sharedInstance] addToRecentlyUsed:selectedIngredient];
+    
     if ([selectedIngredientGroup respondsToSelector:@selector(originalIngredientGroup)])
     {
         selectedIngredientGroup = [selectedIngredientGroup performSelector:@selector(originalIngredientGroup) withObject:nil];
     }
+    
     [self.delegate ingredientListVC:self
             selectedIngredientGroup:[[CSIngredients sharedInstance] indexOfIngredientGroup:selectedIngredientGroup]
                     ingredientIndex:[selectedIngredientGroup indexOfIngredient:selectedIngredient]];
