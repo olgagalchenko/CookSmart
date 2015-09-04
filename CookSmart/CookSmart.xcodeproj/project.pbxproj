@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80221F4F1B99794D00F7F863 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */; };
+		80221F501B99794D00F7F863 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */; };
+		80221F511B99794D00F7F863 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
 		80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0718924B0F0082D4E1 /* CSIngredient.m */; };
 		80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */; };
@@ -100,6 +103,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		80592C0318924B010082D4E1 /* CSIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredients.h; sourceTree = "<group>"; };
 		80592C0418924B010082D4E1 /* CSIngredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredients.m; sourceTree = "<group>"; };
 		80592C0618924B0F0082D4E1 /* CSIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredient.h; sourceTree = "<group>"; };
@@ -181,9 +187,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80221F511B99794D00F7F863 /* FBSDKShareKit.framework in Frameworks */,
 				80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */,
+				80221F4F1B99794D00F7F863 /* FBSDKCoreKit.framework in Frameworks */,
 				80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */,
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
+				80221F501B99794D00F7F863 /* FBSDKLoginKit.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
 			);
@@ -324,6 +333,9 @@
 		B7BCA28F180524A800CF7588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */,
+				80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */,
+				80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */,
 				80629C6718D4B3BF00106131 /* libz.dylib */,
 				B7BCA290180524A800CF7588 /* Foundation.framework */,
 				B7BCA292180524A800CF7588 /* CoreGraphics.framework */,
@@ -822,6 +834,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/vova/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
@@ -846,6 +863,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/vova/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";

@@ -9,12 +9,15 @@
 #import "CSAppDelegate.h"
 #import "CSConversionVC.h"
 #import "CSIngredients.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation CSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     logAppLifecycleEvent(@"launch", nil);
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -24,6 +27,16 @@
     self.window.rootViewController = conversionVC;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -49,6 +62,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     logAppLifecycleEvent(@"become_active", nil);
+    [FBSDKAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
