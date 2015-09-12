@@ -12,6 +12,7 @@
 #import "CSIngredient.h"
 
 #define CUSTOM_GROUP_NAME @"Custom"
+#define RECENTLY_USED_NAME @"Recently Used"
 
 @interface CSIngredients()
 {
@@ -100,6 +101,18 @@ static CSIngredients *sharedInstance;
         [self.ingredientGroups addObject:[CSIngredientGroup ingredientGroupWithDictionary:@{CUSTOM_GROUP_NAME:@[]}]];
     }
     return [self lastIngredientGroup];
+}
+
+- (CSIngredientGroup *)recentlyUsedIngredientGroup
+{
+    CSIngredientGroup *group = [self ingredientGroupAtIndex:0];
+    if (![group.name isEqualToString:RECENTLY_USED_NAME])
+    {
+        //need to create it
+        group = [CSIngredientGroup ingredientGroupWithDictionary:@{RECENTLY_USED_NAME:@[]}];
+        [self.ingredientGroups insertObject:group atIndex:0];
+    }
+    return group;
 }
 
 - (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index
@@ -222,6 +235,18 @@ static CSIngredients *sharedInstance;
     // preserved for the next invocation.
     state->state = countOfItemsAlreadyEnumerated;
     return count;
+}
+
+#pragma mark - actions on list
+
+- (BOOL)addToRecentlyUsed:(CSIngredient *)ingredient
+{
+    _version++; //mutation protection for fast enumeration
+    
+    CSIngredientGroup *recentlyUsedGroup = [self recentlyUsedIngredientGroup];
+    [recentlyUsedGroup addRecentlyUsedIngredient:ingredient];
+    
+    return [sharedInstance persist];
 }
 
 - (BOOL)deleteIngredientAtGroupIndex:(NSUInteger)groupIndex ingredientIndex:(NSUInteger)ingredientIndex

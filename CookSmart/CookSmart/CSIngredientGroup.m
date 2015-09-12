@@ -10,6 +10,8 @@
 #import "CSIngredient.h"
 #import "CSIngredientGroupInternals.h"
 
+static NSUInteger const RECENTLY_USED_COUNT = 5;
+
 @interface CSIngredientGroup ()
 {
     unsigned long _version;
@@ -108,6 +110,23 @@
 {
     _version++;
     [self.ingredients addObject:ingredient];
+}
+
+- (void)addRecentlyUsedIngredient:(CSIngredient *)ingredient
+{
+    _version++;
+    
+    NSUInteger index = [self.ingredients indexOfObject:ingredient];
+    if (index != NSNotFound)
+    {
+        [self.ingredients removeObjectAtIndex:index];
+    }
+    
+    [self.ingredients insertObject:ingredient atIndex:0];
+    if ([self countOfIngredients] > RECENTLY_USED_COUNT)
+    {
+        [self.ingredients removeLastObject];
+    }
 }
 
 - (void)replaceIngredientAtIndex:(NSUInteger)index withIngredient:(CSIngredient*)ingredient
