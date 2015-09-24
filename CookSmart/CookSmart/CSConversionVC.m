@@ -96,8 +96,23 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    // When we first appear, always select the very first ingredient – the one most recently selected.
     [self selectIngredientAtIndex:self.ingredientIndex];
     logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self markCurrentIngredientAccess];
+}
+
+- (void)markCurrentIngredientAccess
+{
+    if (self.isViewLoaded && self.view.window != nil) {
+        CSIngredient *ingredient = [[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:self.ingredientIndex];
+        [ingredient markAccess];
+    }
 }
 
 #pragma mark - Ingredient Picker
@@ -180,6 +195,7 @@
     {
         self.ingredientIndex = projectedIndex;
         [self refreshScalesWithCurrentIngredient];
+        [self markCurrentIngredientAccess];
         logUserAction(@"ingredient_switch", [self.scaleVC analyticsAttributes]);
     }
 }
@@ -203,6 +219,7 @@
     self.ingredientIndex = ingredientIndex;
     [self refreshIngredientNameUI];
     [self refreshScalesWithCurrentIngredient];
+    [self markCurrentIngredientAccess];
 }
 
 - (void)refreshScalesWithCurrentIngredient

@@ -9,6 +9,7 @@
 #import "CSIngredients.h"
 #import "CSIngredientGroup.h"
 #import "CSFilteredIngredientGroup.h"
+#import "CSRecentsIngredientGroup.h"
 #import "CSIngredient.h"
 
 #define CUSTOM_GROUP_NAME @"Custom"
@@ -58,18 +59,25 @@ static CSIngredients *sharedInstance;
 {
     NSArray *rawIngredientGroupsArray = [NSArray arrayWithContentsOfFile:pathToIngredientsOnDisk()];
     NSMutableArray *tmpIngredientGroupsArray = [NSMutableArray arrayWithCapacity:[rawIngredientGroupsArray count]];
+    
     for (NSDictionary *ingredientGroupDict in rawIngredientGroupsArray)
     {
         [tmpIngredientGroupsArray addObject:[CSIngredientGroup ingredientGroupWithDictionary:ingredientGroupDict]];
     }
-    return [self initWithIngredientGroups:[NSArray arrayWithArray:tmpIngredientGroupsArray]];
+    return [self initWithIngredientGroups:[NSArray arrayWithArray:tmpIngredientGroupsArray] synthesizeGroups:YES];
 }
 
-- (id)initWithIngredientGroups:(NSArray *)ingredientGroups
+- (id)initWithIngredientGroups:(NSArray *)ingredientGroups synthesizeGroups:(BOOL)shouldSynthesize
 {
     if (self = [super init])
     {
-        self.ingredientGroups = [NSMutableArray arrayWithArray:ingredientGroups];
+        NSMutableArray *groups = [NSMutableArray arrayWithArray:ingredientGroups];
+        if (shouldSynthesize)
+        {
+            CSRecentsIngredientGroup *recents = [CSRecentsIngredientGroup recentsGroupWithIngredients:[self ingredientsFromGroups:groups]];
+            if ([recents countOfIngredients] > 0) [groups insertObject:recents atIndex:0];
+        }
+        self.ingredientGroups = groups;
     }
     return self;
 }
@@ -78,6 +86,54 @@ static CSIngredients *sharedInstance;
 {
     CSAssert(sharedInstance != nil, @"ingredients_singleton_guard", @"Something went wrong with the singleton.");
     return sharedInstance;
+}
+
+- (void)refreshRecents
+{
+    _version++;
+    NSArray *nonSyntheticGroups = [self.ingredientGroups filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(CSIngredientGroup *  _Nonnull evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return !evaluatedObject.isSynthetic;
+    }]];
+    CSRecentsIngredientGroup *recents = [CSRecentsIngredientGroup recentsGroupWithIngredients:[self ingredientsFromGroups:nonSyntheticGroups]];
+    if (recents.countOfIngredients > 0 && [nonSyntheticGroups count] < [self.ingredientGroups count])
+    {
+        CSAssert([self.ingredientGroups count] > 0 && [[self.ingredientGroups objectAtIndex:0] isKindOfClass:[CSRecentsIngredientGroup class]],
+                 @"recents_group_required", @"The first ingredient group must always be <Recents>");
+        [self.ingredientGroups replaceObjectAtIndex:0
+                                         withObject:recents];
+        [self persist];
+    }
+    else if (recents.countOfIngredients > 0)
+    {
+        [self.ingredientGroups insertObject:recents atIndex:0];
+        [self persist];
+    }
+    else if (recents.countOfIngredients == 0 && ((CSIngredientGroup *) self.ingredientGroups[0]).isSynthetic) {
+        [self.ingredientGroups removeObjectAtIndex:0];
+        [self persist];
+    }
+}
+
+- (CSRecentsIngredientGroup *)recents
+{
+    CSIngredientGroup *group = self.ingredientGroups[0];
+    if (![group isKindOfClass:[CSRecentsIngredientGroup class]]) {
+        group = nil;
+    }
+    return (CSRecentsIngredientGroup *)group;
+}
+
+- (NSArray *)ingredientsFromGroups:(NSArray *)groups
+{
+    NSMutableArray *allIngredients = [NSMutableArray array];
+    for (CSIngredientGroup *group in groups)
+    {
+        for (int i = 0; i < group.countOfIngredients; i++)
+        {
+            [allIngredients addObject:[group ingredientAtIndex:i]];
+        }
+    }
+    return allIngredients;
 }
 
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index
@@ -147,9 +203,9 @@ static CSIngredients *sharedInstance;
 
 - (CSIngredient *)ingredientAtFlattenedIngredientIndex:(NSUInteger)flattenedIngredientIndex
 {
-    NSUInteger ingredientIndex = flattenedIngredientIndex;
+    NSInteger ingredientIndex = flattenedIngredientIndex;
     NSUInteger groupIndex = 0;
-    while (ingredientIndex > ([[self ingredientGroupAtIndex:groupIndex] countOfIngredients] - 1))
+    while (ingredientIndex > ((NSInteger)[[self ingredientGroupAtIndex:groupIndex] countOfIngredients] - 1))
     {
         ingredientIndex -= [[self ingredientGroupAtIndex:groupIndex] countOfIngredients];
         groupIndex++;
@@ -241,6 +297,7 @@ static CSIngredients *sharedInstance;
     {
         [sharedInstance.ingredientGroups removeObject:ingrGroup];
     }
+    [self refreshRecents];
     [[NSNotificationCenter defaultCenter] postNotificationName:INGREDIENT_DELETE_NOTIFICATION_NAME object:ingredient];
     return [sharedInstance persist];
 }
@@ -260,7 +317,10 @@ static CSIngredients *sharedInstance;
     NSMutableArray *groupsToSerialize = [NSMutableArray arrayWithCapacity:self.ingredientGroups.count];
     for (CSIngredientGroup *group in self.ingredientGroups)
     {
-        [groupsToSerialize addObject:[group dictionary]];
+        if (!group.isSynthetic)
+        {
+            [groupsToSerialize addObject:[group dictionary]];
+        }
     }
     BOOL success = [groupsToSerialize writeToFile:pathToIngredientsOnDisk() atomically:YES];
     if (!success)

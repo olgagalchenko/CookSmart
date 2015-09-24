@@ -13,6 +13,7 @@
 
 @property (nonatomic, readwrite, strong) NSString *name;
 @property (nonatomic, readwrite, strong) NSMutableArray *ingredients;
+@property (nonatomic, readwrite, assign, getter = isSynthetic) BOOL synthetic;
 
 @end
 

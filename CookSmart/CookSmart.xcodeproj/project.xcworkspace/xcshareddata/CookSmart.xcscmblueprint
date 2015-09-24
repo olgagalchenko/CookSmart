@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "075EBDAD7A2ED54CD7AF4219FA5C013CEA2810F4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "075EBDAD7A2ED54CD7AF4219FA5C013CEA2810F4" : 0,
+    "6362D405F03BEA017CBD16271CFD574ECF53524C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "86D99CB0-008A-4E5B-AA69-E33DB2242492",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "075EBDAD7A2ED54CD7AF4219FA5C013CEA2810F4" : "CookSmart",
+    "6362D405F03BEA017CBD16271CFD574ECF53524C" : "CookSmartanalytics"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CookSmart",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CookSmart\/CookSmart.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/olgagalchenko\/CookSmart.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "075EBDAD7A2ED54CD7AF4219FA5C013CEA2810F4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vovagalchenko\/ios-analytics.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6362D405F03BEA017CBD16271CFD574ECF53524C"
+    }
+  ]
+}

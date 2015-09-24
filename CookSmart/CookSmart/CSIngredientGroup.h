@@ -23,5 +23,6 @@
 - (NSDictionary *)dictionary;
 
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly, getter = isSynthetic) BOOL synthetic;
 
 @end

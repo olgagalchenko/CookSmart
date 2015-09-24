@@ -32,6 +32,7 @@
             [tmpIngredients addObject:[CSIngredient ingredientWithDictionary:ingredientDictionary]];
         }
         self.ingredients = tmpIngredients;
+        self.synthetic = NO;
     }
     return self;
 }

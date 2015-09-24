@@ -24,6 +24,7 @@
         self.ingredients = [NSMutableArray arrayWithArray:ingredients];
         self.name = groupName;
         self.originalIngredientGroup = originalIngredientGroup;
+        self.synthetic = NO;
     }
     return self;
 }

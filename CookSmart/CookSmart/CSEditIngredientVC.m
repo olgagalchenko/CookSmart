@@ -30,7 +30,7 @@
         if (ingr)
             self.ingredient = ingr;
         else
-            self.ingredient = [[CSIngredient alloc] initWithName:@"" andDensity:150];
+            self.ingredient = [[CSIngredient alloc] initWithName:@"" density:150 lastAccessDate:[NSDate date]];
         
         self.doneBlock = done;
         self.cancelBlock = cancel;
@@ -48,6 +48,14 @@
     [super viewDidAppear:animated];
     logViewChange(@"edit_ingredient", [self analyticsDictionary]);
     [self.ingredientNameField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    if (self.ingredient) {
+        [self.ingredient markAccess];
+    }
 }
 
 - (void)viewDidLoad

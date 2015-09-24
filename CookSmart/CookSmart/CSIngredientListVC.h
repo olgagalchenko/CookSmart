@@ -14,6 +14,7 @@
 @interface CSIngredientListVC : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, UIAlertViewDelegate>
 
 - (id)initWithDelegate:(id<CSIngredientListVCDelegate>)delegate;
+- (void)detailButtonTapped:(id)sender;
 
 @end
 

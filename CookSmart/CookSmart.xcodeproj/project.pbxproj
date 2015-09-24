@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80221F4F1B99794D00F7F863 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */; };
-		80221F501B99794D00F7F863 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */; };
-		80221F511B99794D00F7F863 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */; };
+		80433B261BB26188006B7A85 /* Cake WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 938EAC2C1B67E77800754383 /* Cake WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		80433B291BB26188006B7A85 /* Cake WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 938EAC371B67E77800754383 /* Cake WatchKit App.app */; };
+		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; settings = {ASSET_TAGS = (); }; };
+		80433B321BB27270006B7A85 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		80433B331BB27270006B7A85 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B301BB27270006B7A85 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		80433B341BB27270006B7A85 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B311BB27270006B7A85 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
 		80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0718924B0F0082D4E1 /* CSIngredient.m */; };
 		80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */; };
@@ -18,6 +22,7 @@
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
 		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
 		80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.dylib */; };
+		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
@@ -32,10 +37,8 @@
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		938EAC321B67E77800754383 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 938EAC311B67E77800754383 /* InterfaceController.m */; };
 		938EAC341B67E77800754383 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 938EAC331B67E77800754383 /* Images.xcassets */; };
-		938EAC381B67E77800754383 /* Cake WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 938EAC371B67E77800754383 /* Cake WatchKit App.app */; };
 		938EAC401B67E77800754383 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 938EAC3E1B67E77800754383 /* Interface.storyboard */; };
 		938EAC421B67E77800754383 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 938EAC411B67E77800754383 /* Images.xcassets */; };
-		938EAC451B67E77800754383 /* Cake WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 938EAC2C1B67E77800754383 /* Cake WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
 		93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93F6CCA718AED6050045400D /* CSScaleVC.xib */; };
@@ -51,6 +54,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		80433B241BB26188006B7A85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 938EAC2B1B67E77800754383;
+			remoteInfo = "Cake WatchKit Extension";
+		};
+		80433B271BB26188006B7A85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 938EAC361B67E77800754383;
+			remoteInfo = "Cake WatchKit App";
+		};
 		80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
@@ -72,40 +89,40 @@
 			remoteGlobalIDString = 80629C0C18D4A03100106131;
 			remoteInfo = VGAnalytics;
 		};
-		938EAC391B67E77800754383 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 938EAC361B67E77800754383;
-			remoteInfo = "Cake WatchKit App";
-		};
-		938EAC431B67E77800754383 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 938EAC2B1B67E77800754383;
-			remoteInfo = "Cake WatchKit Extension";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		938EAC4D1B67E77800754383 /* Embed App Extensions */ = {
+		80433B2A1BB26188006B7A85 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				938EAC451B67E77800754383 /* Cake WatchKit Extension.appex in Embed App Extensions */,
+				80433B261BB26188006B7A85 /* Cake WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80433B2B1BB26188006B7A85 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				80433B291BB26188006B7A85 /* Cake WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
+		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
+		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		80433B301BB27270006B7A85 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = CookSmart/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		80433B311BB27270006B7A85 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = CookSmart/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		80433B351BB2731B006B7A85 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		80592C0318924B010082D4E1 /* CSIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredients.h; sourceTree = "<group>"; };
 		80592C0418924B010082D4E1 /* CSIngredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredients.m; sourceTree = "<group>"; };
 		80592C0618924B0F0082D4E1 /* CSIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredient.h; sourceTree = "<group>"; };
@@ -120,6 +137,8 @@
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
 		80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VGAnalytics.xcodeproj; path = "../analytics/iOS Analytics/VGAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		80629C6718D4B3BF00106131 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListViewCell.h; sourceTree = "<group>"; };
+		807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListViewCell.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
 		8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPickerCenterLineView.h; sourceTree = "<group>"; };
 		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
@@ -187,12 +206,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80221F511B99794D00F7F863 /* FBSDKShareKit.framework in Frameworks */,
+				80433B341BB27270006B7A85 /* FBSDKShareKit.framework in Frameworks */,
 				80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */,
-				80221F4F1B99794D00F7F863 /* FBSDKCoreKit.framework in Frameworks */,
+				80433B321BB27270006B7A85 /* FBSDKCoreKit.framework in Frameworks */,
 				80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */,
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
-				80221F501B99794D00F7F863 /* FBSDKLoginKit.framework in Frameworks */,
+				80433B331BB27270006B7A85 /* FBSDKLoginKit.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
 			);
@@ -232,6 +251,8 @@
 				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
 				80592C091892541D0082D4E1 /* CSIngredientGroup.h */,
 				80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */,
+				80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */,
+				80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */,
 				DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */,
 				DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */,
 				DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */,
@@ -257,6 +278,17 @@
 				80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		807C0B681BB3DD04007D2C03 /* Ingredient List UI */ = {
+			isa = PBXGroup;
+			children = (
+				9368096E1891059700655B89 /* CSIngredientListVC.h */,
+				9368096F1891059700655B89 /* CSIngredientListVC.m */,
+				807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */,
+				807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */,
+			);
+			name = "Ingredient List UI";
 			sourceTree = "<group>";
 		};
 		938EAC2D1B67E77800754383 /* Cake WatchKit Extension */ = {
@@ -333,10 +365,10 @@
 		B7BCA28F180524A800CF7588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				80221F4C1B99794D00F7F863 /* FBSDKCoreKit.framework */,
-				80221F4D1B99794D00F7F863 /* FBSDKLoginKit.framework */,
-				80221F4E1B99794D00F7F863 /* FBSDKShareKit.framework */,
 				80629C6718D4B3BF00106131 /* libz.dylib */,
+				80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */,
+				80433B301BB27270006B7A85 /* FBSDKLoginKit.framework */,
+				80433B311BB27270006B7A85 /* FBSDKShareKit.framework */,
 				B7BCA290180524A800CF7588 /* Foundation.framework */,
 				B7BCA292180524A800CF7588 /* CoreGraphics.framework */,
 				B7BCA294180524A800CF7588 /* UIKit.framework */,
@@ -348,6 +380,7 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
+				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
 				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
 				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
 				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
@@ -358,8 +391,7 @@
 				80592C0218924AEA0082D4E1 /* Model */,
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
 				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
-				9368096E1891059700655B89 /* CSIngredientListVC.h */,
-				9368096F1891059700655B89 /* CSIngredientListVC.m */,
+				807C0B681BB3DD04007D2C03 /* Ingredient List UI */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);
@@ -412,27 +444,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				938EAC3A1B67E77800754383 /* PBXTargetDependency */,
 			);
 			name = "Cake WatchKit Extension";
 			productName = "Cake WatchKit Extension";
 			productReference = 938EAC2C1B67E77800754383 /* Cake WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		938EAC361B67E77800754383 /* Cake WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 938EAC4B1B67E77800754383 /* Build configuration list for PBXNativeTarget "Cake WatchKit App" */;
 			buildPhases = (
 				938EAC351B67E77800754383 /* Resources */,
+				80433B2A1BB26188006B7A85 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				80433B251BB26188006B7A85 /* PBXTargetDependency */,
 			);
 			name = "Cake WatchKit App";
 			productName = "Cake WatchKit App";
 			productReference = 938EAC371B67E77800754383 /* Cake WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 		B7BCA28C180524A800CF7588 /* cake */ = {
 			isa = PBXNativeTarget;
@@ -442,13 +475,13 @@
 				B7BCA28A180524A800CF7588 /* Frameworks */,
 				B7BCA28B180524A800CF7588 /* Resources */,
 				80A614DB18BA663B00A205BB /* ShellScript */,
-				938EAC4D1B67E77800754383 /* Embed App Extensions */,
+				80433B2B1BB26188006B7A85 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				80629C6218D4B1C700106131 /* PBXTargetDependency */,
-				938EAC441B67E77800754383 /* PBXTargetDependency */,
+				80433B281BB26188006B7A85 /* PBXTargetDependency */,
 			);
 			name = cake;
 			productName = CookSmart;
@@ -462,7 +495,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CS;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					938EAC2B1B67E77800754383 = {
@@ -471,6 +504,7 @@
 					};
 					938EAC361B67E77800754383 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = DUYQ44RPLQ;
 					};
 					B7BCA28C180524A800CF7588 = {
 						DevelopmentTeam = DUYQ44RPLQ;
@@ -525,7 +559,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				938EAC381B67E77800754383 /* Cake WatchKit App.app in Resources */,
 				938EAC341B67E77800754383 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,6 +584,7 @@
 				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
 				9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
+				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,10 +631,12 @@
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
+				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
 				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
+				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
@@ -610,20 +646,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		80433B251BB26188006B7A85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 938EAC2B1B67E77800754383 /* Cake WatchKit Extension */;
+			targetProxy = 80433B241BB26188006B7A85 /* PBXContainerItemProxy */;
+		};
+		80433B281BB26188006B7A85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 938EAC361B67E77800754383 /* Cake WatchKit App */;
+			targetProxy = 80433B271BB26188006B7A85 /* PBXContainerItemProxy */;
+		};
 		80629C6218D4B1C700106131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VGAnalytics;
 			targetProxy = 80629C6118D4B1C700106131 /* PBXContainerItemProxy */;
-		};
-		938EAC3A1B67E77800754383 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 938EAC361B67E77800754383 /* Cake WatchKit App */;
-			targetProxy = 938EAC391B67E77800754383 /* PBXContainerItemProxy */;
-		};
-		938EAC441B67E77800754383 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 938EAC2B1B67E77800754383 /* Cake WatchKit Extension */;
-			targetProxy = 938EAC431B67E77800754383 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -673,8 +709,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.cake.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -693,8 +734,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.cake.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -703,6 +749,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -713,12 +761,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IBSC_MODULE = Cake_WatchKit_Extension;
 				INFOPLIST_FILE = "Cake WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.cake.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -727,6 +777,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -734,12 +786,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IBSC_MODULE = Cake_WatchKit_Extension;
 				INFOPLIST_FILE = "Cake WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.cake.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -761,6 +815,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -781,7 +836,7 @@
 					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
@@ -820,7 +875,7 @@
 					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -831,23 +886,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/vova/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/CookSmart",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pryanik.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -859,24 +914,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/vova/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/CookSmart",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pryanik.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

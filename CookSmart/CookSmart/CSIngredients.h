@@ -12,6 +12,7 @@
 
 @class CSIngredient;
 @class CSIngredientGroup;
+@class CSRecentsIngredientGroup;
 
 static inline NSString *pathToIngredientsOnDisk()
 {
@@ -28,9 +29,10 @@ static inline NSString *pathToIngredientsInBundle()
 
 @interface CSIngredients : NSObject <NSFastEnumeration>
 
-- (id)initWithIngredientGroups:(NSArray *)ingredientGroups;
-
+- (id)initWithIngredientGroups:(NSArray *)ingredientGroups synthesizeGroups:(BOOL)shouldSynthesize;
 + (CSIngredients *)sharedInstance;
+- (void)refreshRecents;
+- (CSRecentsIngredientGroup *)recents;
 - (CSIngredientGroup *)ingredientGroupAtIndex:(NSUInteger)index;
 - (CSIngredient*)ingredientAtGroupIndex:(NSUInteger)groupIndex andIngredientIndex:(NSUInteger)index;
 - (NSUInteger)countOfIngredientGroups;

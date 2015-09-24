@@ -11,6 +11,8 @@
 #import "CSFilteredIngredientGroup.h"
 #import "CSIngredient.h"
 #import "CSEditIngredientVC.h"
+#import "CSIngredientListViewCell.h"
+#import "CSRecentsIngredientGroup.h"
 
 @interface CSIngredientListVC ()
 
@@ -45,7 +47,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    [self.tableView registerClass:[CSIngredientListViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     UIBarButtonItem* closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Close"] style:UIBarButtonItemStylePlain target:self action:@selector(closeIngrList:)];
     self.navigationItem.leftBarButtonItem = closeItem;
@@ -81,7 +83,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self refreshData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -127,18 +129,9 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
+    CSIngredientListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     CSIngredient *ingredient = [[[self ingredientsToSupplyData] ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
-    UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    [detailButton setTintColor:RED_LINE_COLOR];
-    [detailButton addTarget:self action:@selector(detailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    detailButton.tag = [[CSIngredients sharedInstance] flattenedIndexForIngredient:ingredient];
-    
-    cell.accessoryView = detailButton;
-    cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:17];
-    cell.textLabel.text = [ingredient name];
+    [cell configureForListVC:self ingredient:ingredient];
     return cell;
 }
 
@@ -154,7 +147,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
             selectedIngredientGroup:[[CSIngredients sharedInstance] indexOfIngredientGroup:selectedIngredientGroup]
                     ingredientIndex:[selectedIngredientGroup indexOfIngredient:selectedIngredient]];
     
-    [self closeIngrList:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)detailButtonTapped:(id)sender
@@ -168,12 +161,14 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Don't let people delete the final ingredient for now.
-    // It's not clear what we want the UX to be when there aren't any ingredients.
-    // For now, this is such an edge case that we'll just not support it.
     NSUInteger numGroups = [[CSIngredients sharedInstance] countOfIngredientGroups];
-    return  (numGroups > 1) ||
-            (numGroups == 1 && [[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] countOfIngredients] > 1);
+    CSIngredientGroup *ingrGroup = [[CSIngredients sharedInstance] ingredientGroupAtIndex:indexPath.section];
+    // Don't allow deletions from synthetic groups.
+    return  !ingrGroup.isSynthetic &&
+                // Don't let people delete the final ingredient for now.
+                // It's not clear what we want the UX to be when there aren't any ingredients.
+                // For now, this is such an edge case that we'll just not support it.
+                ((numGroups > 1) || (numGroups == 1 && [[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] countOfIngredients] > 1));
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,13 +176,17 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         CSIngredients *ingredients = [self ingredientsToSupplyData];
-        CSIngredient *ingredientToDelete = [[ingredients ingredientGroupAtIndex:indexPath.section] ingredientAtIndex:indexPath.row];
-        NSUInteger numIngredientGroups = [ingredients countOfIngredientGroups];
+        CSRecentsIngredientGroup *beforeChangeRecents = ingredients.recents;
+        CSIngredientGroup *ingredientGroup = [ingredients ingredientGroupAtIndex:indexPath.section];
+        CSIngredient *ingredientToDelete = [ingredientGroup ingredientAtIndex:indexPath.row];
+        BOOL needToDeleteFromRecents = beforeChangeRecents && [beforeChangeRecents indexOfIngredient:ingredientToDelete] != NSNotFound;
         BOOL deleteSuccess = [ingredients deleteIngredientAtGroupIndex:indexPath.section ingredientIndex:indexPath.row];
         if (deleteSuccess)
         {
-            logUserAction(@"ingredient_delete", [ingredientToDelete dictionary]);
-            if (numIngredientGroups > [ingredients countOfIngredientGroups])
+            logUserAction(@"ingredient_delete", [ingredientToDelete dictionaryForAnalytics]);
+            
+            [tableView beginUpdates];
+            if (ingredientGroup.countOfIngredients == 0)
             {
                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
@@ -195,13 +194,26 @@ static const NSUInteger ResetToDefaultsHeight = 40;
             {
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
+            
+            if (needToDeleteFromRecents)
+            {
+                CSRecentsIngredientGroup *afterChangeRecents = ingredients.recents;
+                if (afterChangeRecents == nil)
+                {
+                    [tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+                else
+                {
+                    [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[beforeChangeRecents indexOfIngredient:ingredientToDelete] inSection:0]]
+                                     withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
+            [tableView endUpdates];
         }
         else
         {
-            logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionary]);
+            logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionaryForAnalytics]);
         }
-        
-        [self refreshData];
     }
 }
 
@@ -230,6 +242,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
                                                  andCancelBlock:^(void){
                                                      ingredientToEdit.name = oldIngrName;
                                                      ingredientToEdit.density = oldIngrDensity;
+                                                     [self refreshData];
                                                  }];
     }
     else
@@ -249,6 +262,9 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     
     for (CSIngredientGroup* group in [CSIngredients sharedInstance])
     {
+        if ([group isSynthetic]) {
+            continue;
+        }
         NSMutableArray* ingredients = [NSMutableArray array];
         for (CSIngredient* ingr in group)
         {
@@ -264,7 +280,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
         }
     }
     
-    self.filteredIngredients = [[CSIngredients alloc] initWithIngredientGroups:filteredGroupsArray];
+    self.filteredIngredients = [[CSIngredients alloc] initWithIngredientGroups:filteredGroupsArray synthesizeGroups:NO];
     [self refreshData];
 }
 
@@ -276,6 +292,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 #pragma mark - reset to defaults
 - (void)refreshData
 {
+    [[CSIngredients sharedInstance] refreshRecents];
     [self.tableView reloadData];
     [self showHideResetToDefaults];
 }
@@ -310,6 +327,10 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 #pragma mark - dismiss self
 - (void)closeIngrList:(id)sender
 {
+    // When closing the ingredient list, always select the very first item – the one most recently looked at.
+    [self.delegate ingredientListVC:self
+            selectedIngredientGroup:0
+                    ingredientIndex:0];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
