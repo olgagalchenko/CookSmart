@@ -126,8 +126,16 @@
     }
     else if (![self.ingredient isIngredientDensityValid] || self.ingredient.density == 0)
     {
-        UIAlertView* densityError = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Choose a value greater than 0." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [densityError show];
+        UIAlertController* alertController = [UIAlertController
+                                              alertControllerWithTitle:@"Error"
+                                              message:@"Choose a weight greater than 0."
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* okAction = [UIAlertAction
+                                        actionWithTitle:@"OK"
+                                        style:UIAlertActionStyleCancel
+                                        handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
         logUserAction(@"ingredient_persist_fail", [self analyticsDictionary]);
     }
     else
