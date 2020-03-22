@@ -307,21 +307,28 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 
 - (void)resetButtonAction:(id)sender
 {
-    UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Resetting to defaults will remove all your added and edited ingredients." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
-    [resetAlert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
+    UIAlertController* alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Are you sure?"
+                                          message:@"Resetting to defaults will remove all your added and edited ingredients."
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
+                                   style:UIAlertActionStyleCancel
+                                   handler:nil];
+    UIAlertAction* resetAction = [UIAlertAction
+                                  actionWithTitle:@"Reset"
+                                  style:UIAlertActionStyleDestructive
+                                  handler:^(UIAlertAction * _Nonnull action) {
         self.tableView.tableFooterView = nil;
         
         [[CSIngredients sharedInstance] deleteAllSavedIngredients];
         [self refreshData];
         NSIndexPath* firstCellPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView scrollToRowAtIndexPath:firstCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:resetAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - dismiss self
