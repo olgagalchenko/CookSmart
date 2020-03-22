@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *volumeScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *weightScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneButtonBottomConstraint;
 @property (strong, nonatomic) CSUnit* volumeUnit;
 @property (strong, nonatomic) CSUnit* weightUnit;
 @property (weak, nonatomic) CSUnitPickerCenterLineView *centerLine;
@@ -56,6 +57,8 @@
     layoutUnitLabels(self.weightScrollView, self.weightUnit.name, self.arrangement);
     self.centerLine.frame = CGRectMake(0, (self.arrangement == CSScaleVCArrangementScales)? (UNIT_LABEL_HEIGHT - CENTER_LINE_THICKNESS)/2 : (self.bounds.size.height - CENTER_LINE_THICKNESS)/2,
                                        self.bounds.size.width, CENTER_LINE_THICKNESS);
+    
+    self.doneButtonBottomConstraint.constant = self.safeAreaInsets.bottom;
 }
 
 - (void)setArrangement:(CSScaleVCArrangement)arrangement
