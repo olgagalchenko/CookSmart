@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80433B261BB26188006B7A85 /* Cake WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 938EAC2C1B67E77800754383 /* Cake WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		80433B291BB26188006B7A85 /* Cake WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 938EAC371B67E77800754383 /* Cake WatchKit App.app */; };
-		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; settings = {ASSET_TAGS = (); }; };
-		80433B321BB27270006B7A85 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		80433B331BB27270006B7A85 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B301BB27270006B7A85 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		80433B341BB27270006B7A85 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B311BB27270006B7A85 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
-		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
+		80433B321BB27270006B7A85 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */; };
+		80433B331BB27270006B7A85 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B301BB27270006B7A85 /* FBSDKLoginKit.framework */; };
+		80433B341BB27270006B7A85 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80433B311BB27270006B7A85 /* FBSDKShareKit.framework */; };
+		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
 		80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0718924B0F0082D4E1 /* CSIngredient.m */; };
 		80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */; };
@@ -22,7 +20,7 @@
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
 		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
 		80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.dylib */; };
-		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; };
 		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
@@ -50,20 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		80433B241BB26188006B7A85 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 938EAC2B1B67E77800754383;
-			remoteInfo = "Cake WatchKit Extension";
-		};
-		80433B271BB26188006B7A85 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 938EAC361B67E77800754383;
-			remoteInfo = "Cake WatchKit App";
-		};
 		80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
@@ -386,6 +370,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = B7BCA284180524A800CF7588;
@@ -488,11 +473,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		80433B251BB26188006B7A85 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 938EAC2B1B67E77800754383 /* Cake WatchKit Extension */;
-			targetProxy = 80433B241BB26188006B7A85 /* PBXContainerItemProxy */;
-		};
 		80629C6218D4B1C700106131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VGAnalytics;
@@ -619,7 +599,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -648,7 +628,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CookSmart/CookSmart-Prefix.pch";
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-all_load",
