@@ -613,6 +613,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = T36GJ569RT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,6 +625,7 @@
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -643,6 +645,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = T36GJ569RT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,6 +657,7 @@
 				INFOPLIST_FILE = "CookSmart/CookSmart-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
