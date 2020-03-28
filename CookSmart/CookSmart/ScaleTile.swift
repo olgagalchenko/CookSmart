@@ -44,7 +44,7 @@ struct ScaleTilePreview: PreviewProvider {
 
     struct TilePreviewContainer: UIViewRepresentable {
         func makeUIView(context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {
-            return ScaleTile(frame: CGRect.zero, mirror: true)
+            ScaleTile(frame: CGRect.zero, mirror: true)
         }
 
         func updateUIView(_: UIView, context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) {}

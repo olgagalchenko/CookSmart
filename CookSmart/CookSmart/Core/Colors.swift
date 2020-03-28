@@ -20,7 +20,7 @@ enum Color {
     )
 
     private static func color(light: UIColor, dark: UIColor) -> UIColor {
-        return UIColor { traitCollection in
+        UIColor { traitCollection in
             switch traitCollection.userInterfaceStyle {
             case .dark: return dark
             case .light, .unspecified: return light
