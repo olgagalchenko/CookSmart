@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
@@ -156,6 +158,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		392D8642242FD0CA002064D6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				392D8644242FD0FF002064D6 /* Colors.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		8000355C18B3CBF50032BF91 /* Scales */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +287,7 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
+				392D8642242FD0CA002064D6 /* Core */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
 				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
 				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
@@ -448,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
