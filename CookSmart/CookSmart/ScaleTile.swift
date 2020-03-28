@@ -11,49 +11,44 @@ import SwiftUI
 import UIKit
 
 class ScaleTile: UIView {
-  
-  // MARK: Lifecycle
-  
-  init(frame: CGRect, mirror: Bool) {
-    self.mirror = mirror
-    super.init(frame: frame)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError()
-  }
-  
-  var value: Double {
-    get { Double(valueLabel.text ?? "") ?? 0 }
-    set {
-      valueLabel.text = String(format:"%1.0f", newValue)
+    // MARK: Lifecycle
+
+    init(frame: CGRect, mirror: Bool) {
+        self.mirror = mirror
+        super.init(frame: frame)
     }
-  }
-  
-  // MARK: Private
-  
-  let valueLabel: UILabel = UILabel()
-  let mirror: Bool
-  
-  override func draw(_ rect: CGRect) {
-    
-  }
+
+    required init?(coder _: NSCoder) {
+        fatalError()
+    }
+
+    var value: Double {
+        get { Double(valueLabel.text ?? "") ?? 0 }
+        set {
+            valueLabel.text = String(format: "%1.0f", newValue)
+        }
+    }
+
+    // MARK: Private
+
+    let valueLabel: UILabel = UILabel()
+    let mirror: Bool
+
+    override func draw(_: CGRect) {}
 }
 
 struct ScaleTilePreview: PreviewProvider {
-  
-  static var previews: some View {
-    TilePreviewContainer()
-  }
-  
-  struct TilePreviewContainer: UIViewRepresentable {
-    func makeUIView(context: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {
-      return ScaleTile(frame: CGRect.zero, mirror: true)
+    static var previews: some View {
+        TilePreviewContainer()
     }
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) {
+
+    struct TilePreviewContainer: UIViewRepresentable {
+        func makeUIView(context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {
+            return ScaleTile(frame: CGRect.zero, mirror: true)
+        }
+
+        func updateUIView(_: UIView, context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) {}
+
+        typealias UIViewType = UIView
     }
-    
-    typealias UIViewType = UIView
-    
-  }
 }
