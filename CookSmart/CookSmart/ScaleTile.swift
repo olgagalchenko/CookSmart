@@ -41,9 +41,19 @@ class ScaleTile: UIView {
 }
 
 struct ScaleTilePreview: PreviewProvider {
-  typealias Previews = ScaleTile
   
   static var previews: some View {
-      Text("Hello Medium")
+    TilePreviewContainer()
+  }
+  
+  struct TilePreviewContainer: UIViewRepresentable {
+    func makeUIView(context: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {
+      return ScaleTile(frame: CGRect.zero, mirror: true)
+    }
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) {
+    }
+    
+    typealias UIViewType = UIView
+    
   }
 }
