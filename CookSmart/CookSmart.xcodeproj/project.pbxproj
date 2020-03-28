@@ -348,7 +348,9 @@
 				B7BCA289180524A800CF7588 /* Sources */,
 				B7BCA28A180524A800CF7588 /* Frameworks */,
 				B7BCA28B180524A800CF7588 /* Resources */,
-				80A614DB18BA663B00A205BB /* ShellScript */,
+				392D864A24300ECA002064D6 /* Swiftformat */,
+				392D864C24301109002064D6 /* Swiftlint */,
+				80A614DB18BA663B00A205BB /* Run Version Script */,
 			);
 			buildRules = (
 			);
@@ -438,13 +440,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		80A614DB18BA663B00A205BB /* ShellScript */ = {
+		392D864A24300ECA002064D6 /* Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftformat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftformat ${SOURCE_ROOT}\n";
+		};
+		392D864C24301109002064D6 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftlint --path ${SOURCE_ROOT}\n";
+		};
+		80A614DB18BA663B00A205BB /* Run Version Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Version Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
