@@ -24,7 +24,7 @@ enum Color {
             switch traitCollection.userInterfaceStyle {
             case .dark: return dark
             case .light, .unspecified: return light
-                @unknown default: return light
+            @unknown default: return light
             }
         }
     }
