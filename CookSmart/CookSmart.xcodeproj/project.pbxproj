@@ -456,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftformat ${SOURCE_ROOT}\n";
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftformat ${SOURCE_ROOT}\n";
 		};
 		392D864C24301109002064D6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -474,7 +474,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftlint --path ${SOURCE_ROOT}\n";
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftlint --path ${SOURCE_ROOT}\n";
 		};
 		80A614DB18BA663B00A205BB /* Run Version Script */ = {
 			isa = PBXShellScriptBuildPhase;
