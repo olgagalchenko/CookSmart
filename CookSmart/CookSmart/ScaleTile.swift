@@ -18,7 +18,7 @@ class ScaleTile: UIView {
     static let large_40: CGFloat = 40
   }
 
-  private enum Thickness {
+  private enum LineWidth {
     static let minor_1: CGFloat = 1
     static let major_2: CGFloat = 2
   }
@@ -64,7 +64,7 @@ class ScaleTile: UIView {
       ctx.translateBy(x: -bounds.size.width / 2, y: 0)
     }
 
-    ctx.setLineWidth(Thickness.minor_1)
+    ctx.setLineWidth(LineWidth.minor_1)
     ctx.setStrokeColor(UIColor.darkGray.cgColor)
     drawEighths(ctx)
     drawQuarters(ctx)
@@ -116,17 +116,18 @@ class ScaleTile: UIView {
   }
 
   private func drawWhole(_ ctx: CGContext) {
-    ctx.setLineWidth(Thickness.major_2)
+    let halfWidth = LineWidth.major_2 / 2
+    ctx.setLineWidth(halfWidth)
 
     ctx.setStrokeColor(UIColor.lightGray.cgColor)
-    let leadingFrom = CGPoint(x: 0, y: Thickness.major_2 / 2)
-    let leadingTo = CGPoint(x: Length.large_40, y: Thickness.major_2 / 2)
+    let leadingFrom = CGPoint(x: 0, y: halfWidth / 2)
+    let leadingTo = CGPoint(x: Length.large_40, y: halfWidth / 2)
     ctx.addLines(between: [leadingFrom, leadingTo])
     ctx.strokePath()
 
     ctx.setStrokeColor(UIColor.darkGray.cgColor)
-    let trailingFrom = CGPoint(x: bounds.size.width, y: Thickness.major_2 / 2)
-    let trailingTo = CGPoint(x: bounds.size.width - Length.large_40, y: Thickness.major_2 / 2)
+    let trailingFrom = CGPoint(x: bounds.size.width, y: halfWidth / 2)
+    let trailingTo = CGPoint(x: bounds.size.width - Length.large_40, y: halfWidth / 2)
     ctx.addLines(between: [trailingFrom, trailingTo])
     ctx.strokePath()
   }
@@ -134,8 +135,26 @@ class ScaleTile: UIView {
 
 struct ScaleTilePreview: PreviewProvider {
   static var previews: some View {
-    TilePreviewContainer()
-      .frame(width: UIScreen.main.bounds.width, height: 200)
+    Group {
+      NavigationView {
+        VStack(spacing: 0) {
+          TilePreviewContainer()
+            .frame(width: UIScreen.main.bounds.width, height: 200)
+          TilePreviewContainer()
+            .frame(width: UIScreen.main.bounds.width, height: 200)
+        }
+      }
+      .environment(\.colorScheme, .light)
+      NavigationView {
+        VStack(spacing: 0) {
+          TilePreviewContainer()
+            .frame(width: UIScreen.main.bounds.width, height: 200)
+          TilePreviewContainer()
+            .frame(width: UIScreen.main.bounds.width, height: 200)
+        }
+      }
+      .environment(\.colorScheme, .dark)
+    }
   }
 
   struct TilePreviewContainer: UIViewRepresentable {
