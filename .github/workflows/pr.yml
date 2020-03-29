@@ -29,9 +29,7 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: /usr/local/Cellar/mint
-        key: ${{ runner.os }}-mint-
-        restore-keys: |
-          ${{ runner.os }}-mint-
+        key: ${{ runner.os }}-mint-${{ mint --version }}
 
     - name: Install Mint
       if: steps.mint-cache.outputs.cache-hit != 'true'
