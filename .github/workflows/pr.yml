@@ -31,7 +31,7 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: /usr/local/Cellar/mint
-        key: ${{ runner.os }}-mint-
+        key: ${{ runner.os }}-mint-${{ hashFiles(CookSmart/BuildTools/Mintfile) }}
 
     - name: Homebrew Cache
       id: homebrew-cache
@@ -44,7 +44,7 @@ jobs:
       if: steps.mint-cache.outputs.cache-hit != 'true' || steps.homebrew-cache.outputs.cache-hit != 'true'
       run: |
         brew update
-        brew install mint
+        brew link mint || brew install mint
         brew cleanup
         mint --version
         pwd
