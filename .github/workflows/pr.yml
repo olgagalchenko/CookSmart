@@ -31,7 +31,7 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: /usr/local/Cellar/mint
-        key: ${{ runner.os }}-mint-${{ hashFiles(CookSmart/BuildTools/Mintfile) }}
+        key: ${{ runner.os }}-mint-${{ hashFiles('CookSmart/BuildTools/Mintfile') }}
 
     - name: Homebrew Cache
       id: homebrew-cache
