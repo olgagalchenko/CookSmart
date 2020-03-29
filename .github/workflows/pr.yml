@@ -41,7 +41,7 @@ jobs:
         key: ${{ runner.os }}-homebrew-
 
     - name: Install Mint
-      if: steps.mint-cache.outputs.cache-hit != 'true' && steps.homebrew-cache.outputs.cache-hit != 'true'
+      if: steps.mint-cache.outputs.cache-hit != 'true' || steps.homebrew-cache.outputs.cache-hit != 'true'
       run: |
         brew update
         brew install mint
