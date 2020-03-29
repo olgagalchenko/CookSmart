@@ -31,7 +31,16 @@ struct IngredientListView: View {
         List {
           Text("test")
         }
-      }.navigationBarTitle("Ingredients")
+      }
+      .navigationBarTitle("Ingredients")
+      .navigationBarItems(leading:
+        Button(action: {
+          print("Pressed")
+        }, label: {
+          Image(systemName: "xmark")
+            .font(Font.system(size: 20, weight: .medium, design: .default))
+        })
+      )
     }
   }
 }
