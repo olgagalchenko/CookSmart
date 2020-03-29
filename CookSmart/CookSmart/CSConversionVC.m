@@ -15,6 +15,7 @@
 #import "CSUnit.h"
 #import "CSUnitCollection.h"
 #import "CSScaleVC.h"
+#import "cake-Swift.h"
 
 #define CHOOSE_UNITS_TEXT @"Choose Units"
 
@@ -99,6 +100,7 @@
     // When we first appear, always select the very first ingredient – the one most recently selected.
     [self selectIngredientAtIndex:self.ingredientIndex];
     logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
+  self.view.backgroundColor = UIColor.systemGray6Color;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -153,9 +155,10 @@
 
 - (void)handleIngredientTap:(id)sender
 {
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
-    [self presentViewController:nav animated:YES completion:nil];
+  [self showIngredientList];
+//    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
+//    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

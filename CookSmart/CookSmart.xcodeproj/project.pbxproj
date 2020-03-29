@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
+		392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865324304F2D002064D6 /* IngredientListViewController.swift */; };
+		392D865724306D0D002064D6 /* CSConversionVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865624306D0D002064D6 /* CSConversionVCExt.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
@@ -72,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		392D865324304F2D002064D6 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
+		392D865624306D0D002064D6 /* CSConversionVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSConversionVCExt.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
 				807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */,
 				807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */,
+				392D865324304F2D002064D6 /* IngredientListViewController.swift */,
 			);
 			name = "Ingredient List UI";
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
+				392D865624306D0D002064D6 /* CSConversionVCExt.swift */,
 				8000355C18B3CBF50032BF91 /* Scales */,
 				80592C0218924AEA0082D4E1 /* Model */,
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
@@ -520,9 +526,11 @@
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80592C121892CA110082D4E1 /* CSScaleTile.m in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
+				392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
+				392D865724306D0D002064D6 /* CSConversionVCExt.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
 				80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */,
