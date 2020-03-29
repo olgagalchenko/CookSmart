@@ -24,9 +24,20 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
+    - name: Mint Cache
+      id: mint-cache
+      uses: actions/cache@v1.1.2
+      with:
+        path: /usr/local/Cellar/mint
+        key: ${{ runner.os }}-mint-
+        restore-keys: |
+          ${{ runner.os }}-mint-
+
     - name: Install Mint
+      if: steps.mint-cache.outputs.cache-hit != 'true'
       run: |
         brew update
         brew install mint
         mint --version
         pwd
+        ls
