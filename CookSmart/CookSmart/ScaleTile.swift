@@ -11,6 +11,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
+@objc
 class ScaleTile: UIView {
   private enum Length {
     static let small_15: CGFloat = 15
@@ -25,6 +26,7 @@ class ScaleTile: UIView {
 
   // MARK: Lifecycle
 
+  @objc
   init(frame: CGRect, mirror: Bool = false) {
     self.mirror = mirror
     super.init(frame: frame)
@@ -38,9 +40,14 @@ class ScaleTile: UIView {
 
   // MARK: Public
 
-  var value: Double {
-    get { Double(valueLabel.text ?? "") ?? 0 }
+  @objc
+  public var value: Float {
+    get { Float(valueLabel.text ?? "") ?? 0 }
     set {
+      guard newValue >= 0 else {
+        valueLabel.text = ""
+        return
+      }
       valueLabel.text = String(format: "%1.0f", newValue)
     }
   }
@@ -87,7 +94,7 @@ class ScaleTile: UIView {
     } else {
       valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Length.small_15).isActive = true
     }
-    valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    valueLabel.bottomAnchor.constraint(equalTo: topAnchor).isActive = true
   }
 
   private func drawEighths(_ ctx: CGContext) {
@@ -178,12 +185,12 @@ struct ScaleTilePreview: PreviewProvider {
   }
 
   struct TilePreviewContainer: UIViewRepresentable {
-    init(value: Double, mirror: Bool) {
+    init(value: Float, mirror: Bool) {
       self.value = value
       self.mirror = mirror
     }
 
-    let value: Double
+    let value: Float
     let mirror: Bool
 
     func makeUIView(context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {

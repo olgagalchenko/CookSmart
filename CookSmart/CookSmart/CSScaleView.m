@@ -8,6 +8,7 @@
 
 #import "CSScaleView.h"
 #import "CSScaleTile.h"
+#import "cake-Swift.h"
 
 #define SCALE_TILE_HEIGHT       200.0
 
@@ -106,7 +107,7 @@
     
     CGFloat minimumVisibleY = CGRectGetMinY(visibleBounds);
     CGFloat maximumVisibleY = CGRectGetMaxY(visibleBounds);
-    for (CSScaleTile *tile in self.tileContainer.subviews)
+    for (ScaleTile *tile in self.tileContainer.subviews)
     {
         CGRect tileFrame = tile.frame;
         CGFloat maxY = CGRectGetMaxY(tileFrame);
@@ -147,7 +148,7 @@
     {
         self.tileContainer.frame = CGRectMake(0, 0, 0, 0);
     }
-    for (CSScaleView *subview in self.tileContainer.subviews)
+    for (ScaleTile *subview in self.tileContainer.subviews)
     {
         [subview removeFromSuperview];
     }
@@ -159,7 +160,7 @@
     {
         CGRect tileRect = CGRectMake(0, lowestTileY, self.bounds.size.width, SCALE_TILE_HEIGHT);
         float tileValue = i*unitsPerTile;
-        CSScaleTile *tile = [[CSScaleTile alloc] initWithFrame:tileRect mirror:mirror];
+        ScaleTile *tile = [[ScaleTile alloc] initWithFrame:tileRect mirror:mirror];
         [tile setValue:tileValue];
         [self.tileContainer addSubview:tile];
         if (CGRectContainsPoint(tileRect, centerPoint))
