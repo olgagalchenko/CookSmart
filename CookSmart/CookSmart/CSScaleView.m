@@ -7,7 +7,6 @@
 //
 
 #import "CSScaleView.h"
-#import "CSScaleTile.h"
 #import "cake-Swift.h"
 
 #define SCALE_TILE_HEIGHT       200.0
