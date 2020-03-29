@@ -83,9 +83,9 @@ class ScaleTile: UIView {
     valueLabel.font = Fonts.tiny
     valueLabel.translatesAutoresizingMaskIntoConstraints = false
     if mirror {
-      valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Length.medium_30 / 2).isActive = true
-    } else {
       valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Length.medium_30 / 2).isActive = true
+    } else {
+      valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Length.small_15).isActive = true
     }
     valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
@@ -148,19 +148,28 @@ struct ScaleTilePreview: PreviewProvider {
   static var previews: some View {
     Group {
       NavigationView {
-        VStack(spacing: 0) {
-          TilePreviewContainer()
-            .frame(width: UIScreen.main.bounds.width, height: 200)
-          TilePreviewContainer()
-            .frame(width: UIScreen.main.bounds.width, height: 200)
+        HStack(spacing: 0) {
+          VStack(spacing: 0) {
+            TilePreviewContainer(value: 5, mirror: false)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+            TilePreviewContainer(value: 600, mirror: false)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+          }
+          VStack(spacing: 0) {
+            TilePreviewContainer(value: 5, mirror: true)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+            TilePreviewContainer(value: 600, mirror: true)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+          }
         }
       }
       .environment(\.colorScheme, .light)
+
       NavigationView {
         VStack(spacing: 0) {
-          TilePreviewContainer()
+          TilePreviewContainer(value: 5, mirror: false)
             .frame(width: UIScreen.main.bounds.width, height: 200)
-          TilePreviewContainer()
+          TilePreviewContainer(value: 80000, mirror: false)
             .frame(width: UIScreen.main.bounds.width, height: 200)
         }
       }
@@ -169,9 +178,17 @@ struct ScaleTilePreview: PreviewProvider {
   }
 
   struct TilePreviewContainer: UIViewRepresentable {
+    init(value: Double, mirror: Bool) {
+      self.value = value
+      self.mirror = mirror
+    }
+
+    let value: Double
+    let mirror: Bool
+
     func makeUIView(context _: UIViewRepresentableContext<ScaleTilePreview.TilePreviewContainer>) -> UIView {
-      let tile = ScaleTile(frame: CGRect.zero)
-      tile.value = 6
+      let tile = ScaleTile(frame: CGRect.zero, mirror: mirror)
+      tile.value = value
       return tile
     }
 
