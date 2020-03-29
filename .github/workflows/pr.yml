@@ -38,7 +38,7 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: ~/Library/Caches/Homebrew
-        key: ${{ runner.os }}-mint-
+        key: ${{ runner.os }}-homebrew-
 
     - name: Install Mint
       if: steps.mint-cache.outputs.cache-hit != 'true' && steps.homebrew-cache.outputs.cache-hit != 'true'
