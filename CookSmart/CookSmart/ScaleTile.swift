@@ -54,10 +54,10 @@ class ScaleTile: UIView {
     }
 
     ctx.setLineWidth(LineWidth.minor_1)
-    ctx.setStrokeColor(UIColor.darkGray.cgColor)
+    ctx.setStrokeColor(UIColor.systemGray.cgColor)
     drawEighths(ctx)
     drawQuarters(ctx)
-    ctx.setStrokeColor(UIColor.lightGray.cgColor)
+    ctx.setStrokeColor(UIColor.systemGray3.cgColor)
     drawThirds(ctx)
     drawSixths(ctx)
 
@@ -130,13 +130,13 @@ class ScaleTile: UIView {
     let halfWidth = LineWidth.major_2 / 2
     ctx.setLineWidth(halfWidth)
 
-    ctx.setStrokeColor(UIColor.lightGray.cgColor)
+    ctx.setStrokeColor(UIColor.systemGray3.cgColor)
     let leadingFrom = CGPoint(x: 0, y: halfWidth / 2)
     let leadingTo = CGPoint(x: Length.large_40, y: halfWidth / 2)
     ctx.addLines(between: [leadingFrom, leadingTo])
     ctx.strokePath()
 
-    ctx.setStrokeColor(UIColor.darkGray.cgColor)
+    ctx.setStrokeColor(UIColor.systemGray.cgColor)
     let trailingFrom = CGPoint(x: bounds.size.width, y: halfWidth / 2)
     let trailingTo = CGPoint(x: bounds.size.width - Length.large_40, y: halfWidth / 2)
     ctx.addLines(between: [trailingFrom, trailingTo])
