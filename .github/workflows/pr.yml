@@ -29,7 +29,7 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: /usr/local/Cellar/mint
-        key: ${{ runner.os }}-mint-${{ mint --version }}
+        key: ${{ runner.os }}-mint-
 
     - name: Install Mint
       if: steps.mint-cache.outputs.cache-hit != 'true'
@@ -39,3 +39,8 @@ jobs:
         mint --version
         pwd
         ls
+
+    - name: Mint Bootstrap
+      run: |
+        cd CookSmart/BuildTools
+        mint bootstrap
