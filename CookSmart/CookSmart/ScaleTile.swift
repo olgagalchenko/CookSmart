@@ -173,11 +173,19 @@ struct ScaleTilePreview: PreviewProvider {
       .environment(\.colorScheme, .light)
 
       NavigationView {
-        VStack(spacing: 0) {
-          TilePreviewContainer(value: 5, mirror: false)
-            .frame(width: UIScreen.main.bounds.width, height: 200)
-          TilePreviewContainer(value: 80000, mirror: false)
-            .frame(width: UIScreen.main.bounds.width, height: 200)
+        HStack(spacing: 0) {
+          VStack(spacing: 0) {
+            TilePreviewContainer(value: 5, mirror: false)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+            TilePreviewContainer(value: 600, mirror: false)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+          }
+          VStack(spacing: 0) {
+            TilePreviewContainer(value: 5, mirror: true)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+            TilePreviewContainer(value: 600, mirror: true)
+              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
+          }
         }
       }
       .environment(\.colorScheme, .dark)
