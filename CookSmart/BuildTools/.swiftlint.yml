@@ -1,1 +1,5 @@
 # Rules found at https://realm.github.io/SwiftLint/rule-directory.html
+
+disabled_rules: # rule identifiers to exclude from running
+  - identifier_name
+  - nesting
