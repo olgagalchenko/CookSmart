@@ -36,24 +36,13 @@ class ScaleTile: UIView {
     fatalError()
   }
 
+  // MARK: Public
+
   var value: Double {
     get { Double(valueLabel.text ?? "") ?? 0 }
     set {
       valueLabel.text = String(format: "%1.0f", newValue)
     }
-  }
-
-  // MARK: Private
-
-  let valueLabel: UILabel = UILabel()
-  let mirror: Bool
-
-  private func setUpViews() {
-    backgroundColor = UIColor.clear
-    addSubview(valueLabel)
-    valueLabel.translatesAutoresizingMaskIntoConstraints = false
-    valueLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    valueLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
 
   override func draw(_: CGRect) {
@@ -77,6 +66,28 @@ class ScaleTile: UIView {
     ctx.scaleBy(x: 1, y: -1)
     ctx.translateBy(x: 0, y: -bounds.size.height / 2)
     drawWhole(ctx)
+  }
+
+  // MARK: Private
+
+  let valueLabel: UILabel = UILabel()
+  let mirror: Bool
+
+  private func setUpViews() {
+    backgroundColor = UIColor.clear
+    setUpLabel()
+  }
+
+  private func setUpLabel() {
+    addSubview(valueLabel)
+    valueLabel.font = Fonts.tiny
+    valueLabel.translatesAutoresizingMaskIntoConstraints = false
+    if mirror {
+      valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Length.medium_30 / 2).isActive = true
+    } else {
+      valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Length.medium_30 / 2).isActive = true
+    }
+    valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
 
   private func drawEighths(_ ctx: CGContext) {
