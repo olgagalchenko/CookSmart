@@ -3,3 +3,4 @@
 --enable isEmpty
 
 --indent 2
+--indentcase false

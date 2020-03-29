@@ -368,7 +368,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CS;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
 					B7BCA28C180524A800CF7588 = {
@@ -678,6 +678,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
