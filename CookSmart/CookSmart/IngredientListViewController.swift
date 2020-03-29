@@ -76,7 +76,7 @@ private struct SearchBar: UIViewRepresentable {
   }
 }
 
-private struct IngredientListViewController_Previews: PreviewProvider {
+struct IngredientListViewController_Previews: PreviewProvider {
   static var previews: some View {
     IngredientListView()
   }
