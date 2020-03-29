@@ -348,6 +348,7 @@
 				B7BCA289180524A800CF7588 /* Sources */,
 				B7BCA28A180524A800CF7588 /* Frameworks */,
 				B7BCA28B180524A800CF7588 /* Resources */,
+				392D864F24301E96002064D6 /* Mint */,
 				392D864A24300ECA002064D6 /* Swiftformat */,
 				392D864C24301109002064D6 /* Swiftlint */,
 				80A614DB18BA663B00A205BB /* Run Version Script */,
@@ -456,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftformat  --swiftversion 5.2 ${SOURCE_ROOT}\n";
+			shellScript = "cd BuildTools\nmint run swiftformat swiftformat --config \".swiftformat\" --swiftversion 5.2 ${SOURCE_ROOT}\n";
 		};
 		392D864C24301109002064D6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -474,7 +475,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint run swiftlint --path ${SOURCE_ROOT} --config ./BuildTools/.swiftlint.yml\n";
+			shellScript = "cd BuildTools\nmint run swiftlint swiftlint --path ${SOURCE_ROOT} --config ./BuildTools/.swiftlint.yml\n";
+		};
+		392D864F24301E96002064D6 /* Mint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Mint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint bootstrap # Install or update dependencies if needed\n";
 		};
 		80A614DB18BA663B00A205BB /* Run Version Script */ = {
 			isa = PBXShellScriptBuildPhase;
