@@ -33,11 +33,19 @@ jobs:
         path: /usr/local/Cellar/mint
         key: ${{ runner.os }}-mint-
 
+    - name: Homebrew Cache
+      id: homebrew-cache
+      uses: actions/cache@v1.1.2
+      with:
+        path: ~/Library/Caches/Homebrew
+        key: ${{ runner.os }}-mint-
+
     - name: Install Mint
-      if: steps.mint-cache.outputs.cache-hit != 'true'
+      if: steps.mint-cache.outputs.cache-hit != 'true' && steps.homebrew-cache.outputs.cache-hit != 'true'
       run: |
         brew update
         brew install mint
+        brew cleanup
         mint --version
         pwd
         ls
