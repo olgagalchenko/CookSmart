@@ -19,6 +19,11 @@ class IngredientListViewController: UIHostingController<IngredientListView> {
     assertionFailure("init(coder:) has not been implemented")
     return nil
   }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    CSIngredients.sharedInstance()?.refreshRecents()
+  }
 }
 
 struct IngredientListView: View {
@@ -26,21 +31,59 @@ struct IngredientListView: View {
 
   var body: some View {
     NavigationView {
-      VStack {
+      List {
         SearchBar(text: $searchText)
-        List {
-          Text("test")
+        ForEach(CSIngredients.sharedInstance()!.ingredientList) { group in
+          Section(header: Text(group.name)) {
+            ForEach(group.ingredients) { ingredient in
+              IngredientListCell(ingredientName: ingredient.name)
+            }
+          }
         }
       }
-      .navigationBarTitle("Ingredients")
+      .listStyle(GroupedListStyle())
+      .navigationBarTitle(searchText.isEmpty ? "Ingredients" : "Filtered")
       .navigationBarItems(leading:
         Button(action: {
           print("Pressed")
         }, label: {
           Image(systemName: "xmark")
+            .foregroundColor(SwiftUI.Color(Color.cakeRed))
             .font(Font.system(size: 20, weight: .medium, design: .default))
-        })
-      )
+        }),
+                          trailing:
+        NavigationLink(destination: CSEditIngredientVCRepresentable(),
+                       label: { Image(systemName: "plus")
+                         .foregroundColor(SwiftUI.Color(Color.cakeRed))
+                         .font(Font.system(size: 20, weight: .medium, design: .default))
+                       }))
+    }
+  }
+}
+
+struct IngredientListCell: View {
+  private let ingredientName: String
+
+  init(ingredientName: String = "Sugar") {
+    self.ingredientName = ingredientName
+  }
+
+  var body: some View {
+    ZStack {
+      NavigationLink(destination: CSEditIngredientVCRepresentable()) {
+        EmptyView()
+      }.buttonStyle(PlainButtonStyle())
+      HStack {
+        Text(ingredientName)
+        Spacer()
+        Button(action: {
+          print("Edit Tapped")
+        }, label: {
+          Image(systemName: "pencil.circle")
+            .foregroundColor(SwiftUI.Color(Color.cakeRed))
+            .font(Font.system(size: 22, weight: .regular, design: .default))
+          }).buttonStyle(BorderlessButtonStyle())
+      }
     }
   }
 }
@@ -66,6 +109,7 @@ private struct SearchBar: UIViewRepresentable {
 
   func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
     let searchBar = UISearchBar(frame: .zero)
+    searchBar.placeholder = "Search"
     searchBar.delegate = context.coordinator
     searchBar.searchBarStyle = .minimal
     return searchBar

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39024F62243174BB0063725D /* CSIngredientsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39024F61243174BB0063725D /* CSIngredientsExt.swift */; };
+		39024F6524317F720063725D /* ViewControllerRepresentables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39024F6424317F720063725D /* ViewControllerRepresentables.swift */; };
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
 		392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865324304F2D002064D6 /* IngredientListViewController.swift */; };
 		392D865724306D0D002064D6 /* CSConversionVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865624306D0D002064D6 /* CSConversionVCExt.swift */; };
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39024F61243174BB0063725D /* CSIngredientsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSIngredientsExt.swift; sourceTree = "<group>"; };
+		39024F6424317F720063725D /* ViewControllerRepresentables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRepresentables.swift; sourceTree = "<group>"; };
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		392D865324304F2D002064D6 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
 		392D865624306D0D002064D6 /* CSConversionVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSConversionVCExt.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				93D0993B18977D320014DB3E /* Units */,
 				80592C0318924B010082D4E1 /* CSIngredients.h */,
 				80592C0418924B010082D4E1 /* CSIngredients.m */,
+				39024F61243174BB0063725D /* CSIngredientsExt.swift */,
 				80592C0618924B0F0082D4E1 /* CSIngredient.h */,
 				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
 				80592C091892541D0082D4E1 /* CSIngredientGroup.h */,
@@ -306,6 +311,7 @@
 				807C0B681BB3DD04007D2C03 /* Ingredient List UI */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
+				39024F6424317F720063725D /* ViewControllerRepresentables.swift */,
 			);
 			path = CookSmart;
 			sourceTree = "<group>";
@@ -521,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				39024F6524317F720063725D /* ViewControllerRepresentables.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */,
@@ -544,6 +551,7 @@
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
 				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
+				39024F62243174BB0063725D /* CSIngredientsExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
