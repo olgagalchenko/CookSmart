@@ -11,7 +11,6 @@
 		396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */; };
 		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
 		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
-		396E364524397F2600C2815B /* CSConversionVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E364424397F2600C2815B /* CSConversionVCExt.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
@@ -79,7 +78,6 @@
 		396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerCenterLineView.swift; sourceTree = "<group>"; };
 		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
 		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		396E364424397F2600C2815B /* CSConversionVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSConversionVCExt.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
-				396E364424397F2600C2815B /* CSConversionVCExt.swift */,
 				8000355C18B3CBF50032BF91 /* Scales */,
 				80592C0218924AEA0082D4E1 /* Model */,
 				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
@@ -550,7 +547,6 @@
 				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				396E3643243976A000C2815B /* GradientView.swift in Sources */,
 				396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */,
-				396E364524397F2600C2815B /* CSConversionVCExt.swift in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
