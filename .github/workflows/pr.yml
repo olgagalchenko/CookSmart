@@ -57,8 +57,10 @@ jobs:
     - name: Mint Bootstrap
       run: |
         brew link mint
-        cd CookSmart/BuildTools
+        cd $GITHUB_WORKSPACE/CookSmart/BuildTools
         mint bootstrap -v
 
     - name: Fastlane Build
-      run: bundle exec fastlane build
+      run: |
+        cd $GITHUB_WORKSPACE/CookSmart
+        bundle exec fastlane build
