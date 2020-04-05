@@ -47,15 +47,11 @@ jobs:
         key: ${{ runner.os }}-homebrew-v2
 
     - name: Install Mint
-      if: steps.mint-cache.outputs.cache-hit != 'true' || steps.homebrew-cache.outputs.cache-hit != 'true'
+      if: steps.mint-cache.outputs.cache-hit != 'true'
       run: |
         brew update
         brew link mint || brew install mint
         brew cleanup
-        mint --version
-        mint list
-        pwd
-        ls -a
 
     - name: Mint Bootstrap
       run: |
