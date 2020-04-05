@@ -1,5 +1,7 @@
 # Rules found at https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md
 
+--exclude fastlane
+
 --enable isEmpty
 
 --indent 2

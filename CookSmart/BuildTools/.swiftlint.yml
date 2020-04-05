@@ -1,5 +1,8 @@
 # Rules found at https://realm.github.io/SwiftLint/rule-directory.html
 
+excluded:
+  - fastlane
+
 disabled_rules: # rule identifiers to exclude from running
   - identifier_name
   - nesting
