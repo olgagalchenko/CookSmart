@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: build_ios_app" time="1.983817">
+        
+          <failure message="/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/runner.rb:253:in `block in execute_action'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/runner.rb:227:in `chdir'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/runner.rb:227:in `execute_action'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server_action_command_executor.rb:73:in `run'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server_action_command_executor.rb:42:in `execute'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:181:in `execute_action_command'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:176:in `process_action_command'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:123:in `handle_action_command'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:86:in `parse_and_execute_command'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:62:in `block in receive_and_process_commands'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:49:in `loop'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:49:in `receive_and_process_commands'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:158:in `listen'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/server/socket_server.rb:38:in `start'&#10;/usr/local/Cellar/fastlane/2.144.0/libexec/gems/fastlane-2.145.0/fastlane/lib/fastlane/swift_lane_manager.rb:231:in `block in start_socket_thread'&#10;&#10;Exit status: 65" />
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
