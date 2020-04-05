@@ -39,6 +39,7 @@ jobs:
 
     - name: Homebrew Cache
       id: homebrew-cache
+      if: steps.mint-cache.outputs.cache-hit != 'true'
       uses: actions/cache@master
       with:
         path: |
