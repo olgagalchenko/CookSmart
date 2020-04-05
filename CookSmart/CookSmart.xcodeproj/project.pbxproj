@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
+		396E364D243A640E00C2815B /* IngredientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E364C243A640E00C2815B /* IngredientStore.swift */; };
+		396E364F243A6CD000C2815B /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E364E243A6CD000C2815B /* Ingredients.swift */; };
+		396E3651243A6CFE00C2815B /* IngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3650243A6CFE00C2815B /* IngredientGroup.swift */; };
+		396E3653243A6D0A00C2815B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3652243A6D0A00C2815B /* Ingredient.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
@@ -72,6 +76,10 @@
 
 /* Begin PBXFileReference section */
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		396E364C243A640E00C2815B /* IngredientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStore.swift; sourceTree = "<group>"; };
+		396E364E243A6CD000C2815B /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
+		396E3650243A6CFE00C2815B /* IngredientGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientGroup.swift; sourceTree = "<group>"; };
+		396E3652243A6D0A00C2815B /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -164,6 +172,17 @@
 				77479AF824303D86000CFB0E /* Fonts.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		396E364A243A63FB00C2815B /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				396E364C243A640E00C2815B /* IngredientStore.swift */,
+				396E364E243A6CD000C2815B /* Ingredients.swift */,
+				396E3650243A6CFE00C2815B /* IngredientGroup.swift */,
+				396E3652243A6D0A00C2815B /* Ingredient.swift */,
+			);
+			path = Ingredients;
 			sourceTree = "<group>";
 		};
 		8000355C18B3CBF50032BF91 /* Scales */ = {
@@ -286,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				392D8642242FD0CA002064D6 /* Core */,
+				396E364A243A63FB00C2815B /* Ingredients */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
 				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
 				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
@@ -514,10 +534,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				396E364D243A640E00C2815B /* IngredientStore.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
+				396E3651243A6CFE00C2815B /* IngredientGroup.swift in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
@@ -526,9 +548,11 @@
 				77479AF924303D86000CFB0E /* Fonts.swift in Sources */,
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
+				396E3653243A6D0A00C2815B /* Ingredient.swift in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
 				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
+				396E364F243A6CD000C2815B /* Ingredients.swift in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
