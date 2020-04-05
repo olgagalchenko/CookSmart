@@ -4,3 +4,4 @@
 
 --indent 2
 --indentcase false
+--stripunusedargs closure-only

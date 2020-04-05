@@ -19,6 +19,9 @@ class UnitPickerView: UIView {
   private var weightUnit: CSUnit
 
   @objc
+  public weak var delegate: CSUnitPickerDelegate?
+
+  @objc
   init(volumeUnit: CSUnit, weightUnit: CSUnit) {
     self.volumeUnit = volumeUnit
     self.weightUnit = weightUnit
@@ -26,16 +29,15 @@ class UnitPickerView: UIView {
     setupViews()
   }
 
-  @objc
-  public weak var delegate: CSUnitPickerDelegate?
-
   @available(*, unavailable)
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private let volumeScrollView = UnitPickerScrollView(units: CSUnitCollection.volumeUnits())
-  private let weightScrollView = UnitPickerScrollView(units: CSUnitCollection.weightUnits())
+  private lazy var volumeScrollView = UnitPickerScrollView(units: CSUnitCollection.volumeUnits(),
+                                                           selectedUnit: self.volumeUnit)
+  private lazy var weightScrollView = UnitPickerScrollView(units: CSUnitCollection.weightUnits(),
+                                                           selectedUnit: self.weightUnit)
 
   private let doneButton: UIButton = {
     let button = UIButton(type: .system)
@@ -73,7 +75,8 @@ class UnitPickerView: UIView {
 
   @objc
   private func doneButtonPressed() {
-    delegate?.pickedVolumeUnit(volumeUnit, andWeightUnit: weightUnit)
+    delegate?.pickedVolumeUnit(volumeScrollView.currentlySelectedUnit,
+                               andWeightUnit: weightScrollView.currentlySelectedUnit)
   }
 }
 
@@ -82,10 +85,16 @@ private class UnitPickerScrollView: UIView {
     static let unitLabelHeight: CGFloat = 40
   }
 
-  init(units: CSUnitCollection) {
+  private let unitCollection: CSUnitCollection
+
+  var currentlySelectedUnit: CSUnit {
+    unitCollection.unit(at: UInt(closestLabelIndex))
+  }
+
+  init(units: CSUnitCollection, selectedUnit: CSUnit) {
+    unitCollection = units
     super.init(frame: .zero)
     setupViews()
-    addUnitLabels(unitCollection: units)
   }
 
   @available(*, unavailable)
@@ -149,23 +158,41 @@ private class UnitPickerScrollView: UIView {
     centerLineView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     centerLineView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     centerLineView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
+    addUnitLabels()
   }
 
-  private func addUnitLabels(unitCollection: CSUnitCollection) {
+  private func addUnitLabels() {
     unitCollection.units
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
         let unitLabel = UILabel()
+        unitLabel.font = Fonts.regular?.withSize(15)
+        unitLabel.textColor = .label
         unitLabel.translatesAutoresizingMaskIntoConstraints = false
         unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true
         unitLabel.text = unit.name
         unitStackView.addArrangedSubview(unitLabel)
       }
   }
+
+  private var closestLabelIndex: Int {
+    Int(round(scrollView.contentOffset.y / Constants.unitLabelHeight))
+  }
+
+  private func scrollToNearestLabel() {
+    let yOffset = CGFloat(closestLabelIndex) * Constants.unitLabelHeight
+    scrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
+  }
 }
 
 extension UnitPickerScrollView: UIScrollViewDelegate {
-  func scrollViewDidEndDecelerating(_: UIScrollView) {}
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    scrollToNearestLabel()
+  }
 
-  func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {}
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    guard !decelerate else { return }
+    scrollToNearestLabel()
+  }
 }
