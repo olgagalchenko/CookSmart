@@ -154,10 +154,10 @@
 
 - (void)handleIngredientTap:(id)sender
 {
-  [self showUnitPickerWithVolumeUnit:self.scaleVC.currentVolumeUnit weightUnit:self.scaleVC.currentWeightUnit];
-//    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
-//    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
-//    [self presentViewController:nav animated:YES completion:nil];
+//  [self showUnitPickerWithVolumeUnit:self.scaleVC.currentVolumeUnit weightUnit:self.scaleVC.currentWeightUnit];
+    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class UnitPickerViewController: UIViewController {
+@objc
+class UnitPickerView: UIView {
   private enum Constants {
     static let doneButtonHeight: CGFloat = 44.0
   }
@@ -17,82 +18,80 @@ class UnitPickerViewController: UIViewController {
   private var volumeUnit: CSUnit
   private var weightUnit: CSUnit
 
+  @objc
   init(volumeUnit: CSUnit, weightUnit: CSUnit) {
     self.volumeUnit = volumeUnit
     self.weightUnit = weightUnit
-    super.init(nibName: nil, bundle: nil)
+    super.init(frame: .zero)
+    setupViews()
   }
+
+  @objc
+  public weak var delegate: CSUnitPickerDelegate?
 
   @available(*, unavailable)
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupViews()
-  }
-
-  private let volumeScrollView = UnitPickerScrollView(title: "Volume", units: CSUnitCollection.volumeUnits())
-  private let weightScrollView = UnitPickerScrollView(title: "Weight", units: CSUnitCollection.weightUnits())
+  private let volumeScrollView = UnitPickerScrollView(units: CSUnitCollection.volumeUnits())
+  private let weightScrollView = UnitPickerScrollView(units: CSUnitCollection.weightUnits())
 
   private let doneButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitleColor(Color.redLineColor, for: .normal)
     button.setTitle("Done", for: .normal)
+    button.titleLabel?.font = Fonts.regular
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
   }()
 
   private func setupViews() {
-    title = "Choose Units"
-    view.backgroundColor = .systemBackground
+    backgroundColor = .systemBackground
+    translatesAutoresizingMaskIntoConstraints = false
 
-    view.addSubview(doneButton)
-    doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    doneButton.heightAnchor.constraint(equalToConstant: Constants.doneButtonHeight).isActive = true
+    addSubview(volumeScrollView)
+    volumeScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    volumeScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    volumeScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
-    view.addSubview(volumeScrollView)
-    volumeScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    volumeScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    volumeScrollView.bottomAnchor.constraint(equalTo: doneButton.topAnchor).isActive = true
-
-    view.addSubview(weightScrollView)
-    weightScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    weightScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    weightScrollView.bottomAnchor.constraint(equalTo: doneButton.topAnchor).isActive = true
+    addSubview(weightScrollView)
+    weightScrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    weightScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    weightScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
     volumeScrollView.trailingAnchor.constraint(equalTo: weightScrollView.leadingAnchor).isActive = true
     volumeScrollView.widthAnchor.constraint(equalTo: weightScrollView.widthAnchor).isActive = true
+
+    addSubview(doneButton)
+    doneButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    doneButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+    doneButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    doneButton.heightAnchor.constraint(equalToConstant: Constants.doneButtonHeight).isActive = true
   }
 
   @objc
   private func doneButtonPressed() {
-    presentingViewController?.dismiss(animated: true, completion: nil)
+    delegate?.pickedVolumeUnit(volumeUnit, andWeightUnit: weightUnit)
   }
 }
 
 private class UnitPickerScrollView: UIView {
-  init(title: String, units: CSUnitCollection) {
+  private enum Constants {
+    static let unitLabelHeight: CGFloat = 40
+  }
+
+  init(units: CSUnitCollection) {
     super.init(frame: .zero)
     setupViews()
     addUnitLabels(unitCollection: units)
-    titleLabel.text = title
   }
 
   @available(*, unavailable)
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
-  private let titleLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -111,11 +110,10 @@ private class UnitPickerScrollView: UIView {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.alignment = .center
     stackView.distribution = .fillEqually
-    stackView.spacing = 10
     return stackView
   }()
 
-  private let topGradientView = GradientView(startColor: .systemBackground, endColor: .clear)
+  private let centerLineView = UnitPickerCenterLineView()
 
   private var unitStackViewTopConstraint: NSLayoutConstraint?
   private var unitStackViewBottomConstraint: NSLayoutConstraint?
@@ -124,17 +122,19 @@ private class UnitPickerScrollView: UIView {
     super.layoutSubviews()
 
     let scrollViewHeight = scrollView.frame.height
-    unitStackViewTopConstraint?.constant = scrollViewHeight / 2
-    unitStackViewBottomConstraint?.constant = -(scrollViewHeight / 2)
+    unitStackViewTopConstraint?.constant = (scrollViewHeight / 2) - (Constants.unitLabelHeight / 2)
+    unitStackViewBottomConstraint?.constant = -((scrollViewHeight / 2) - (Constants.unitLabelHeight * 3 / 2))
   }
 
   private func setupViews() {
     translatesAutoresizingMaskIntoConstraints = false
+    scrollView.delegate = self
 
     addSubview(scrollView)
     scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
 
     scrollView.addSubview(unitStackView)
     unitStackViewTopConstraint = unitStackView.topAnchor.constraint(equalTo: scrollView.topAnchor)
@@ -145,29 +145,27 @@ private class UnitPickerScrollView: UIView {
     unitStackViewBottomConstraint?.isActive = true
     unitStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
 
-    addSubview(topGradientView)
-    topGradientView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    topGradientView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    topGradientView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    topGradientView.isHidden = true
-
-    addSubview(titleLabel)
-    titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    topGradientView.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 2.0).isActive = true
-    scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+    addSubview(centerLineView)
+    centerLineView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    centerLineView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    centerLineView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
   }
 
   private func addUnitLabels(unitCollection: CSUnitCollection) {
     unitCollection.units
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
-        print(unit.name ?? "")
         let unitLabel = UILabel()
+        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true
         unitLabel.text = unit.name
         unitStackView.addArrangedSubview(unitLabel)
       }
   }
 }
 
-extension UnitPickerScrollView: UIScrollViewDelegate {}
+extension UnitPickerScrollView: UIScrollViewDelegate {
+  func scrollViewDidEndDecelerating(_: UIScrollView) {}
+
+  func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {}
+}

@@ -73,7 +73,7 @@
 {
     self.volumeUnit = [self centerUnitForScrollView:self.volumeScrollView];
     self.weightUnit = [self centerUnitForScrollView:self.weightScrollView];
-    [self.delegate unitPicker:self pickedVolumeUnit:self.volumeUnit andWeightUnit:self.weightUnit];
+    [self.delegate pickedVolumeUnit:self.volumeUnit andWeightUnit:self.weightUnit];
 }
 
 static inline void addUnitLabels(UIScrollView* view, CSUnitCollection* unitCollection, id gestureTarget, SEL gestureSelector)

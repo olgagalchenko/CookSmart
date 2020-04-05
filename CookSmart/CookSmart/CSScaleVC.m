@@ -14,6 +14,7 @@
 #import "CSScaleVCInternals.h"
 #import "CSUnitCollection.h"
 #import "CSUnit.h"
+#import "cake-Swift.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
@@ -31,7 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet CSGlassView *glassView;
 
-@property (weak, nonatomic) CSUnitPicker *unitPicker;
+//@property (weak, nonatomic) CSUnitPicker *unitPicker;
+@property (weak, nonatomic) UnitPickerView *swiftUnitPicker;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
 
@@ -69,32 +71,36 @@
     self.scalesContainer.translatesAutoresizingMaskIntoConstraints = NO;
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
+
+  UnitPickerView *newUnitPicker = [[UnitPickerView alloc] initWithVolumeUnit:self.currentVolumeUnit weightUnit:self.currentWeightUnit];
+  newUnitPicker.delegate = self;
+  self.swiftUnitPicker = newUnitPicker;
     
-    CSUnitPicker *unitPicker = [CSUnitPicker unitPickerWithCurrentVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
-    unitPicker.delegate = self;
-    unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitPicker
+//    CSUnitPicker *unitPicker = [CSUnitPicker unitPickerWithCurrentVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+//    unitPicker.delegate = self;
+//    unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:newUnitPicker
                                                            attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
                                                               toItem:self.scalesContainer
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:unitPicker
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:newUnitPicker
                                                             attribute:NSLayoutAttributeLeft
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:self.contentView
                                                             attribute:NSLayoutAttributeLeft
                                                            multiplier:1.0
                                                              constant:0];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:unitPicker
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:newUnitPicker
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual
                                                                  toItem:self.contentView
                                                               attribute:NSLayoutAttributeHeight
                                                              multiplier:1.0
                                                                constant:0];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:unitPicker
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:newUnitPicker
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.contentView
@@ -102,9 +108,9 @@
                                                             multiplier:1.0
                                                               constant:0];
     
-    [self.contentView insertSubview:unitPicker atIndex:0];
+    [self.contentView insertSubview:newUnitPicker atIndex:0];
     [self.view addConstraints:@[top, left, height, width]];
-    self.unitPicker = unitPicker;
+//    self.unitPicker = unitPicker;
     
     [self animateToArrangement:CSScaleVCArrangementScales];
 }
@@ -373,7 +379,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION*2 animations:^
     {
         [self setConstraintsForArrangement:arrangement];
-        self.unitPicker.arrangement = arrangement;
+//        self.unitPicker.arrangement = arrangement;
         [self.contentView layoutIfNeeded];
     }];
     self.weightUnitButton.enabled = self.volumeUnitButton.enabled = (arrangement == CSScaleVCArrangementScales);
@@ -462,7 +468,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 }
 
 #pragma mark - CSUnitPicker delegate method
-- (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
+- (void)pickedVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
 {
     self.currentWeightUnit = weightUnit;
     self.currentVolumeUnit = volumeUnit;

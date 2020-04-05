@@ -12,4 +12,5 @@ public enum Fonts {}
 
 extension Fonts {
   public static let tiny = UIFont(name: "AvenirNextCondensed-Medium", size: 12)
+  public static let regular = UIFont(name: "AvenirNext-Regular", size: 17)
 }

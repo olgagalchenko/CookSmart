@@ -12,7 +12,7 @@
 @class CSUnitPicker;
 @class CSUnit;
 @protocol CSUnitPickerDelegate <NSObject>
-- (void)unitPicker:(CSUnitPicker*)unitPicker pickedVolumeUnit:(CSUnit*)volumeUnit andWeightUnit:(CSUnit*)weightUnit;
+- (void)pickedVolumeUnit:(CSUnit*)volumeUnit andWeightUnit:(CSUnit*)weightUnit;
 @end
 
 @interface CSUnitPicker : UIControl <UIScrollViewDelegate>
