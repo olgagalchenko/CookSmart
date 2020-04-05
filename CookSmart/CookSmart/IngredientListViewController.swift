@@ -42,7 +42,7 @@ struct IngredientListView: View {
         }
       }
       .listStyle(GroupedListStyle())
-      .navigationBarTitle(searchText.isEmpty ? "Ingredients" : "Filtered")
+      .navigationBarTitle("Ingredients")
       .navigationBarItems(leading:
         Button(action: {
           print("Pressed")

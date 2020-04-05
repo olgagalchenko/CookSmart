@@ -13,8 +13,8 @@ final class CSEditIngredientVCRepresentable: UIViewControllerRepresentable {
   func updateUIViewController(_: CSEditIngredientVC, context _: Context) {}
 
   func makeUIViewController(context _: Context) -> CSEditIngredientVC {
-    CSEditIngredientVC(ingredient: nil, withDoneBlock: { _ in
-
-    }) {}
+    CSEditIngredientVC(ingredient: nil,
+                       withDoneBlock: { _ in },
+                       andCancel: {})
   }
 }

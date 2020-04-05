@@ -24,10 +24,7 @@ extension CSIngredientGroup {
 
 extension CSIngredients {
   var ingredientList: [CSIngredientGroup] {
-    var groups: [CSIngredientGroup] = (0 ..< countOfIngredientGroups()).map { ingredientGroup(at: $0) }
-    if let recents = recents(), recents.countOfIngredients() > 0 {
-      groups.insert(recents, at: 0)
-    }
+    let groups: [CSIngredientGroup] = (0 ..< countOfIngredientGroups()).map { ingredientGroup(at: $0) }
     return groups
   }
 }

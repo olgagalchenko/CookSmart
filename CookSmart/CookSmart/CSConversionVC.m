@@ -100,7 +100,6 @@
     // When we first appear, always select the very first ingredient – the one most recently selected.
     [self selectIngredientAtIndex:self.ingredientIndex];
     logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
-  self.view.backgroundColor = UIColor.systemGray6Color;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
