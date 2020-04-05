@@ -22,9 +22,11 @@ jobs:
       with:
         submodules: true
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+    - name: Print Stuff
+      run: |
+       echo Hello, world!
+       echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE
+       ls $GITHUB_WORKSPACE
 
     - name: Mint Cache
       id: mint-cache
@@ -35,7 +37,7 @@ jobs:
 
     - name: Homebrew Cache
       id: homebrew-cache
-      uses: actions/cache@v1.1.2
+      uses: actions/cache@master
       with:
         path: ~/Library/Caches/Homebrew
         key: ${{ runner.os }}-homebrew-
