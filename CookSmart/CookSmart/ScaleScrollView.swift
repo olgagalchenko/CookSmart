@@ -11,7 +11,7 @@ import SwiftUI
 import UIKit
 
 class ScaleScrollView: UIScrollView {
-  static let height_200: CGFloat = 200
+  static let TileHeight: CGFloat = 200
 
   @objc
   init(frame: CGRect, centerValue: Double, unitsPerTile: Int, mirror: Bool) {
@@ -36,27 +36,59 @@ class ScaleScrollView: UIScrollView {
   private let tileContainer = UIView()
 
   private func setUpViews() {
-    backgroundColor = UIColor.clear
+    setUpScrollView()
     contentSize = CGSize(width: bounds.size.width, height: bounds.size.height * 2)
+
 //    addSubview(tileContainer)
 
-//    tileContainer.backgroundColor = UIColor.systemBlue
-
     var index = 0
-    for y in stride(from: 0, to: contentSize.height / 2, by: 200) {
-      index += 1
+    for bottomTileY in stride(from: 0, to: contentSize.height / 2, by: ScaleScrollView.TileHeight) {
       let tile = ScaleTile(
-        frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: bounds.width, height: 200)),
+        frame: CGRect(x: 0, y: bottomTileY, width: bounds.width, height: ScaleScrollView.TileHeight),
         mirror: mirror
       )
       tile.value = Float(unitsPerTile * index)
-      print(tile.frame)
       addSubview(tile)
+      index += 1
     }
+  }
+
+  private func setUpScrollView() {
+    backgroundColor = UIColor.clear
+    bounces = false
+    isPagingEnabled = false
+    alwaysBounceVertical = false
+    alwaysBounceHorizontal = false
+    bouncesZoom = false
+    showsHorizontalScrollIndicator = false
+    showsVerticalScrollIndicator = false
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
+
+    let targetContentOffset = contentSize.height / 3 // + bounds.height / 2
+    if contentOffset.y > targetContentOffset {
+      setContentOffset(CGPoint(x: 0, y: contentSize.height / 2), animated: false)
+    }
+
+    let topVisibleY = bounds.minY
+    let bottomVisibleY = bounds.maxY
+    for case let tile as ScaleTile in subviews {
+      let topY = tile.frame.minY
+      let bottomY = tile.frame.maxY
+
+      // Tile is above the visible screen
+      if bottomY < topVisibleY {
+        tile.frame = tile.frame.offsetBy(dx: 0, dy: CGFloat(subviews.count) * ScaleScrollView.TileHeight)
+        tile.value = Float(tile.frame.origin.y / ScaleScrollView.TileHeight * CGFloat(unitsPerTile))
+      }
+      // Tile is below the visible screen
+      else if topY > bottomVisibleY {
+        tile.frame = tile.frame.offsetBy(dx: 0, dy: -CGFloat(subviews.count) * ScaleScrollView.TileHeight)
+        tile.value = Float(tile.frame.origin.y / ScaleScrollView.TileHeight * CGFloat(unitsPerTile))
+      }
+    }
   }
 }
 

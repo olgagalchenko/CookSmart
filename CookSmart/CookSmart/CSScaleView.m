@@ -201,8 +201,8 @@ static inline CGFloat ptsPerUnit(CSScaleView *scaleView)
 
 static inline CGFloat getTargetContentOffset(CSScaleView *scaleView)
 {
-    CGFloat centerX = scaleView.contentSize.height/2;
-    return centerX - scaleView.bounds.size.height/2;
+    CGFloat centerY = scaleView.contentSize.height/2;
+    return centerY - scaleView.bounds.size.height/2;
 }
 
 static inline void setScrollViewOffset(CSScaleView *scaleView, CGPoint newContentOffset, BOOL cancelDeceleration)
