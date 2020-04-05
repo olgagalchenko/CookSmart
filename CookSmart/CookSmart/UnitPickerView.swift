@@ -47,7 +47,6 @@ class UnitPickerView: UIView {
   }()
 
   private func setupViews() {
-    backgroundColor = .systemBackground
     translatesAutoresizingMaskIntoConstraints = false
 
     addSubview(volumeScrollView)
@@ -62,7 +61,6 @@ class UnitPickerView: UIView {
 
     volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//    volumeScrollView.widthAnchor.constraint(equalTo: weightScrollView.widthAnchor).isActive = true
 
     addSubview(doneButton)
     doneButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
