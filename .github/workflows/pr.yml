@@ -55,6 +55,6 @@ jobs:
 
     - name: Mint Bootstrap
       run: |
+        brew link mint
         cd CookSmart/BuildTools
         mint bootstrap -v
-        du -sh ~/Library/Caches/Homebrew/*
