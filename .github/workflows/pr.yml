@@ -42,16 +42,16 @@ jobs:
       uses: actions/cache@master
       with:
         path: ~/Library/Caches/Homebrew
-        key: ${{ runner.os }}-homebrew-
+        key: ${{ runner.os }}-homebrew-v2
 
     - name: Install Mint
       if: steps.mint-cache.outputs.cache-hit != 'true' || steps.homebrew-cache.outputs.cache-hit != 'true'
       run: |
-        mint list
         brew update
         brew link mint || brew install mint
         brew cleanup
         mint --version
+        mint list
         pwd
         ls -a
 
