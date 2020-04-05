@@ -24,7 +24,6 @@
 		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
 		80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.dylib */; };
 		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; };
-		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
 		931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96918C2B9C90018AA8B /* VolumeUnits.plist */; };
@@ -102,8 +101,6 @@
 		807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListViewCell.h; sourceTree = "<group>"; };
 		807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListViewCell.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
-		8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPickerCenterLineView.h; sourceTree = "<group>"; };
-		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
 		931AF96718C2B8AF0018AA8B /* WeightUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeightUnits.plist; sourceTree = "<group>"; };
@@ -184,8 +181,6 @@
 				396E3642243976A000C2815B /* GradientView.swift */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
-				8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */,
-				8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */,
 				396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */,
 			);
 			name = Scales;
@@ -538,7 +533,6 @@
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,
-				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
 				396E3643243976A000C2815B /* GradientView.swift in Sources */,
 				396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
