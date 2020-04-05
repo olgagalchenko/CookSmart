@@ -13,7 +13,8 @@ class Fastfile: LaneFile {
     desc("Builds cake")
 		// add actions here: https://docs.fastlane.tools/actions
     buildIosApp(project: "CookSmart.xcodeproj",
-                scheme: "cake")
+                scheme: "cake",
+                skipCodesigning: true)
 
   }
 }
