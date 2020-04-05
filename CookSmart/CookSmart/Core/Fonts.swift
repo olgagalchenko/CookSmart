@@ -11,5 +11,8 @@ import UIKit
 public enum Fonts {}
 
 extension Fonts {
-  public static let tiny = UIFont(name: "AvenirNextCondensed-Medium", size: 12)
+  private static let medium: UIFont! = UIFont(name: "AvenirNextCondensed-Medium", size: UIFont.labelFontSize)
+
+  public static let regular = UIFontMetrics(forTextStyle: .body).scaledFont(for: Fonts.medium)
+  public static let tiny = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: Fonts.medium)
 }

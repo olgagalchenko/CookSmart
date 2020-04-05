@@ -74,8 +74,10 @@ struct ScalePreview: PreviewProvider {
     Group {
       NavigationView {
         preview
-      }
-      .environment(\.colorScheme, .light)
+      }.environment(\.colorScheme, .light)
+      NavigationView {
+        preview
+      }.environment(\.sizeCategory, .extraLarge)
       NavigationView {
         preview
       }.environment(\.colorScheme, .dark)
