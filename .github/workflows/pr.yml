@@ -63,4 +63,5 @@ jobs:
     - name: Fastlane Build
       run: |
         cd $GITHUB_WORKSPACE/CookSmart
+        fastlane setup --verbose
         fastlane build
