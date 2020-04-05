@@ -15,16 +15,18 @@ class UnitPickerView: UIView {
     static let doneButtonHeight: CGFloat = 44.0
   }
 
-  private var volumeUnit: CSUnit
-  private var weightUnit: CSUnit
+  private let volumeScrollView: UnitPickerScrollView
+  private let weightScrollView: UnitPickerScrollView
 
   @objc
-  public weak var delegate: CSUnitPickerDelegate?
+  public weak var delegate: UnitPickerDelegate?
 
   @objc
   init(volumeUnit: CSUnit, weightUnit: CSUnit) {
-    self.volumeUnit = volumeUnit
-    self.weightUnit = weightUnit
+    volumeScrollView = UnitPickerScrollView(units: CSUnitCollection.volumeUnits(),
+                                            selectedUnit: volumeUnit)
+    weightScrollView = UnitPickerScrollView(units: CSUnitCollection.weightUnits(),
+                                            selectedUnit: weightUnit)
     super.init(frame: .zero)
     setupViews()
   }
@@ -33,11 +35,6 @@ class UnitPickerView: UIView {
   required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
-  private lazy var volumeScrollView = UnitPickerScrollView(units: CSUnitCollection.volumeUnits(),
-                                                           selectedUnit: self.volumeUnit)
-  private lazy var weightScrollView = UnitPickerScrollView(units: CSUnitCollection.weightUnits(),
-                                                           selectedUnit: self.weightUnit)
 
   private let doneButton: UIButton = {
     let button = UIButton(type: .system)
@@ -63,8 +60,9 @@ class UnitPickerView: UIView {
     weightScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
     weightScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
-    volumeScrollView.trailingAnchor.constraint(equalTo: weightScrollView.leadingAnchor).isActive = true
-    volumeScrollView.widthAnchor.constraint(equalTo: weightScrollView.widthAnchor).isActive = true
+    volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//    volumeScrollView.widthAnchor.constraint(equalTo: weightScrollView.widthAnchor).isActive = true
 
     addSubview(doneButton)
     doneButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -75,8 +73,8 @@ class UnitPickerView: UIView {
 
   @objc
   private func doneButtonPressed() {
-    delegate?.pickedVolumeUnit(volumeScrollView.currentlySelectedUnit,
-                               andWeightUnit: weightScrollView.currentlySelectedUnit)
+    delegate?.picked(volumeUnit: volumeScrollView.currentlySelectedUnit,
+                     weightUnit: weightScrollView.currentlySelectedUnit)
   }
 }
 

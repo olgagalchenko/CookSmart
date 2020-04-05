@@ -11,6 +11,7 @@
 		396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */; };
 		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
 		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
+		396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
@@ -28,8 +29,6 @@
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
 		931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96918C2B9C90018AA8B /* VolumeUnits.plist */; };
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
-		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
-		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
 		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
@@ -78,6 +77,7 @@
 		396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerCenterLineView.swift; sourceTree = "<group>"; };
 		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
 		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerDelegate.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -110,9 +110,6 @@
 		931AF96918C2B9C90018AA8B /* VolumeUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VolumeUnits.plist; sourceTree = "<group>"; };
 		931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitCollection.h; sourceTree = "<group>"; };
 		931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitCollection.m; sourceTree = "<group>"; };
-		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
-		9343EDC118BD380000892D0B /* CSUnitPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPicker.m; sourceTree = "<group>"; };
-		9343EDC218BD380000892D0B /* CSUnitPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUnitPicker.xib; sourceTree = "<group>"; };
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
@@ -180,10 +177,8 @@
 				93F6CCA518AED6050045400D /* CSScaleVC.h */,
 				93F6CCA618AED6050045400D /* CSScaleVC.m */,
 				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
-				9343EDC018BD380000892D0B /* CSUnitPicker.h */,
-				9343EDC118BD380000892D0B /* CSUnitPicker.m */,
-				9343EDC218BD380000892D0B /* CSUnitPicker.xib */,
 				396E363E24396D5900C2815B /* UnitPickerView.swift */,
+				396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
 				396E3642243976A000C2815B /* GradientView.swift */,
@@ -438,7 +433,6 @@
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
 				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
-				9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
@@ -538,9 +532,9 @@
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
-				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
 				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
+				396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
 				B7BCA29D180524A800CF7588 /* main.m in Sources */,

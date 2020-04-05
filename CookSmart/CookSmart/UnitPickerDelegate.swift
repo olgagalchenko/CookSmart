@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+@objc
+protocol UnitPickerDelegate: AnyObject {
+  @objc(pickedVolumeUnit:weightUnit:) func picked(volumeUnit: CSUnit, weightUnit: CSUnit)
+}
