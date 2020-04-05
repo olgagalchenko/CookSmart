@@ -24,6 +24,10 @@
 @property (strong, nonatomic) CSIngredient*         ingredient;
 @property (assign, nonatomic) BOOL                  syncsScales;
 @property (weak, nonatomic) id<CSScaleVCDelegate>   delegate;
+
+@property (strong, nonatomic) CSUnit* currentWeightUnit;
+@property (strong, nonatomic) CSUnit* currentVolumeUnit;
+
 - (NSDictionary *)analyticsAttributes;
 - (void)setScalesAlpha:(CGFloat)newScaleViewAlpha;
 @end

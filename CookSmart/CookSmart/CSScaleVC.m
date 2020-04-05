@@ -31,9 +31,6 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet CSGlassView *glassView;
 
-@property (strong, nonatomic) CSUnit* currentWeightUnit;
-@property (strong, nonatomic) CSUnit* currentVolumeUnit;
-
 @property (weak, nonatomic) CSUnitPicker *unitPicker;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
