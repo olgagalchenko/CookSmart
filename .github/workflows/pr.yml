@@ -41,7 +41,9 @@ jobs:
       id: homebrew-cache
       uses: actions/cache@master
       with:
-        path: ~/Library/Caches/Homebrew
+        path: |
+          ~/Library/Caches/Homebrew
+          /usr/local/Homebrew
         key: ${{ runner.os }}-homebrew-v2
 
     - name: Install Mint
@@ -59,3 +61,4 @@ jobs:
       run: |
         cd CookSmart/BuildTools
         mint bootstrap -v
+        du -sh ~/Library/Caches/Homebrew/*
