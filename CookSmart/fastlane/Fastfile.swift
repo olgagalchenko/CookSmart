@@ -54,6 +54,9 @@ class Fastfile: LaneFile {
 //         readonly: <#T##Bool#>,
 //         templateName: <#T##String?#>)
 
-    buildIosApp(skipCodesigning: true)
+    scan(device: "iPhone 11 Pro",
+         buildForTesting: true)
+
+//    buildIosApp(skipCodesigning: true)
   }
 }
