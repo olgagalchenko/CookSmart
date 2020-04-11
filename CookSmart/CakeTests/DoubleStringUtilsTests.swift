@@ -10,17 +10,31 @@
 import XCTest
 
 class DoubleSringUtilsTests: XCTestCase {
-  override func setUpWithError() throws {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  // MARK: humanReadableValue
+
+  func test_humanReadableValue_aboveThreshold_roundsDown() {
+    let rawValue = 66.445
+    let result = rawValue.humanReadableValue
+    XCTAssertEqual(result, 66)
   }
 
-  override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+  func test_humanReadableValue_aboveThreshhold_roundsUp() {
+    let rawValue = 104.849998
+    let result = rawValue.humanReadableValue
+    XCTAssertEqual(result, 105)
   }
 
-  func test_humanReadbleValue_aboveThreshold() throws {
-    let value = 66.445
-    let string = value.humanReadableValue
-    XCTAssertEqual(string, "")
+  func test_humanReadableValue_belowThreshold() {
+    let rawValue = 49.45
+    let result = rawValue.humanReadableValue
+    XCTAssertEqual(result, 49.45)
+  }
+
+  // MARK: humanReadableString
+
+  func test_humanReadableString_aboveThreshold() {
+    let rawValue = 66.445
+    let result = rawValue.humanReadableString
+    XCTAssertEqual(result, "66")
   }
 }

@@ -9,7 +9,20 @@
 import Foundation
 
 extension Double {
-  var humanReadableValue: String {
-    ""
+  var humanReadableValue: Double {
+    guard self < 50.0 else {
+      return rounded(FloatingPointRoundingRule.toNearestOrEven)
+    }
+
+    let wholeNumber = floor(self)
+    let leftover = self - wholeNumber
+
+    // iterate over special fractions to figure out which is closer
+
+    return self
+  }
+
+  var humanReadableString: String {
+    String(format: "%.0f", humanReadableValue)
   }
 }
