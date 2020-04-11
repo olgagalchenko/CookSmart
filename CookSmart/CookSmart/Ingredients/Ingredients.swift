@@ -22,8 +22,8 @@ struct Ingredients {
   }
 
   private static func makeIngredientGroups(data: IngredientStore.IngredientsDataType) -> [IngredientGroup] {
-    return data.flatMap({
+    data.flatMap {
       $0.map { IngredientGroup(name: $0, ingredients: $1) }
-    })
+    }
   }
 }
