@@ -15,6 +15,6 @@ struct IngredientGroup {
 
 extension IngredientGroup: Identifiable {
   var id: String {
-    return name
+    name
   }
 }
