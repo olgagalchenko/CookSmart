@@ -16,6 +16,7 @@ class ScaleViewController: UIViewController {
     setUpViews()
   }
 
+  @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

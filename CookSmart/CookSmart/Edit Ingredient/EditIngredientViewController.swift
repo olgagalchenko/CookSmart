@@ -52,7 +52,7 @@ class EditIngredientViewController: UIViewController {
     return textField
   }()
 
-  private let scaleViewController = CSScaleVC(nibName: "CSScaleVC", bundle: nil)
+  private lazy var scaleViewController = ScaleViewController(ingredient: ingredient, shouldSyncScales: false)
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,15 +81,11 @@ class EditIngredientViewController: UIViewController {
     addChild(scaleViewController)
     view.addSubview(scaleViewController.view)
     scaleViewController.view.translatesAutoresizingMaskIntoConstraints = false
-    scaleViewController.syncsScales = false
-    scaleViewController.delegate = self
 
     scaleViewController.view.topAnchor.constraint(equalTo: ingredientNameField.bottomAnchor).isActive = true
     scaleViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     scaleViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     scaleViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-
-//    scaleViewController.ingredient = ingredient
   }
 
   private func addBarButtonItems() {
