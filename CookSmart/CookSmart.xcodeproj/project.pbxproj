@@ -19,6 +19,7 @@
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
 		774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */; };
+		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
@@ -97,6 +98,7 @@
 		774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStringUtilsTests.swift; sourceTree = "<group>"; };
 		774EBD6D244271D6002A59AC /* CakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774EBD71244271D6002A59AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		774EBD782442A1CE002A59AC /* Fraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
 		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				392D8644242FD0FF002064D6 /* Colors.swift */,
 				77479AF824303D86000CFB0E /* Fonts.swift */,
 				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
+				774EBD782442A1CE002A59AC /* Fraction.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
+				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
