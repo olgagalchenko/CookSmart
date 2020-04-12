@@ -11,3 +11,6 @@
 #import "CSIngredient.h"
 #import "CSIngredients.h"
 #import "CSIngredientListVC.h"
+#import "CSIngredientGroup.h"
+#import "CSRecentsIngredientGroup.h"
+#import "CSIngredientGroupInternals.h"

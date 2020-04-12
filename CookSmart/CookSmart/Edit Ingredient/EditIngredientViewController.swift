@@ -7,6 +7,15 @@
 //
 
 import Foundation
+import SwiftUI
+
+struct EditIngredientViewControllerRepresentable: UIViewControllerRepresentable {
+  func makeUIViewController(context: Context) -> EditIngredientViewController {
+    EditIngredientViewController()
+  }
+
+  func updateUIViewController(_ uiViewController: EditIngredientViewController, context: Context) {}
+}
 
 class EditIngredientViewController: UIViewController {
 

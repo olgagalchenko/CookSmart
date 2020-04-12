@@ -171,52 +171,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
                 ((numGroups > 1) || (numGroups == 1 && [[[CSIngredients sharedInstance] ingredientGroupAtIndex:0] countOfIngredients] > 1));
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        CSIngredients *ingredients = [self ingredientsToSupplyData];
-        CSRecentsIngredientGroup *beforeChangeRecents = ingredients.recents;
-        CSIngredientGroup *ingredientGroup = [ingredients ingredientGroupAtIndex:indexPath.section];
-        CSIngredient *ingredientToDelete = [ingredientGroup ingredientAtIndex:indexPath.row];
-        BOOL needToDeleteFromRecents = beforeChangeRecents && [beforeChangeRecents indexOfIngredient:ingredientToDelete] != NSNotFound;
-        BOOL deleteSuccess = [ingredients deleteIngredientAtGroupIndex:indexPath.section ingredientIndex:indexPath.row];
-        if (deleteSuccess)
-        {
-            logUserAction(@"ingredient_delete", [ingredientToDelete dictionaryForAnalytics]);
-            
-            [tableView beginUpdates];
-            if (ingredientGroup.countOfIngredients == 0)
-            {
-                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            else
-            {
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            
-            if (needToDeleteFromRecents)
-            {
-                CSRecentsIngredientGroup *afterChangeRecents = ingredients.recents;
-                if (afterChangeRecents == nil)
-                {
-                    [tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-                }
-                else
-                {
-                    [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[beforeChangeRecents indexOfIngredient:ingredientToDelete] inSection:0]]
-                                     withRowAnimation:UITableViewRowAnimationAutomatic];
-                }
-            }
-            [tableView endUpdates];
-        }
-        else
-        {
-            logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionaryForAnalytics]);
-        }
-    }
-}
-
 - (void)editIngredient:(id)sender
 {
     UIViewController *editVC;

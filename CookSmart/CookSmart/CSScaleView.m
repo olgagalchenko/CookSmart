@@ -195,7 +195,11 @@ static inline CGFloat unitsPerPoint(CSScaleView *scaleView)
 
 static inline CGFloat ptsPerUnit(CSScaleView *scaleView)
 {
-    return (SCALE_TILE_HEIGHT/scaleView.unitsPerTile);
+  CGFloat pts = (SCALE_TILE_HEIGHT/scaleView.unitsPerTile);
+  if (isnan(pts)) {
+    return 0;
+  }
+    return pts;
 }
 
 static inline CGFloat getTargetContentOffset(CSScaleView *scaleView)
@@ -206,10 +210,14 @@ static inline CGFloat getTargetContentOffset(CSScaleView *scaleView)
 
 static inline void setScrollViewOffset(CSScaleView *scaleView, CGPoint newContentOffset, BOOL cancelDeceleration)
 {
+  if (isnan(newContentOffset.y)) {
+    return;
+  }
     id delegate = scaleView.delegate;
     scaleView.delegate = nil;
     if (cancelDeceleration)
     {
+      NSLog(@"%f", newContentOffset.y);
         [scaleView setContentOffset:newContentOffset animated:NO];
     }
     else

@@ -11,7 +11,7 @@ import UIKit
 enum Color {
   static let redLineColor = Color.color(
     light: UIColor(red: 187.0 / 255.0, green: 1.0 / 255.0, blue: 3.0 / 255.0, alpha: 1.0),
-    dark: UIColor(red: 187.0 / 255.0, green: 1.0 / 255.0, blue: 3.0 / 255.0, alpha: 1.0)
+    dark: UIColor(red: 234.0 / 255.0, green: 110.0 / 255.0, blue: 104.0 / 255.0, alpha: 1.0)
   )
 
   static let background = Color.color(

@@ -15,6 +15,7 @@
 #import "CSUnit.h"
 #import "CSUnitCollection.h"
 #import "CSScaleVC.h"
+#import "cake-Swift.h"
 
 #define CHOOSE_UNITS_TEXT @"Choose Units"
 
@@ -153,9 +154,10 @@
 
 - (void)handleIngredientTap:(id)sender
 {
-    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
-    [self presentViewController:nav animated:YES completion:nil];
+  [self showIngredientList];
+//    CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
+//    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39024F62243174BB0063725D /* CSIngredientsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39024F61243174BB0063725D /* CSIngredientsExt.swift */; };
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
+		392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865324304F2D002064D6 /* IngredientListViewController.swift */; };
+		392D865724306D0D002064D6 /* CSConversionVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D865624306D0D002064D6 /* CSConversionVCExt.swift */; };
 		396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */; };
 		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
 		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
@@ -83,7 +86,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39024F61243174BB0063725D /* CSIngredientsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSIngredientsExt.swift; sourceTree = "<group>"; };
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		392D865324304F2D002064D6 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
+		392D865624306D0D002064D6 /* CSConversionVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSConversionVCExt.swift; sourceTree = "<group>"; };
 		396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerCenterLineView.swift; sourceTree = "<group>"; };
 		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
 		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 				93D0993B18977D320014DB3E /* Units */,
 				80592C0318924B010082D4E1 /* CSIngredients.h */,
 				80592C0418924B010082D4E1 /* CSIngredients.m */,
+				39024F61243174BB0063725D /* CSIngredientsExt.swift */,
 				80592C0618924B0F0082D4E1 /* CSIngredient.h */,
 				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
 				80592C091892541D0082D4E1 /* CSIngredientGroup.h */,
@@ -271,6 +278,7 @@
 				9368096F1891059700655B89 /* CSIngredientListVC.m */,
 				807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */,
 				807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */,
+				392D865324304F2D002064D6 /* IngredientListViewController.swift */,
 			);
 			name = "Ingredient List UI";
 			sourceTree = "<group>";
@@ -332,6 +340,7 @@
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
+				392D865624306D0D002064D6 /* CSConversionVCExt.swift */,
 				8000355C18B3CBF50032BF91 /* Scales */,
 				80592C0218924AEA0082D4E1 /* Model */,
 				807C0B681BB3DD04007D2C03 /* Ingredient List UI */,
@@ -575,6 +584,8 @@
 				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
 				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				392D865424304F2D002064D6 /* IngredientListViewController.swift in Sources */,
+				392D865724306D0D002064D6 /* CSConversionVCExt.swift in Sources */,
 				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
@@ -600,6 +611,7 @@
 				396E3643243976A000C2815B /* GradientView.swift in Sources */,
 				396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
+				39024F62243174BB0063725D /* CSIngredientsExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
