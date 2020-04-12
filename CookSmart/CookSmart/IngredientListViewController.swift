@@ -48,13 +48,13 @@ struct IngredientListView: View {
           print("Pressed")
         }, label: {
           Image(systemName: "xmark")
-            .foregroundColor(SwiftUI.Color(Color.cakeRed))
+            .foregroundColor(SwiftUI.Color(Color.redLineColor))
             .font(Font.system(size: 20, weight: .medium, design: .default))
         }),
                           trailing:
-        NavigationLink(destination: CSEditIngredientVCRepresentable(),
+        NavigationLink(destination: EditIngredientViewControllerRepresentable(),
                        label: { Image(systemName: "plus")
-                         .foregroundColor(SwiftUI.Color(Color.cakeRed))
+                         .foregroundColor(SwiftUI.Color(Color.redLineColor))
                          .font(Font.system(size: 20, weight: .medium, design: .default))
                        }))
     }
@@ -70,7 +70,7 @@ struct IngredientListCell: View {
 
   var body: some View {
     ZStack {
-      NavigationLink(destination: CSEditIngredientVCRepresentable()) {
+      NavigationLink(destination: EditIngredientViewControllerRepresentable()) {
         EmptyView()
       }.buttonStyle(PlainButtonStyle())
       HStack {
@@ -80,7 +80,7 @@ struct IngredientListCell: View {
           print("Edit Tapped")
         }, label: {
           Image(systemName: "pencil.circle")
-            .foregroundColor(SwiftUI.Color(Color.cakeRed))
+            .foregroundColor(SwiftUI.Color(Color.redLineColor))
             .font(Font.system(size: 22, weight: .regular, design: .default))
           }).buttonStyle(BorderlessButtonStyle())
       }

@@ -14,4 +14,3 @@
 #import "CSIngredientGroup.h"
 #import "CSRecentsIngredientGroup.h"
 #import "CSIngredientGroupInternals.h"
-#import "CSEditIngredientVC.h"
