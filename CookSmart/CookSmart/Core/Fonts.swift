@@ -22,6 +22,6 @@ public enum Fonts {
   }
 
   public func of(size: CGFloat) -> UIFont? {
-    return UIFont(name: name, size: size)
+    UIFont(name: name, size: size)
   }
 }
