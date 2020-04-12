@@ -197,6 +197,6 @@ extension UnitPickerScrollView: UIScrollViewDelegate {
   }
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    scrollView.contentOffset = CGPoint(x: 0, y: scrollView.contentOffset.y)
+    scrollView.contentOffset.x = 0
   }
 }
