@@ -8,11 +8,20 @@
 
 import UIKit
 
-public enum Fonts {}
+public enum Fonts {
+  case condensedMedium
+  case regular
+  case medium
 
-extension Fonts {
-  private static let medium: UIFont! = UIFont(name: "AvenirNextCondensed-Medium", size: UIFont.labelFontSize)
+  private var name: String {
+    switch self {
+    case .condensedMedium: return "AvenirNextCondensed-Medium"
+    case .regular: return "AvenirNext-Regular"
+    case .medium: return "AvenirNext-Medium"
+    }
+  }
 
-  public static let regular = UIFontMetrics(forTextStyle: .body).scaledFont(for: Fonts.medium)
-  public static let tiny = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: Fonts.medium)
+  public func of(size: CGFloat) -> UIFont? {
+    UIFont(name: name, size: size)
+  }
 }

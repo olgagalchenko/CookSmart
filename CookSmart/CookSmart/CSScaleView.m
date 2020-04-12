@@ -52,7 +52,6 @@
 
 - (void)initialize
 {
-    self.backgroundColor = BACKGROUND_COLOR;
     self.bounces = NO;
     self.pagingEnabled = NO;
     self.alwaysBounceHorizontal = NO;

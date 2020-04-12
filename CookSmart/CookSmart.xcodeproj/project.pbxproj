@@ -8,9 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
+		396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */; };
+		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
+		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
+		396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */; };
+		39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE562442775E00359EDF /* AppDelegate.swift */; };
+		39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE592442776D00359EDF /* SceneDelegate.swift */; };
+		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F41931243950CB0055053E /* ScaleScrollView.swift */; };
+		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
+		774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */; };
+		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
+		774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7C2442E475002A59AC /* ScaleViewController.swift */; };
+		774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
@@ -21,17 +33,12 @@
 		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
 		80629C6818D4B3BF00106131 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.dylib */; };
 		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; };
-		8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
 		931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96918C2B9C90018AA8B /* VolumeUnits.plist */; };
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
-		9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9343EDC118BD380000892D0B /* CSUnitPicker.m */; };
-		9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9343EDC218BD380000892D0B /* CSUnitPicker.xib */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
-		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
-		935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
@@ -40,14 +47,19 @@
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
 		B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
 		B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA299180524A800CF7588 /* InfoPlist.strings */; };
-		B7BCA29D180524A800CF7588 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA29C180524A800CF7588 /* main.m */; };
-		B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */; };
 		B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2A2180524A800CF7588 /* Images.xcassets */; };
 		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
 		DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		774EBD72244271D6002A59AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7BCA285180524A800CF7588 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7BCA28C180524A800CF7588;
+			remoteInfo = cake;
+		};
 		80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
@@ -73,10 +85,24 @@
 
 /* Begin PBXFileReference section */
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerCenterLineView.swift; sourceTree = "<group>"; };
+		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
+		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerDelegate.swift; sourceTree = "<group>"; };
+		39C3CE562442775E00359EDF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		39C3CE592442776D00359EDF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientViewController.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		77F41931243950CB0055053E /* ScaleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScrollView.swift; sourceTree = "<group>"; };
+		774EBD6424426CC2002A59AC /* Double+StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+StringUtils.swift"; sourceTree = "<group>"; };
+		774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStringUtilsTests.swift; sourceTree = "<group>"; };
+		774EBD6D244271D6002A59AC /* CakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		774EBD71244271D6002A59AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		774EBD782442A1CE002A59AC /* Fraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
+		774EBD7C2442E475002A59AC /* ScaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
+		774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
 		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -98,23 +124,15 @@
 		807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListViewCell.h; sourceTree = "<group>"; };
 		807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListViewCell.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
-		8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPickerCenterLineView.h; sourceTree = "<group>"; };
-		8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPickerCenterLineView.m; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
 		931AF96718C2B8AF0018AA8B /* WeightUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeightUnits.plist; sourceTree = "<group>"; };
 		931AF96918C2B9C90018AA8B /* VolumeUnits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VolumeUnits.plist; sourceTree = "<group>"; };
 		931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitCollection.h; sourceTree = "<group>"; };
 		931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitCollection.m; sourceTree = "<group>"; };
-		9343EDC018BD380000892D0B /* CSUnitPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnitPicker.h; sourceTree = "<group>"; };
-		9343EDC118BD380000892D0B /* CSUnitPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnitPicker.m; sourceTree = "<group>"; };
-		9343EDC218BD380000892D0B /* CSUnitPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUnitPicker.xib; sourceTree = "<group>"; };
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
-		935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEditIngredientVC.h; sourceTree = "<group>"; };
-		935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEditIngredientVC.m; sourceTree = "<group>"; };
-		935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSEditIngredientVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
@@ -128,15 +146,9 @@
 		B7BCA294180524A800CF7588 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B7BCA298180524A800CF7588 /* CookSmart-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookSmart-Info.plist"; sourceTree = "<group>"; };
 		B7BCA29A180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B7BCA29C180524A800CF7588 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B7BCA29E180524A800CF7588 /* CookSmart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CookSmart-Prefix.pch"; sourceTree = "<group>"; };
-		B7BCA29F180524A800CF7588 /* CSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAppDelegate.h; sourceTree = "<group>"; };
-		B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
 		B7BCA2A2180524A800CF7588 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B7BCA2A9180524A800CF7588 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		B7BCA2B1180524A800CF7588 /* CookSmartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookSmartTests-Info.plist"; sourceTree = "<group>"; };
-		B7BCA2B3180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B7BCA2B5180524A800CF7588 /* CookSmartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookSmartTests.m; sourceTree = "<group>"; };
 		B7BCA2BF1805284A00CF7588 /* Ingredients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
 		DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFilteredIngredientGroup.h; sourceTree = "<group>"; };
 		DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFilteredIngredientGroup.m; sourceTree = "<group>"; };
@@ -144,6 +156,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		774EBD6A244271D6002A59AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BCA28A180524A800CF7588 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,8 +183,28 @@
 			children = (
 				392D8644242FD0FF002064D6 /* Colors.swift */,
 				77479AF824303D86000CFB0E /* Fonts.swift */,
+				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
+				774EBD782442A1CE002A59AC /* Fraction.swift */,
+				774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		39C3CE612442A1A300359EDF /* Edit Ingredient */ = {
+			isa = PBXGroup;
+			children = (
+				39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */,
+			);
+			path = "Edit Ingredient";
+			sourceTree = "<group>";
+		};
+		774EBD6E244271D6002A59AC /* CakeTests */ = {
+			isa = PBXGroup;
+			children = (
+				774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */,
+				774EBD71244271D6002A59AC /* Info.plist */,
+			);
+			path = CakeTests;
 			sourceTree = "<group>";
 		};
 		8000355C18B3CBF50032BF91 /* Scales */ = {
@@ -176,15 +215,15 @@
 				93F6CCA518AED6050045400D /* CSScaleVC.h */,
 				93F6CCA618AED6050045400D /* CSScaleVC.m */,
 				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
-				9343EDC018BD380000892D0B /* CSUnitPicker.h */,
-				9343EDC118BD380000892D0B /* CSUnitPicker.m */,
-				9343EDC218BD380000892D0B /* CSUnitPicker.xib */,
+				396E363E24396D5900C2815B /* UnitPickerView.swift */,
+				396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
+				396E3642243976A000C2815B /* GradientView.swift */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
-				8087757E18C2615F00A94031 /* CSUnitPickerCenterLineView.h */,
-				8087757F18C2615F00A94031 /* CSUnitPickerCenterLineView.m */,
+				396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */,
+				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
 			);
 			name = Scales;
 			sourceTree = "<group>";
@@ -214,7 +253,6 @@
 				80592C0C189268D60082D4E1 /* CSScaleView.h */,
 				80592C0D189268D60082D4E1 /* CSScaleView.m */,
 				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
-				77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */,
 				77F41931243950CB0055053E /* ScaleScrollView.swift */,
 			);
 			name = ScaleView;
@@ -256,7 +294,7 @@
 			children = (
 				80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */,
 				B7BCA296180524A800CF7588 /* CookSmart */,
-				B7BCA2AF180524A800CF7588 /* CookSmartTests */,
+				774EBD6E244271D6002A59AC /* CakeTests */,
 				B7BCA28F180524A800CF7588 /* Frameworks */,
 				B7BCA28E180524A800CF7588 /* Products */,
 			);
@@ -266,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				B7BCA28D180524A800CF7588 /* cake.app */,
+				774EBD6D244271D6002A59AC /* CakeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,18 +327,16 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
+				39C3CE562442775E00359EDF /* AppDelegate.swift */,
+				39C3CE592442776D00359EDF /* SceneDelegate.swift */,
 				392D8642242FD0CA002064D6 /* Core */,
+				39C3CE612442A1A300359EDF /* Edit Ingredient */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
-				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
-				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
-				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
 				8000355C18B3CBF50032BF91 /* Scales */,
 				80592C0218924AEA0082D4E1 /* Model */,
-				B7BCA29F180524A800CF7588 /* CSAppDelegate.h */,
-				B7BCA2A0180524A800CF7588 /* CSAppDelegate.m */,
 				807C0B681BB3DD04007D2C03 /* Ingredient List UI */,
 				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
@@ -310,10 +347,10 @@
 		B7BCA297180524A800CF7588 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */,
 				B7BCA2BF1805284A00CF7588 /* Ingredients.plist */,
 				B7BCA298180524A800CF7588 /* CookSmart-Info.plist */,
 				B7BCA299180524A800CF7588 /* InfoPlist.strings */,
-				B7BCA29C180524A800CF7588 /* main.m */,
 				B7BCA29E180524A800CF7588 /* CookSmart-Prefix.pch */,
 				931AF96718C2B8AF0018AA8B /* WeightUnits.plist */,
 				931AF96918C2B9C90018AA8B /* VolumeUnits.plist */,
@@ -321,27 +358,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B7BCA2AF180524A800CF7588 /* CookSmartTests */ = {
-			isa = PBXGroup;
-			children = (
-				B7BCA2B5180524A800CF7588 /* CookSmartTests.m */,
-				B7BCA2B0180524A800CF7588 /* Supporting Files */,
-			);
-			path = CookSmartTests;
-			sourceTree = "<group>";
-		};
-		B7BCA2B0180524A800CF7588 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B7BCA2B1180524A800CF7588 /* CookSmartTests-Info.plist */,
-				B7BCA2B2180524A800CF7588 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		774EBD6C244271D6002A59AC /* CakeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 774EBD74244271D6002A59AC /* Build configuration list for PBXNativeTarget "CakeTests" */;
+			buildPhases = (
+				774EBD69244271D6002A59AC /* Sources */,
+				774EBD6A244271D6002A59AC /* Frameworks */,
+				774EBD6B244271D6002A59AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				774EBD73244271D6002A59AC /* PBXTargetDependency */,
+			);
+			name = CakeTests;
+			productName = CakeTests;
+			productReference = 774EBD6D244271D6002A59AC /* CakeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B7BCA28C180524A800CF7588 /* cake */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7BCA2B9180524A800CF7588 /* Build configuration list for PBXNativeTarget "cake" */;
@@ -371,9 +408,16 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CS;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Olga Galchenko";
 				TargetAttributes = {
+					774EBD6C244271D6002A59AC = {
+						CreatedOnToolsVersion = 11.4;
+						DevelopmentTeam = 6NPJ4ZUZ5S;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B7BCA28C180524A800CF7588;
+					};
 					B7BCA28C180524A800CF7588 = {
 						DevelopmentTeam = T36GJ569RT;
 						LastSwiftMigration = 1130;
@@ -400,6 +444,7 @@
 			projectRoot = "";
 			targets = (
 				B7BCA28C180524A800CF7588 /* cake */,
+				774EBD6C244271D6002A59AC /* CakeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -422,6 +467,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		774EBD6B244271D6002A59AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BCA28B180524A800CF7588 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,8 +483,6 @@
 				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
-				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
-				9343EDC418BD380000892D0B /* CSUnitPicker.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
@@ -513,32 +563,46 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		774EBD69244271D6002A59AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7BCA289180524A800CF7588 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
+				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
+				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
-				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
+				774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */,
+				39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
+				39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */,
 				80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */,
 				77479AF924303D86000CFB0E /* Fonts.swift in Sources */,
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
+				39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */,
 				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
-				9343EDC318BD380000892D0B /* CSUnitPicker.m in Sources */,
-				B7BCA2A1180524A800CF7588 /* CSAppDelegate.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
+				396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
 				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
-				B7BCA29D180524A800CF7588 /* main.m in Sources */,
-				8087758018C2615F00A94031 /* CSUnitPickerCenterLineView.m in Sources */,
+				396E3643243976A000C2815B /* GradientView.swift in Sources */,
+				396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +610,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		774EBD73244271D6002A59AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7BCA28C180524A800CF7588 /* cake */;
+			targetProxy = 774EBD72244271D6002A59AC /* PBXContainerItemProxy */;
+		};
 		80629C6218D4B1C700106131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VGAnalytics;
@@ -562,17 +631,69 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		B7BCA2B2180524A800CF7588 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B7BCA2B3180524A800CF7588 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		774EBD75244271D6002A59AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6NPJ4ZUZ5S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CakeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.CakeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cake.app/cake";
+			};
+			name = Debug;
+		};
+		774EBD76244271D6002A59AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6NPJ4ZUZ5S;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CakeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pryanik.CakeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cake.app/cake";
+			};
+			name = Release;
+		};
 		B7BCA2B7180524A800CF7588 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -760,6 +881,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		774EBD74244271D6002A59AC /* Build configuration list for PBXNativeTarget "CakeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				774EBD75244271D6002A59AC /* Debug */,
+				774EBD76244271D6002A59AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B7BCA288180524A800CF7588 /* Build configuration list for PBXProject "CookSmart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
