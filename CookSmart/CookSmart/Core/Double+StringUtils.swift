@@ -8,25 +8,27 @@
 
 import Foundation
 
+let fractionThreshold: Double = 50.0
+
 extension Double {
-  private var whole: Self { modf(self).0 }
+  private var whole: Int { Int(modf(self).0) }
   private var decimal: Self { modf(self).1 }
 
-  private var roundedWhole: Double {
-    guard self < 50.0 else {
-      return rounded(FloatingPointRoundingRule.toNearestOrEven)
+  private var roundedWhole: Int {
+    guard self < fractionThreshold else {
+      return Int(rounded(FloatingPointRoundingRule.toNearestOrEven))
     }
 
     return whole
   }
 
   private var decimalFraction: Fraction {
-    guard self < 50.0 else { return .zero }
+    guard self < fractionThreshold else { return .zero }
     return Fraction(value: decimal)
   }
 
   var roundedValue: Double {
-    roundedWhole + decimalFraction.rawValue
+    Double(roundedWhole) + decimalFraction.rawValue
   }
 
   var vulgarFractionString: String {
@@ -37,6 +39,6 @@ extension Double {
     if whole == 0, fraction != .zero {
       return fraction.string
     }
-    return String(format: "%.0f", whole) + fraction.string
+    return String(whole) + fraction.string
   }
 }
