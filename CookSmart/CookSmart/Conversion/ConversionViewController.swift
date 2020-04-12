@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class ConversionViewController: UIViewController {
+  private enum Constants {
+    static let ingredientButtonHeight: CGFloat = 75
+  }
+
   private var ingredientIndex: UInt = 0
 
   init() {
@@ -22,55 +26,87 @@ class ConversionViewController: UIViewController {
     return nil
   }
 
-  private let ingredientLabel: UILabel = {
-    let label = UILabel()
-    label.textColor = Color.redLineColor
-    label.font = Fonts.regular?.withSize(20)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
+  private let ingredientButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitleColor(Color.redLineColor, for: .normal)
+    button.titleLabel?.font = Fonts.medium
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(ingredientButtonPressed), for: .touchUpInside)
+    return button
   }()
 
-  private let ingredientLabelContainer = UIView()
-
   private let scaleViewController = CSScaleVC(nibName: "CSScaleVC", bundle: nil)
+
+  var currentIngredient: CSIngredient? {
+    CSIngredients.sharedInstance()?.ingredient(atFlattenedIngredientIndex: ingredientIndex)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
     selectIngredientAtCurrentIndex()
+
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(INGREDIENT_DELETE_NOTIFICATION_NAME),
+                                           object: nil,
+                                           queue: nil) { [weak self] _ in
+      self?.ingredientIndex = 0
+      self?.selectIngredientAtCurrentIndex()
+    }
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    markIngredientAccess()
   }
 
   private func setupViews() {
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = Color.background
 
-    ingredientLabelContainer.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(ingredientLabelContainer)
-    ingredientLabelContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    ingredientLabelContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    ingredientLabelContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    ingredientLabelContainer.heightAnchor.constraint(equalToConstant: 70).isActive = true
-
-    ingredientLabelContainer.addSubview(ingredientLabel)
-    ingredientLabel.centerYAnchor.constraint(equalTo: ingredientLabelContainer.centerYAnchor).isActive = true
-    ingredientLabel.centerXAnchor.constraint(equalTo: ingredientLabelContainer.centerXAnchor).isActive = true
-    ingredientLabel.leadingAnchor.constraint(greaterThanOrEqualTo: ingredientLabelContainer.leadingAnchor, constant: 15).isActive = true
+    view.addSubview(ingredientButton)
+    ingredientButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    ingredientButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    ingredientButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    ingredientButton.heightAnchor.constraint(equalToConstant: Constants.ingredientButtonHeight).isActive = true
 
     addChild(scaleViewController)
     view.addSubview(scaleViewController.view)
     scaleViewController.view.translatesAutoresizingMaskIntoConstraints = false
     scaleViewController.delegate = self
 
-    scaleViewController.view.topAnchor.constraint(equalTo: ingredientLabelContainer.bottomAnchor).isActive = true
+    scaleViewController.view.topAnchor.constraint(equalTo: ingredientButton.bottomAnchor).isActive = true
     scaleViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     scaleViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     scaleViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
   }
 
   private func selectIngredientAtCurrentIndex() {
-    let ingredient = CSIngredients.sharedInstance()?.ingredient(atFlattenedIngredientIndex: ingredientIndex)
-    ingredientLabel.text = ingredient?.name
+    guard let ingredient = CSIngredients.sharedInstance()?.ingredient(atFlattenedIngredientIndex: ingredientIndex) else {
+      return
+    }
+    ingredientButton.setTitle(ingredient.name, for: .normal)
     scaleViewController.ingredient = ingredient
+    markIngredientAccess()
+  }
+
+  private func markIngredientAccess() {
+    currentIngredient?.markAccess()
+  }
+
+  @objc
+  private func ingredientButtonPressed() {
+    guard let ingredientListVC = CSIngredientListVC(delegate: self) else {
+      return
+    }
+    let ingredientListNav = UINavigationController(rootViewController: ingredientListVC)
+    present(ingredientListNav, animated: true)
   }
 }
 
 extension ConversionViewController: CSScaleVCDelegate {}
+
+extension ConversionViewController: CSIngredientListVCDelegate {
+  func ingredientListVC(_ listVC: CSIngredientListVC!, selectedIngredientGroup ingredientGroupIndex: UInt, ingredientIndex index: UInt) {
+    ingredientIndex = CSIngredients.sharedInstance()?.flattenedIngredientIndex(forGroupIndex: ingredientGroupIndex, ingredientIndex: index) ?? 0
+    selectIngredientAtCurrentIndex()
+  }
+}
