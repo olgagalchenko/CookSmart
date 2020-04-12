@@ -2,6 +2,8 @@
 
 --enable isEmpty
 
+--disable blankLinesAtStartOfScope
+
 --indent 2
 --indentcase false
 --stripunusedargs closure-only

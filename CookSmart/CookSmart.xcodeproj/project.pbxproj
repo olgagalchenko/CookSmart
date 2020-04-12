@@ -18,11 +18,14 @@
 		396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */; };
 		39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE562442775E00359EDF /* AppDelegate.swift */; };
 		39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE592442776D00359EDF /* SceneDelegate.swift */; };
+		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
 		774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */; };
 		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
+		774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7C2442E475002A59AC /* ScaleViewController.swift */; };
+		774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
@@ -39,8 +42,6 @@
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
-		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
-		935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
@@ -97,6 +98,7 @@
 		396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerDelegate.swift; sourceTree = "<group>"; };
 		39C3CE562442775E00359EDF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C3CE592442776D00359EDF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientViewController.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -105,6 +107,8 @@
 		774EBD6D244271D6002A59AC /* CakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774EBD71244271D6002A59AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		774EBD782442A1CE002A59AC /* Fraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
+		774EBD7C2442E475002A59AC /* ScaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
+		774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
 		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -135,9 +139,6 @@
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
-		935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEditIngredientVC.h; sourceTree = "<group>"; };
-		935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEditIngredientVC.m; sourceTree = "<group>"; };
-		935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSEditIngredientVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 				77479AF824303D86000CFB0E /* Fonts.swift */,
 				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
 				774EBD782442A1CE002A59AC /* Fraction.swift */,
+				774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -203,7 +205,15 @@
 				396E3652243A6D0A00C2815B /* Ingredient.swift */,
 			);
 			path = Ingredients;
-      sourceTree = "<group>";
+      		sourceTree = "<group>";
+		};
+		39C3CE612442A1A300359EDF /* Edit Ingredient */ = {
+			isa = PBXGroup;
+			children = (
+				39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */,
+			);
+			path = "Edit Ingredient";
+			sourceTree = "<group>";
 		};
 		774EBD6E244271D6002A59AC /* CakeTests */ = {
 			isa = PBXGroup;
@@ -230,6 +240,7 @@
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
 				396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */,
+				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
 			);
 			name = Scales;
 			sourceTree = "<group>";
@@ -336,10 +347,8 @@
 				39C3CE592442776D00359EDF /* SceneDelegate.swift */,
 				392D8642242FD0CA002064D6 /* Core */,
 				396E364A243A63FB00C2815B /* Ingredients */,
+				39C3CE612442A1A300359EDF /* Edit Ingredient */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
-				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
-				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
-				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
@@ -491,7 +500,6 @@
 				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
-				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
@@ -588,13 +596,14 @@
 				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
 				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				396E3651243A6CFE00C2815B /* IngredientGroup.swift in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
-				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
+				774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */,
 				39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
@@ -602,6 +611,7 @@
 				80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */,
 				77479AF924303D86000CFB0E /* Fonts.swift in Sources */,
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
+				39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				396E3653243A6D0A00C2815B /* Ingredient.swift in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
