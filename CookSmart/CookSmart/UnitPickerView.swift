@@ -40,7 +40,7 @@ class UnitPickerView: UIView {
     let button = UIButton(type: .system)
     button.setTitleColor(Color.redLineColor, for: .normal)
     button.setTitle("Done", for: .normal)
-    button.titleLabel?.font = Fonts.regular
+    button.titleLabel?.font = Fonts.regular.of(size: 17)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
@@ -76,19 +76,23 @@ class UnitPickerView: UIView {
   }
 }
 
+// MARK: - UnitPickerScrollView
+
 private class UnitPickerScrollView: UIView {
   private enum Constants {
     static let unitLabelHeight: CGFloat = 40
   }
 
   private let unitCollection: CSUnitCollection
+  private var selectedIndex: UInt
 
   var currentlySelectedUnit: CSUnit {
-    unitCollection.unit(at: UInt(closestLabelIndex))
+    unitCollection.unit(at: selectedIndex)
   }
 
   init(units: CSUnitCollection, selectedUnit: CSUnit) {
     unitCollection = units
+    selectedIndex = unitCollection.index(of: selectedUnit)
     super.init(frame: .zero)
     setupViews()
   }
@@ -126,9 +130,13 @@ private class UnitPickerScrollView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    let scrollViewHeight = scrollView.frame.height
-    unitStackViewTopConstraint?.constant = (scrollViewHeight / 2) - (Constants.unitLabelHeight / 2)
-    unitStackViewBottomConstraint?.constant = -((scrollViewHeight / 2) - (Constants.unitLabelHeight * 3 / 2))
+    let halfScrollViewHeight = scrollView.frame.height / 2
+    let halfUnitLabelHeight = Constants.unitLabelHeight / 2
+    unitStackViewTopConstraint?.constant = halfScrollViewHeight - halfUnitLabelHeight
+    unitStackViewBottomConstraint?.constant = -(halfScrollViewHeight - (halfUnitLabelHeight * 3))
+
+    let selectedIndexOffset = Constants.unitLabelHeight * CGFloat(selectedIndex)
+    scrollView.contentOffset = CGPoint(x: 0, y: selectedIndexOffset)
   }
 
   private func setupViews() {
@@ -136,24 +144,17 @@ private class UnitPickerScrollView: UIView {
     scrollView.delegate = self
 
     addSubview(scrollView)
-    scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    scrollView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    scrollView.constrainToSuperview()
 
     scrollView.addSubview(unitStackView)
+    unitStackView.constrainToSuperview(anchors: [.leading, .trailing, .width])
     unitStackViewTopConstraint = unitStackView.topAnchor.constraint(equalTo: scrollView.topAnchor)
     unitStackViewTopConstraint?.isActive = true
-    unitStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-    unitStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
     unitStackViewBottomConstraint = unitStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
     unitStackViewBottomConstraint?.isActive = true
-    unitStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
 
     addSubview(centerLineView)
-    centerLineView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    centerLineView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    centerLineView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    centerLineView.constrainToSuperview(anchors: [.centerY, .leading, .trailing])
 
     addUnitLabels()
   }
@@ -163,7 +164,7 @@ private class UnitPickerScrollView: UIView {
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
         let unitLabel = UILabel()
-        unitLabel.font = Fonts.regular?.withSize(15)
+        unitLabel.font = Fonts.regular.of(size: 15)
         unitLabel.textColor = .label
         unitLabel.translatesAutoresizingMaskIntoConstraints = false
         unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true
@@ -172,15 +173,18 @@ private class UnitPickerScrollView: UIView {
       }
   }
 
-  private var closestLabelIndex: Int {
-    Int(round(scrollView.contentOffset.y / Constants.unitLabelHeight))
+  private func updateSelectedIndex() {
+    selectedIndex = UInt(round(scrollView.contentOffset.y / Constants.unitLabelHeight))
   }
 
   private func scrollToNearestLabel() {
-    let yOffset = CGFloat(closestLabelIndex) * Constants.unitLabelHeight
+    updateSelectedIndex()
+    let yOffset = CGFloat(selectedIndex) * Constants.unitLabelHeight
     scrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
   }
 }
+
+// MARK: UIScrollViewDelegate
 
 extension UnitPickerScrollView: UIScrollViewDelegate {
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -190,5 +194,9 @@ extension UnitPickerScrollView: UIScrollViewDelegate {
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     guard !decelerate else { return }
     scrollToNearestLabel()
+  }
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    scrollView.contentOffset.x = 0
   }
 }

@@ -8,10 +8,20 @@
 
 import UIKit
 
-public enum Fonts {}
+public enum Fonts {
+  case condensedMedium
+  case regular
+  case medium
 
-extension Fonts {
-  public static let tiny = UIFont(name: "AvenirNextCondensed-Medium", size: 12)
-  public static let regular = UIFont(name: "AvenirNext-Regular", size: 17)
-  public static let medium = UIFont(name: "AvenirNext-Medium", size: 20)
+  private var name: String {
+    switch self {
+    case .condensedMedium: return "AvenirNextCondensed-Medium"
+    case .regular: return "AvenirNext-Regular"
+    case .medium: return "AvenirNext-Medium"
+    }
+  }
+
+  public func of(size: CGFloat) -> UIFont? {
+    UIFont(name: name, size: size)
+  }
 }
