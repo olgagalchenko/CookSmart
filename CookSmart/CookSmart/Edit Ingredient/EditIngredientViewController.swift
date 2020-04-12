@@ -17,6 +17,7 @@ class EditIngredientViewController: UIViewController {
 
   private let ingredient: CSIngredient
   private let editingMode: EditingMode
+  private lazy var density: Float = ingredient.density
 
   @objc
   public init(ingredient: CSIngredient? = nil) {
@@ -24,9 +25,9 @@ class EditIngredientViewController: UIViewController {
       self.ingredient = ingredient
       editingMode = .edit
     } else {
-      self.ingredient =  CSIngredient(name: "",
-                                      density: 150,
-                                      lastAccessDate: Date())
+      self.ingredient = CSIngredient(name: "",
+                                     density: 150,
+                                     lastAccessDate: Date())
       editingMode = .add
     }
     super.init(nibName: nil, bundle: nil)
@@ -45,6 +46,8 @@ class EditIngredientViewController: UIViewController {
     textField.textAlignment = .center
     textField.placeholder = "Ingredient Name"
     textField.autocapitalizationType = .words
+    textField.font = Fonts.medium.of(size: 20)
+    textField.textColor = .label
     textField.tintColor = Color.redLineColor
     return textField
   }()
@@ -90,7 +93,7 @@ class EditIngredientViewController: UIViewController {
     scaleViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     scaleViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
-    scaleViewController.ingredient = ingredient
+//    scaleViewController.ingredient = ingredient
   }
 
   private func addBarButtonItems() {
@@ -118,8 +121,48 @@ class EditIngredientViewController: UIViewController {
       ingredientNameField.becomeFirstResponder()
       return
     }
+
+    guard densityIsValid else {
+      displayInvalidDensityAlert()
+      logUserAction("ingredient_persist_fail", analyticsDictionary)
+      return
+    }
+
+    updateIngredient()
+    switch editingMode {
+    case .add:
+      CSIngredients.sharedInstance()?.add(ingredient)
+    case .edit:
+      CSIngredients.sharedInstance()?.persist()
+    }
+
+    navigationController?.popViewController(animated: true)
+  }
+
+  private func updateIngredient() {
+    ingredient.name = ingredientNameField.text
+    ingredient.density = density
+  }
+
+  private func displayInvalidDensityAlert() {
+    let alertController = UIAlertController(title: "Error",
+                                            message: "Choose a weight greater than 0.",
+                                            preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "OK",
+                                 style: .default,
+                                 handler: nil)
+    alertController.addAction(okAction)
+    present(alertController, animated: true)
+  }
+
+  private var densityIsValid: Bool {
+    !density.isNaN
+      && !density.isInfinite
+      && !density.isZero
   }
 }
+
+// MARK: UITextFieldDelegate
 
 extension EditIngredientViewController: UITextFieldDelegate {
 
@@ -129,13 +172,28 @@ extension EditIngredientViewController: UITextFieldDelegate {
   }
 }
 
+// MARK: CSScaleVCDelegate
+
 extension EditIngredientViewController: CSScaleVCDelegate {
 
   func scaleVC(_ scaleVC: CSScaleVC!, densityDidChange changedDensity: Float) {
-    ingredient.density = changedDensity
+    density = changedDensity
   }
 
   func scaleVCWillBeginHandlingInteraction(_ scaleVC: CSScaleVC!) {
     ingredientNameField.resignFirstResponder()
+  }
+}
+
+// MARK: Analytics
+
+extension EditIngredientViewController {
+  private var analyticsDictionary: [String: Any] {
+    let ingredientName = ingredientNameField.text ?? ingredient.name ?? ""
+    let ingredientDensity = densityIsValid ? density : Float.infinity
+    return [
+      "ingredient_name": ingredientName,
+      "ingredient_density": ingredientDensity,
+    ]
   }
 }
