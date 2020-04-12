@@ -10,12 +10,25 @@ import Foundation
 
 class EditIngredientViewController: UIViewController {
 
-  private let ingredient: CSIngredient
+  private enum EditingMode {
+    case edit
+    case add
+  }
 
+  private let ingredient: CSIngredient
+  private let editingMode: EditingMode
+
+  @objc
   public init(ingredient: CSIngredient? = nil) {
-    self.ingredient = ingredient ?? CSIngredient(name: "",
-                                                 density: 150,
-                                                 lastAccessDate: Date())
+    if let ingredient = ingredient {
+      self.ingredient = ingredient
+      editingMode = .edit
+    } else {
+      self.ingredient =  CSIngredient(name: "",
+                                      density: 150,
+                                      lastAccessDate: Date())
+      editingMode = .add
+    }
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -29,6 +42,10 @@ class EditIngredientViewController: UIViewController {
     let textField = UITextField()
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.returnKeyType = .done
+    textField.textAlignment = .center
+    textField.placeholder = "Ingredient Name"
+    textField.autocapitalizationType = .words
+    textField.tintColor = Color.redLineColor
     return textField
   }()
 
@@ -54,6 +71,7 @@ class EditIngredientViewController: UIViewController {
   private func setupViews() {
     view.backgroundColor = Color.background
 
+    ingredientNameField.text = ingredient.name
     ingredientNameField.delegate = self
     view.addSubview(ingredientNameField)
     ingredientNameField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -71,6 +89,8 @@ class EditIngredientViewController: UIViewController {
     scaleViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     scaleViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     scaleViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+
+    scaleViewController.ingredient = ingredient
   }
 
   private func addBarButtonItems() {
@@ -94,7 +114,10 @@ class EditIngredientViewController: UIViewController {
 
   @objc
   private func doneButtonPressed() {
-
+    guard let ingredientName = ingredientNameField.text, !ingredientName.isEmpty else {
+      ingredientNameField.becomeFirstResponder()
+      return
+    }
   }
 }
 
@@ -115,5 +138,4 @@ extension EditIngredientViewController: CSScaleVCDelegate {
   func scaleVCWillBeginHandlingInteraction(_ scaleVC: CSScaleVC!) {
     ingredientNameField.resignFirstResponder()
   }
-
 }
