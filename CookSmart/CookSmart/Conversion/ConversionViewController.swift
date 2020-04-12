@@ -16,7 +16,7 @@ class ConversionViewController: UIViewController {
 
   private var ingredientIndex: UInt = 0
 
-  init() {
+  public init() {
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -37,7 +37,7 @@ class ConversionViewController: UIViewController {
 
   private let scaleViewController = CSScaleVC(nibName: "CSScaleVC", bundle: nil)
 
-  var currentIngredient: CSIngredient? {
+  private var currentIngredient: CSIngredient? {
     CSIngredients.sharedInstance()?.ingredient(atFlattenedIngredientIndex: ingredientIndex)
   }
 
@@ -46,12 +46,17 @@ class ConversionViewController: UIViewController {
     setupViews()
     selectIngredientAtCurrentIndex()
 
-    NotificationCenter.default.addObserver(forName: NSNotification.Name(INGREDIENT_DELETE_NOTIFICATION_NAME),
-                                           object: nil,
-                                           queue: nil) { [weak self] _ in
+    _ = NotificationCenter.default.addObserver(forName: NSNotification.Name(INGREDIENT_DELETE_NOTIFICATION_NAME),
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
       self?.ingredientIndex = 0
       self?.selectIngredientAtCurrentIndex()
     }
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    selectIngredientAtCurrentIndex()
   }
 
   override func viewDidDisappear(_ animated: Bool) {
@@ -71,7 +76,6 @@ class ConversionViewController: UIViewController {
     addChild(scaleViewController)
     view.addSubview(scaleViewController.view)
     scaleViewController.view.translatesAutoresizingMaskIntoConstraints = false
-    scaleViewController.delegate = self
 
     scaleViewController.view.topAnchor.constraint(equalTo: ingredientButton.bottomAnchor).isActive = true
     scaleViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -101,8 +105,6 @@ class ConversionViewController: UIViewController {
     present(ingredientListNav, animated: true)
   }
 }
-
-extension ConversionViewController: CSScaleVCDelegate {}
 
 extension ConversionViewController: CSIngredientListVCDelegate {
   func ingredientListVC(_ listVC: CSIngredientListVC!, selectedIngredientGroup ingredientGroupIndex: UInt, ingredientIndex index: UInt) {
