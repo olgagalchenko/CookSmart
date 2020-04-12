@@ -10,9 +10,9 @@
 #import "CSIngredients.h"
 #import "CSFilteredIngredientGroup.h"
 #import "CSIngredient.h"
-#import "CSEditIngredientVC.h"
 #import "CSIngredientListViewCell.h"
 #import "CSRecentsIngredientGroup.h"
+#import "cake-Swift.h"
 
 @interface CSIngredientListVC ()
 
@@ -176,28 +176,12 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     UIViewController *editVC;
     if (sender == self.navigationItem.rightBarButtonItem)
     {
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:nil
-                                                  withDoneBlock:^(CSIngredient* newIngr){
-                                                      [[CSIngredients sharedInstance] addIngredient:newIngr];
-                                                      [self refreshData];
-                                                  }
-                                                 andCancelBlock:nil];
+      editVC = [[EditIngredientViewController alloc] initWithIngredient: nil];
     }
     else if ([sender isKindOfClass:[CSIngredient class]])
     {
-        CSIngredient *ingredientToEdit = (CSIngredient *)sender;
-        NSString *oldIngrName = [NSString stringWithString:ingredientToEdit.name];
-        float oldIngrDensity = ingredientToEdit.density;
-        editVC = [[CSEditIngredientVC alloc] initWithIngredient:ingredientToEdit
-                                                  withDoneBlock:^(CSIngredient* newIngr){
-                                                      [[CSIngredients sharedInstance] persist];
-                                                      [self refreshData];
-                                                  }
-                                                 andCancelBlock:^(void){
-                                                     ingredientToEdit.name = oldIngrName;
-                                                     ingredientToEdit.density = oldIngrDensity;
-                                                     [self refreshData];
-                                                 }];
+      CSIngredient *ingredientToEdit = (CSIngredient *)sender;
+      editVC = [[EditIngredientViewController alloc] initWithIngredient:ingredientToEdit];
     }
     else
     {
