@@ -30,6 +30,12 @@ class DoubleSringUtilsTests: XCTestCase {
     XCTAssertEqual(result, 49.500)
   }
 
+  func test_roundedValue_belowThreshold_two() {
+    let rawValue = 1.95
+    let result = rawValue.roundedValue
+    XCTAssertEqual(result, 2)
+  }
+
   // MARK: vulgarFractionString
 
   func test_vulgarFractionString_aboveThreshold_roundsUp() {
@@ -66,5 +72,29 @@ class DoubleSringUtilsTests: XCTestCase {
     let rawValue = 0.1
     let result = rawValue.vulgarFractionString
     XCTAssertEqual(result, "⅛")
+  }
+
+  func test_vulgarFractionString_belowThreshold_quarter() {
+    let rawValue = 1.20
+    let result = rawValue.vulgarFractionString
+    XCTAssertEqual(result, "1¼")
+  }
+
+  func test_vulgarFractionString_belowThreshold_third() {
+    let rawValue = 1.35
+    let result = rawValue.vulgarFractionString
+    XCTAssertEqual(result, "1⅓")
+  }
+
+  func test_vulgarFractionString_belowThreshold_one() {
+    let rawValue = 0.95
+    let result = rawValue.vulgarFractionString
+    XCTAssertEqual(result, "1")
+  }
+
+  func test_vulgarFractionString_belowThreshold_two() {
+    let rawValue = 1.95
+    let result = rawValue.vulgarFractionString
+    XCTAssertEqual(result, "2")
   }
 }
