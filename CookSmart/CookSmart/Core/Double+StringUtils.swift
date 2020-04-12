@@ -8,7 +8,7 @@
 
 import Foundation
 
-let fractionThreshold: Double = 50.0
+private let fractionThreshold: Double = 50.0
 
 extension Double {
   private var whole: Int { Int(modf(self).0) }
