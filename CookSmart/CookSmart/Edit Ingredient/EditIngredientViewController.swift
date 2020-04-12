@@ -67,10 +67,6 @@ class EditIngredientViewController: UIViewController {
     }
   }
 
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-  }
-
   private func setupViews() {
     view.backgroundColor = Color.background
 
@@ -142,6 +138,7 @@ class EditIngredientViewController: UIViewController {
   private func updateIngredient() {
     ingredient.name = ingredientNameField.text
     ingredient.density = density
+    ingredient.markAccess()
   }
 
   private func displayInvalidDensityAlert() {
