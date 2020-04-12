@@ -9,14 +9,14 @@
 import Foundation
 
 struct IngredientStore {
+
   typealias IngredientsDataType = [[String: [Ingredient]]]
 
   static let shared = IngredientStore()
 
   private init() {
     var isDirectory: ObjCBool = false
-    if
-      let diskIngredientsURL = IngredientStore.diskIngredientsURL,
+    if let diskIngredientsURL = IngredientStore.diskIngredientsURL,
       FileManager.default.fileExists(atPath: diskIngredientsURL.path, isDirectory: &isDirectory) {
       assert(!isDirectory.boolValue)
     } else {
@@ -37,8 +37,7 @@ struct IngredientStore {
   }
 
   func loadIngredientsData() -> IngredientsDataType? {
-    guard
-      let diskIngredientsURL = IngredientStore.diskIngredientsURL else {
+    guard let diskIngredientsURL = IngredientStore.diskIngredientsURL else {
       return nil
     }
     do {
