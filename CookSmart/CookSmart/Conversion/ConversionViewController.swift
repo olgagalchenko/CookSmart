@@ -29,7 +29,7 @@ class ConversionViewController: UIViewController {
   private let ingredientButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitleColor(Color.redLineColor, for: .normal)
-    button.titleLabel?.font = Fonts.medium
+    button.titleLabel?.font = Fonts.medium.of(size: 17)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(ingredientButtonPressed), for: .touchUpInside)
     return button
