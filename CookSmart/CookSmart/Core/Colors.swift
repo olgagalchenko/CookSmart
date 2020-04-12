@@ -16,7 +16,7 @@ enum Color {
 
   static let background = Color.color(
     light: UIColor(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0),
-    dark: UIColor(red: 245.0 / 255.0, green: 245.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0)
+    dark: UIColor(red: 10.0 / 255.0, green: 10.0 / 255.0, blue: 10.0 / 255.0, alpha: 1.0)
   )
 
   private static func color(light: UIColor, dark: UIColor) -> UIColor {
