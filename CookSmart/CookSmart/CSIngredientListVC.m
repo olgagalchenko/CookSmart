@@ -10,7 +10,6 @@
 #import "CSIngredients.h"
 #import "CSFilteredIngredientGroup.h"
 #import "CSIngredient.h"
-#import "CSEditIngredientVC.h"
 #import "CSIngredientListViewCell.h"
 #import "CSRecentsIngredientGroup.h"
 #import "cake-Swift.h"

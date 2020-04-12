@@ -36,8 +36,6 @@
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
-		935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */; };
-		935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */; };
 		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
@@ -129,9 +127,6 @@
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
-		935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEditIngredientVC.h; sourceTree = "<group>"; };
-		935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEditIngredientVC.m; sourceTree = "<group>"; };
-		935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSEditIngredientVC.xib; sourceTree = "<group>"; };
 		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
 		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
@@ -328,9 +323,6 @@
 				392D8642242FD0CA002064D6 /* Core */,
 				39C3CE612442A1A300359EDF /* Edit Ingredient */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
-				935DB3A918B46A28007989D7 /* CSEditIngredientVC.h */,
-				935DB3AA18B46A28007989D7 /* CSEditIngredientVC.m */,
-				935DB3AB18B46A28007989D7 /* CSEditIngredientVC.xib */,
 				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
 				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
 				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
@@ -482,7 +474,6 @@
 				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
-				935DB3AD18B46A28007989D7 /* CSEditIngredientVC.xib in Resources */,
 				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
 				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
@@ -583,7 +574,6 @@
 				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
-				935DB3AC18B46A28007989D7 /* CSEditIngredientVC.m in Sources */,
 				39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
