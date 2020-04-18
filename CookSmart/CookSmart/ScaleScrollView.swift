@@ -10,11 +10,56 @@ import Foundation
 import SwiftUI
 import UIKit
 
+// MARK: - ScalesView
+
+class ScalesView: UIView {
+
+  var ingredient: CSIngredient
+
+  var syncScales = true
+
+  init(ingredient: CSIngredient) {
+    self.ingredient = ingredient
+    super.init(frame: .zero)
+    setupViews()
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    assertionFailure("init(coder:) has not been implemented")
+    return nil
+  }
+
+  private let volumeScrollView = ScaleScrollView(frame: .zero)
+  private let weightScrollView = ScaleScrollView(frame: .zero, mirror: true)
+
+  private func setupViews() {
+    translatesAutoresizingMaskIntoConstraints = false
+    addSubview(volumeScrollView)
+    volumeScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    volumeScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    volumeScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+    addSubview(weightScrollView)
+    weightScrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    weightScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    weightScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+    volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+  }
+}
+
+// MARK: - ScaleScrollView
+
 class ScaleScrollView: UIScrollView {
   static let TileHeight: CGFloat = 200
 
   @objc
-  init(frame: CGRect, centerValue: Double, unitsPerTile: Int, mirror: Bool) {
+  init(frame: CGRect,
+       centerValue: Double = 1,
+       unitsPerTile: Int = 1,
+       mirror: Bool = false) {
     self.centerValue = centerValue
     self.unitsPerTile = unitsPerTile
     self.mirror = mirror
@@ -24,8 +69,18 @@ class ScaleScrollView: UIScrollView {
     setUpViews()
   }
 
+  @available(*, unavailable)
   required init?(coder _: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    assertionFailure("init(coder:) has not been implemented")
+    return nil
+  }
+
+  override var bounds: CGRect {
+    didSet {
+      if bounds != oldValue {
+
+      }
+    }
   }
 
   // MARK: Private
@@ -36,13 +91,14 @@ class ScaleScrollView: UIScrollView {
   private let tileContainer = UIView()
 
   private func setUpViews() {
+    translatesAutoresizingMaskIntoConstraints = false
     setUpScrollView()
-    contentSize = CGSize(width: bounds.size.width, height: bounds.size.height * 2)
-
-//    addSubview(tileContainer)
+    updateContentSize()
 
     var index = 0
-    for bottomTileY in stride(from: 0, to: contentSize.height / 2, by: ScaleScrollView.TileHeight) {
+    for bottomTileY in stride(from: 0,
+                              to: contentSize.height / 2,
+                              by: ScaleScrollView.TileHeight) {
       let tile = ScaleTile(
         frame: CGRect(x: 0, y: bottomTileY, width: bounds.width, height: ScaleScrollView.TileHeight),
         mirror: mirror
@@ -54,7 +110,7 @@ class ScaleScrollView: UIScrollView {
   }
 
   private func setUpScrollView() {
-    backgroundColor = UIColor.clear
+    backgroundColor = .clear
     bounces = false
     isPagingEnabled = false
     alwaysBounceVertical = false
@@ -62,6 +118,11 @@ class ScaleScrollView: UIScrollView {
     bouncesZoom = false
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
+  }
+
+  private func updateContentSize() {
+    contentSize = CGSize(width: bounds.size.width, height: bounds.size.height * 2)
+    setNeedsLayout()
   }
 
   override func layoutSubviews() {
@@ -91,6 +152,8 @@ class ScaleScrollView: UIScrollView {
     }
   }
 }
+
+// MARK: - ScalePreview
 
 struct ScalePreview: PreviewProvider {
   static var preview: some View {
@@ -132,7 +195,6 @@ struct ScalePreview: PreviewProvider {
         unitsPerTile: unitsPerTile,
         mirror: mirror
       )
-//      ScaleScrollView(frame: CGRect.zero, centerValue: 1, unitsPerTile: 125, mirror: false)
     }
 
     func updateUIView(_: UIViewType, context _: UIViewRepresentableContext<ScalePreview.ScalePreviewContainer>) {}

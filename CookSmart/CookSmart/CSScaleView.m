@@ -136,6 +136,7 @@
                                            scale:(NSUInteger)unitsPerTile
                                           mirror:(BOOL)mirror
 {
+  assert(unitsPerTile > 0);
     self.unitsPerTile = unitsPerTile;
     setScrollViewOffset(self, CGPointMake(0, 0), NO);
     if (!self.tileContainer)
