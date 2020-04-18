@@ -51,6 +51,7 @@
 
 - (void)initialize
 {
+//  self.backgroundColor = [UIColor systemRedColor];
     self.bounces = NO;
     self.pagingEnabled = NO;
     self.alwaysBounceHorizontal = NO;
@@ -71,7 +72,7 @@
 {
     [super layoutSubviews];
     
-    if ([self.delegate respondsToSelector:@selector(isSnapping)] && [self.delegate performSelector:@selector(isSnapping)])
+    if ([self.delegate respondsToSelector:@selector(isSnapping)] && [self.delegate performSelector:@  selector(isSnapping)])
     {
         // We snap these views to values in an animated way. We don't want to be messing with the contentOffset
         // and tile moves inside an animation block. For that reason, we will forego this work during the snapping animation.
@@ -118,6 +119,7 @@
             CGFloat timesDecreaseFactor = ceil(offBy/totalTileHeight);
             tile.frame = CGRectMake(0, tileFrame.origin.y - timesDecreaseFactor*totalTileHeight, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
+          tile.backgroundColor = [UIColor systemTealColor];
         }
         else if (maxY < minimumVisibleY &&
                  tileFrame.origin.y + (self.tileContainer.subviews.count - 1)*SCALE_TILE_HEIGHT < maximumVisibleY)
@@ -126,6 +128,7 @@
             CGFloat timesIncreaseFactor = ceil(offBy/totalTileHeight);
             tile.frame = CGRectMake(0, tileFrame.origin.y + timesIncreaseFactor*totalTileHeight, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
+          tile.backgroundColor = [UIColor systemGrayColor];
         }
     }
 }

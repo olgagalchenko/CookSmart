@@ -87,7 +87,7 @@ class ScaleTile: UIView {
 
   private func setUpLabel() {
     addSubview(valueLabel)
-    valueLabel.font = Fonts.condensedMedium.of(size: 12)
+    valueLabel.font = AvenirFont.condensedMedium.of(size: 12)
     valueLabel.translatesAutoresizingMaskIntoConstraints = false
     if mirror {
       valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Length.medium_30 / 2).isActive = true

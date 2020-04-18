@@ -40,7 +40,7 @@ class UnitPickerView: UIView {
     let button = UIButton(type: .system)
     button.setTitleColor(Color.redLineColor, for: .normal)
     button.setTitle("Done", for: .normal)
-    button.titleLabel?.font = Fonts.regular.of(size: 17)
+    button.titleLabel?.font = AvenirFont.regular.of(size: 17)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
@@ -164,7 +164,7 @@ private class UnitPickerScrollView: UIView {
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
         let unitLabel = UILabel()
-        unitLabel.font = Fonts.regular.of(size: 15)
+        unitLabel.font = AvenirFont.regular.of(size: 15)
         unitLabel.textColor = .label
         unitLabel.translatesAutoresizingMaskIntoConstraints = false
         unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true

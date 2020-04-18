@@ -6,22 +6,30 @@
 //  Copyright © 2020 Olga Galchenko. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
-public enum Fonts {
-  case condensedMedium
-  case regular
-  case medium
-
-  private var name: String {
-    switch self {
-    case .condensedMedium: return "AvenirNextCondensed-Medium"
-    case .regular: return "AvenirNext-Regular"
-    case .medium: return "AvenirNext-Medium"
-    }
-  }
+public enum AvenirFont: String {
+  case condensedMedium = "AvenirNextCondensed-Medium"
+  case regular = "AvenirNext-Regular"
+  case medium = "AvenirNext-Medium"
 
   public func of(size: CGFloat) -> UIFont? {
-    UIFont(name: name, size: size)
+    UIFont(name: rawValue, size: size)
+  }
+}
+
+struct CustomFont: ViewModifier {
+  var weight: AvenirFont
+  var size: CGFloat
+
+  func body(content: Content) -> some View {
+    content.font(.custom(weight.rawValue, size: size))
+  }
+}
+
+extension View {
+  func font(weight: AvenirFont, size: CGFloat) -> some View {
+    modifier(CustomFont(weight: weight, size: size))
   }
 }
