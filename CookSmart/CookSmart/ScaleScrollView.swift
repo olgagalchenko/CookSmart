@@ -10,6 +10,15 @@ import Foundation
 import SwiftUI
 import UIKit
 
+extension CSConversionVC {
+  @objc
+  func addNewScaleView(ingredient: CSIngredient) {
+    let scaleView = ScalesView(ingredient: ingredient)
+    view.addSubview(scaleView)
+    scaleView.constrainToSuperview()
+  }
+}
+
 // MARK: - ScalesView
 
 class ScalesView: UIView {
@@ -30,10 +39,12 @@ class ScalesView: UIView {
     return nil
   }
 
-  private let volumeScrollView = ScaleScrollView(frame: .zero)
-  private let weightScrollView = ScaleScrollView(frame: .zero, mirror: true)
+  private let volumeScrollView = ScaleScrollView()
+  private let weightScrollView = ScaleScrollView(mirror: true)
 
   private func setupViews() {
+    weightScrollView.translatesAutoresizingMaskIntoConstraints = false
+
     translatesAutoresizingMaskIntoConstraints = false
     addSubview(volumeScrollView)
     volumeScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -47,6 +58,9 @@ class ScalesView: UIView {
 
     volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+
+//    weightScrollView.isHidden = true
+//    weightScrollView.isUserInteractionEnabled = false
   }
 }
 
@@ -56,15 +70,17 @@ class ScaleScrollView: UIScrollView {
   static let TileHeight: CGFloat = 200
 
   @objc
-  init(frame: CGRect,
-       centerValue: Double = 1,
+  init(centerValue: Double = 1,
        unitsPerTile: Int = 1,
        mirror: Bool = false) {
     self.centerValue = centerValue
     self.unitsPerTile = unitsPerTile
     self.mirror = mirror
 
-    super.init(frame: frame)
+    pointsPerUnit = ScaleScrollView.TileHeight / CGFloat(unitsPerTile)
+    unitsPerPoint = 1 / pointsPerUnit
+
+    super.init(frame: .zero)
 
     setUpViews()
   }
@@ -77,8 +93,8 @@ class ScaleScrollView: UIScrollView {
 
   override var bounds: CGRect {
     didSet {
-      if bounds != oldValue {
-
+      if bounds.size != oldValue.size {
+        updateContentSize()
       }
     }
   }
@@ -86,31 +102,32 @@ class ScaleScrollView: UIScrollView {
   // MARK: Private
 
   private let centerValue: Double
-  private let unitsPerTile: Int
+  private var unitsPerTile: Int {
+    didSet {
+      assert(unitsPerTile > 0, "Units per tile must be greater than zero")
+      pointsPerUnit = ScaleScrollView.TileHeight / CGFloat(unitsPerTile)
+      unitsPerPoint = 1 / pointsPerUnit
+    }
+  }
+
   private let mirror: Bool
   private let tileContainer = UIView()
+
+  private var unitsPerPoint: CGFloat
+  private var pointsPerUnit: CGFloat
+  private var accumulatedOffset: CGFloat = 0
 
   private func setUpViews() {
     translatesAutoresizingMaskIntoConstraints = false
     setUpScrollView()
-    updateContentSize()
 
-    var index = 0
-    for bottomTileY in stride(from: 0,
-                              to: contentSize.height / 2,
-                              by: ScaleScrollView.TileHeight) {
-      let tile = ScaleTile(
-        frame: CGRect(x: 0, y: bottomTileY, width: bounds.width, height: ScaleScrollView.TileHeight),
-        mirror: mirror
-      )
-      tile.value = Float(unitsPerTile * index)
-      addSubview(tile)
-      index += 1
-    }
+    addSubview(tileContainer)
+
+    updateContentSize()
   }
 
   private func setUpScrollView() {
-    backgroundColor = .clear
+    backgroundColor = Color.background
     bounces = false
     isPagingEnabled = false
     alwaysBounceVertical = false
@@ -118,38 +135,114 @@ class ScaleScrollView: UIScrollView {
     bouncesZoom = false
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
+
+    delegate = self
   }
 
   private func updateContentSize() {
-    contentSize = CGSize(width: bounds.size.width, height: bounds.size.height * 2)
-    setNeedsLayout()
+    contentSize = CGSize(width: bounds.size.width, height: bounds.size.height * 10)
+
+    tileContainer.subviews.forEach { $0.removeFromSuperview() }
+
+    var index = 0
+    var actualCenter: CGFloat = 0
+    for bottomTileY in stride(from: 0,
+                              to: contentSize.height / 2,
+                              by: ScaleScrollView.TileHeight) {
+      let tile = ScaleTile(
+        frame: CGRect(x: 0, y: bottomTileY, width: bounds.width, height: ScaleScrollView.TileHeight),
+        mirror: mirror
+      )
+
+      tile.value = Float(unitsPerTile * index)
+      tileContainer.addSubview(tile)
+      if tile.frame.contains(CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)) {
+        actualCenter = CGFloat(tile.value) + CGFloat(unitsPerPoint) * (bounds.size.height / 2 - tile.frame.origin.y)
+      }
+      index += 1
+    }
+
+    accumulatedOffset = actualCenter * pointsPerUnit
+    updateCenterValue(CGFloat(centerValue))
+  }
+
+  private func updateCenterValue(_ newCenterValue: CGFloat) {
+    contentOffset = CGPoint(x: 0, y: pointsPerUnit * newCenterValue - accumulatedOffset)
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
 
-    let targetContentOffset = contentSize.height / 3 // + bounds.height / 2
-    if contentOffset.y > targetContentOffset {
-      setContentOffset(CGPoint(x: 0, y: contentSize.height / 2), animated: false)
+    let newYOffset = getNewYOffset()
+    if yOffset != newYOffset {
+      let yOffsetDelta = yOffset - newYOffset
+      contentOffset = CGPoint(x: 0, y: newYOffset)
+      tileContainer.center = CGPoint(x: tileContainer.center.x, y: tileContainer.center.y - yOffsetDelta)
+      accumulatedOffset += yOffsetDelta
     }
 
-    let topVisibleY = bounds.minY
-    let bottomVisibleY = bounds.maxY
-    for case let tile as ScaleTile in subviews {
-      let topY = tile.frame.minY
-      let bottomY = tile.frame.maxY
+    updateTileFrames()
+  }
 
+  private func updateTileFrames() {
+    let visibleBounds = convert(bounds, to: tileContainer)
+    let minVisibleY = visibleBounds.minY
+    let maxVisibleY = visibleBounds.maxY
+
+    for case let tile as ScaleTile in tileContainer.subviews {
+      let tileMinY = tile.frame.minY
+      let tileMaxY = tile.frame.maxY
+
+      let totalTileHeight = CGFloat(tileContainer.subviews.count) * ScaleScrollView.TileHeight
       // Tile is above the visible screen
-      if bottomY < topVisibleY {
-        tile.frame = tile.frame.offsetBy(dx: 0, dy: CGFloat(subviews.count) * ScaleScrollView.TileHeight)
-        tile.value = Float(tile.frame.origin.y / ScaleScrollView.TileHeight * CGFloat(unitsPerTile))
+      if tileMinY > maxVisibleY {
+        let visibleDelta = tileMinY - maxVisibleY
+        let decreaseFactor = ceil(visibleDelta / totalTileHeight) * totalTileHeight
+        tile.frame = tile.frame.offsetBy(dx: 0, dy: -decreaseFactor)
       }
       // Tile is below the visible screen
-      else if topY > bottomVisibleY {
-        tile.frame = tile.frame.offsetBy(dx: 0, dy: -CGFloat(subviews.count) * ScaleScrollView.TileHeight)
-        tile.value = Float(tile.frame.origin.y / ScaleScrollView.TileHeight * CGFloat(unitsPerTile))
+      else if tileMaxY < minVisibleY {
+        let visibleDelta = minVisibleY - tileMaxY
+        let increaseFactor = ceil(visibleDelta / totalTileHeight) * totalTileHeight
+        tile.frame = tile.frame.offsetBy(dx: 0, dy: increaseFactor)
       }
+
+      tile.value = Float(tile.frame.origin.y * unitsPerPoint)
     }
+  }
+}
+
+// MARK: UIScrollViewDelegate
+
+extension ScaleScrollView: UIScrollViewDelegate {
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print("Unit Value: \(virtualContentYOffset * unitsPerPoint)")
+  }
+}
+
+// MARK: Helpers
+
+private extension ScaleScrollView {
+  private var targetContentYOffset: CGFloat {
+    (contentSize.height - bounds.size.height) / 2
+  }
+
+  private var virtualContentYOffset: CGFloat {
+    contentOffset.y + accumulatedOffset
+  }
+
+  private var yOffset: CGFloat {
+    contentOffset.y
+  }
+
+  private func getNewYOffset() -> CGFloat {
+    let maxYOffset = targetContentYOffset + bounds.size.height
+    let minYOffset = targetContentYOffset - bounds.size.height
+    if yOffset > maxYOffset || (yOffset < minYOffset && accumulatedOffset > 0) {
+      return min(targetContentYOffset, yOffset + accumulatedOffset)
+    }
+    return yOffset
   }
 }
 
@@ -190,7 +283,6 @@ struct ScalePreview: PreviewProvider {
 
     func makeUIView(context _: UIViewRepresentableContext<ScalePreview.ScalePreviewContainer>) -> UIView {
       ScaleScrollView(
-        frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height),
         centerValue: 1,
         unitsPerTile: unitsPerTile,
         mirror: mirror
