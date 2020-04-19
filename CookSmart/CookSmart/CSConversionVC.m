@@ -15,6 +15,7 @@
 #import "CSUnit.h"
 #import "CSUnitCollection.h"
 #import "CSScaleVC.h"
+#import "cake-Swift.h"
 
 #define CHOOSE_UNITS_TEXT @"Choose Units"
 
@@ -91,6 +92,11 @@
     self.ingredientPickerScrollView.scrollsToTop = NO;
     self.ingredientPickerScrollView.showsHorizontalScrollIndicator = NO;
     self.ingredientPickerScrollView.showsVerticalScrollIndicator = NO;
+
+  CSIngredient *ingredient = [[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:self.ingredientIndex];
+  if (ingredient != nil) {
+    [self addNewScaleViewWithIngredient:ingredient];
+  }
 }
 
 - (void)viewDidAppear:(BOOL)animated

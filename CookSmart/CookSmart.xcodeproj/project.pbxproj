@@ -17,6 +17,7 @@
 		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
+		77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F41931243950CB0055053E /* ScaleScrollView.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
 		774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */; };
 		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
@@ -94,6 +95,7 @@
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		77F41931243950CB0055053E /* ScaleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScrollView.swift; sourceTree = "<group>"; };
 		774EBD6424426CC2002A59AC /* Double+StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+StringUtils.swift"; sourceTree = "<group>"; };
 		774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStringUtilsTests.swift; sourceTree = "<group>"; };
 		774EBD6D244271D6002A59AC /* CakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +253,7 @@
 				80592C0C189268D60082D4E1 /* CSScaleView.h */,
 				80592C0D189268D60082D4E1 /* CSScaleView.m */,
 				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
+				77F41931243950CB0055053E /* ScaleScrollView.swift */,
 			);
 			name = ScaleView;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
+				77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */,
 				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */,
