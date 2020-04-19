@@ -160,10 +160,7 @@ private class UnitPickerScrollView: UIView {
     unitCollection.units
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
-        let unitLabel = UILabel()
-        unitLabel.font = AvenirFont.regular.of(size: 15)
-        unitLabel.textColor = .label
-        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        let unitLabel = Label(style: .medium)
         unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true
         unitLabel.text = unit.name
         unitStackView.addArrangedSubview(unitLabel)

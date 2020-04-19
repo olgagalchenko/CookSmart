@@ -39,4 +39,10 @@ struct LabelStyle {
     style.font = AvenirFont.condensedMedium.of(size: 12)
     return style
   }
+
+  static var medium: LabelStyle {
+    var style = standard
+    style.font = AvenirFont.regular.of(size: 15)
+    return style
+  }
 }
