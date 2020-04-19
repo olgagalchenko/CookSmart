@@ -60,11 +60,11 @@
     self.showsVerticalScrollIndicator = NO;
     self.contentSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height*10);
     self.accumulatedOffset = 0;
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
-//    tapRecognizer.numberOfTapsRequired = 1;
-//    tapRecognizer.numberOfTouchesRequired = 1;
-//    [tapRecognizer addTarget:self action:@selector(handleTap:)];
-//    [self addGestureRecognizer:tapRecognizer];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [tapRecognizer addTarget:self action:@selector(handleTap:)];
+    [self addGestureRecognizer:tapRecognizer];
 }
 
 - (void)layoutSubviews
