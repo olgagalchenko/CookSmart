@@ -12,9 +12,11 @@ import UIKit
 class GradientView: UIView {
   private let gradientLayer: CAGradientLayer
 
-  init(startColor: UIColor = .clear, endColor: UIColor = .clear) {
+  init(topColor: UIColor = Color.background, bottomColor: UIColor = Color.background.withAlphaComponent(0)) {
     let gradientLayer = CAGradientLayer()
-    gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+    gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.1)
+    gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+    gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
     self.gradientLayer = gradientLayer
 
     super.init(frame: .zero)

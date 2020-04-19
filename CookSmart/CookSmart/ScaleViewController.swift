@@ -67,7 +67,7 @@ class ScaleViewController: UIViewController {
   }
 
   private func setUpUnitViews() {
-    let gradientView = GradientView(startColor: UIColor.clear, endColor: Color.background)
+    let gradientView = GradientView()
     view.addSubview(gradientView)
     gradientView.constrainToSuperview(anchors: [.leading, .top, .right], priority: .defaultHigh, shouldActivate: true)
     gradientView.heightAnchor.constraint(equalToConstant: 100).isActive = true
