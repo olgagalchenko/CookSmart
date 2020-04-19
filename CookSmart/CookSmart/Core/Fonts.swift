@@ -14,8 +14,8 @@ public enum AvenirFont: String {
   case regular = "AvenirNext-Regular"
   case medium = "AvenirNext-Medium"
 
-  public func of(size: CGFloat) -> UIFont? {
-    UIFont(name: rawValue, size: size)
+  public func of(size: CGFloat) -> UIFont {
+    UIFont(name: rawValue, size: size) ?? UIFont.systemFont(ofSize: size)
   }
 }
 

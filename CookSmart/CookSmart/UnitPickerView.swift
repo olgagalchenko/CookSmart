@@ -37,11 +37,7 @@ class UnitPickerView: UIView {
   }
 
   private let doneButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitleColor(Color.redLineColor, for: .normal)
-    button.setTitle("Done", for: .normal)
-    button.titleLabel?.font = AvenirFont.regular.of(size: 17)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    let button = Button()
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
   }()
