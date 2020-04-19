@@ -20,7 +20,7 @@ struct ScaleView: View {
 
   var body: some View {
     ZStack {
-      ScaleScrollView()
+      ScaleScrollViewRepresentable()
       VStack {
         Button(action: unitButtonTapped) {
           Text(unitButtonText)

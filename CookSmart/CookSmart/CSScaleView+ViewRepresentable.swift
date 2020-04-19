@@ -8,23 +8,17 @@
 
 import SwiftUI
 
-struct ScaleScrollView: UIViewRepresentable {
-  func makeUIView(context: Context) -> CSScaleView {
-    let scrollView = CSScaleView()
-    scrollView.configureScaleView(withInitialCenterValue: 1, scale: 1, mirror: false)
-    scrollView.layoutSubviews()
-    return scrollView
+struct ScaleScrollViewRepresentable: UIViewRepresentable {
+  func makeUIView(context: Context) -> ScaleScrollView {
+    ScaleScrollView()
   }
 
-  func updateUIView(_ scaleView: CSScaleView, context: Context) {
-//    scaleView.configureScaleView(withInitialCenterValue: 1, scale: 1, mirror: false)
-//    scaleView.layoutSubviews()
-  }
+  func updateUIView(_ scaleView: ScaleScrollView, context: Context) {}
 }
 
 struct ScaleScrollView_Previews: PreviewProvider {
   static var previews: some View {
-    ScaleScrollView()
+    ScaleScrollViewRepresentable()
       .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
   }
 }
