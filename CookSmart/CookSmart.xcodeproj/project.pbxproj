@@ -24,8 +24,6 @@
 		774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7C2442E475002A59AC /* ScaleViewController.swift */; };
 		774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */; };
 		77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F41931243950CB0055053E /* ScaleScrollView.swift */; };
-		774EBD84244387A1002A59AC /* ScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD83244387A1002A59AC /* ScaleView.swift */; };
-		774EBD8724439FD9002A59AC /* CSScaleView+ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD8624439FD9002A59AC /* CSScaleView+ViewRepresentable.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
@@ -107,8 +105,6 @@
 		774EBD7C2442E475002A59AC /* ScaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
 		774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		77F41931243950CB0055053E /* ScaleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScrollView.swift; sourceTree = "<group>"; };
-		774EBD83244387A1002A59AC /* ScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleView.swift; sourceTree = "<group>"; };
-		774EBD8624439FD9002A59AC /* CSScaleView+ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CSScaleView+ViewRepresentable.swift"; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
 		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -240,7 +236,6 @@
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
 				396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */,
 				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
-				774EBD83244387A1002A59AC /* ScaleView.swift */,
 			);
 			name = Scales;
 			sourceTree = "<group>";
@@ -269,9 +264,6 @@
 			children = (
 				80592C0C189268D60082D4E1 /* CSScaleView.h */,
 				80592C0D189268D60082D4E1 /* CSScaleView.m */,
-				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
-				77F41931243950CB0055053E /* ScaleScrollView.swift */,
-				774EBD8624439FD9002A59AC /* CSScaleView+ViewRepresentable.swift */,
 			);
 			name = ScaleView;
 			sourceTree = "<group>";
@@ -601,11 +593,9 @@
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
 				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
-				774EBD84244387A1002A59AC /* ScaleView.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */,
-				774EBD8724439FD9002A59AC /* CSScaleView+ViewRepresentable.swift in Sources */,
 				39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,

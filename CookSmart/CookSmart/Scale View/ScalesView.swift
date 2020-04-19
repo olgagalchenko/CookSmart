@@ -59,6 +59,14 @@ class ScalesView: UIView {
     volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
+//    volumeLabel.translatesAutoresizingMaskIntoConstraints = false
+//    volumeScrollView.addSubview(volumeLabel)
+//    volumeLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
+//
+//    weightLabel.translatesAutoresizingMaskIntoConstraints = false
+//    weightScrollView.addSubview(weightLabel)
+//    weightLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
+
     setupSync()
   }
 

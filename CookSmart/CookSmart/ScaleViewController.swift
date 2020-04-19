@@ -43,9 +43,7 @@ class ScaleViewController: UIViewController {
   private let weightLabel = UILabel()
   private let volumeUnitButton = UIButton()
   private let weightUnitButton = UIButton()
-  private let volumeScrollView = ScaleScrollView(mirror: false)
-  private let weightScrollView = ScaleScrollView(mirror: true)
-  private let scalesContainer = UIView()
+  private lazy var scalesContainer = ScalesView(ingredient: ingredient)
 //  private let scaleView = ScaleView(
 //    unitButtonText: "Cups",
 //    value: 1,
@@ -105,33 +103,6 @@ class ScaleViewController: UIViewController {
     scalesContainer.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(scalesContainer)
     scalesContainer.constrainToSuperview()
-
-    volumeScrollView.translatesAutoresizingMaskIntoConstraints = false
-    scalesContainer.addSubview(volumeScrollView)
-    volumeScrollView.constrainToSuperview(
-      anchors: [.top, .leading, .bottom],
-      priority: .defaultHigh,
-      shouldActivate: true
-    )
-
-    weightScrollView.translatesAutoresizingMaskIntoConstraints = false
-    scalesContainer.addSubview(weightScrollView)
-    weightScrollView.constrainToSuperview(
-      anchors: [.top, .trailing, .bottom],
-      priority: .defaultHigh,
-      shouldActivate: true
-    )
-
-    volumeScrollView.trailingAnchor.constraint(equalTo: weightScrollView.leadingAnchor, constant: 0).isActive = true
-    volumeScrollView.widthAnchor.constraint(equalTo: weightScrollView.widthAnchor, multiplier: 1).isActive = true
-
-    volumeLabel.translatesAutoresizingMaskIntoConstraints = false
-    volumeScrollView.addSubview(volumeLabel)
-    volumeLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
-
-    weightLabel.translatesAutoresizingMaskIntoConstraints = false
-    weightScrollView.addSubview(weightLabel)
-    weightLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
   }
 
   private func setContent() {
