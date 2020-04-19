@@ -15,7 +15,7 @@ public extension UIView {
   @discardableResult func constrain(
     to view: UIView,
     anchors: Set<NSLayoutConstraint.Attribute> = [.top, .bottom, .leading, .trailing],
-    priority: UILayoutPriority = .required,
+    priority: UILayoutPriority = .defaultHigh,
     shouldActivate: Bool = true
   ) -> [NSLayoutConstraint.Attribute: NSLayoutConstraint] {
     assert(
@@ -52,7 +52,7 @@ public extension UIView {
   /// The anchors to constrain default to `.top`, `.bottom`, `.leading`, and `.trailing`.
   @discardableResult func constrainToSuperview(
     anchors: Set<NSLayoutConstraint.Attribute> = [.top, .trailing, .bottom, .leading],
-    priority: UILayoutPriority = .required,
+    priority: UILayoutPriority = .defaultHigh,
     shouldActivate: Bool = true
   ) -> [NSLayoutConstraint.Attribute: NSLayoutConstraint] {
     #if DEBUG
@@ -74,7 +74,7 @@ public extension UIView {
   /// Constrains the edges of this view to another view's layout margins.
   @discardableResult func constrainToMargins(
     of view: UIView,
-    priority: UILayoutPriority = .required,
+    priority: UILayoutPriority = .defaultHigh,
     shouldActivate: Bool = true
   ) -> [NSLayoutConstraint.Attribute: NSLayoutConstraint] {
     constrain(
@@ -87,7 +87,7 @@ public extension UIView {
 
   /// Constrains the edges of this view to its superview's layout margins.
   @discardableResult func constrainToSuperviewMargins(
-    priority: UILayoutPriority = .required,
+    priority: UILayoutPriority = .defaultHigh,
     shouldActivate: Bool = true
   ) -> [NSLayoutConstraint.Attribute: NSLayoutConstraint] {
     guard let superview = superview else {

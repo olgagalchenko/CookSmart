@@ -1,5 +1,5 @@
 //
-//  UnitPickerCenterLineView.swift
+//  CenterLineView.swift
 //  cake
 //
 //  Created by Alex King on 4/4/20.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UnitPickerCenterLineView: UIView {
+class CenterLineView: UIView {
   private enum Constants {
     static let lineHeight: CGFloat = 2.0
     static let unitLabelWidth: CGFloat = 110

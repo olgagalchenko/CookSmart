@@ -51,6 +51,7 @@
 
 - (void)initialize
 {
+//  self.backgroundColor = [UIColor systemRedColor];
     self.bounces = NO;
     self.pagingEnabled = NO;
     self.alwaysBounceHorizontal = NO;
@@ -71,7 +72,7 @@
 {
     [super layoutSubviews];
     
-    if ([self.delegate respondsToSelector:@selector(isSnapping)] && [self.delegate performSelector:@selector(isSnapping)])
+    if ([self.delegate respondsToSelector:@selector(isSnapping)] && [self.delegate performSelector:@  selector(isSnapping)])
     {
         // We snap these views to values in an animated way. We don't want to be messing with the contentOffset
         // and tile moves inside an animation block. For that reason, we will forego this work during the snapping animation.

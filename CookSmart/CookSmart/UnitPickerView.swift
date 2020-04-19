@@ -37,11 +37,8 @@ class UnitPickerView: UIView {
   }
 
   private let doneButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitleColor(Color.redLineColor, for: .normal)
+    let button = Button()
     button.setTitle("Done", for: .normal)
-    button.titleLabel?.font = Fonts.regular.of(size: 17)
-    button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
   }()
@@ -122,7 +119,7 @@ private class UnitPickerScrollView: UIView {
     return stackView
   }()
 
-  private let centerLineView = UnitPickerCenterLineView()
+  private let centerLineView = CenterLineView()
 
   private var unitStackViewTopConstraint: NSLayoutConstraint?
   private var unitStackViewBottomConstraint: NSLayoutConstraint?
@@ -163,10 +160,7 @@ private class UnitPickerScrollView: UIView {
     unitCollection.units
       .compactMap { $0 as? CSUnit }
       .forEach { unit in
-        let unitLabel = UILabel()
-        unitLabel.font = Fonts.regular.of(size: 15)
-        unitLabel.textColor = .label
-        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        let unitLabel = Label(style: .medium)
         unitLabel.heightAnchor.constraint(equalToConstant: Constants.unitLabelHeight).isActive = true
         unitLabel.text = unit.name
         unitStackView.addArrangedSubview(unitLabel)
