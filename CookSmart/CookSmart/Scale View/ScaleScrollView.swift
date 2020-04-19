@@ -49,7 +49,7 @@ class ScaleScrollView: UIScrollView {
   // MARK: Private
 
   private let centerValue: Double
-  private var unitsPerTile: Int {
+  var unitsPerTile: Int {
     didSet {
       assert(unitsPerTile > 0, "Units per tile must be greater than zero")
       pointsPerUnit = ScaleScrollView.TileHeight / CGFloat(unitsPerTile)
