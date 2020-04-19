@@ -103,29 +103,29 @@ class ScalesView: UIView {
   private func setUpSubscribers() {
     switch mode {
     case .edit:
-      cancellable = Publishers.CombineLatest(volumeScrollView.$unitValue, weightScrollView.$unitValue)
+      volumeSubscriber = Publishers.CombineLatest(volumeScrollView.$unitValue, weightScrollView.$unitValue)
         .sink(receiveValue: {
           self.unitConversionFactor = $0.1 / $0.0
         })
     case .sync:
       volumeSubscriber = volumeScrollView.$unitValue
-      .filter { _ in self.syncScales }
-      .sink { volumeValue in
-        self.weightScrollView.updateCenterValue(volumeValue * self.density)
-      }
+        .filter { _ in self.mode == .sync }
+        .sink { volumeValue in
+          self.weightScrollView.updateCenterValue(volumeValue * self.unitConversionFactor)
+        }
 
-    volumeLabelSubscriber = volumeScrollView.$unitValue
-      .map { scaleValue -> String in
-        Double(scaleValue).vulgarFractionString
-      }
-      .assign(to: \.text, on: volumeLabel)
+      volumeLabelSubscriber = volumeScrollView.$unitValue
+        .map { scaleValue -> String in
+          Double(scaleValue).vulgarFractionString
+        }
+        .assign(to: \.text, on: volumeLabel)
     }
 
     weightLabelSubscriber = weightScrollView.$unitValue
       .map { scaleValue -> String in
-        Double(scaleValue).vulgarFractionString
-      }
-      .assign(to: \.text, on: weightLabel)
+      Double(scaleValue).vulgarFractionString
+    }
+    .assign(to: \.text, on: weightLabel)
   }
 }
 

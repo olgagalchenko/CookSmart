@@ -41,7 +41,8 @@ class ScaleViewController: UIViewController {
 
   private let volumeUnitButton = Button()
   private let weightUnitButton = Button()
-  private lazy var scalesContainer = ScalesView(ingredient: ingredient)
+  private lazy var scalesContainer = ScalesView(ingredient: ingredient,
+                                                unitConversionFactor: CGFloat(ingredient.density(withVolumeUnit: currentVolumeUnit, andWeightUnit: currentWeightUnit)))
 //  private let scaleView = ScaleView(
 //    unitButtonText: "Cups",
 //    value: 1,
