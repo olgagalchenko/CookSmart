@@ -13,9 +13,9 @@ import UIKit
 extension CSConversionVC {
   @objc
   func addNewScaleView(ingredient: CSIngredient) {
-    let scaleView = ScalesView(ingredient: ingredient)
-    view.addSubview(scaleView)
-    scaleView.constrainToSuperview()
+//    let scaleView = ScalesView(ingredient: ingredient)
+//    view.addSubview(scaleView)
+//    scaleView.constrainToSuperview()
   }
 }
 
