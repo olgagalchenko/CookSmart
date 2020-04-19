@@ -9,15 +9,6 @@
 import Combine
 import Foundation
 
-extension CSConversionVC {
-  @objc
-  func addNewScaleView(ingredient: CSIngredient) {
-//    let scaleView = ScalesView(ingredient: ingredient)
-//    view.addSubview(scaleView)
-//    scaleView.constrainToSuperview()
-  }
-}
-
 class ScalesView: UIView {
 
   var ingredient: CSIngredient

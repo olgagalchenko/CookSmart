@@ -29,13 +29,13 @@ class ConversionViewController: UIViewController {
   private let ingredientButton: UIButton = {
     let button = UIButton(type: .system)
     button.setTitleColor(Color.redLineColor, for: .normal)
-    button.titleLabel?.font = Fonts.medium.of(size: 17)
+    button.titleLabel?.font = AvenirFont.medium.of(size: 17)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(ingredientButtonPressed), for: .touchUpInside)
     return button
   }()
 
-  private let scaleViewController = CSScaleVC(nibName: "CSScaleVC", bundle: nil)
+  private lazy var scaleViewController = ScaleViewController(ingredient: currentIngredient!, shouldSyncScales: true)
 
   private var currentIngredient: CSIngredient? {
     CSIngredients.sharedInstance()?.ingredient(atFlattenedIngredientIndex: ingredientIndex)

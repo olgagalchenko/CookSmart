@@ -30,7 +30,12 @@ class ScaleViewController: UIViewController {
 
   // MARK: Public
 
-  var ingredient: CSIngredient
+  var ingredient: CSIngredient {
+    didSet {
+      scalesContainer.ingredient = ingredient
+    }
+  }
+  
   var currentVolumeUnit: CSUnit { CSUnitCollection.volumeUnits()?.unit(at: 2) ?? CSUnit() }
   var currentWeightUnit: CSUnit { CSUnitCollection.weightUnits()?.unit(at: 2) ?? CSUnit() }
 
@@ -42,13 +47,10 @@ class ScaleViewController: UIViewController {
   private let volumeUnitButton = Button()
   private let weightUnitButton = Button()
   private lazy var scalesContainer = ScalesView(ingredient: ingredient)
-//  private let scaleView = ScaleView(
-//    unitButtonText: "Cups",
-//    value: 1,
-//    unitButtonTapped: {
-//      print("unit button tapped")
-//    }
-//  )
+
+  private var unitConversionFactor: Float {
+    return ingredient.density(withVolumeUnit: currentVolumeUnit, andWeightUnit: currentWeightUnit)
+  }
 
   private func setUpViews() {
 //    let childView = UIHostingController(rootView: scaleView)
