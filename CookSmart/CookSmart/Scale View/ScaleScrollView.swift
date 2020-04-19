@@ -6,68 +6,15 @@
 //  Copyright © 2020 Olga Galchenko. All rights reserved.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 import UIKit
 
-extension CSConversionVC {
-  @objc
-  func addNewScaleView(ingredient: CSIngredient) {
-//    let scaleView = ScalesView(ingredient: ingredient)
-//    view.addSubview(scaleView)
-//    scaleView.constrainToSuperview()
-  }
-}
-
-// MARK: - ScalesView
-
-class ScalesView: UIView {
-
-  var ingredient: CSIngredient
-
-  var syncScales = true
-
-  init(ingredient: CSIngredient) {
-    self.ingredient = ingredient
-    super.init(frame: .zero)
-    setupViews()
-  }
-
-  @available(*, unavailable)
-  required init?(coder _: NSCoder) {
-    assertionFailure("init(coder:) has not been implemented")
-    return nil
-  }
-
-  private let volumeScrollView = ScaleScrollView()
-  private let weightScrollView = ScaleScrollView(mirror: true)
-
-  private func setupViews() {
-    weightScrollView.translatesAutoresizingMaskIntoConstraints = false
-
-    translatesAutoresizingMaskIntoConstraints = false
-    addSubview(volumeScrollView)
-    volumeScrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    volumeScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-    volumeScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
-    addSubview(weightScrollView)
-    weightScrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    weightScrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-    weightScrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-
-    volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
-
-//    weightScrollView.isHidden = true
-//    weightScrollView.isUserInteractionEnabled = false
-  }
-}
-
-// MARK: - ScaleScrollView
-
 class ScaleScrollView: UIScrollView {
   static let TileHeight: CGFloat = 200
+
+  @Published private(set) var unitValue: CGFloat = 0
 
   @objc
   init(centerValue: Double = 1,
@@ -163,10 +110,14 @@ class ScaleScrollView: UIScrollView {
     }
 
     accumulatedOffset = actualCenter * pointsPerUnit
+
+    setNeedsLayout()
+    layoutIfNeeded()
+
     updateCenterValue(CGFloat(centerValue))
   }
 
-  private func updateCenterValue(_ newCenterValue: CGFloat) {
+  func updateCenterValue(_ newCenterValue: CGFloat) {
     contentOffset = CGPoint(x: 0, y: pointsPerUnit * newCenterValue - accumulatedOffset)
   }
 
@@ -217,7 +168,7 @@ class ScaleScrollView: UIScrollView {
 extension ScaleScrollView: UIScrollViewDelegate {
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print("Unit Value: \(virtualContentYOffset * unitsPerPoint)")
+    unitValue = virtualContentYOffset * unitsPerPoint
   }
 }
 

@@ -133,7 +133,7 @@
     }
     else
     {
-        float idealVolumeScale = humanReadableWeightScale/[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+        float idealVolumeScale = humanReadableWeightScale/idealWeightScale;
         volumeScale = 1;
         if (idealVolumeScale >= 10)
         {
@@ -146,7 +146,7 @@
                                                                    scale:volumeScale
                                                                   mirror:NO];
     
-    float initialCenterValue = volumeInitialCenterValue*[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    float initialCenterValue = volumeInitialCenterValue*idealWeightScale;
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
                                                                    scale:humanReadableWeightScale
                                                                   mirror:YES];
