@@ -12,14 +12,19 @@ import Foundation
 extension CSConversionVC {
   @objc
   func addNewScaleView(ingredient: CSIngredient) {
-    let scaleView = ScalesView(ingredient: ingredient, unitConversionFactor: 125, syncScales: false)
-    scaleView.unitConversionFactor = 3
-    view.addSubview(scaleView)
-    scaleView.constrainToSuperview()
+//    let scaleView = ScalesView(ingredient: ingredient, unitConversionFactor: 125, syncScales: true)
+//    scaleView.unitConversionFactor = 22
+//    view.addSubview(scaleView)
+//    scaleView.constrainToSuperview()
   }
 }
 
 class ScalesView: UIView {
+
+  enum Mode {
+    case sync
+    case edit
+  }
 
   var ingredient: CSIngredient {
     didSet {
@@ -29,18 +34,19 @@ class ScalesView: UIView {
 
   var unitConversionFactor: CGFloat {
     didSet {
+      guard mode == .sync else { return }
       updateScaleDensity()
     }
   }
 
-  private let syncScales: Bool
+  private let mode: Mode
 
   init(ingredient: CSIngredient,
        unitConversionFactor: CGFloat,
        syncScales: Bool = true) {
     self.ingredient = ingredient
     self.unitConversionFactor = unitConversionFactor
-    self.syncScales = syncScales
+    mode = syncScales ? .sync : .edit
     super.init(frame: .zero)
     setupViews()
   }
@@ -79,17 +85,25 @@ class ScalesView: UIView {
   }
 
   private func setupSync() {
-    cancellable = volumeScrollView.$unitValue
-      .filter { _ in self.syncScales }
-      .sink { volumeValue in
-        self.weightScrollView.updateCenterValue(volumeValue * self.unitConversionFactor)
-      }
+    switch mode {
+    case .edit:
+      cancellable = Publishers.CombineLatest(volumeScrollView.$unitValue, weightScrollView.$unitValue)
+        .sink(receiveValue: {
+          self.unitConversionFactor = $0.1 / $0.0
+        })
+    case .sync:
+      cancellable = volumeScrollView.$unitValue
+        .filter { _ in self.mode == .sync }
+        .sink { volumeValue in
+          self.weightScrollView.updateCenterValue(volumeValue * self.unitConversionFactor)
+        }
 
-    cancellable2 = weightScrollView.$unitValue
-      .filter { _ in self.syncScales }
-      .sink { weightValue in
-        self.volumeScrollView.updateCenterValue(weightValue / self.unitConversionFactor)
-      }
+      cancellable2 = weightScrollView.$unitValue
+        .filter { _ in self.mode == .sync }
+        .sink { weightValue in
+          self.volumeScrollView.updateCenterValue(weightValue / self.unitConversionFactor)
+        }
+    }
   }
 }
 
