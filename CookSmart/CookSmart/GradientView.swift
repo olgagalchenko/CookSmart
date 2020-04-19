@@ -10,15 +10,9 @@ import Foundation
 import UIKit
 
 class GradientView: UIView {
-  private let gradientLayer: CAGradientLayer
 
   init(topColor: UIColor = Color.background, bottomColor: UIColor = Color.background.withAlphaComponent(0)) {
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.1)
-    gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-    gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
-    self.gradientLayer = gradientLayer
-
+    colors = [topColor, bottomColor]
     super.init(frame: .zero)
 
     isOpaque = false
@@ -31,6 +25,11 @@ class GradientView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    applyColors(colors)
+  }
+
   override var bounds: CGRect {
     didSet {
       if bounds != oldValue {
@@ -39,8 +38,24 @@ class GradientView: UIView {
     }
   }
 
+  // MARK: Private
+
+  private let gradientLayer = CAGradientLayer()
+  private let colors: [UIColor]
+
   private func addGradientLayer() {
+    gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.1)
+    gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+    applyColors(colors)
+
     layer.addSublayer(gradientLayer)
     gradientLayer.frame = bounds
+  }
+
+  private func applyColors(_ colors: [UIColor]) {
+    let resolvedColors = colors.map { color -> CGColor in
+      color.resolvedColor(with: traitCollection).cgColor
+    }
+    gradientLayer.colors = resolvedColors
   }
 }

@@ -39,8 +39,12 @@ class ScalesView: UIView {
 
   private let volumeScrollView = ScaleScrollView()
   private let weightScrollView = ScaleScrollView(unitsPerTile: 100, mirror: true)
+  private let volumeLabel = Label()
+  private let weightLabel = Label()
 
-  private var cancellable: AnyCancellable?
+  private var volumeSubscriber: AnyCancellable?
+  private var volumeLabelSubscriber: AnyCancellable?
+  private var weightLabelSubscriber: AnyCancellable?
 
   private func setupViews() {
     weightScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,23 +63,43 @@ class ScalesView: UIView {
     volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
-//    volumeLabel.translatesAutoresizingMaskIntoConstraints = false
-//    volumeScrollView.addSubview(volumeLabel)
-//    volumeLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
-//
-//    weightLabel.translatesAutoresizingMaskIntoConstraints = false
-//    weightScrollView.addSubview(weightLabel)
-//    weightLabel.constrainToSuperview(anchors: [.centerX, .centerY], priority: .defaultHigh, shouldActivate: true)
+    addSubview(volumeLabel)
+    volumeLabel.constrain(
+      to: volumeScrollView,
+      anchors: [.centerX, .centerY],
+      priority: .defaultHigh,
+      shouldActivate: true
+    )
 
-    setupSync()
+    addSubview(weightLabel)
+    weightLabel.constrain(
+      to: weightScrollView,
+      anchors: [.centerX, .centerY],
+      priority: .defaultHigh,
+      shouldActivate: true
+    )
+
+    setUpSubscribers()
   }
 
-  private func setupSync() {
-    cancellable = volumeScrollView.$unitValue
+  private func setUpSubscribers() {
+    volumeSubscriber = volumeScrollView.$unitValue
       .filter { _ in self.syncScales }
       .sink { volumeValue in
         self.weightScrollView.updateCenterValue(volumeValue * self.density)
       }
+
+    volumeLabelSubscriber = volumeScrollView.$unitValue
+      .map { scaleValue -> String in
+        Double(scaleValue).vulgarFractionString
+      }
+      .assign(to: \.text, on: volumeLabel)
+
+    weightLabelSubscriber = weightScrollView.$unitValue
+      .map { scaleValue -> String in
+        Double(scaleValue).vulgarFractionString
+      }
+      .assign(to: \.text, on: weightLabel)
   }
 }
 

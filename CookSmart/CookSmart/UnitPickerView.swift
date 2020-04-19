@@ -38,6 +38,7 @@ class UnitPickerView: UIView {
 
   private let doneButton: UIButton = {
     let button = Button()
+    button.setTitle("Done", for: .normal)
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
     return button
   }()

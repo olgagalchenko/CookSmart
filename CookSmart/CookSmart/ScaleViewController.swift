@@ -39,8 +39,6 @@ class ScaleViewController: UIViewController {
 
   // MARK: Private
 
-  private let volumeLabel = UILabel()
-  private let weightLabel = UILabel()
   private let volumeUnitButton = Button()
   private let weightUnitButton = Button()
   private lazy var scalesContainer = ScalesView(ingredient: ingredient)
