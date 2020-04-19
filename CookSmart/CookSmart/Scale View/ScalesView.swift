@@ -49,6 +49,7 @@ class ScalesView: UIView {
     mode = syncScales ? .sync : .edit
     super.init(frame: .zero)
     setupViews()
+    setUpSubscribers()
   }
 
   @available(*, unavailable)
@@ -58,10 +59,15 @@ class ScalesView: UIView {
   }
 
   private let volumeScrollView = ScaleScrollView()
-  private let weightScrollView = ScaleScrollView(mirror: true)
+  private let weightScrollView = ScaleScrollView(unitsPerTile: 100, mirror: true)
+  private let volumeLabel = Label()
+  private let weightLabel = Label()
+  private let volumeCenterLine = CenterLineView()
+  private let weightCenterLine = CenterLineView()
 
-  private var cancellable: AnyCancellable?
-  private var cancellable2: AnyCancellable?
+  private var volumeSubscriber: AnyCancellable?
+  private var volumeLabelSubscriber: AnyCancellable?
+  private var weightLabelSubscriber: AnyCancellable?
 
   private func setupViews() {
     weightScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,11 +86,21 @@ class ScalesView: UIView {
     volumeScrollView.trailingAnchor.constraint(equalTo: centerXAnchor).isActive = true
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
+    addSubview(volumeLabel)
+    volumeLabel.constrain(to: volumeScrollView, anchors: [.centerX, .centerY])
+
+    addSubview(weightLabel)
+    weightLabel.constrain(to: weightScrollView, anchors: [.centerX, .centerY])
+
+    addSubview(volumeCenterLine)
+    volumeCenterLine.constrain(to: volumeScrollView, anchors: [.centerY, .leading, .trailing])
+    addSubview(weightCenterLine)
+    weightCenterLine.constrain(to: weightScrollView, anchors: [.centerY, .leading, .trailing])
+
     updateScaleDensity()
-    setupSync()
   }
 
-  private func setupSync() {
+  private func setUpSubscribers() {
     switch mode {
     case .edit:
       cancellable = Publishers.CombineLatest(volumeScrollView.$unitValue, weightScrollView.$unitValue)
@@ -92,18 +108,24 @@ class ScalesView: UIView {
           self.unitConversionFactor = $0.1 / $0.0
         })
     case .sync:
-      cancellable = volumeScrollView.$unitValue
-        .filter { _ in self.mode == .sync }
-        .sink { volumeValue in
-          self.weightScrollView.updateCenterValue(volumeValue * self.unitConversionFactor)
-        }
+      volumeSubscriber = volumeScrollView.$unitValue
+      .filter { _ in self.syncScales }
+      .sink { volumeValue in
+        self.weightScrollView.updateCenterValue(volumeValue * self.density)
+      }
 
-      cancellable2 = weightScrollView.$unitValue
-        .filter { _ in self.mode == .sync }
-        .sink { weightValue in
-          self.volumeScrollView.updateCenterValue(weightValue / self.unitConversionFactor)
-        }
+    volumeLabelSubscriber = volumeScrollView.$unitValue
+      .map { scaleValue -> String in
+        Double(scaleValue).vulgarFractionString
+      }
+      .assign(to: \.text, on: volumeLabel)
     }
+
+    weightLabelSubscriber = weightScrollView.$unitValue
+      .map { scaleValue -> String in
+        Double(scaleValue).vulgarFractionString
+      }
+      .assign(to: \.text, on: weightLabel)
   }
 }
 

@@ -46,7 +46,7 @@ class EditIngredientViewController: UIViewController {
     textField.textAlignment = .center
     textField.placeholder = "Ingredient Name"
     textField.autocapitalizationType = .words
-    textField.font = Fonts.medium.of(size: 20)
+    textField.font = AvenirFont.medium.of(size: 20)
     textField.textColor = .label
     textField.tintColor = Color.redLineColor
     return textField
