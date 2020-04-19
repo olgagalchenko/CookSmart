@@ -33,4 +33,10 @@ struct LabelStyle {
   static var standard: LabelStyle {
     LabelStyle()
   }
+
+  static var tiny: LabelStyle {
+    var style = standard
+    style.font = AvenirFont.condensedMedium.of(size: 12)
+    return style
+  }
 }
