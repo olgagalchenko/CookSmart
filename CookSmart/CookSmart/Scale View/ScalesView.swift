@@ -29,6 +29,7 @@ class ScalesView: UIView {
     self.ingredient = ingredient
     super.init(frame: .zero)
     setupViews()
+    setUpSubscribers()
   }
 
   @available(*, unavailable)
@@ -41,6 +42,8 @@ class ScalesView: UIView {
   private let weightScrollView = ScaleScrollView(unitsPerTile: 100, mirror: true)
   private let volumeLabel = Label()
   private let weightLabel = Label()
+  private let volumeCenterLine = CenterLineView()
+  private let weightCenterLine = CenterLineView()
 
   private var volumeSubscriber: AnyCancellable?
   private var volumeLabelSubscriber: AnyCancellable?
@@ -64,22 +67,15 @@ class ScalesView: UIView {
     weightScrollView.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
 
     addSubview(volumeLabel)
-    volumeLabel.constrain(
-      to: volumeScrollView,
-      anchors: [.centerX, .centerY],
-      priority: .defaultHigh,
-      shouldActivate: true
-    )
+    volumeLabel.constrain(to: volumeScrollView, anchors: [.centerX, .centerY])
 
     addSubview(weightLabel)
-    weightLabel.constrain(
-      to: weightScrollView,
-      anchors: [.centerX, .centerY],
-      priority: .defaultHigh,
-      shouldActivate: true
-    )
+    weightLabel.constrain(to: weightScrollView, anchors: [.centerX, .centerY])
 
-    setUpSubscribers()
+    addSubview(volumeCenterLine)
+    volumeCenterLine.constrain(to: volumeScrollView, anchors: [.centerY, .leading, .trailing])
+    addSubview(weightCenterLine)
+    weightCenterLine.constrain(to: weightScrollView, anchors: [.centerY, .leading, .trailing])
   }
 
   private func setUpSubscribers() {

@@ -119,7 +119,7 @@ private class UnitPickerScrollView: UIView {
     return stackView
   }()
 
-  private let centerLineView = UnitPickerCenterLineView()
+  private let centerLineView = CenterLineView()
 
   private var unitStackViewTopConstraint: NSLayoutConstraint?
   private var unitStackViewBottomConstraint: NSLayoutConstraint?
