@@ -119,7 +119,6 @@
             CGFloat timesDecreaseFactor = ceil(offBy/totalTileHeight);
             tile.frame = CGRectMake(0, tileFrame.origin.y - timesDecreaseFactor*totalTileHeight, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
-          tile.backgroundColor = [UIColor systemTealColor];
         }
         else if (maxY < minimumVisibleY &&
                  tileFrame.origin.y + (self.tileContainer.subviews.count - 1)*SCALE_TILE_HEIGHT < maximumVisibleY)
@@ -128,7 +127,6 @@
             CGFloat timesIncreaseFactor = ceil(offBy/totalTileHeight);
             tile.frame = CGRectMake(0, tileFrame.origin.y + timesIncreaseFactor*totalTileHeight, self.bounds.size.width, SCALE_TILE_HEIGHT);
             tile.value = unitsPerPoint(self)*(tile.frame.origin.y);
-          tile.backgroundColor = [UIColor systemGrayColor];
         }
     }
 }

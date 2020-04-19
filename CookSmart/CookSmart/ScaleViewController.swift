@@ -41,8 +41,8 @@ class ScaleViewController: UIViewController {
 
   private let volumeLabel = UILabel()
   private let weightLabel = UILabel()
-  private let volumeUnitButton = UIButton()
-  private let weightUnitButton = UIButton()
+  private let volumeUnitButton = Button()
+  private let weightUnitButton = Button()
   private lazy var scalesContainer = ScalesView(ingredient: ingredient)
 //  private let scaleView = ScaleView(
 //    unitButtonText: "Cups",
@@ -70,33 +70,14 @@ class ScaleViewController: UIViewController {
     gradientView.constrainToSuperview(anchors: [.leading, .top, .right], priority: .defaultHigh, shouldActivate: true)
     gradientView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
-    volumeUnitButton.translatesAutoresizingMaskIntoConstraints = false
     gradientView.addSubview(volumeUnitButton)
     volumeUnitButton.constrainToSuperview(anchors: [.leading, .top], priority: .defaultHigh, shouldActivate: true)
 
-    weightUnitButton.translatesAutoresizingMaskIntoConstraints = false
     gradientView.addSubview(weightUnitButton)
     weightUnitButton.constrainToSuperview(anchors: [.trailing, .top], priority: .defaultHigh, shouldActivate: true)
 
-    NSLayoutConstraint(
-      item: volumeUnitButton,
-      attribute: .trailing,
-      relatedBy: .equal,
-      toItem: weightUnitButton,
-      attribute: .leading,
-      multiplier: 1,
-      constant: 0
-    ).isActive = true
-
-    NSLayoutConstraint(
-      item: volumeUnitButton,
-      attribute: .width,
-      relatedBy: .equal,
-      toItem: weightUnitButton,
-      attribute: .width,
-      multiplier: 1,
-      constant: 0
-    ).isActive = true
+    volumeUnitButton.trailingAnchor.constraint(equalTo: weightUnitButton.leadingAnchor, constant: 0).isActive = true
+    volumeUnitButton.widthAnchor.constraint(equalTo: weightUnitButton.widthAnchor, multiplier: 1).isActive = true
   }
 
   private func setUpScaleViews() {

@@ -16,6 +16,7 @@
 		39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE592442776D00359EDF /* SceneDelegate.swift */; };
 		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
 		39C3CE82244BE22100359EDF /* ScalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE81244BE22100359EDF /* ScalesView.swift */; };
+		773C97E2244BE5D900208351 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E0244BE5D900208351 /* Button.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
@@ -94,6 +95,7 @@
 		39C3CE592442776D00359EDF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientViewController.swift; sourceTree = "<group>"; };
 		39C3CE81244BE22100359EDF /* ScalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalesView.swift; sourceTree = "<group>"; };
+		773C97E0244BE5D900208351 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		392D8642242FD0CA002064D6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				773C97E0244BE5D900208351 /* Button.swift */,
 				392D8644242FD0FF002064D6 /* Colors.swift */,
 				77479AF824303D86000CFB0E /* Fonts.swift */,
 				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
@@ -589,6 +592,7 @@
 				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
 				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				773C97E2244BE5D900208351 /* Button.swift in Sources */,
 				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
