@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
-		396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */; };
+		396E363D2439684E00C2815B /* CenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* CenterLineView.swift */; };
 		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
 		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
 		396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */; };
@@ -16,6 +16,10 @@
 		39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE562442775E00359EDF /* AppDelegate.swift */; };
 		39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE592442776D00359EDF /* SceneDelegate.swift */; };
 		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
+		39C3CE82244BE22100359EDF /* ScalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE81244BE22100359EDF /* ScalesView.swift */; };
+		773C97E2244BE5D900208351 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E0244BE5D900208351 /* Button.swift */; };
+		773C97E5244BF0BF00208351 /* StyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E4244BF0BF00208351 /* StyledView.swift */; };
+		773C97E8244BF14A00208351 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E7244BF14A00208351 /* Label.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
 		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
@@ -23,6 +27,7 @@
 		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
 		774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7C2442E475002A59AC /* ScaleViewController.swift */; };
 		774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */; };
+		77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F41931243950CB0055053E /* ScaleScrollView.swift */; };
 		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
 		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
@@ -83,7 +88,7 @@
 
 /* Begin PBXFileReference section */
 		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerCenterLineView.swift; sourceTree = "<group>"; };
+		396E363C2439684E00C2815B /* CenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLineView.swift; sourceTree = "<group>"; };
 		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
 		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +96,10 @@
 		39C3CE562442775E00359EDF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C3CE592442776D00359EDF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientViewController.swift; sourceTree = "<group>"; };
+		39C3CE81244BE22100359EDF /* ScalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalesView.swift; sourceTree = "<group>"; };
+		773C97E0244BE5D900208351 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		773C97E4244BF0BF00208351 /* StyledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledView.swift; sourceTree = "<group>"; };
+		773C97E7244BF14A00208351 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
 		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -101,6 +110,7 @@
 		774EBD782442A1CE002A59AC /* Fraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		774EBD7C2442E475002A59AC /* ScaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
 		774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		77F41931243950CB0055053E /* ScaleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScrollView.swift; sourceTree = "<group>"; };
 		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
 		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B2F1BB27270006B7A85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = CookSmart/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -176,11 +186,14 @@
 		392D8642242FD0CA002064D6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				773C97E0244BE5D900208351 /* Button.swift */,
 				392D8644242FD0FF002064D6 /* Colors.swift */,
 				77479AF824303D86000CFB0E /* Fonts.swift */,
 				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
 				774EBD782442A1CE002A59AC /* Fraction.swift */,
 				774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */,
+				773C97E4244BF0BF00208351 /* StyledView.swift */,
+				773C97E7244BF14A00208351 /* Label.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -199,6 +212,16 @@
 				39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */,
 			);
 			path = "Edit Ingredient";
+			sourceTree = "<group>";
+		};
+		39C3CE7F244BE1B100359EDF /* Scale View */ = {
+			isa = PBXGroup;
+			children = (
+				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
+				77F41931243950CB0055053E /* ScaleScrollView.swift */,
+				39C3CE81244BE22100359EDF /* ScalesView.swift */,
+			);
+			path = "Scale View";
 			sourceTree = "<group>";
 		};
 		774EBD6E244271D6002A59AC /* CakeTests */ = {
@@ -225,7 +248,7 @@
 				396E3642243976A000C2815B /* GradientView.swift */,
 				80592C0F18926AF30082D4E1 /* ScaleView */,
 				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
-				396E363C2439684E00C2815B /* UnitPickerCenterLineView.swift */,
+				396E363C2439684E00C2815B /* CenterLineView.swift */,
 				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
 			);
 			name = Scales;
@@ -255,7 +278,6 @@
 			children = (
 				80592C0C189268D60082D4E1 /* CSScaleView.h */,
 				80592C0D189268D60082D4E1 /* CSScaleView.m */,
-				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
 			);
 			name = ScaleView;
 			sourceTree = "<group>";
@@ -329,6 +351,7 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
+				39C3CE7F244BE1B100359EDF /* Scale View */,
 				39C3CE562442775E00359EDF /* AppDelegate.swift */,
 				39C3CE592442776D00359EDF /* SceneDelegate.swift */,
 				39C3CE2224426AF700359EDF /* Conversion */,
@@ -577,6 +600,7 @@
 				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
 				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
+				773C97E2244BE5D900208351 /* Button.swift in Sources */,
 				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
 				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
@@ -593,14 +617,18 @@
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */,
 				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
+				77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */,
+				39C3CE82244BE22100359EDF /* ScalesView.swift in Sources */,
 				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
 				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
 				396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */,
+				773C97E8244BF14A00208351 /* Label.swift in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
+				773C97E5244BF0BF00208351 /* StyledView.swift in Sources */,
 				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
 				39C3CE2524426BE600359EDF /* ConversionViewController.swift in Sources */,
 				396E3643243976A000C2815B /* GradientView.swift in Sources */,
-				396E363D2439684E00C2815B /* UnitPickerCenterLineView.swift in Sources */,
+				396E363D2439684E00C2815B /* CenterLineView.swift in Sources */,
 				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
