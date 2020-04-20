@@ -14,13 +14,18 @@ import UIKit
 class ScaleScrollView: UIScrollView {
   static let TileHeight: CGFloat = 200
 
-  @Published private(set) var unitValue: CGFloat = 0
+  @Published private(set) var unitValue: CGFloat = 1
 
-  @objc
-  init(centerValue: Double = 1,
-       unitsPerTile: Int = 1,
+  var unitText: AnyPublisher<String?, Never> {
+    publisher(for: \.contentOffset)
+      .map { _ in
+        Double(self.virtualContentYOffset * self.unitsPerPoint).vulgarFractionString
+      }
+      .eraseToAnyPublisher()
+  }
+
+  init(unitsPerTile: Int = 1,
        mirror: Bool = false) {
-    self.centerValue = centerValue
     self.unitsPerTile = unitsPerTile
     self.mirror = mirror
 
@@ -46,9 +51,6 @@ class ScaleScrollView: UIScrollView {
     }
   }
 
-  // MARK: Private
-
-  private let centerValue: Double
   var unitsPerTile: Int {
     didSet {
       assert(unitsPerTile > 0, "Units per tile must be greater than zero")
@@ -56,6 +58,8 @@ class ScaleScrollView: UIScrollView {
       unitsPerPoint = 1 / pointsPerUnit
     }
   }
+
+  // MARK: Private
 
   private let mirror: Bool
   private let tileContainer = UIView()
@@ -114,11 +118,28 @@ class ScaleScrollView: UIScrollView {
     setNeedsLayout()
     layoutIfNeeded()
 
-    updateCenterValue(CGFloat(centerValue))
+    updateCenterValue(unitValue, notifyDelegate: true)
   }
 
-  func updateCenterValue(_ newCenterValue: CGFloat) {
-    contentOffset = CGPoint(x: 0, y: pointsPerUnit * newCenterValue - accumulatedOffset)
+  func syncToUnitValue(_ unitValue: CGFloat) {
+    delegate = nil
+    setContentOffset(CGPoint(x: 0, y: pointsPerUnit * unitValue - accumulatedOffset), animated: false)
+    delegate = self
+  }
+
+  private func updateCenterValue(_ newCenterValue: CGFloat, notifyDelegate: Bool = false, animated: Bool = false) {
+    if !notifyDelegate { delegate = nil }
+    let updateContentOffset = {
+      self.contentOffset = CGPoint(x: 0, y: self.pointsPerUnit * newCenterValue - self.accumulatedOffset)
+    }
+    if animated {
+      UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+        updateContentOffset()
+      }.startAnimation()
+    } else {
+      updateContentOffset()
+    }
+    delegate = self
   }
 
   override func layoutSubviews() {
@@ -127,7 +148,9 @@ class ScaleScrollView: UIScrollView {
     let newYOffset = getNewYOffset()
     if yOffset != newYOffset {
       let yOffsetDelta = yOffset - newYOffset
+      delegate = nil
       contentOffset = CGPoint(x: 0, y: newYOffset)
+      delegate = self
       tileContainer.center = CGPoint(x: tileContainer.center.x, y: tileContainer.center.y - yOffsetDelta)
       accumulatedOffset += yOffsetDelta
     }
@@ -161,6 +184,11 @@ class ScaleScrollView: UIScrollView {
       tile.value = Float(tile.frame.origin.y * unitsPerPoint)
     }
   }
+
+  private func snapToHumanReadableValue() {
+    let humanReadableValue = CGFloat(Double(unitValue).roundedValue)
+    updateCenterValue(humanReadableValue, notifyDelegate: true, animated: true)
+  }
 }
 
 // MARK: UIScrollViewDelegate
@@ -169,6 +197,21 @@ extension ScaleScrollView: UIScrollViewDelegate {
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     unitValue = virtualContentYOffset * unitsPerPoint
+  }
+
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    guard !decelerate else {
+      return
+    }
+    snapToHumanReadableValue()
+  }
+
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    snapToHumanReadableValue()
+  }
+
+  func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+    false
   }
 }
 
@@ -234,7 +277,6 @@ struct ScalePreview: PreviewProvider {
 
     func makeUIView(context _: UIViewRepresentableContext<ScalePreview.ScalePreviewContainer>) -> UIView {
       ScaleScrollView(
-        centerValue: 1,
         unitsPerTile: unitsPerTile,
         mirror: mirror
       )

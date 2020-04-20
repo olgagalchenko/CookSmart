@@ -34,6 +34,7 @@ class ScaleTile: UIView {
     setUpViews()
   }
 
+  @available(*, unavailable)
   required init?(coder _: NSCoder) {
     fatalError()
   }

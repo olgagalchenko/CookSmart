@@ -66,6 +66,7 @@ class ScalesView: UIView {
   private let weightCenterLine = CenterLineView()
 
   private var volumeSubscriber: AnyCancellable?
+  private var weightSubscriber: AnyCancellable?
   private var volumeLabelSubscriber: AnyCancellable?
   private var weightLabelSubscriber: AnyCancellable?
 
@@ -111,21 +112,21 @@ class ScalesView: UIView {
       volumeSubscriber = volumeScrollView.$unitValue
         .filter { _ in self.mode == .sync }
         .sink { volumeValue in
-          self.weightScrollView.updateCenterValue(volumeValue * self.unitConversionFactor)
+          self.weightScrollView.syncToUnitValue(volumeValue * self.unitConversionFactor)
         }
 
-      volumeLabelSubscriber = volumeScrollView.$unitValue
-        .map { scaleValue -> String in
-          Double(scaleValue).vulgarFractionString
+      weightSubscriber = weightScrollView.$unitValue
+        .filter { _ in self.mode == .sync }
+        .sink { weightValue in
+          self.volumeScrollView.syncToUnitValue(weightValue / self.unitConversionFactor)
         }
-        .assign(to: \.text, on: volumeLabel)
     }
 
-    weightLabelSubscriber = weightScrollView.$unitValue
-      .map { scaleValue -> String in
-      Double(scaleValue).vulgarFractionString
-    }
-    .assign(to: \.text, on: weightLabel)
+    volumeLabelSubscriber = volumeScrollView.unitText
+      .assign(to: \.text, on: volumeLabel)
+
+    weightLabelSubscriber = weightScrollView.unitText
+      .assign(to: \.text, on: weightLabel)
   }
 }
 
@@ -148,6 +149,6 @@ extension ScalesView {
 
     volumeScrollView.unitsPerTile = Int(volumeScale)
     weightScrollView.unitsPerTile = Int(humanReadableWeightScale)
-    weightScrollView.updateCenterValue(volumeScrollView.unitValue * unitConversionFactor)
+    weightScrollView.syncToUnitValue(volumeScrollView.unitValue * unitConversionFactor)
   }
 }
