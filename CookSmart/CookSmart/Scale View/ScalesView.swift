@@ -9,16 +9,6 @@
 import Combine
 import Foundation
 
-extension CSConversionVC {
-  @objc
-  func addNewScaleView(ingredient: CSIngredient) {
-//    let scaleView = ScalesView(ingredient: ingredient, unitConversionFactor: 125, syncScales: true)
-//    scaleView.unitConversionFactor = 22
-//    view.addSubview(scaleView)
-//    scaleView.constrainToSuperview()
-  }
-}
-
 class ScalesView: UIView {
 
   enum Mode {
@@ -140,7 +130,7 @@ extension ScalesView {
       let orderOfMagnitue = floor(log10(idealWeightScale))
       humanReadableWeightScale = idealWeightScale - idealWeightScale.truncatingRemainder(dividingBy: pow(10, orderOfMagnitue))
     } else {
-      let idealVolumeScale = humanReadableWeightScale / idealWeightScale
+      let idealVolumeScale = 1 / unitConversionFactor
       if idealVolumeScale >= 10 {
         let orderOfMagnitue = floor(log10(idealVolumeScale))
         volumeScale = idealVolumeScale - idealVolumeScale.truncatingRemainder(dividingBy: pow(10, orderOfMagnitue))

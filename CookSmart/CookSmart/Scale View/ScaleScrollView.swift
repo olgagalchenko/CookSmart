@@ -118,7 +118,7 @@ class ScaleScrollView: UIScrollView {
     setNeedsLayout()
     layoutIfNeeded()
 
-    updateCenterValue(unitValue, notifyDelegate: true)
+    syncToUnitValue(unitValue)
   }
 
   func syncToUnitValue(_ unitValue: CGFloat) {

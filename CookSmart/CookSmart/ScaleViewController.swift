@@ -49,22 +49,7 @@ class ScaleViewController: UIViewController {
     CGFloat(ingredient.density(withVolumeUnit: currentVolumeUnit, andWeightUnit: currentWeightUnit))
   }
 
-//  private let scaleView = ScaleView(
-//    unitButtonText: "Cups",
-//    value: 1,
-//    unitButtonTapped: {
-//      print("unit button tapped")
-//    }
-//  )
-
   private func setUpViews() {
-//    let childView = UIHostingController(rootView: scaleView)
-//    addChild(childView)
-//    view.addSubview(childView.view)
-//    childView.view.translatesAutoresizingMaskIntoConstraints = false
-//    childView.view.constrainToSuperview()
-//    childView.didMove(toParent: self)
-
     setUpScaleViews()
     setUpUnitViews()
   }
