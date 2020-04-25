@@ -9,24 +9,34 @@
 import Combine
 import Foundation
 
-extension CSConversionVC {
-  @objc
-  func addNewScaleView(ingredient: CSIngredient) {
-//    let scaleView = ScalesView(ingredient: ingredient)
-//    view.addSubview(scaleView)
-//    scaleView.constrainToSuperview()
-  }
-}
-
 class ScalesView: UIView {
 
-  var ingredient: CSIngredient
-  private var density: CGFloat = 125
+  enum Mode {
+    case sync
+    case edit
+  }
 
-  var syncScales = true
+  var ingredient: CSIngredient {
+    didSet {
+      updateScaleDensity()
+    }
+  }
 
-  init(ingredient: CSIngredient) {
+  var unitConversionFactor: CGFloat {
+    didSet {
+      guard mode == .sync else { return }
+      updateScaleDensity()
+    }
+  }
+
+  private let mode: Mode
+
+  init(ingredient: CSIngredient,
+       unitConversionFactor: CGFloat,
+       syncScales: Bool = true) {
     self.ingredient = ingredient
+    self.unitConversionFactor = unitConversionFactor
+    mode = syncScales ? .sync : .edit
     super.init(frame: .zero)
     setupViews()
     setUpSubscribers()
@@ -46,6 +56,7 @@ class ScalesView: UIView {
   private let weightCenterLine = CenterLineView()
 
   private var volumeSubscriber: AnyCancellable?
+  private var weightSubscriber: AnyCancellable?
   private var volumeLabelSubscriber: AnyCancellable?
   private var weightLabelSubscriber: AnyCancellable?
 
@@ -76,27 +87,58 @@ class ScalesView: UIView {
     volumeCenterLine.constrain(to: volumeScrollView, anchors: [.centerY, .leading, .trailing])
     addSubview(weightCenterLine)
     weightCenterLine.constrain(to: weightScrollView, anchors: [.centerY, .leading, .trailing])
+
+    updateScaleDensity()
   }
 
   private func setUpSubscribers() {
-    volumeSubscriber = volumeScrollView.$unitValue
-      .filter { _ in self.syncScales }
-      .sink { volumeValue in
-        self.weightScrollView.updateCenterValue(volumeValue * self.density)
-      }
+    switch mode {
+    case .edit:
+      volumeSubscriber = Publishers.CombineLatest(volumeScrollView.$unitValue, weightScrollView.$unitValue)
+        .sink(receiveValue: {
+          self.unitConversionFactor = $0.1 / $0.0
+        })
+    case .sync:
+      volumeSubscriber = volumeScrollView.$unitValue
+        .filter { _ in self.mode == .sync }
+        .sink { volumeValue in
+          self.weightScrollView.syncToUnitValue(volumeValue * self.unitConversionFactor)
+        }
 
-    volumeLabelSubscriber = volumeScrollView.$unitValue
-      .map { scaleValue -> String in
-        Double(scaleValue).vulgarFractionString
-      }
+      weightSubscriber = weightScrollView.$unitValue
+        .filter { _ in self.mode == .sync }
+        .sink { weightValue in
+          self.volumeScrollView.syncToUnitValue(weightValue / self.unitConversionFactor)
+        }
+    }
+
+    volumeLabelSubscriber = volumeScrollView.unitText
       .assign(to: \.text, on: volumeLabel)
 
-    weightLabelSubscriber = weightScrollView.$unitValue
-      .map { scaleValue -> String in
-        Double(scaleValue).vulgarFractionString
-      }
+    weightLabelSubscriber = weightScrollView.unitText
       .assign(to: \.text, on: weightLabel)
   }
 }
 
-extension ScalesView {}
+extension ScalesView {
+  private func updateScaleDensity() {
+    var volumeScale: CGFloat = 1
+
+    let idealWeightScale = unitConversionFactor
+    var humanReadableWeightScale: CGFloat = 1
+    if idealWeightScale >= 10 {
+      let orderOfMagnitue = floor(log10(idealWeightScale))
+      humanReadableWeightScale = idealWeightScale - idealWeightScale.truncatingRemainder(dividingBy: pow(10, orderOfMagnitue))
+    } else {
+      let idealVolumeScale = 1 / unitConversionFactor
+      if idealVolumeScale >= 10 {
+        let orderOfMagnitue = floor(log10(idealVolumeScale))
+        volumeScale = idealVolumeScale - idealVolumeScale.truncatingRemainder(dividingBy: pow(10, orderOfMagnitue))
+      }
+    }
+
+    volumeScrollView.unitsPerTile = Int(volumeScale)
+    weightScrollView.unitsPerTile = Int(humanReadableWeightScale)
+    weightScrollView.syncToUnitValue(volumeScrollView.unitValue * unitConversionFactor)
+  }
+}

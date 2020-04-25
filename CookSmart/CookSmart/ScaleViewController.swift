@@ -41,23 +41,15 @@ class ScaleViewController: UIViewController {
 
   private let volumeUnitButton = Button()
   private let weightUnitButton = Button()
-  private lazy var scalesContainer = ScalesView(ingredient: ingredient)
-//  private let scaleView = ScaleView(
-//    unitButtonText: "Cups",
-//    value: 1,
-//    unitButtonTapped: {
-//      print("unit button tapped")
-//    }
-//  )
+  private lazy var scalesContainer = ScalesView(ingredient: ingredient,
+                                                unitConversionFactor: unitConversionFactor,
+                                                syncScales: true)
+
+  private var unitConversionFactor: CGFloat {
+    CGFloat(ingredient.density(withVolumeUnit: currentVolumeUnit, andWeightUnit: currentWeightUnit))
+  }
 
   private func setUpViews() {
-//    let childView = UIHostingController(rootView: scaleView)
-//    addChild(childView)
-//    view.addSubview(childView.view)
-//    childView.view.translatesAutoresizingMaskIntoConstraints = false
-//    childView.view.constrainToSuperview()
-//    childView.didMove(toParent: self)
-
     setUpScaleViews()
     setUpUnitViews()
   }

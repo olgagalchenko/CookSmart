@@ -92,11 +92,6 @@
     self.ingredientPickerScrollView.scrollsToTop = NO;
     self.ingredientPickerScrollView.showsHorizontalScrollIndicator = NO;
     self.ingredientPickerScrollView.showsVerticalScrollIndicator = NO;
-
-  CSIngredient *ingredient = [[CSIngredients sharedInstance] ingredientAtFlattenedIngredientIndex:self.ingredientIndex];
-  if (ingredient != nil) {
-    [self addNewScaleViewWithIngredient:ingredient];
-  }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -161,6 +156,7 @@
 {
     CSIngredientListVC* ingrListVC = [[CSIngredientListVC alloc] initWithDelegate:self];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:ingrListVC];
+    nav.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
