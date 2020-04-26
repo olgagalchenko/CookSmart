@@ -16,13 +16,7 @@ class ScalesView: UIView {
     case edit
   }
 
-  var ingredient: CSIngredient {
-    didSet {
-      updateScaleDensity()
-    }
-  }
-
-  var unitConversionFactor: CGFloat {
+  private(set) var unitConversionFactor: CGFloat {
     didSet {
       guard mode == .sync else { return }
       updateScaleDensity()
@@ -31,10 +25,8 @@ class ScalesView: UIView {
 
   private let mode: Mode
 
-  init(ingredient: CSIngredient,
-       unitConversionFactor: CGFloat,
+  init(unitConversionFactor: CGFloat,
        syncScales: Bool = true) {
-    self.ingredient = ingredient
     self.unitConversionFactor = unitConversionFactor
     mode = syncScales ? .sync : .edit
     super.init(frame: .zero)
@@ -46,6 +38,11 @@ class ScalesView: UIView {
   required init?(coder _: NSCoder) {
     assertionFailure("init(coder:) has not been implemented")
     return nil
+  }
+
+  func updateConversionFactor(_ conversionFactor: CGFloat) {
+    unitConversionFactor = conversionFactor
+    updateScaleDensity()
   }
 
   private let volumeScrollView = ScaleScrollView()
