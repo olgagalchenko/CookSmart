@@ -44,5 +44,5 @@ jobs:
     - name: Run Tests
       run: |
         cd $GITHUB_WORKSPACE/CookSmart
-        fastlane testlane
+        bundle exec fastlane testlane
 
