@@ -17,9 +17,19 @@ class ScaleViewController: UIViewController {
     case unitPicker
   }
 
-  init(ingredient: CSIngredient, shouldSyncScales: Bool = true) {
+  init(ingredient: CSIngredient,
+       volumeUnit: CSUnit = CSUnitCollection.volumeUnits()?.unit(at: 2) ?? CSUnit(),
+       weightUnit: CSUnit = CSUnitCollection.weightUnits()?.unit(at: 2) ?? CSUnit(),
+       shouldSyncScales: Bool = true) {
     self.ingredient = ingredient
+    let density = CGFloat(ingredient.density(withVolumeUnit: volumeUnit, andWeightUnit: weightUnit))
+    scalesContainer = ScalesView(unitConversionFactor: density, syncScales: shouldSyncScales)
+    unitPickerView = UnitPickerView(volumeUnit: volumeUnit, weightUnit: weightUnit)
+
     super.init(nibName: nil, bundle: nil)
+
+    volumeUnitButton.setTitle(volumeUnit.name, for: .normal)
+    weightUnitButton.setTitle(weightUnit.name, for: .normal)
   }
 
   @available(*, unavailable)
@@ -31,14 +41,19 @@ class ScaleViewController: UIViewController {
     super.viewDidLoad()
 
     setUpViews()
-    setContent()
   }
 
   // MARK: Public
 
   var ingredient: CSIngredient
-  var currentVolumeUnit: CSUnit = CSUnitCollection.volumeUnits()?.unit(at: 2) ?? CSUnit()
-  var currentWeightUnit: CSUnit = CSUnitCollection.weightUnits()?.unit(at: 2) ?? CSUnit()
+  var density: CGFloat {
+    get {
+      scalesContainer.unitConversionFactor
+    }
+    set {
+      scalesContainer.updateConversionFactor(newValue)
+    }
+  }
 
   // MARK: Private
 
@@ -60,16 +75,11 @@ class ScaleViewController: UIViewController {
     return button
   }()
 
-  private lazy var scalesContainer = ScalesView(unitConversionFactor: unitConversionFactor,
-                                                syncScales: true)
-  private lazy var unitPickerView = UnitPickerView(volumeUnit: currentVolumeUnit, weightUnit: currentWeightUnit)
+  private let scalesContainer: ScalesView
+  private let unitPickerView: UnitPickerView
 
   private var scalesTopConstraint: NSLayoutConstraint?
   private var unitPickerBottomConstraint: NSLayoutConstraint?
-
-  private var unitConversionFactor: CGFloat {
-    CGFloat(ingredient.density(withVolumeUnit: currentVolumeUnit, andWeightUnit: currentWeightUnit))
-  }
 
   private func setUpViews() {
     view.clipsToBounds = true
@@ -108,11 +118,6 @@ class ScaleViewController: UIViewController {
     unitPickerView.topAnchor.constraint(equalTo: scalesContainer.bottomAnchor).isActive = true
   }
 
-  private func setContent() {
-    volumeUnitButton.setTitle(currentVolumeUnit.name, for: .normal)
-    weightUnitButton.setTitle(currentWeightUnit.name, for: .normal)
-  }
-
   @objc
   private func toggleDisplayMode() {
     guard let scalesTopConstraint = scalesTopConstraint,
@@ -132,10 +137,10 @@ class ScaleViewController: UIViewController {
 
 extension ScaleViewController: UnitPickerDelegate {
   func picked(volumeUnit: CSUnit, weightUnit: CSUnit) {
-    currentVolumeUnit = volumeUnit
-    currentWeightUnit = weightUnit
-    setContent()
-    scalesContainer.updateConversionFactor(unitConversionFactor)
+    volumeUnitButton.setTitle(volumeUnit.name, for: .normal)
+    weightUnitButton.setTitle(weightUnit.name, for: .normal)
+
+    density = CGFloat(ingredient.density(withVolumeUnit: volumeUnit, andWeightUnit: weightUnit))
     toggleDisplayMode()
   }
 }
