@@ -34,6 +34,7 @@ class ScaleTile: UIView {
     setUpViews()
   }
 
+  @available(*, unavailable)
   required init?(coder _: NSCoder) {
     fatalError()
   }
@@ -77,7 +78,7 @@ class ScaleTile: UIView {
 
   // MARK: Private
 
-  let valueLabel: UILabel = UILabel()
+  let valueLabel: Label = Label(style: .tiny)
   let mirror: Bool
 
   private func setUpViews() {
@@ -87,8 +88,6 @@ class ScaleTile: UIView {
 
   private func setUpLabel() {
     addSubview(valueLabel)
-    valueLabel.font = Fonts.tiny
-    valueLabel.translatesAutoresizingMaskIntoConstraints = false
     if mirror {
       valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Length.medium_30 / 2).isActive = true
     } else {
