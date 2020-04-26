@@ -317,7 +317,10 @@
 				B7BCA28F180524A800CF7588 /* Frameworks */,
 				B7BCA28E180524A800CF7588 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		B7BCA28E180524A800CF7588 /* Products */ = {
 			isa = PBXGroup;
