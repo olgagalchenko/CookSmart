@@ -40,6 +40,7 @@ class ScaleViewController: UIViewController {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Volume", for: .disabled)
+    button.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
     return button
   }()
 
@@ -47,6 +48,7 @@ class ScaleViewController: UIViewController {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Weight", for: .disabled)
+    button.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
     return button
   }()
 
@@ -62,34 +64,30 @@ class ScaleViewController: UIViewController {
   }
 
   private func setUpViews() {
-    setUpScaleViews()
-    setUpUnitViews()
-
     view.clipsToBounds = true
     unitPickerView.delegate = self
 
-    volumeUnitButton.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
-    weightUnitButton.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
+    setUpScaleViews()
+    setUpUnitViews()
   }
 
   private func setUpUnitViews() {
     let gradientView = GradientView()
     view.addSubview(gradientView)
-    gradientView.constrainToSuperview(anchors: [.leading, .top, .right], priority: .defaultHigh, shouldActivate: true)
+    gradientView.constrainToSuperview(anchors: [.leading, .top, .right])
     gradientView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 
     gradientView.addSubview(volumeUnitButton)
-    volumeUnitButton.constrainToSuperview(anchors: [.leading, .top], priority: .defaultHigh, shouldActivate: true)
+    volumeUnitButton.constrainToSuperview(anchors: [.leading, .top])
 
     gradientView.addSubview(weightUnitButton)
-    weightUnitButton.constrainToSuperview(anchors: [.trailing, .top], priority: .defaultHigh, shouldActivate: true)
+    weightUnitButton.constrainToSuperview(anchors: [.trailing, .top])
 
     volumeUnitButton.trailingAnchor.constraint(equalTo: weightUnitButton.leadingAnchor).isActive = true
     volumeUnitButton.widthAnchor.constraint(equalTo: weightUnitButton.widthAnchor).isActive = true
   }
 
   private func setUpScaleViews() {
-    scalesContainer.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(scalesContainer)
     scalesContainer.constrainToSuperview(anchors: [.leading, .trailing, .height])
     scalesTopConstraint = scalesContainer.topAnchor.constraint(equalTo: view.topAnchor)
