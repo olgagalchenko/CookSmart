@@ -17,7 +17,9 @@ class EditIngredientViewController: UIViewController {
 
   private let ingredient: CSIngredient
   private let editingMode: EditingMode
-  private lazy var density: Float = ingredient.density
+  private var density: Float {
+    Float(scaleViewController.density)
+  }
 
   @objc
   public init(ingredient: CSIngredient? = nil) {
@@ -162,19 +164,6 @@ extension EditIngredientViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     ingredientNameField.resignFirstResponder()
     return true
-  }
-}
-
-// MARK: CSScaleVCDelegate
-
-extension EditIngredientViewController: CSScaleVCDelegate {
-
-  func scaleVC(_ scaleVC: CSScaleVC!, densityDidChange changedDensity: Float) {
-    density = changedDensity
-  }
-
-  func scaleVCWillBeginHandlingInteraction(_ scaleVC: CSScaleVC!) {
-    ingredientNameField.resignFirstResponder()
   }
 }
 

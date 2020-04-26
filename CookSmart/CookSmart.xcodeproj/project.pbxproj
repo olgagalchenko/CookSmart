@@ -322,7 +322,10 @@
 				B7BCA28F180524A800CF7588 /* Frameworks */,
 				B7BCA28E180524A800CF7588 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		B7BCA28E180524A800CF7588 /* Products */ = {
 			isa = PBXGroup;
@@ -530,7 +533,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nmint run swiftformat swiftformat --config \".swiftformat\" --swiftversion 5.2 ${SOURCE_ROOT}\n";
+			shellScript = "cd BuildTools\nmint run swiftformat swiftformat --config \"../.swiftformat\" ${SOURCE_ROOT}\n";
 		};
 		392D864C24301109002064D6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -566,7 +569,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\nmint bootstrap # Install or update dependencies if needed\n";
+			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\n/usr/bin/xcrun --sdk macosx mint bootstrap # Install or update dependencies if needed\n";
 		};
 		80A614DB18BA663B00A205BB /* Run Version Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -580,7 +583,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}\"/versions.sh\n";
+			shellScript = "#\"${PROJECT_DIR}\"/versions.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -890,6 +893,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.4.1;
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
