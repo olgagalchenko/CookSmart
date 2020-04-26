@@ -1,0 +1,20 @@
+# Rules found at https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md
+
+# Excluded Files
+
+--exclude fastlane
+
+# Format Rules
+
+--swiftversion 5.2
+--indent 2
+--indentcase false
+--stripunusedargs closure-only
+
+# Enabled Rules
+
+--enable isEmpty
+
+# Disabled Rules
+
+--disable blankLinesAtStartOfScope

@@ -1,9 +1,0 @@
-# Rules found at https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md
-
---enable isEmpty
-
---disable blankLinesAtStartOfScope
-
---indent 2
---indentcase false
---stripunusedargs closure-only
