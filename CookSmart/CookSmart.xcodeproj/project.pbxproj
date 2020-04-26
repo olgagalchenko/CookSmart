@@ -439,7 +439,7 @@
 						TestTargetID = B7BCA28C180524A800CF7588;
 					};
 					B7BCA28C180524A800CF7588 = {
-						DevelopmentTeam = 5B7P72SMLP;
+						DevelopmentTeam = T36GJ569RT;
 						LastSwiftMigration = 1130;
 					};
 				};
@@ -840,7 +840,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = 5B7P72SMLP;
+				DEVELOPMENT_TEAM = T36GJ569RT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -876,7 +876,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = 5B7P72SMLP;
+				DEVELOPMENT_TEAM = T36GJ569RT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
