@@ -11,6 +11,12 @@ import SwiftUI
 import UIKit
 
 class ScaleViewController: UIViewController {
+
+  private enum DisplayMode {
+    case scales
+    case unitPicker
+  }
+
   init(ingredient: CSIngredient, shouldSyncScales: Bool = true) {
     self.ingredient = ingredient
     super.init(nibName: nil, bundle: nil)
@@ -36,11 +42,13 @@ class ScaleViewController: UIViewController {
 
   // MARK: Private
 
+  private var displayMode: DisplayMode = .scales
+
   private let volumeUnitButton: Button = {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Volume", for: .disabled)
-    button.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
+    button.addTarget(self, action: #selector(toggleDisplayMode), for: .touchUpInside)
     return button
   }()
 
@@ -48,7 +56,7 @@ class ScaleViewController: UIViewController {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Weight", for: .disabled)
-    button.addTarget(self, action: #selector(toggleScaleMode), for: .touchUpInside)
+    button.addTarget(self, action: #selector(toggleDisplayMode), for: .touchUpInside)
     return button
   }()
 
@@ -106,18 +114,19 @@ class ScaleViewController: UIViewController {
   }
 
   @objc
-  private func toggleScaleMode() {
+  private func toggleDisplayMode() {
     guard let scalesTopConstraint = scalesTopConstraint,
       let unitPickerBottomConstraint = unitPickerBottomConstraint else {
       return
     }
+    displayMode = (displayMode == .scales) ? .unitPicker : .scales
     UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-      scalesTopConstraint.isActive = !scalesTopConstraint.isActive
-      unitPickerBottomConstraint.isActive = !unitPickerBottomConstraint.isActive
+      scalesTopConstraint.isActive = self.displayMode == .scales
+      unitPickerBottomConstraint.isActive = self.displayMode == .unitPicker
       self.view.layoutIfNeeded()
     }.startAnimation()
-    weightUnitButton.isEnabled = scalesTopConstraint.isActive
-    volumeUnitButton.isEnabled = scalesTopConstraint.isActive
+    weightUnitButton.isEnabled = displayMode == .scales
+    volumeUnitButton.isEnabled = displayMode == .scales
   }
 }
 
@@ -127,6 +136,6 @@ extension ScaleViewController: UnitPickerDelegate {
     currentWeightUnit = weightUnit
     setContent()
     scalesContainer.updateConversionFactor(unitConversionFactor)
-    toggleScaleMode()
+    toggleDisplayMode()
   }
 }
