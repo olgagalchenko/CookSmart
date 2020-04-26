@@ -1,6 +1,6 @@
 # Rules found at https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md
 
---exclude fastlane,../fastlane,**/fastlane/**,CookSmart/fastlane
+--exclude fastlane,../fastlane,**/fastlane/**,CookSmart/fastlane,CookSmart/CookSmart/fastlane
 --swiftversion 5.2
 --enable isEmpty
 
