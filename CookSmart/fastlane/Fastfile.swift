@@ -9,8 +9,8 @@
 import Foundation
 
 class Fastfile: LaneFile {
-	func testLane() {
+  func testLane() {
     desc("Runs tests on cake")
     scan()
-	}
+  }
 }
