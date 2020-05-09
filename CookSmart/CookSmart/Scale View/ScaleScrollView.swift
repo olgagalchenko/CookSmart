@@ -118,7 +118,7 @@ class ScaleScrollView: UIScrollView {
     setNeedsLayout()
     layoutIfNeeded()
 
-    syncToUnitValue(unitValue)
+    syncToUnitValue(virtualContentYOffset * unitsPerPoint)
   }
 
   func syncToUnitValue(_ unitValue: CGFloat) {
@@ -186,7 +186,7 @@ class ScaleScrollView: UIScrollView {
   }
 
   private func snapToHumanReadableValue() {
-    let humanReadableValue = CGFloat(Double(unitValue).roundedValue)
+    let humanReadableValue = CGFloat(Double(virtualContentYOffset * unitsPerPoint).roundedValue)
     updateCenterValue(humanReadableValue, notifyDelegate: true, animated: true)
   }
 }
