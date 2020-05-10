@@ -206,9 +206,6 @@ static inline CGFloat getTargetContentOffset(CSScaleView *scaleView)
 
 static inline void setScrollViewOffset(CSScaleView *scaleView, CGPoint newContentOffset, BOOL cancelDeceleration)
 {
-  if (isnan(newContentOffset.y)) {
-    return;
-  }
     id delegate = scaleView.delegate;
     scaleView.delegate = nil;
     if (cancelDeceleration)
