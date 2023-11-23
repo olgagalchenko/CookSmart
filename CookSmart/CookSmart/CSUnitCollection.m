@@ -10,6 +10,7 @@
 #import "CSUnit.h"
 
 @interface CSUnitCollection ()
+@property (nonatomic, strong) NSArray* units;
 
 @end
 

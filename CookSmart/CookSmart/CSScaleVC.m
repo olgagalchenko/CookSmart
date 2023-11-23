@@ -10,10 +10,10 @@
 #import "CSScaleView.h"
 #import "CSIngredient.h"
 #import "CSGlassView.h"
+#import "CSUnitPicker.h"
 #import "CSScaleVCInternals.h"
 #import "CSUnitCollection.h"
 #import "CSUnit.h"
-#import "cake-Swift.h"
 
 #define UNIT_LABEL_HEIGHT           44
 #define UNIT_VERTICAL_PADDING       10
@@ -31,7 +31,10 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet CSGlassView *glassView;
 
-@property (weak, nonatomic) UnitPickerView *unitPicker;
+@property (strong, nonatomic) CSUnit* currentWeightUnit;
+@property (strong, nonatomic) CSUnit* currentVolumeUnit;
+
+@property (weak, nonatomic) CSUnitPicker *unitPicker;
 
 @property (nonatomic, readwrite, assign) BOOL isSnapping;
 
@@ -69,11 +72,10 @@
     self.scalesContainer.translatesAutoresizingMaskIntoConstraints = NO;
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scalesContainer.backgroundColor = BACKGROUND_COLOR;
-
-  UnitPickerView *unitPicker = [[UnitPickerView alloc] initWithVolumeUnit:self.currentVolumeUnit weightUnit:self.currentWeightUnit];
-  unitPicker.delegate = self;
-  self.unitPicker = unitPicker;
     
+    CSUnitPicker *unitPicker = [CSUnitPicker unitPickerWithCurrentVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    unitPicker.delegate = self;
+    unitPicker.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:unitPicker
                                                            attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
@@ -105,7 +107,8 @@
     
     [self.contentView insertSubview:unitPicker atIndex:0];
     [self.view addConstraints:@[top, left, height, width]];
-
+    self.unitPicker = unitPicker;
+    
     [self animateToArrangement:CSScaleVCArrangementScales];
 }
 
@@ -124,7 +127,7 @@
     float volumeInitialCenterValue = [self.volumeScaleScrollView getCenterValue] == 0? DEFAULT_VOLUME : [self.volumeScaleScrollView getCenterValue];
     float volumeScale = 1.0;
     
-    float idealWeightScale = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
+    float idealWeightScale = [self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit]*volumeScale;
     NSUInteger humanReadableWeightScale = 1;
     if (idealWeightScale >= 10)
     {
@@ -133,7 +136,7 @@
     }
     else
     {
-        float idealVolumeScale = humanReadableWeightScale/idealWeightScale;
+        float idealVolumeScale = humanReadableWeightScale/[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
         volumeScale = 1;
         if (idealVolumeScale >= 10)
         {
@@ -146,7 +149,7 @@
                                                                    scale:volumeScale
                                                                   mirror:NO];
     
-    float initialCenterValue = volumeInitialCenterValue*idealWeightScale;
+    float initialCenterValue = volumeInitialCenterValue*[self.ingredient densityWithVolumeUnit:self.currentVolumeUnit andWeightUnit:self.currentWeightUnit];
     [self.weightScaleScrollView configureScaleViewWithInitialCenterValue:initialCenterValue
                                                                    scale:humanReadableWeightScale
                                                                   mirror:YES];
@@ -373,6 +376,7 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION*2 animations:^
     {
         [self setConstraintsForArrangement:arrangement];
+        self.unitPicker.arrangement = arrangement;
         [self.contentView layoutIfNeeded];
     }];
     self.weightUnitButton.enabled = self.volumeUnitButton.enabled = (arrangement == CSScaleVCArrangementScales);
@@ -460,12 +464,12 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     [self.contentView addConstraints:@[scalesTop, height, scalesLeft, width]];
 }
 
-#pragma mark - UnitPickerDelegate method
-
-- (void)pickedVolumeUnit:(CSUnit *)volumeUnit weightUnit:(CSUnit *)weightUnit {
-  self.currentWeightUnit = weightUnit;
-  self.currentVolumeUnit = volumeUnit;
-  [self commitUnitChoices];
+#pragma mark - CSUnitPicker delegate method
+- (void)unitPicker:(CSUnitPicker *)unitPicker pickedVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
+{
+    self.currentWeightUnit = weightUnit;
+    self.currentVolumeUnit = volumeUnit;
+    [self commitUnitChoices];
 }
 
 #pragma mark - Misc Helpers

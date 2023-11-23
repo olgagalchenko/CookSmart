@@ -19,8 +19,3 @@ DerivedData
 
 #CocoaPods
 Pods
-
-# Fastlane
-CookSmart/fastlane/report.xml
-CookSmart/test_output
-CookSmart/fastlane/FastlaneRunner

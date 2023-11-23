@@ -15,7 +15,6 @@
 
 @property (nonatomic, weak) UIView *magnifiedView;
 @property (nonatomic, weak) UIView *glassening;
-@property (nonatomic, weak) CADisplayLink *displayLink;
 
 @end
 
@@ -35,15 +34,9 @@
         self.glassening = glassening;
         self.glassening.opaque = NO;
         self.glassening.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0.025];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(observeSceneLifecycle:)
-                                                     name:UISceneWillEnterForegroundNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(observeSceneLifecycle:)
-                                                     name:UISceneDidEnterBackgroundNotification
-                                                   object:nil];
+        
+        CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(refreshMagnifiedView)];
+        [link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
 }
@@ -54,36 +47,15 @@
     self.glassening.frame = self.bounds;
 }
 
-- (void)observeSceneLifecycle: (NSNotification *)sceneLifecycleChangeNotification
-{
-    if (((UIScene *)[sceneLifecycleChangeNotification object]) == self.window.windowScene) {
-        if ([[sceneLifecycleChangeNotification name] isEqualToString:UISceneDidEnterBackgroundNotification]) {
-            [self.displayLink invalidate];
-        } else if ([[sceneLifecycleChangeNotification name] isEqualToString:UISceneWillEnterForegroundNotification]) {
-            CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(refreshMagnifiedView)];
-            [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-            self.displayLink = displayLink;
-        }
-    }
-}
-
-
 - (void)refreshMagnifiedView
 {
     [self.magnifiedView removeFromSuperview];
     CGPoint imageUnderGlassOrigin = [self.viewToMagnify convertPoint:CGPointMake(0, 0) fromView:self];
     CGFloat widthIncrease = (MAGNIFYING_FACTOR - 1)*self.bounds.size.width;
     CGFloat heightIncrease = (MAGNIFYING_FACTOR - 1)*self.bounds.size.height;
-    
-    UIView *magnifiedView = [self.viewToMagnify resizableSnapshotViewFromRect:CGRectMake(
-                                                                                         imageUnderGlassOrigin.x + widthIncrease/2,
-                                                                                         imageUnderGlassOrigin.y + heightIncrease/2,
-                                                                                         self.bounds.size.width - widthIncrease,
-                                                                                         self.bounds.size.height - heightIncrease
-                                                                                         )
+    UIView *magnifiedView = [self.viewToMagnify resizableSnapshotViewFromRect:CGRectMake(imageUnderGlassOrigin.x + widthIncrease/2, imageUnderGlassOrigin.y + heightIncrease/2, self.bounds.size.width - widthIncrease, self.bounds.size.height - heightIncrease)
                                                            afterScreenUpdates:NO
                                                                 withCapInsets:UIEdgeInsetsZero];
-    
     
     magnifiedView.frame = self.bounds;
     [self insertSubview:magnifiedView atIndex:0];

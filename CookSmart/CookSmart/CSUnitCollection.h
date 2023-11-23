@@ -17,6 +17,4 @@
 - (CSUnit*)unitAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfUnit:(CSUnit*)unit;
 - (NSUInteger)countOfUnits;
-
-@property (nonatomic, strong) NSArray* units;
 @end
