@@ -36,7 +36,7 @@ class UnitPickerView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private let doneButton: UIButton = {
+  private lazy var doneButton: UIButton = {
     let button = Button()
     button.setTitle("Done", for: .normal)
     button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)

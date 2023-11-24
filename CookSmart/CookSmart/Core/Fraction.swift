@@ -23,7 +23,7 @@ enum Fraction: Double, CaseIterable {
 
   init(value: Double) {
     var closestFraction: Fraction = .zero
-    var smallestDifference: Double = 1.0
+    var smallestDifference = 1.0
 
     for fraction in Fraction.allCases {
       let difference = fabs(fraction.rawValue - value)

@@ -19,7 +19,7 @@
 #define UNIT_VERTICAL_PADDING       10
 #define UNIT_LABEL_SPREAD           (150.0) // Unit labels will be spread over that many points
 
-@interface CSScaleVC ()
+@interface CSScaleVC () <UnitPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *volumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;

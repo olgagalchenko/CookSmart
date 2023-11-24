@@ -14,7 +14,7 @@
 @class CSIngredientGroup;
 @class CSRecentsIngredientGroup;
 
-static inline NSString *pathToIngredientsOnDisk()
+static inline NSString *pathToIngredientsOnDisk(void)
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSCAssert([paths count] > 0, @"Unable to get the path to the documents directory.");
@@ -22,7 +22,7 @@ static inline NSString *pathToIngredientsOnDisk()
     return [documentsDirectory stringByAppendingPathComponent:@"ingredients.plist"];
 }
 
-static inline NSString *pathToIngredientsInBundle()
+static inline NSString *pathToIngredientsInBundle(void)
 {
     return [[NSBundle mainBundle] pathForResource:@"Ingredients" ofType:@"plist"];
 }
