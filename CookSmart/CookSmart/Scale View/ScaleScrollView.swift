@@ -1,5 +1,5 @@
 //
-//  ScaleView.swift
+//  ScaleScrollView.swift
 //  cake
 //
 //  Created by Olga Galchenko on 4/4/20.
@@ -24,8 +24,7 @@ class ScaleScrollView: UIScrollView {
       .eraseToAnyPublisher()
   }
 
-  init(unitsPerTile: Int = 1,
-       mirror: Bool = false) {
+  init(unitsPerTile: Int = 1, mirror: Bool = false) {
     self.unitsPerTile = unitsPerTile
     self.mirror = mirror
 
@@ -267,11 +266,6 @@ struct ScalePreview: PreviewProvider {
   }
 
   struct ScalePreviewContainer: UIViewRepresentable {
-    init(unitsPerTile: Int, mirror: Bool) {
-      self.unitsPerTile = unitsPerTile
-      self.mirror = mirror
-    }
-
     var unitsPerTile: Int
     var mirror: Bool
 

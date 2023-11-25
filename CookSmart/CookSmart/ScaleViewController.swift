@@ -59,7 +59,7 @@ class ScaleViewController: UIViewController {
 
   private var displayMode: DisplayMode = .scales
 
-  private let volumeUnitButton: Button = {
+  private lazy var volumeUnitButton: Button = {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Volume", for: .disabled)
@@ -67,7 +67,7 @@ class ScaleViewController: UIViewController {
     return button
   }()
 
-  private let weightUnitButton: Button = {
+  private lazy var weightUnitButton: Button = {
     let button = Button()
     button.setTitleColor(.label, for: .disabled)
     button.setTitle("Weight", for: .disabled)
@@ -121,7 +121,8 @@ class ScaleViewController: UIViewController {
   @objc
   private func toggleDisplayMode() {
     guard let scalesTopConstraint = scalesTopConstraint,
-      let unitPickerBottomConstraint = unitPickerBottomConstraint else {
+          let unitPickerBottomConstraint = unitPickerBottomConstraint
+    else {
       return
     }
     displayMode = (displayMode == .scales) ? .unitPicker : .scales

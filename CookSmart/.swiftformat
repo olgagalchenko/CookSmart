@@ -18,3 +18,4 @@
 # Disabled Rules
 
 --disable blankLinesAtStartOfScope
+--disable wrapMultilineStatementBraces

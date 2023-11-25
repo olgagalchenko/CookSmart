@@ -28,7 +28,7 @@ final class Label: UILabel, StyledView {
 }
 
 struct LabelStyle {
-  var titleColor: UIColor = UIColor.label
+  var titleColor: UIColor = .label
   var font: UIFont = AvenirFont.regular.of(size: 17)
 
   static var standard: LabelStyle {

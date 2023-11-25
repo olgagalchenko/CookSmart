@@ -1,5 +1,5 @@
 //
-//  DoubleUtilsTests.swift
+//  DoubleStringUtilsTests.swift
 //  cake
 //
 //  Created by Olga Galchenko on 4/11/20.

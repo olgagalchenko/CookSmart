@@ -78,7 +78,7 @@ class ScaleTile: UIView {
 
   // MARK: Private
 
-  let valueLabel: Label = Label(style: .tiny)
+  let valueLabel: Label = .init(style: .tiny)
   let mirror: Bool
 
   private func setUpViews() {
@@ -192,10 +192,6 @@ struct ScaleTilePreview: PreviewProvider {
   }
 
   struct TilePreviewContainer: UIViewRepresentable {
-    init(value: Float, mirror: Bool) {
-      self.value = value
-      self.mirror = mirror
-    }
 
     let value: Float
     let mirror: Bool

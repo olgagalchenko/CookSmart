@@ -1,5 +1,5 @@
 //
-//  ScalesView.swift
+//  ScaleView.swift
 //  cake
 //
 //  Created by Olga Galchenko on 4/12/20.
