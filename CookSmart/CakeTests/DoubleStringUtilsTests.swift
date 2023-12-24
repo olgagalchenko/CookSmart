@@ -40,61 +40,61 @@ class DoubleSringUtilsTests: XCTestCase {
 
   func test_vulgarFractionString_aboveThreshold_roundsUp() {
     let rawValue = 66.7
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "67")
   }
 
   func test_vulgarFractionString_aboveThreshold_roundsDown() {
     let rawValue = 66.445
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "66")
   }
 
   func test_vulgarFractionString_aboveThreshold() {
     let rawValue = 66.445
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "66")
   }
 
   func test_vulgarFractionString_belowThreshold_half() {
     let rawValue = 49.45
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "49½")
   }
 
   func test_vulgarFractionString_belowThreshold_zero() {
     let rawValue = 0.05
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "0")
   }
 
   func test_vulgarFractionString_belowThreshold_eighth() {
     let rawValue = 0.1
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "⅛")
   }
 
   func test_vulgarFractionString_belowThreshold_quarter() {
     let rawValue = 1.20
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "1¼")
   }
 
   func test_vulgarFractionString_belowThreshold_third() {
     let rawValue = 1.35
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "1⅓")
   }
 
   func test_vulgarFractionString_belowThreshold_one() {
     let rawValue = 0.95
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "1")
   }
 
   func test_vulgarFractionString_belowThreshold_two() {
     let rawValue = 1.95
-    let result = rawValue.vulgarFractionString
+    let result = rawValue.humanReabableString
     XCTAssertEqual(result, "2")
   }
 }

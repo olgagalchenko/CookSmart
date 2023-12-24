@@ -2,34 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
+	<dict>
 		<key>Flours</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>All-Purpose Flour</string>
 				<key>Density</key>
 				<real>125</real>
 			</dict>
-            <dict>
-				<key>Name</key>
-				<string>Almond Flour</string>
-				<key>Density</key>
-				<real>95.6796</real>
-			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Barley Flour</string>
 				<key>Density</key>
 				<real>113.398</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Bread Flour</string>
 				<key>Density</key>
 				<real>120.485</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Buckwheat Flour</string>
 				<key>Density</key>
@@ -41,31 +35,31 @@
 				<key>Density</key>
 				<real>116.25</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Oat Flour</string>
 				<key>Density</key>
 				<real>92.136</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Quinoa Flour</string>
 				<key>Density</key>
 				<real>92.136</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Brown Rice Flour</string>
 				<key>Density</key>
 				<real>152.379</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>White Rice Flour</string>
 				<key>Density</key>
 				<real>141.748</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Self Rising Flour</string>
 				<key>Density</key>
@@ -100,13 +94,13 @@
 				<key>Density</key>
 				<integer>198</integer>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Pearl Sugar</string>
 				<key>Density</key>
 				<integer>200</integer>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Muscovado Sugar</string>
 				<key>Density</key>
@@ -120,34 +114,34 @@
 			</dict>
 		</array>
 	</dict>
-		<dict>
+	<dict>
 		<key>Oil and Shortening</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Butter</string>
 				<key>Density</key>
 				<real>227</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Canola Oil</string>
 				<key>Density</key>
 				<real>219.5</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Coconut Oil</string>
 				<key>Density</key>
 				<real>216</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Lard</string>
 				<key>Density</key>
 				<real>205</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Olive Oil</string>
 				<key>Density</key>
@@ -159,7 +153,7 @@
 				<key>Density</key>
 				<real>222</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Vegetable Shortening</string>
 				<key>Density</key>
@@ -167,63 +161,63 @@
 			</dict>
 		</array>
 	</dict>
-    <dict>
+	<dict>
 		<key>Syrups</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Corn Syrup</string>
 				<key>Density</key>
 				<real>311.845</real>
 			</dict>
-            <dict>
-                <key>Name</key>
-                <string>Honey</string>
-                <key>Density</key>
-                <real>340</real>
-            </dict>
-            <dict>
-                <key>Name</key>
-                <string>Maple Syrup</string>
-                <key>Density</key>
-                <real>311.845</real>
-            </dict>
-            <dict>
-                <key>Name</key>
-                <string>Molasses</string>
-                <key>Density</key>
-                <real>340.194</real>
-            </dict>
-        </array>
+			<dict>
+				<key>Name</key>
+				<string>Honey</string>
+				<key>Density</key>
+				<real>340</real>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Maple Syrup</string>
+				<key>Density</key>
+				<real>311.845</real>
+			</dict>
+			<dict>
+				<key>Name</key>
+				<string>Molasses</string>
+				<key>Density</key>
+				<real>340.194</real>
+			</dict>
+		</array>
 	</dict>
-    <dict>
+	<dict>
 		<key>Dry Goods</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Baking Powder</string>
 				<key>Density</key>
 				<real>240</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Bread Crumbs</string>
 				<key>Density</key>
 				<real>113.398</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Bread Crumbs, Panko</string>
 				<key>Density</key>
 				<real>49.6117</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Buttermilk Powder</string>
 				<key>Density</key>
 				<real>198.447</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Chocolate, chopped/chips</string>
 				<key>Density</key>
@@ -235,23 +229,23 @@
 				<key>Density</key>
 				<real>85</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Cornmeal</string>
 				<key>Density</key>
 				<real>138.204</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Cornstarch</string>
 				<key>Density</key>
 				<real>113.398</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Oats, rolled</string>
 				<key>Density</key>
-				<real>99.2233</real>
+				<real>99.22329999999999</real>
 			</dict>
 			<dict>
 				<key>Name</key>
@@ -259,13 +253,13 @@
 				<key>Density</key>
 				<real>269.32</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Poppy Seeds</string>
 				<key>Density</key>
 				<real>155.922</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Raisins</string>
 				<key>Density</key>
@@ -273,94 +267,94 @@
 			</dict>
 		</array>
 	</dict>
-    <dict>
+	<dict>
 		<key>Dairy</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Buttermilk</string>
 				<key>Density</key>
 				<real>242</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Cream Cheese</string>
 				<key>Density</key>
 				<real>226.796</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Egg Whites, large</string>
 				<key>Density</key>
 				<real>240</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Egg Yolks, large</string>
 				<key>Density</key>
 				<real>300</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Feta Cheese</string>
 				<key>Density</key>
 				<real>113.398</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Heavy/Whipping Cream</string>
 				<key>Density</key>
 				<real>232</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Milk (whole, 2%, 1%, skim)</string>
 				<key>Density</key>
 				<real>242</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Milk, evaporated</string>
 				<key>Density</key>
 				<real>255.146</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Milk, sweetened condensed</string>
 				<key>Density</key>
 				<real>311.845</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Parmesan Cheese, grated</string>
 				<key>Density</key>
-				<real>99.2233</real>
+				<real>99.22329999999999</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Ricotta Cheese</string>
 				<key>Density</key>
 				<real>226.796</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Semi-Soft Cheese, grated</string>
 				<key>Density</key>
 				<real>113.398</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Sour Cream</string>
 				<key>Density</key>
 				<real>242</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Yogurt</string>
 				<key>Density</key>
 				<real>245</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Yogurt, greek</string>
 				<key>Density</key>
@@ -368,58 +362,58 @@
 			</dict>
 		</array>
 	</dict>
-    	<dict>
+	<dict>
 		<key>Produce</key>
 		<array>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Bananas, mashed</string>
 				<key>Density</key>
 				<real>226.796</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Berries, frozen</string>
 				<key>Density</key>
 				<real>141.748</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Blueberries</string>
 				<key>Density</key>
 				<real>170.097</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Carrots, grated</string>
 				<key>Density</key>
-				<real>99.2233</real>
+				<real>99.22329999999999</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Mushrooms, sliced</string>
 				<key>Density</key>
-				<real>77.9612</real>
+				<real>77.96120000000001</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Onions, diced</string>
 				<key>Density</key>
 				<real>141.748</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Pumpkin, pureed</string>
 				<key>Density</key>
 				<real>269.32</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Raspberries</string>
 				<key>Density</key>
 				<real>120.485</real>
 			</dict>
-            <dict>
+			<dict>
 				<key>Name</key>
 				<string>Strawberries, sliced</string>
 				<key>Density</key>

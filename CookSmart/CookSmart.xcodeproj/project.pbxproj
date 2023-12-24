@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		392D8645242FD0FF002064D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392D8644242FD0FF002064D6 /* Colors.swift */; };
 		396E363D2439684E00C2815B /* CenterLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363C2439684E00C2815B /* CenterLineView.swift */; };
 		396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E363E24396D5900C2815B /* UnitPickerView.swift */; };
 		396E3643243976A000C2815B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3642243976A000C2815B /* GradientView.swift */; };
-		396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */; };
 		39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE562442775E00359EDF /* AppDelegate.swift */; };
 		39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE592442776D00359EDF /* SceneDelegate.swift */; };
 		39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */; };
 		39C3CE82244BE22100359EDF /* ScalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C3CE81244BE22100359EDF /* ScalesView.swift */; };
-		773C97E2244BE5D900208351 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E0244BE5D900208351 /* Button.swift */; };
-		773C97E5244BF0BF00208351 /* StyledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E4244BF0BF00208351 /* StyledView.swift */; };
-		773C97E8244BF14A00208351 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C97E7244BF14A00208351 /* Label.swift */; };
 		77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AE9242FB9C8000CFB0E /* ScaleTile.swift */; };
-		77479AF924303D86000CFB0E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77479AF824303D86000CFB0E /* Fonts.swift */; };
 		774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD6424426CC2002A59AC /* Double+StringUtils.swift */; };
 		774EBD77244271DC002A59AC /* DoubleStringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */; };
-		774EBD792442A1CE002A59AC /* Fraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD782442A1CE002A59AC /* Fraction.swift */; };
 		774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7C2442E475002A59AC /* ScaleViewController.swift */; };
-		774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */; };
 		77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F41931243950CB0055053E /* ScaleScrollView.swift */; };
-		80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */; };
 		80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80433B351BB2731B006B7A85 /* Launch Screen.storyboard */; };
-		80592C0518924B010082D4E1 /* CSIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0418924B010082D4E1 /* CSIngredients.m */; };
+		80475EF62B12AB00009644DF /* IngredientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80475EF52B12AB00009644DF /* IngredientListView.swift */; };
+		80475EFF2B12E105009644DF /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80475EFE2B12E105009644DF /* Ingredient.swift */; };
+		80475F012B12E257009644DF /* StoredIngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80475F002B12E257009644DF /* StoredIngredientGroup.swift */; };
+		80475F032B12E33B009644DF /* IngredientsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80475F022B12E33B009644DF /* IngredientsStore.swift */; };
+		80475F052B130C41009644DF /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80475F042B130C41009644DF /* Assertions.swift */; };
+		805231B52B38F397009C473A /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805231B42B38F397009C473A /* UIView+Constraints.swift */; };
+		805541E62B16BD5300529F3B /* IngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805541E52B16BD5300529F3B /* IngredientGroup.swift */; };
+		805541E82B16C82C00529F3B /* RecentsIngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805541E72B16C82C00529F3B /* RecentsIngredientGroup.swift */; };
+		805541F02B19780200529F3B /* CSSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 805541EF2B19780200529F3B /* CSSharedConstants.m */; };
+		805541F52B1AC45700529F3B /* Density.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805541F42B1AC45700529F3B /* Density.swift */; };
+		805541FD2B1C0DC000529F3B /* CSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805541FC2B1C0DC000529F3B /* CSColor.swift */; };
 		80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0718924B0F0082D4E1 /* CSIngredient.m */; };
-		80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */; };
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
+		805B8B0F2B1C71BE00FF0BBF /* CSTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805B8B0E2B1C71BE00FF0BBF /* CSTextStyle.swift */; };
 		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
-		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
 		80CD77B72B1158A10042B93D /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.1.tbd */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
@@ -43,7 +43,6 @@
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
 		9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */; };
 		9358BD6F1891CAAA00A99D51 /* CSConversionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */; };
-		936809701891059700655B89 /* CSIngredientListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9368096F1891059700655B89 /* CSIngredientListVC.m */; };
 		93D09934189766080014DB3E /* CSUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D09933189766080014DB3E /* CSUnit.m */; };
 		93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CCA618AED6050045400D /* CSScaleVC.m */; };
 		93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93F6CCA718AED6050045400D /* CSScaleVC.xib */; };
@@ -51,9 +50,8 @@
 		B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA292180524A800CF7588 /* CoreGraphics.framework */; };
 		B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BCA294180524A800CF7588 /* UIKit.framework */; };
 		B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA299180524A800CF7588 /* InfoPlist.strings */; };
-		B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2A2180524A800CF7588 /* Images.xcassets */; };
+		B7BCA2A3180524A800CF7588 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2A2180524A800CF7588 /* Assets.xcassets */; };
 		B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = B7BCA2BF1805284A00CF7588 /* Ingredients.plist */; };
-		DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,46 +86,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		392D8644242FD0FF002064D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		396E363C2439684E00C2815B /* CenterLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLineView.swift; sourceTree = "<group>"; };
 		396E363E24396D5900C2815B /* UnitPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerView.swift; sourceTree = "<group>"; };
 		396E3642243976A000C2815B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPickerDelegate.swift; sourceTree = "<group>"; };
 		39C3CE562442775E00359EDF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39C3CE592442776D00359EDF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientViewController.swift; sourceTree = "<group>"; };
 		39C3CE81244BE22100359EDF /* ScalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalesView.swift; sourceTree = "<group>"; };
-		773C97E0244BE5D900208351 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
-		773C97E4244BF0BF00208351 /* StyledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledView.swift; sourceTree = "<group>"; };
-		773C97E7244BF14A00208351 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		77479AE8242FB9C8000CFB0E /* cake-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cake-Bridging-Header.h"; sourceTree = "<group>"; };
 		77479AE9242FB9C8000CFB0E /* ScaleTile.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScaleTile.swift; sourceTree = "<group>"; };
-		77479AF824303D86000CFB0E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		774EBD6424426CC2002A59AC /* Double+StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+StringUtils.swift"; sourceTree = "<group>"; };
 		774EBD67244270C8002A59AC /* DoubleStringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleStringUtilsTests.swift; sourceTree = "<group>"; };
 		774EBD6D244271D6002A59AC /* CakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774EBD71244271D6002A59AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		774EBD782442A1CE002A59AC /* Fraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fraction.swift; sourceTree = "<group>"; };
 		774EBD7C2442E475002A59AC /* ScaleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleViewController.swift; sourceTree = "<group>"; };
-		774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		77F41931243950CB0055053E /* ScaleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleScrollView.swift; sourceTree = "<group>"; };
-		80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRecentsIngredientGroup.h; sourceTree = "<group>"; };
-		80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRecentsIngredientGroup.m; sourceTree = "<group>"; };
 		80433B351BB2731B006B7A85 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		80592C0318924B010082D4E1 /* CSIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredients.h; sourceTree = "<group>"; };
-		80592C0418924B010082D4E1 /* CSIngredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredients.m; sourceTree = "<group>"; };
+		80475EF52B12AB00009644DF /* IngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListView.swift; sourceTree = "<group>"; };
+		80475EFE2B12E105009644DF /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		80475F002B12E257009644DF /* StoredIngredientGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredIngredientGroup.swift; sourceTree = "<group>"; };
+		80475F022B12E33B009644DF /* IngredientsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsStore.swift; sourceTree = "<group>"; };
+		80475F042B130C41009644DF /* Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
+		805231B42B38F397009C473A /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		805541E52B16BD5300529F3B /* IngredientGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientGroup.swift; sourceTree = "<group>"; };
+		805541E72B16C82C00529F3B /* RecentsIngredientGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsIngredientGroup.swift; sourceTree = "<group>"; };
+		805541EE2B19780200529F3B /* CSSharedConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSharedConstants.h; sourceTree = "<group>"; };
+		805541EF2B19780200529F3B /* CSSharedConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSSharedConstants.m; sourceTree = "<group>"; };
+		805541F42B1AC45700529F3B /* Density.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Density.swift; sourceTree = "<group>"; };
+		805541FC2B1C0DC000529F3B /* CSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSColor.swift; sourceTree = "<group>"; };
 		80592C0618924B0F0082D4E1 /* CSIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredient.h; sourceTree = "<group>"; };
 		80592C0718924B0F0082D4E1 /* CSIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredient.m; sourceTree = "<group>"; };
-		80592C091892541D0082D4E1 /* CSIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientGroup.h; sourceTree = "<group>"; };
-		80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientGroup.m; sourceTree = "<group>"; };
 		80592C0C189268D60082D4E1 /* CSScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSScaleView.h; sourceTree = "<group>"; };
 		80592C0D189268D60082D4E1 /* CSScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleView.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
+		805B8B0E2B1C71BE00FF0BBF /* CSTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTextStyle.swift; sourceTree = "<group>"; };
 		80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VGAnalytics.xcodeproj; path = "../analytics/iOS Analytics/VGAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		80629C6718D4B3BF00106131 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = ../iPhoneOS.sdk/usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
-		807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListViewCell.h; sourceTree = "<group>"; };
-		807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListViewCell.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
 		80A614DC18BF3D4100A205BB /* CSGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGlassView.h; sourceTree = "<group>"; };
 		80A614DD18BF3D4100A205BB /* CSGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGlassView.m; sourceTree = "<group>"; };
@@ -138,8 +133,6 @@
 		9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSConversionVC.h; sourceTree = "<group>"; };
 		9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSConversionVC.m; sourceTree = "<group>"; };
 		9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSConversionVC.xib; sourceTree = "<group>"; };
-		9368096E1891059700655B89 /* CSIngredientListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListVC.h; sourceTree = "<group>"; };
-		9368096F1891059700655B89 /* CSIngredientListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListVC.m; sourceTree = "<group>"; };
 		93D09932189766080014DB3E /* CSUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUnit.h; sourceTree = "<group>"; };
 		93D09933189766080014DB3E /* CSUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUnit.m; sourceTree = "<group>"; };
 		93F6CCA518AED6050045400D /* CSScaleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSScaleVC.h; sourceTree = "<group>"; };
@@ -152,11 +145,8 @@
 		B7BCA298180524A800CF7588 /* CookSmart-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CookSmart-Info.plist"; sourceTree = "<group>"; };
 		B7BCA29A180524A800CF7588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7BCA29E180524A800CF7588 /* CookSmart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CookSmart-Prefix.pch"; sourceTree = "<group>"; };
-		B7BCA2A2180524A800CF7588 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B7BCA2A2180524A800CF7588 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7BCA2BF1805284A00CF7588 /* Ingredients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
-		DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFilteredIngredientGroup.h; sourceTree = "<group>"; };
-		DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFilteredIngredientGroup.m; sourceTree = "<group>"; };
-		DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSIngredientGroupInternals.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,37 +172,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		392D8642242FD0CA002064D6 /* Core */ = {
+		392D8642242FD0CA002064D6 /* Misc Utils */ = {
 			isa = PBXGroup;
 			children = (
-				773C97E0244BE5D900208351 /* Button.swift */,
-				392D8644242FD0FF002064D6 /* Colors.swift */,
-				77479AF824303D86000CFB0E /* Fonts.swift */,
 				774EBD6424426CC2002A59AC /* Double+StringUtils.swift */,
-				774EBD782442A1CE002A59AC /* Fraction.swift */,
-				774EBD7F2442EC26002A59AC /* UIView+Constraints.swift */,
-				773C97E4244BF0BF00208351 /* StyledView.swift */,
-				773C97E7244BF14A00208351 /* Label.swift */,
+				80475F042B130C41009644DF /* Assertions.swift */,
 			);
-			path = Core;
+			path = "Misc Utils";
 			sourceTree = "<group>";
 		};
-		39C3CE612442A1A300359EDF /* Edit Ingredient */ = {
+		39C3CE7F244BE1B100359EDF /* Scales */ = {
 			isa = PBXGroup;
 			children = (
-				39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */,
-			);
-			path = "Edit Ingredient";
-			sourceTree = "<group>";
-		};
-		39C3CE7F244BE1B100359EDF /* Scale View */ = {
-			isa = PBXGroup;
-			children = (
+				805231B12B38D566009C473A /* ObjC */,
+				396E363E24396D5900C2815B /* UnitPickerView.swift */,
+				396E3642243976A000C2815B /* GradientView.swift */,
+				396E363C2439684E00C2815B /* CenterLineView.swift */,
+				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
 				77479AE9242FB9C8000CFB0E /* ScaleTile.swift */,
 				77F41931243950CB0055053E /* ScaleScrollView.swift */,
 				39C3CE81244BE22100359EDF /* ScalesView.swift */,
 			);
-			path = "Scale View";
+			path = Scales;
 			sourceTree = "<group>";
 		};
 		774EBD6E244271D6002A59AC /* CakeTests */ = {
@@ -224,53 +205,98 @@
 			path = CakeTests;
 			sourceTree = "<group>";
 		};
-		8000355C18B3CBF50032BF91 /* Scales */ = {
+		80475EF32B12AAC9009644DF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				805231B42B38F397009C473A /* UIView+Constraints.swift */,
+				805231B22B38D6B5009C473A /* ObjC */,
+				80475EF52B12AB00009644DF /* IngredientListView.swift */,
+				39C3CE632442A1C000359EDF /* EditIngredientViewController.swift */,
+				39C3CE7F244BE1B100359EDF /* Scales */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		80475EFD2B12E01A009644DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				805231B02B38D4E6009C473A /* ObjC */,
+				805541E92B18709F00529F3B /* IngredientGroup */,
+				80475EFE2B12E105009644DF /* Ingredient.swift */,
+				80475F022B12E33B009644DF /* IngredientsStore.swift */,
+				805541F42B1AC45700529F3B /* Density.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		805231B02B38D4E6009C473A /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				805541EE2B19780200529F3B /* CSSharedConstants.h */,
+				805541EF2B19780200529F3B /* CSSharedConstants.m */,
+				805231B32B38DCB7009C473A /* Units */,
+				80592C0618924B0F0082D4E1 /* CSIngredient.h */,
+				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
+		805231B12B38D566009C473A /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				80592C0C189268D60082D4E1 /* CSScaleView.h */,
+				80592C0D189268D60082D4E1 /* CSScaleView.m */,
+				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
 				80A614DC18BF3D4100A205BB /* CSGlassView.h */,
 				80A614DD18BF3D4100A205BB /* CSGlassView.m */,
 				93F6CCA518AED6050045400D /* CSScaleVC.h */,
 				93F6CCA618AED6050045400D /* CSScaleVC.m */,
 				93F6CCA718AED6050045400D /* CSScaleVC.xib */,
-				396E363E24396D5900C2815B /* UnitPickerView.swift */,
-				396E3646243A3BDC00C2815B /* UnitPickerDelegate.swift */,
 				80592C1518939E030082D4E1 /* CSGradientView.h */,
 				80592C1618939E030082D4E1 /* CSGradientView.m */,
-				396E3642243976A000C2815B /* GradientView.swift */,
-				80592C0F18926AF30082D4E1 /* ScaleView */,
-				8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */,
-				396E363C2439684E00C2815B /* CenterLineView.swift */,
-				774EBD7C2442E475002A59AC /* ScaleViewController.swift */,
 			);
-			name = Scales;
+			path = ObjC;
 			sourceTree = "<group>";
 		};
-		80592C0218924AEA0082D4E1 /* Model */ = {
+		805231B22B38D6B5009C473A /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				93D0993B18977D320014DB3E /* Units */,
-				80592C0318924B010082D4E1 /* CSIngredients.h */,
-				80592C0418924B010082D4E1 /* CSIngredients.m */,
-				80592C0618924B0F0082D4E1 /* CSIngredient.h */,
-				80592C0718924B0F0082D4E1 /* CSIngredient.m */,
-				80592C091892541D0082D4E1 /* CSIngredientGroup.h */,
-				80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */,
-				80433B2C1BB26C1A006B7A85 /* CSRecentsIngredientGroup.h */,
-				80433B2D1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m */,
-				DC82F26018AC25B9004FD733 /* CSFilteredIngredientGroup.h */,
-				DC82F26118AC25B9004FD733 /* CSFilteredIngredientGroup.m */,
-				DC82F26318AC2642004FD733 /* CSIngredientGroupInternals.h */,
+				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
+				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
+				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
 			);
-			name = Model;
+			path = ObjC;
 			sourceTree = "<group>";
 		};
-		80592C0F18926AF30082D4E1 /* ScaleView */ = {
+		805231B32B38DCB7009C473A /* Units */ = {
 			isa = PBXGroup;
 			children = (
-				80592C0C189268D60082D4E1 /* CSScaleView.h */,
-				80592C0D189268D60082D4E1 /* CSScaleView.m */,
+				93D09932189766080014DB3E /* CSUnit.h */,
+				93D09933189766080014DB3E /* CSUnit.m */,
+				931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */,
+				931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */,
 			);
-			name = ScaleView;
+			path = Units;
+			sourceTree = "<group>";
+		};
+		805541E92B18709F00529F3B /* IngredientGroup */ = {
+			isa = PBXGroup;
+			children = (
+				80475F002B12E257009644DF /* StoredIngredientGroup.swift */,
+				805541E52B16BD5300529F3B /* IngredientGroup.swift */,
+				805541E72B16C82C00529F3B /* RecentsIngredientGroup.swift */,
+			);
+			path = IngredientGroup;
+			sourceTree = "<group>";
+		};
+		805541FE2B1C0FD200529F3B /* Design Language */ = {
+			isa = PBXGroup;
+			children = (
+				805541FC2B1C0DC000529F3B /* CSColor.swift */,
+				B7BCA2A2180524A800CF7588 /* Assets.xcassets */,
+				805B8B0E2B1C71BE00FF0BBF /* CSTextStyle.swift */,
+			);
+			path = "Design Language";
 			sourceTree = "<group>";
 		};
 		80629C5618D4AE8A00106131 /* Products */ = {
@@ -280,28 +306,6 @@
 				80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		807C0B681BB3DD04007D2C03 /* Ingredient List UI */ = {
-			isa = PBXGroup;
-			children = (
-				9368096E1891059700655B89 /* CSIngredientListVC.h */,
-				9368096F1891059700655B89 /* CSIngredientListVC.m */,
-				807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */,
-				807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */,
-			);
-			name = "Ingredient List UI";
-			sourceTree = "<group>";
-		};
-		93D0993B18977D320014DB3E /* Units */ = {
-			isa = PBXGroup;
-			children = (
-				93D09932189766080014DB3E /* CSUnit.h */,
-				93D09933189766080014DB3E /* CSUnit.m */,
-				931AF96B18C2BAE50018AA8B /* CSUnitCollection.h */,
-				931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */,
-			);
-			name = Units;
 			sourceTree = "<group>";
 		};
 		B7BCA284180524A800CF7588 = {
@@ -341,19 +345,13 @@
 		B7BCA296180524A800CF7588 /* CookSmart */ = {
 			isa = PBXGroup;
 			children = (
-				39C3CE7F244BE1B100359EDF /* Scale View */,
+				80475EF32B12AAC9009644DF /* UI */,
+				80475EFD2B12E01A009644DF /* Model */,
+				805541FE2B1C0FD200529F3B /* Design Language */,
+				392D8642242FD0CA002064D6 /* Misc Utils */,
 				39C3CE562442775E00359EDF /* AppDelegate.swift */,
 				39C3CE592442776D00359EDF /* SceneDelegate.swift */,
-				392D8642242FD0CA002064D6 /* Core */,
-				39C3CE612442A1A300359EDF /* Edit Ingredient */,
 				80433B351BB2731B006B7A85 /* Launch Screen.storyboard */,
-				9358BD6B1891CAAA00A99D51 /* CSConversionVC.h */,
-				9358BD6C1891CAAA00A99D51 /* CSConversionVC.m */,
-				9358BD6D1891CAAA00A99D51 /* CSConversionVC.xib */,
-				8000355C18B3CBF50032BF91 /* Scales */,
-				80592C0218924AEA0082D4E1 /* Model */,
-				807C0B681BB3DD04007D2C03 /* Ingredient List UI */,
-				B7BCA2A2180524A800CF7588 /* Images.xcassets */,
 				B7BCA297180524A800CF7588 /* Supporting Files */,
 			);
 			path = CookSmart;
@@ -499,7 +497,7 @@
 				931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */,
 				B7BCA29B180524A800CF7588 /* InfoPlist.strings in Resources */,
 				B7BCA2C01805284A00CF7588 /* Ingredients.plist in Resources */,
-				B7BCA2A3180524A800CF7588 /* Images.xcassets in Resources */,
+				B7BCA2A3180524A800CF7588 /* Assets.xcassets in Resources */,
 				80433B361BB2731B006B7A85 /* Launch Screen.storyboard in Resources */,
 				93F6CCA918AED6050045400D /* CSScaleVC.xib in Resources */,
 			);
@@ -597,37 +595,35 @@
 			files = (
 				774EBD6524426CC2002A59AC /* Double+StringUtils.swift in Sources */,
 				396E363F24396D5900C2815B /* UnitPickerView.swift in Sources */,
+				80475F012B12E257009644DF /* StoredIngredientGroup.swift in Sources */,
+				805541E62B16BD5300529F3B /* IngredientGroup.swift in Sources */,
+				80475EFF2B12E105009644DF /* Ingredient.swift in Sources */,
+				805541FD2B1C0DC000529F3B /* CSColor.swift in Sources */,
 				77479AEA242FB9C8000CFB0E /* ScaleTile.swift in Sources */,
-				773C97E2244BE5D900208351 /* Button.swift in Sources */,
-				774EBD802442EC26002A59AC /* UIView+Constraints.swift in Sources */,
-				392D8645242FD0FF002064D6 /* Colors.swift in Sources */,
+				80475EF62B12AB00009644DF /* IngredientListView.swift in Sources */,
 				80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */,
-				774EBD792442A1CE002A59AC /* Fraction.swift in Sources */,
+				80475F052B130C41009644DF /* Assertions.swift in Sources */,
 				93F6CCA818AED6050045400D /* CSScaleVC.m in Sources */,
+				805B8B0F2B1C71BE00FF0BBF /* CSTextStyle.swift in Sources */,
 				931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */,
 				774EBD7D2442E475002A59AC /* ScaleViewController.swift in Sources */,
+				805231B52B38F397009C473A /* UIView+Constraints.swift in Sources */,
+				805541F52B1AC45700529F3B /* Density.swift in Sources */,
+				80475F032B12E33B009644DF /* IngredientsStore.swift in Sources */,
 				39C3CE582442775E00359EDF /* AppDelegate.swift in Sources */,
 				80592C0818924B0F0082D4E1 /* CSIngredient.m in Sources */,
 				80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */,
 				39C3CE5A2442776D00359EDF /* SceneDelegate.swift in Sources */,
-				80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */,
-				77479AF924303D86000CFB0E /* Fonts.swift in Sources */,
 				80592C1718939E030082D4E1 /* CSGradientView.m in Sources */,
 				39C3CE642442A1C000359EDF /* EditIngredientViewController.swift in Sources */,
 				9358BD6E1891CAAA00A99D51 /* CSConversionVC.m in Sources */,
-				80592C0518924B010082D4E1 /* CSIngredients.m in Sources */,
 				77F41932243950CB0055053E /* ScaleScrollView.swift in Sources */,
 				39C3CE82244BE22100359EDF /* ScalesView.swift in Sources */,
-				807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */,
-				DC82F26218AC25B9004FD733 /* CSFilteredIngredientGroup.m in Sources */,
-				396E3647243A3BDC00C2815B /* UnitPickerDelegate.swift in Sources */,
-				773C97E8244BF14A00208351 /* Label.swift in Sources */,
 				93D09934189766080014DB3E /* CSUnit.m in Sources */,
-				773C97E5244BF0BF00208351 /* StyledView.swift in Sources */,
-				80433B2E1BB26C1A006B7A85 /* CSRecentsIngredientGroup.m in Sources */,
+				805541F02B19780200529F3B /* CSSharedConstants.m in Sources */,
 				396E3643243976A000C2815B /* GradientView.swift in Sources */,
 				396E363D2439684E00C2815B /* CenterLineView.swift in Sources */,
-				936809701891059700655B89 /* CSIngredientListVC.m in Sources */,
+				805541E82B16C82C00529F3B /* RecentsIngredientGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +670,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -709,7 +704,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -781,7 +775,7 @@
 					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
@@ -836,7 +830,7 @@
 					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
