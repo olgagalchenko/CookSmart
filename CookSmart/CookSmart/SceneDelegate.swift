@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: Instrument scene lifecycle with analytics
+// TODO: do an audit of all things analytics
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
 
