@@ -24,6 +24,8 @@ class ScaleTile: UIView {
     static let major_2: CGFloat = 2
   }
 
+  static let ingredients = Ingredients.shared
+
   // MARK: Lifecycle
 
   @objc
@@ -32,6 +34,7 @@ class ScaleTile: UIView {
     super.init(frame: frame)
 
     setUpViews()
+    _ = ScaleTile.ingredients
   }
 
   @available(*, unavailable)
