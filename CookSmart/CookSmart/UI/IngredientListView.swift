@@ -13,13 +13,11 @@ struct IngredientListView: View {
   @State private var searchText: String = ""
   @State private var isShowingResetAlert = false
   private var ingredientGroupsToPresent: [any IngredientGroup] {
-    let relevantGroups = if searchText.isEmpty {
-      ingredientsStore.ingredientGroups
-    } else {
+    let relevantGroups = searchText.isEmpty ?
+      ingredientsStore.ingredientGroups :
       ingredientsStore.ingredientGroups.compactMap { group in
         group.filter(searchString: searchText)
       }
-    }
     return relevantGroups.filter { !$0.ingredients.isEmpty }
   }
 

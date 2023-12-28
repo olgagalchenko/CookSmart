@@ -72,11 +72,7 @@ struct Ingredient: Codable, Identifiable, Equatable {
       CodingKeys.name.stringValue: name,
       CodingKeys.density.stringValue: density.canonical,
     ] as [String: Any]
-    let date: [String: Any] = if lastAccessDate == nil {
-      [:]
-    } else {
-      [CodingKeys.lastAccessDate.stringValue: lastAccessDate!]
-    }
+    let date: [String: Any] = lastAccessDate == nil ? [:] : [CodingKeys.lastAccessDate.stringValue: lastAccessDate!]
     return baseDict.merging(date, uniquingKeysWith: { _, x in x })
   }
 }

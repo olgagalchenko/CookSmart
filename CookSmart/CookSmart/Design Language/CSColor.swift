@@ -17,11 +17,7 @@ enum CSColor: String {
   case clear = "Clear"
 
   func asUIColor() -> UIColor {
-    if rawValue == "Clear" {
-      UIColor.clear
-    } else {
-      UIColor(named: rawValue)!
-    }
+    rawValue == "Clear" ? UIColor.clear : UIColor(named: rawValue)!
   }
 
   func asSwiftUIColor() -> Color {
