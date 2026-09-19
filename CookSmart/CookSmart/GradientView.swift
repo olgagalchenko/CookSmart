@@ -16,8 +16,12 @@ class GradientView: UIView {
     super.init(frame: .zero)
 
     isOpaque = false
+    backgroundColor = .clear
+    // Redraw on bounds changes so the gradient always spans the view. Drawing in
+    // `draw(_:)` also means UIKit resolves the dynamic colors against the current
+    // trait collection for us, so light/dark changes need no trait observation.
+    contentMode = .redraw
     translatesAutoresizingMaskIntoConstraints = false
-    addGradientLayer()
   }
 
   @available(*, unavailable)
@@ -25,37 +29,31 @@ class GradientView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-    applyColors(colors)
-  }
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
 
-  override var bounds: CGRect {
-    didSet {
-      if bounds != oldValue {
-        gradientLayer.frame = bounds
-      }
+    guard let context = UIGraphicsGetCurrentContext(),
+          let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                    colors: colors.map(\.cgColor) as CFArray,
+                                    locations: nil)
+    else {
+      return
     }
+
+    context.drawLinearGradient(
+      gradient,
+      start: CGPoint(x: bounds.midX, y: bounds.minY + (bounds.height * Constants.startY)),
+      end: CGPoint(x: bounds.midX, y: bounds.maxY),
+      options: [.drawsBeforeStartLocation, .drawsAfterEndLocation]
+    )
   }
 
   // MARK: Private
 
-  private let gradientLayer = CAGradientLayer()
+  private enum Constants {
+    /// Fraction of the view's height at which the gradient begins.
+    static let startY: CGFloat = 0.1
+  }
+
   private let colors: [UIColor]
-
-  private func addGradientLayer() {
-    gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.1)
-    gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-    applyColors(colors)
-
-    layer.addSublayer(gradientLayer)
-    gradientLayer.frame = bounds
-  }
-
-  private func applyColors(_ colors: [UIColor]) {
-    let resolvedColors = colors.map { color -> CGColor in
-      color.resolvedColor(with: traitCollection).cgColor
-    }
-    gradientLayer.colors = resolvedColors
-  }
 }

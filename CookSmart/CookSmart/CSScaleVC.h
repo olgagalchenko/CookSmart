@@ -20,7 +20,7 @@
 
 @class CSIngredient;
 @protocol UnitPickerDelegate;
-@interface CSScaleVC : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+@interface CSScaleVC : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) CSIngredient*         ingredient;
 @property (assign, nonatomic) BOOL                  syncsScales;

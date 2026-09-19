@@ -6,7 +6,7 @@
 
 # Format Rules
 
---swiftversion 5.2
+--swiftversion 5.10
 --indent 2
 --indentcase false
 --stripunusedargs closure-only

@@ -245,23 +245,23 @@ struct ScalePreview: PreviewProvider {
   static var preview: some View {
     HStack(spacing: 0) {
       ScalePreviewContainer(unitsPerTile: 1, mirror: false)
-        .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
       ScalePreviewContainer(unitsPerTile: 125, mirror: true)
-        .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
   }
 
   static var previews: some View {
     Group {
-      NavigationView {
-        preview
-      }.environment(\.colorScheme, .light)
-      NavigationView {
-        preview
-      }.environment(\.sizeCategory, .extraLarge)
-      NavigationView {
-        preview
-      }.environment(\.colorScheme, .dark)
+      preview
+        .environment(\.colorScheme, .light)
+        .previewDisplayName("Light")
+      preview
+        .environment(\.dynamicTypeSize, .xLarge)
+        .previewDisplayName("Extra Large Type")
+      preview
+        .environment(\.colorScheme, .dark)
+        .previewDisplayName("Dark")
     }
   }
 

@@ -19,6 +19,6 @@ struct ScaleScrollViewRepresentable: UIViewRepresentable {
 struct ScaleScrollView_Previews: PreviewProvider {
   static var previews: some View {
     ScaleScrollViewRepresentable()
-      .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }

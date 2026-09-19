@@ -151,43 +151,31 @@ class ScaleTile: UIView {
 }
 
 struct ScaleTilePreview: PreviewProvider {
+  static var preview: some View {
+    HStack(spacing: 0) {
+      VStack(spacing: 0) {
+        TilePreviewContainer(value: 5, mirror: false)
+          .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+        TilePreviewContainer(value: 600, mirror: false)
+          .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+      }
+      VStack(spacing: 0) {
+        TilePreviewContainer(value: 5, mirror: true)
+          .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+        TilePreviewContainer(value: 600, mirror: true)
+          .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+      }
+    }
+  }
+
   static var previews: some View {
     Group {
-      NavigationView {
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            TilePreviewContainer(value: 5, mirror: false)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-            TilePreviewContainer(value: 600, mirror: false)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-          }
-          VStack(spacing: 0) {
-            TilePreviewContainer(value: 5, mirror: true)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-            TilePreviewContainer(value: 600, mirror: true)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-          }
-        }
-      }
-      .environment(\.colorScheme, .light)
-
-      NavigationView {
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            TilePreviewContainer(value: 5, mirror: false)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-            TilePreviewContainer(value: 600, mirror: false)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-          }
-          VStack(spacing: 0) {
-            TilePreviewContainer(value: 5, mirror: true)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-            TilePreviewContainer(value: 600, mirror: true)
-              .frame(width: UIScreen.main.bounds.width / 2, height: 200)
-          }
-        }
-      }
-      .environment(\.colorScheme, .dark)
+      preview
+        .environment(\.colorScheme, .light)
+        .previewDisplayName("Light")
+      preview
+        .environment(\.colorScheme, .dark)
+        .previewDisplayName("Dark")
     }
   }
 

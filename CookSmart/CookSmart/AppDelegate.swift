@@ -8,7 +8,7 @@
 
 import UIKit
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
@@ -30,25 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
 
-  // MARK: Legacy Lifecycle
-
-  func applicationWillResignActive(_ application: UIApplication) {
-    logAppLifecycleEvent("resign_active", nil)
-  }
-
-  func applicationDidEnterBackground(_ application: UIApplication) {
-    logAppLifecycleEvent("enter_background", nil)
-  }
-
-  func applicationWillEnterForeground(_ application: UIApplication) {
-    logAppLifecycleEvent("enter_foreground", nil)
-  }
-
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    logAppLifecycleEvent("become_active", nil)
-  }
-
-  func applicationWillTerminate(_ application: UIApplication) {
-    logAppLifecycleEvent("terminate", nil)
-  }
+  // The pre-scene UIApplicationDelegate lifecycle callbacks (applicationDidBecomeActive,
+  // applicationDidEnterBackground, applicationWillTerminate, ...) are never invoked in a
+  // scene-based app, so the equivalent analytics live on SceneDelegate instead.
 }
