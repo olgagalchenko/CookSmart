@@ -35,11 +35,6 @@
 	<string>415350645324584</string>
 	<key>FacebookDisplayName</key>
 	<string>Cake</string>
-	<key>IANSettings</key>
-	<dict>
-		<key>PostURL</key>
-		<string>http://bakewithcake.com/api/analytics.py</string>
-	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

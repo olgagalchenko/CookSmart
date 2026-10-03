@@ -11,8 +11,13 @@ import Foundation
 private let fractionThreshold: Double = 50.0
 
 extension Double {
-  private var whole: Int { Int(modf(self).0) }
-  private var decimal: Self { modf(self).1 }
+  private var whole: Int {
+    Int(modf(self).0)
+  }
+
+  private var decimal: Self {
+    modf(self).1
+  }
 
   private var roundedWhole: Int {
     guard self < fractionThreshold else {

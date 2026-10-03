@@ -56,13 +56,6 @@
     return dict;
 }
 
-- (NSDictionary *)dictionaryForAnalytics
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self dictionary]];
-    dict[INGREDIENT_KEY_LAST_ACCESS_DATE] = [dict[INGREDIENT_KEY_LAST_ACCESS_DATE] description];
-    return dict;
-}
-
 - (float)densityWithVolumeUnit:(CSUnit *)volumeUnit andWeightUnit:(CSUnit *)weightUnit
 {
     return self.density*(weightUnit.conversionFactor/volumeUnit.conversionFactor);

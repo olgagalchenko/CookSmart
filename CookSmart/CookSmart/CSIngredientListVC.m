@@ -86,12 +86,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     [self refreshData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    logViewChange(@"ingredient_list", nil);
-}
-
 #pragma mark - Scroll view delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -183,8 +177,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
         BOOL deleteSuccess = [ingredients deleteIngredientAtGroupIndex:indexPath.section ingredientIndex:indexPath.row];
         if (deleteSuccess)
         {
-            logUserAction(@"ingredient_delete", [ingredientToDelete dictionaryForAnalytics]);
-            
             [tableView beginUpdates];
             if (ingredientGroup.countOfIngredients == 0)
             {
@@ -212,7 +204,7 @@ static const NSUInteger ResetToDefaultsHeight = 40;
         }
         else
         {
-            logIssue(@"ingredient_delete_fail", [ingredientToDelete dictionaryForAnalytics]);
+            NSLog(@"ISSUE: ingredient_delete_fail\n\n%@", [ingredientToDelete dictionary]);
         }
     }
 }
@@ -240,8 +232,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
 #pragma mark - search bar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    logUserAction(@"ingredient_filter", @{@"search_text" : searchText});
-    
     NSMutableArray* filteredGroupsArray = [NSMutableArray array];
     
     for (CSIngredientGroup* group in [CSIngredients sharedInstance])
@@ -266,11 +256,6 @@ static const NSUInteger ResetToDefaultsHeight = 40;
     
     self.filteredIngredients = [[CSIngredients alloc] initWithIngredientGroups:filteredGroupsArray synthesizeGroups:NO];
     [self refreshData];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    logUserAction(@"ingredient_filter_cancel", @{@"search_text" : searchBar.text});
 }
 
 #pragma mark - reset to defaults

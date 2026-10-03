@@ -14,7 +14,6 @@
 
 + (CSIngredient *)ingredientWithDictionary:(NSDictionary *)rawIngredientDictionary;
 - (id)initWithName:(NSString*)name density:(float)density lastAccessDate:(NSDate *)lastAccessDate;
-- (NSDictionary *)dictionaryForAnalytics;
 - (NSDictionary *)dictionary;
 
 @property (nonatomic, readwrite, strong) NSString *name;

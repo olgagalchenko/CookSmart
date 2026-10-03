@@ -127,7 +127,9 @@ class ScaleScrollView: UIScrollView {
   }
 
   private func updateCenterValue(_ newCenterValue: CGFloat, notifyDelegate: Bool = false, animated: Bool = false) {
-    if !notifyDelegate { delegate = nil }
+    if !notifyDelegate {
+      delegate = nil
+    }
     let updateContentOffset = {
       self.contentOffset = CGPoint(x: 0, y: self.pointsPerUnit * newCenterValue - self.accumulatedOffset)
     }
