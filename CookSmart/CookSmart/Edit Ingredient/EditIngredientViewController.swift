@@ -22,7 +22,7 @@ class EditIngredientViewController: UIViewController {
   }
 
   @objc
-  public init(ingredient: CSIngredient? = nil) {
+  init(ingredient: CSIngredient? = nil) {
     if let ingredient = ingredient {
       self.ingredient = ingredient
       editingMode = .edit
@@ -118,7 +118,6 @@ class EditIngredientViewController: UIViewController {
 
     guard densityIsValid else {
       displayInvalidDensityAlert()
-      logUserAction("ingredient_persist_fail", analyticsDictionary)
       return
     }
 
@@ -164,18 +163,5 @@ extension EditIngredientViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     ingredientNameField.resignFirstResponder()
     return true
-  }
-}
-
-// MARK: Analytics
-
-extension EditIngredientViewController {
-  private var analyticsDictionary: [String: Any] {
-    let ingredientName = ingredientNameField.text ?? ingredient.name ?? ""
-    let ingredientDensity = densityIsValid ? density : Float.infinity
-    return [
-      "ingredient_name": ingredientName,
-      "ingredient_density": ingredientDensity,
-    ]
   }
 }

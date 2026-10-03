@@ -42,7 +42,7 @@ class ScaleTile: UIView {
   // MARK: Public
 
   @objc
-  public var value: Float {
+  var value: Float {
     get { Float(valueLabel.text ?? "") ?? 0 }
     set {
       guard newValue >= 0 else {

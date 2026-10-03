@@ -99,7 +99,6 @@
     [super viewDidAppear:animated];
     // When we first appear, always select the very first ingredient – the one most recently selected.
     [self selectIngredientAtIndex:self.ingredientIndex];
-    logViewChange(@"conversion", [self.scaleVC analyticsAttributes]);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -198,7 +197,6 @@
         self.ingredientIndex = projectedIndex;
         [self refreshScalesWithCurrentIngredient];
         [self markCurrentIngredientAccess];
-        logUserAction(@"ingredient_switch", [self.scaleVC analyticsAttributes]);
     }
 }
 
@@ -206,13 +204,6 @@
 
 - (void)ingredientListVC:(CSIngredientListVC *)listVC selectedIngredientGroup:(NSUInteger)ingredientGroupIndex ingredientIndex:(NSUInteger)index
 {
-    CSIngredientGroup *ingredientGroup = [[CSIngredients sharedInstance] ingredientGroupAtIndex:ingredientGroupIndex];
-    CSIngredient *ingredient = [ingredientGroup ingredientAtIndex:index];
-    logUserAction(@"ingredient_select", @{
-                                          @"ingredient_group_name" : ingredientGroup.name,
-                                          @"ingredient_name" : ingredient.name,
-                                          @"ingredient_density" : [NSNumber numberWithFloat:ingredient.density],
-                                          });
     [self selectIngredientAtIndex:[[CSIngredients sharedInstance] flattenedIngredientIndexForGroupIndex:ingredientGroupIndex ingredientIndex:index]];
 }
 

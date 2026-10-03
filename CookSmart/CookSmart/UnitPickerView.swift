@@ -19,7 +19,7 @@ class UnitPickerView: UIView {
   private let weightScrollView: UnitPickerScrollView
 
   @objc
-  public weak var delegate: UnitPickerDelegate?
+  weak var delegate: UnitPickerDelegate?
 
   @objc
   init(volumeUnit: CSUnit, weightUnit: CSUnit) {

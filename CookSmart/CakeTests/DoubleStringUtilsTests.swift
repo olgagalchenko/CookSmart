@@ -10,6 +10,7 @@
 import XCTest
 
 class DoubleSringUtilsTests: XCTestCase {
+
   // MARK: roundedValue
 
   func test_roundedValue_aboveThreshold_roundsDown() {

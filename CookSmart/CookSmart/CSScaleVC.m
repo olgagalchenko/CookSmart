@@ -185,8 +185,6 @@
     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
         [self setCenterValue:0 forScaleView:self.weightScaleScrollView cancelDeceleration:YES];
         [self setCenterValue:0 forScaleView:self.volumeScaleScrollView cancelDeceleration:YES];
-    } completion:^(BOOL finished) {
-        logUserAction(@"scroll_to_top", [self analyticsAttributes]);
     }];
     return NO;
 }
@@ -221,17 +219,7 @@
         [self synchronizeVolumeAndWeight:scaleView cancelDeceleration:YES force:NO];
     } completion:^(BOOL finished) {
         self.isSnapping = NO;
-        NSString *valueSnapEventName = @"value_snap_unknown";
-        if (scaleView == self.weightScaleScrollView)
-        {
-            valueSnapEventName = @"value_snap_weight";
-        }
-        else if (scaleView == self.volumeScaleScrollView)
-        {
-            valueSnapEventName = @"value_snap_volume";
-        }
         [self informDelegateOfDensityChangeIfNecessary];
-        logUserAction(valueSnapEventName, [self analyticsAttributes]);
     }];
 }
 
@@ -352,7 +340,6 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
     if ([self.delegate respondsToSelector:@selector(scaleVCDidBeginChangingUnits:)])
         [self.delegate scaleVCDidBeginChangingUnits:self];
     
-    logUserAction(@"begin_unit_change", [self analyticsAttributes]);
     [self animateToArrangement:CSScaleVCArrangementUnitChoice];
 }
 
@@ -360,8 +347,6 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 {
     if ([self.delegate respondsToSelector:@selector(scaleVCDidFinishChangingUnits:)])
         [self.delegate scaleVCDidFinishChangingUnits:self];
-    
-    logUserAction(@"commit_unit_change", [self analyticsAttributes]);
     
     [self refreshScalesUI];
     [self animateToArrangement:CSScaleVCArrangementScales];
@@ -469,18 +454,6 @@ static inline NSString *humanReadableValue(float rawValue, float *humanReadableV
 }
 
 #pragma mark - Misc Helpers
-
-- (NSDictionary *)analyticsAttributes
-{
-    return @{
-             @"ingredient_name" : self.ingredient.name,
-             @"ingredient_density" : [self.ingredient isIngredientDensityValid] ? [NSNumber numberWithFloat:self.ingredient.density] : [NSNumber numberWithFloat:FLT_MAX],
-             @"volume_unit" : self.currentVolumeUnit.name,
-             @"weight_unit" : self.currentWeightUnit.name,
-             @"volume_value" : @([self.volumeScaleScrollView getCenterValue]),
-             @"weight_value" : @([self.weightScaleScrollView getCenterValue]),
-             };
-}
 
 - (void)informDelegateOfDensityChangeIfNecessary
 {

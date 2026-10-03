@@ -29,6 +29,5 @@
 @property (strong, nonatomic) CSUnit* currentWeightUnit;
 @property (strong, nonatomic) CSUnit* currentVolumeUnit;
 
-- (NSDictionary *)analyticsAttributes;
 - (void)setScalesAlpha:(CGFloat)newScaleViewAlpha;
 @end

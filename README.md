@@ -7,8 +7,5 @@ Features
 ----
 * linked infinite scroll views
 * nice use of auto layout 
-* example use of the [iOS analytics framework]
 
 Now in the store: http://bakewithcake.com/app
-
-[iOS analytics framework]:https://github.com/vovagalchenko/ios-analytics

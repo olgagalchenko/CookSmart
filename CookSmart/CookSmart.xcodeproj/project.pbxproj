@@ -34,10 +34,8 @@
 		80592C0B1892541D0082D4E1 /* CSIngredientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0A1892541D0082D4E1 /* CSIngredientGroup.m */; };
 		80592C0E189268D60082D4E1 /* CSScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C0D189268D60082D4E1 /* CSScaleView.m */; };
 		80592C1718939E030082D4E1 /* CSGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80592C1618939E030082D4E1 /* CSGradientView.m */; };
-		80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C5B18D4AE8A00106131 /* libVGAnalytics.a */; };
 		807C0B6C1BB3DD4D007D2C03 /* CSIngredientListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */; };
 		80A614DE18BF3D4100A205BB /* CSGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A614DD18BF3D4100A205BB /* CSGlassView.m */; };
-		80CD77B72B1158A10042B93D /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 80629C6718D4B3BF00106131 /* libz.1.tbd */; };
 		931AF96818C2B8AF0018AA8B /* WeightUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96718C2B8AF0018AA8B /* WeightUnits.plist */; };
 		931AF96A18C2B9C90018AA8B /* VolumeUnits.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931AF96918C2B9C90018AA8B /* VolumeUnits.plist */; };
 		931AF96D18C2BAE50018AA8B /* CSUnitCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 931AF96C18C2BAE50018AA8B /* CSUnitCollection.m */; };
@@ -63,27 +61,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = B7BCA28C180524A800CF7588;
 			remoteInfo = cake;
-		};
-		80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 80629C0D18D4A03100106131;
-			remoteInfo = VGAnalytics;
-		};
-		80629C5C18D4AE8A00106131 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 80629C1D18D4A03100106131;
-			remoteInfo = VGAnalyticsTests;
-		};
-		80629C6118D4B1C700106131 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 80629C0C18D4A03100106131;
-			remoteInfo = VGAnalytics;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -124,8 +101,6 @@
 		80592C0D189268D60082D4E1 /* CSScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSScaleView.m; sourceTree = "<group>"; };
 		80592C1518939E030082D4E1 /* CSGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGradientView.h; sourceTree = "<group>"; };
 		80592C1618939E030082D4E1 /* CSGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGradientView.m; sourceTree = "<group>"; };
-		80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VGAnalytics.xcodeproj; path = "../analytics/iOS Analytics/VGAnalytics.xcodeproj"; sourceTree = "<group>"; };
-		80629C6718D4B3BF00106131 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = ../iPhoneOS.sdk/usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		807C0B6A1BB3DD4D007D2C03 /* CSIngredientListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSIngredientListViewCell.h; sourceTree = "<group>"; };
 		807C0B6B1BB3DD4D007D2C03 /* CSIngredientListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSIngredientListViewCell.m; sourceTree = "<group>"; };
 		8087757D18C24D1F00A94031 /* CSScaleVCInternals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSScaleVCInternals.h; sourceTree = "<group>"; };
@@ -171,8 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80629C5E18D4AED600106131 /* libVGAnalytics.a in Frameworks */,
-				80CD77B72B1158A10042B93D /* libz.1.tbd in Frameworks */,
 				B7BCA293180524A800CF7588 /* CoreGraphics.framework in Frameworks */,
 				B7BCA295180524A800CF7588 /* UIKit.framework in Frameworks */,
 				B7BCA291180524A800CF7588 /* Foundation.framework in Frameworks */,
@@ -273,15 +246,6 @@
 			name = ScaleView;
 			sourceTree = "<group>";
 		};
-		80629C5618D4AE8A00106131 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				80629C5B18D4AE8A00106131 /* libVGAnalytics.a */,
-				80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		807C0B681BB3DD04007D2C03 /* Ingredient List UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,7 +271,6 @@
 		B7BCA284180524A800CF7588 = {
 			isa = PBXGroup;
 			children = (
-				80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */,
 				B7BCA296180524A800CF7588 /* CookSmart */,
 				774EBD6E244271D6002A59AC /* CakeTests */,
 				B7BCA28F180524A800CF7588 /* Frameworks */,
@@ -330,7 +293,6 @@
 		B7BCA28F180524A800CF7588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				80629C6718D4B3BF00106131 /* libz.1.tbd */,
 				B7BCA290180524A800CF7588 /* Foundation.framework */,
 				B7BCA292180524A800CF7588 /* CoreGraphics.framework */,
 				B7BCA294180524A800CF7588 /* UIKit.framework */,
@@ -401,7 +363,6 @@
 				B7BCA289180524A800CF7588 /* Sources */,
 				B7BCA28A180524A800CF7588 /* Frameworks */,
 				B7BCA28B180524A800CF7588 /* Resources */,
-				392D864F24301E96002064D6 /* Mint */,
 				392D864A24300ECA002064D6 /* Swiftformat */,
 				392D864C24301109002064D6 /* Swiftlint */,
 				80A614DB18BA663B00A205BB /* Run Version Script */,
@@ -409,7 +370,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				80629C6218D4B1C700106131 /* PBXTargetDependency */,
 			);
 			name = cake;
 			productName = CookSmart;
@@ -451,12 +411,6 @@
 			mainGroup = B7BCA284180524A800CF7588;
 			productRefGroup = B7BCA28E180524A800CF7588 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 80629C5618D4AE8A00106131 /* Products */;
-					ProjectRef = 80629C5518D4AE8A00106131 /* VGAnalytics.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B7BCA28C180524A800CF7588 /* cake */,
@@ -466,20 +420,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		80629C5B18D4AE8A00106131 /* libVGAnalytics.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libVGAnalytics.a;
-			remoteRef = 80629C5A18D4AE8A00106131 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		80629C5D18D4AE8A00106131 /* VGAnalyticsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = VGAnalyticsTests.xctest;
-			remoteRef = 80629C5C18D4AE8A00106131 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -525,7 +465,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nmint run swiftformat swiftformat --config \"../.swiftformat\" ${SOURCE_ROOT}\n";
+			shellScript = "export PATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\"\nif which swiftformat >/dev/null; then\n  swiftformat --config \"${SOURCE_ROOT}/.swiftformat\" \"${SOURCE_ROOT}\"\nelse\n  echo \"warning: SwiftFormat not installed, run: brew install swiftformat\"\nfi\n";
 		};
 		392D864C24301109002064D6 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -544,26 +484,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nmint run swiftlint swiftlint --config ${SOURCE_ROOT}/BuildTools/.swiftlint.yml ${SOURCE_ROOT}\n";
-		};
-		392D864F24301E96002064D6 /* Mint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Mint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nhash mint 2>/dev/null || { echo >&2 \"error: Mint isn't installed. Use 'brew install mint' to install.\"; exit 1; }\n/usr/bin/xcrun --sdk macosx mint bootstrap # Install or update dependencies if needed\n";
+			shellScript = "export PATH=\"/opt/homebrew/bin:/usr/local/bin:$PATH\"\nif which swiftlint >/dev/null; then\n  swiftlint --config \"${SOURCE_ROOT}/BuildTools/.swiftlint.yml\" \"${SOURCE_ROOT}\"\nelse\n  echo \"warning: SwiftLint not installed, run: brew install swiftlint\"\nfi\n";
 		};
 		80A614DB18BA663B00A205BB /* Run Version Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -639,11 +560,6 @@
 			target = B7BCA28C180524A800CF7588 /* cake */;
 			targetProxy = 774EBD72244271D6002A59AC /* PBXContainerItemProxy */;
 		};
-		80629C6218D4B1C700106131 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VGAnalytics;
-			targetProxy = 80629C6118D4B1C700106131 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -674,7 +590,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -709,7 +625,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -778,10 +694,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
-					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
@@ -833,10 +747,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
-					"\"$(OBJROOT)/UninstalledProducts/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PROVISIONING_PROFILE = "11064EA0-77EA-4B3B-BB70-727CC87F5A87";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
